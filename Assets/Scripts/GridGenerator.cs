@@ -6,7 +6,7 @@ public class GridGenerator : MonoBehaviour {
     private GameObject tile;
 
     [SerializeField, Tooltip("Define the different types of terrain in this map.")]
-    private List<TileTerrain> terrainTypes = new List<TileTerrain>();
+    public List<TileTerrain> terrainTypes = new List<TileTerrain>();
 
     [SerializeField, Tooltip("How big each tile is."), Range(0.1f, 10)]
     private float scale = 1;
@@ -20,6 +20,9 @@ public class GridGenerator : MonoBehaviour {
     //temporarily here for testing & creating unit functionality
     [SerializeField]
     private GameObject unit;
+
+    [SerializeField]
+    private bool testUnit;
 
     private void Awake() {
         GenerateGrid();
@@ -59,7 +62,9 @@ public class GridGenerator : MonoBehaviour {
             }
         }
         //here for testing unit movement
-        GameObject unitObj = Instantiate(unit);
-        unitObj.GetComponent<Unit>().UnitSpawn(gridParentScript.tiles[0, 0]);
+        if (testUnit) {
+            GameObject unitObj = Instantiate(unit);
+            unitObj.GetComponent<Unit>().UnitSpawn(gridParentScript.tiles[0, 0]);
+        }
     }
 }

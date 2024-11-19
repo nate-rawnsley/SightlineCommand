@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CursorControls : MonoBehaviour {
-    private Unit activeUnit;
+public abstract class CursorControls : MonoBehaviour {
 
     //More efficient ways of doing this can be made later
-    void Update() {
+    private void Update() {
         if (Input.GetMouseButtonDown(0)) {
             Debug.Log("Ray cast");
             Ray cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -15,17 +14,17 @@ public class CursorControls : MonoBehaviour {
                 Debug.Log(cursorHit.collider);
                 switch(cursorHit.collider.tag) {
                     case "Unit":
-                        activeUnit = cursorHit.collider.GetComponent<Unit>();
-                        activeUnit.BeginMove();
+                        UnitClickBehaviour(cursorHit.collider.GetComponent<Unit>());
                         break;
                     case "Tile":
-                        if (activeUnit != null) {
-                            activeUnit.EndMove(cursorHit.collider.GetComponent<Tile>());
-                            activeUnit = null;
-                        }
+                        TileClickBehaviour(cursorHit.collider.GetComponent<Tile>());
                         break;
                 }
             }
         }
     }
+
+    protected virtual void UnitClickBehaviour(Unit unit) { }
+
+    protected virtual void TileClickBehaviour(Tile tile) { }
 }
