@@ -5,4 +5,5 @@ public class Tile : MonoBehaviour {
     public TileTerrain terrainType;
     public List<Tile> adjacentTiles = new List<Tile>();
     public Unit unitHere;
+    public bool IsSelected;
 }

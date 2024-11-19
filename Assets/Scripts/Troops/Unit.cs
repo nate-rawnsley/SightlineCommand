@@ -17,7 +17,7 @@ public class Unit : MonoBehaviour {
     [SerializeField]
     protected int Damage;
     [SerializeField]
-    protected int AttackRange;
+    public int AttackRange;
 
 
     protected int CurrentMove;
@@ -47,7 +47,15 @@ public class Unit : MonoBehaviour {
     public void BeginMove() {
         foreach (Tile adjacentTile in currentTile.adjacentTiles)
         {
+            
             adjacentTile.GetComponent<Renderer>().material = CurrentMoveableMat;
+            //foreach (Tile var in adjacentTile.adjacentTiles)
+            //{
+            //    var.GetComponent<Renderer>().material = CurrentMoveableMat;
+            //}
+
+
+
         }    
     }
     public void EndMove(Tile targetTile) {
@@ -75,11 +83,26 @@ public class Unit : MonoBehaviour {
     protected void TakeDamage()
     {
         Health--;
+  
     }
     //
 
     //Damage and Targeting///////////////////////////////////
+    public void BeginAttack()
+    {
+        foreach (Tile adjacentTile in currentTile.adjacentTiles)
+        {
 
+            adjacentTile.GetComponent<Renderer>().material = CurrentMoveableMat;
+            foreach (Tile var in adjacentTile.adjacentTiles)
+            {
+                var.GetComponent<Renderer>().material = CurrentMoveableMat;
+            }
+
+
+
+        }
+    }
     //
 
 
