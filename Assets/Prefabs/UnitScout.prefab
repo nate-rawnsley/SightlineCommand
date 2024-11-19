@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 1525994377440538051}
   - component: {fileID: 3060039964036656435}
   - component: {fileID: 1182775587085733850}
-  - component: {fileID: 3190884165055881842}
   - component: {fileID: -8439805222673433636}
+  - component: {fileID: -7963936134096693854}
   m_Layer: 0
-  m_Name: Unit
+  m_Name: UnitScout
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2cc0a5bc949b3a3459e1d1382997c0a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,19 +107,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3190884165055881842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5477471966950854349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6a5fb735511abc4f83859b50713c56f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveableMat: {fileID: 2100000, guid: 6dcb16a750903944bb68f65411471162, type: 2}
 --- !u!65 &-8439805222673433636
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -141,3 +128,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-7963936134096693854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5477471966950854349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf9f888299461ea498bbf25a48bc9ed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveableMat:
+  - {fileID: 2100000, guid: 6dcb16a750903944bb68f65411471162, type: 2}
+  - {fileID: 2100000, guid: 85d0e2ea22186a24698553bedb980c56, type: 2}
