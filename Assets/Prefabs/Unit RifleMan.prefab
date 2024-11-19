@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3060039964036656435}
   - component: {fileID: 1182775587085733850}
   - component: {fileID: -8439805222673433636}
-  - component: {fileID: -7963936134096693854}
+  - component: {fileID: 1295532986441781782}
   m_Layer: 0
-  m_Name: UnitScout
+  m_Name: Unit RifleMan
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,7 +128,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-7963936134096693854
+--- !u!114 &1295532986441781782
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,13 +137,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5477471966950854349}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf9f888299461ea498bbf25a48bc9ed4, type: 3}
+  m_Script: {fileID: 11500000, guid: cedc0e2ec0eaea345aa4a13cc4ca142c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveableMat:
   - {fileID: 2100000, guid: 6dcb16a750903944bb68f65411471162, type: 2}
   - {fileID: 2100000, guid: 85d0e2ea22186a24698553bedb980c56, type: 2}
-  MaxMovement: 6
-  Health: 2
-  Damage: 0
-  AttackRange: 0
+  MaxMovement: 3
+  Health: 5
+  Damage: 1
+  AttackRange: 3
