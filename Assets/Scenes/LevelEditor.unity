@@ -897,6 +897,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridGeneratorPrefab: {fileID: 3568308934959176345, guid: 4c055b2d482c2f84f8cfe6722c92bdb5, type: 3}
+  genUse: {fileID: 1664200046}
   terrainSelect: {fileID: 99167084}
   editorCursor: {fileID: 1125465673}
   nameInput: {fileID: 505972529}
@@ -2025,10 +2026,11 @@ MonoBehaviour:
     travelSpeed: 1
     walkable: 0
     editorIndex: 0
+  levelSave: {fileID: 0}
   scale: 1
-  gapScale: 1.05
-  width: 10
-  height: 10
+  gapScale: 1
+  width: 9
+  height: 12
   unit: {fileID: 0}
   testUnit: 0
 --- !u!1 &1670541710

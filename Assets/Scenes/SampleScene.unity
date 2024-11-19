@@ -292,6 +292,10 @@ PrefabInstance:
       propertyPath: testUnit
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3568308934959176345, guid: 4c055b2d482c2f84f8cfe6722c92bdb5, type: 3}
+      propertyPath: levelSave
+      value: 
+      objectReference: {fileID: 4900000, guid: f02febeaf79a1254ca008931d0f765f6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

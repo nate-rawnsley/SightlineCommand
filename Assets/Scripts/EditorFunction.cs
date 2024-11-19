@@ -8,6 +8,9 @@ public class EditorFunction : MonoBehaviour {
     private GridGenerator gridGeneratorPrefab;
 
     [SerializeField]
+    private GridGenerator genUse;
+
+    [SerializeField]
     private TMP_Dropdown terrainSelect;
 
     [SerializeField]
@@ -37,15 +40,15 @@ public class EditorFunction : MonoBehaviour {
     public void Save() {
         Tile[,] tileData = gridParent.tiles;
         string saveString = string.Empty;
+        saveString += $"{genUse.scale} {genUse.gapScale} {genUse.width} {genUse.height}\n";
         for (int x = 0; x < tileData.GetLength(0); x++) {
-            for (int z = 0; z < tileData.GetLength(1); z++) {
+            for (int z = 0; z < tileData.GetLength(1) - 1; z++) {
                 saveString += tileData[x, z].terrainType.editorIndex + " ";
             }
-            saveString += "\n";
+            saveString += tileData[x, tileData.GetLength(1) - 1].terrainType.editorIndex + "\n";
         }
         AssetDatabase.Refresh();
-        Debug.Log("Assets/LevelSaves/" + nameInput.text + ".asset");
         TextAsset levelSave = new TextAsset(saveString);
-        AssetDatabase.CreateAsset(levelSave, "Assets/LevelSaves/" +  nameInput.text + ".asset");
+        AssetDatabase.CreateAsset(levelSave, $"Assets/Level Saves/{nameInput.text}.asset");
     }
 }
