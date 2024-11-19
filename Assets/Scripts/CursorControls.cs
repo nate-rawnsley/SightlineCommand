@@ -7,11 +7,9 @@ public abstract class CursorControls : MonoBehaviour {
     //More efficient ways of doing this can be made later
     private void Update() {
         if (Input.GetMouseButtonDown(0)) {
-            Debug.Log("Ray cast");
             Ray cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit cursorHit;
             if (Physics.Raycast(cursorRay, out cursorHit)) {
-                Debug.Log(cursorHit.collider);
                 switch(cursorHit.collider.tag) {
                     case "Unit":
                         UnitClickBehaviour(cursorHit.collider.GetComponent<Unit>());
