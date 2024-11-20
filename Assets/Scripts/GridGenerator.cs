@@ -6,22 +6,45 @@ public class GridGenerator : MonoBehaviour {
     private GameObject tile;
 
     [SerializeField, Tooltip("Define the different types of terrain in this map.")]
-    private List<TileTerrain> terrainTypes = new List<TileTerrain>();
+    public List<TileTerrain> terrainTypes = new List<TileTerrain>();
+
+    [SerializeField, Tooltip("Which level to load. Leave blank if you want to randomly generate a new one with below paramters.")]
+    private TextAsset levelSave;
+    private int[,] loadedTiles;
 
     [SerializeField, Tooltip("How big each tile is."), Range(0.1f, 10)]
-    private float scale = 1;
+    public float scale = 1;
 
     [SerializeField, Tooltip("How much gap is between each tile."), Range(1, 1.25f)]
-    private float gapScale = 1.05f;
+    public float gapScale = 1.05f;
 
     [SerializeField, Tooltip("The number of tiles in the grid."), Range(1,50)]
-    private int width = 10, height = 10;
+    public int width = 10, height = 10;
 
     //temporarily here for testing & creating unit functionality
     [SerializeField]
     private GameObject unit;
 
+    [SerializeField]
+    private bool testUnit;
+
     private void Awake() {
+        if (levelSave != null) {
+            string[] rawLines = levelSave.text.Split('\n');
+            string[] rawParamters = rawLines[0].Split(' ');
+            scale = float.Parse(rawParamters[0]);
+            gapScale = float.Parse(rawParamters[1]);
+            width = int.Parse(rawParamters[2]);
+            height = int.Parse(rawParamters[3]);
+            loadedTiles = new int[width, height];
+            for (int i = 0; i < rawLines.Length - 2; i++) {
+                string[] rawValues = rawLines[i + 1].Split(' ');
+                for (int j = 0; j < rawValues.Length; j++) {
+                    loadedTiles[i,j] = int.Parse(rawValues[j]);
+                }
+                
+            }
+        }
         GenerateGrid();
     }
 
@@ -45,7 +68,11 @@ public class GridGenerator : MonoBehaviour {
                 Tile tileScript = gridTile.AddComponent<Tile>();
                 gridParentScript.tiles[x,z] = tileScript;
 
-                tileScript.terrainType = terrainTypes[Random.Range(0, terrainTypes.Count)];
+                if (loadedTiles != null) {
+                    tileScript.terrainType = terrainTypes[loadedTiles[x, z]];
+                } else {
+                    tileScript.terrainType = terrainTypes[Random.Range(0, terrainTypes.Count)];
+                }
                 gridTile.GetComponent<Renderer>().material = tileScript.terrainType.material;
 
                 if (x > 0) {
@@ -59,7 +86,9 @@ public class GridGenerator : MonoBehaviour {
             }
         }
         //here for testing unit movement
-        GameObject unitObj = Instantiate(unit);
-        unitObj.GetComponent<Unit>().UnitSpawn(gridParentScript.tiles[0, 0]);
+        if (testUnit) {
+            GameObject unitObj = Instantiate(unit);
+            unitObj.GetComponent<Unit>().UnitSpawn(gridParentScript.tiles[0, 0]);
+        }
     }
 }
