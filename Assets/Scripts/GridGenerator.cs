@@ -85,6 +85,7 @@ public class GridGenerator : MonoBehaviour {
                 }
             }
         }
+        Camera.main.GetComponent<CameraMovement>().SetInitialPosition(scale);
         //here for testing unit movement
         if (testUnit) {
             GameObject unitObj = Instantiate(unit);
