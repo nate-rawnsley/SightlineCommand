@@ -1673,6 +1673,8 @@ MonoBehaviour:
     travelSpeed: 1
     walkable: 1
     editorIndex: 0
+    decorations: []
+    decorationFrequency: 0
 --- !u!114 &1125465674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2038,13 +2040,19 @@ MonoBehaviour:
   - name: Grass
     material: {fileID: 2100000, guid: efa91acd5cb6fcd4baf5461cced8a77b, type: 2}
     travelSpeed: 1
-    walkable: 0
+    walkable: 1
     editorIndex: 0
+    decorations:
+    - {fileID: 270727258609585479, guid: 8f0b4788e00d683448174f76e24a8b01, type: 3}
+    - {fileID: 1648771566205993822, guid: 2767e49e4bd218d409027527c2bc6e53, type: 3}
+    - {fileID: 4947065853307073972, guid: f2b2a0b156efc254bb573ab31301b090, type: 3}
+    - {fileID: 5604806301651022278, guid: 63d6372ef9ddfcb40bda61abc7995a35, type: 3}
+    decorationFrequency: 0.6
   levelSave: {fileID: 0}
-  scale: 1
-  gapScale: 1
-  width: 9
-  height: 12
+  scale: 2
+  gapScale: 1.025
+  width: 10
+  height: 10
   unit: {fileID: 0}
   testUnit: 0
 --- !u!1 &1670541710
