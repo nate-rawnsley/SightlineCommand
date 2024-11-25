@@ -6,4 +6,5 @@ public class TileTerrain {
     public Material material;
     public float travelSpeed = 1;
     public bool walkable = true;
+    public int editorIndex;
 }

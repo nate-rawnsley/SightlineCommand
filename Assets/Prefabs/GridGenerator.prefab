@@ -50,14 +50,20 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: efa91acd5cb6fcd4baf5461cced8a77b, type: 2}
     travelSpeed: 1
     walkable: 1
+    editorIndex: 0
   - name: Sand
     material: {fileID: 2100000, guid: 50cd20ee62f767f43b6efbd4b5c2d6a4, type: 2}
     travelSpeed: 0.5
     walkable: 1
+    editorIndex: 1
   - name: Water
     material: {fileID: 2100000, guid: fc7fc1e1ecfbec545af37122e6654ab8, type: 2}
     travelSpeed: 0.25
     walkable: 0
+    editorIndex: 2
   scale: 1
+  gapScale: 1.05
   width: 10
   height: 10
+  unit: {fileID: 0}
+  testUnit: 0
