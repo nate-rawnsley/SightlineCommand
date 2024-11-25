@@ -28,6 +28,9 @@ public class GridGenerator : MonoBehaviour {
     [SerializeField]
     private bool testUnit;
 
+    [SerializeField]
+    private int testUnitAmount;
+
     private void Awake() {
         if (levelSave != null) {
             string[] rawLines = levelSave.text.Split('\n');
@@ -88,8 +91,12 @@ public class GridGenerator : MonoBehaviour {
         Camera.main.GetComponent<CameraMovement>().SetInitialPosition(scale);
         //here for testing unit movement
         if (testUnit) {
-            GameObject unitObj = Instantiate(unit);
-            unitObj.GetComponent<Unit>().UnitSpawn(gridParentScript.tiles[0, 0]);
+            for (int p = 0; p < testUnitAmount; p++) //multiple test units done by Dylan
+            {
+                GameObject unitObj = Instantiate(unit);
+                unit.name = ("Unit" + p).ToString();
+                unitObj.GetComponent<Unit>().UnitSpawn(gridParentScript.tiles[0, p]);
+            }
         }
     }
 }
