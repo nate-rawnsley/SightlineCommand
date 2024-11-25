@@ -3,10 +3,14 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    [SerializeField, Tooltip("The material adjacent tiles are set to when the unit is moving.")]
+    [Tooltip("The material adjacent tiles are set to when the unit is moving.")]
     public Material[] moveableMat;
     public Material CurrentMoveableMat;
-    
+
+    public bool canBuild = true;
+    [Tooltip("Every building this unit can create (if applicable)")]
+    public List<Building> createableBuildings;
+
     public Tile currentTile;
 
     protected float scale;
@@ -82,6 +86,10 @@ public class Unit : MonoBehaviour
                 MoveToTile();
                 
             }
+
+            if (currentTile.buildingHere != null) {
+                currentTile.buildingHere.OnEnterBehaviour(this);
+            }
         }
         
     }
@@ -128,4 +136,10 @@ public class Unit : MonoBehaviour
     }
 
     //End Of Damage and Targeting/////////////////////////////
+
+    public void CreateBuilding(int index) {
+        if (canBuild) {
+            currentTile.CreateBuilding(createableBuildings[index]);
+        }
+    }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1541939218204405614}
   - component: {fileID: 785687551336374724}
   - component: {fileID: 7311748347647868182}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 4278554572624032532}
   - component: {fileID: 6174392137731276970}
   - component: {fileID: 3829299525475884200}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4699655991367063878}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Tree (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4403827654692678192}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 5590384799104807521}
   - component: {fileID: 1905854108721147508}
   - component: {fileID: 3809487419570524469}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -390,7 +390,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4358086569932474329}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GrassDeco4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,7 +424,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6616658683222391914}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Tree (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 3619651230875748977}
   - component: {fileID: 7969826724340648171}
   - component: {fileID: 8330991272788483718}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -567,7 +567,7 @@ GameObject:
   - component: {fileID: 7351463013014024157}
   - component: {fileID: 4265916007402700585}
   - component: {fileID: 317174816429881900}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -674,7 +674,7 @@ GameObject:
   - component: {fileID: 1607189603948240403}
   - component: {fileID: 7864889508343955689}
   - component: {fileID: 1063101025317278232}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

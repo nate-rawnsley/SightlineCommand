@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3731539216313790631}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SandDeco3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,6 +42,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3731539216313790631}
     m_Modifications:
+    - target: {fileID: 628255648265970749, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1187765472290244969, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.32
@@ -86,6 +90,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cactus (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4834107127854689416, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377500851602029053, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812456294998983821, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442277486275873825, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7829270552970096060, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -104,6 +128,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3731539216313790631}
     m_Modifications:
+    - target: {fileID: 628255648265970749, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1187765472290244969, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.32
@@ -148,6 +176,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cactus (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4834107127854689416, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377500851602029053, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812456294998983821, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442277486275873825, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7829270552970096060, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -166,6 +214,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3731539216313790631}
     m_Modifications:
+    - target: {fileID: 628255648265970749, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1187765472290244969, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.325
@@ -209,6 +261,26 @@ PrefabInstance:
     - target: {fileID: 4834107127854689416, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
       propertyPath: m_Name
       value: Cactus
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834107127854689416, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377500851602029053, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812456294998983821, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442277486275873825, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7829270552970096060, guid: b440b5707a6ad1440b1ff8c485830a0c, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

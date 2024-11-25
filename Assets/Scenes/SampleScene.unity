@@ -361,6 +361,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4900000, guid: cce27531b3cfdcb4c833374d07ac45fc, type: 2}
     - target: {fileID: 3568308934959176345, guid: 4c055b2d482c2f84f8cfe6722c92bdb5, type: 3}
+      propertyPath: testUnitAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3568308934959176345, guid: 4c055b2d482c2f84f8cfe6722c92bdb5, type: 3}
       propertyPath: terrainTypes.Array.data[3].decorations.Array.data[0]
       value: 
       objectReference: {fileID: 8656991695000812791, guid: 791e32bef0047e449942dd7065516092, type: 3}
@@ -475,6 +479,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3921b9908070341b28605bd9f99ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackMode: 0
+  MoveMode: 0
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
