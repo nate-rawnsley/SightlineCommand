@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: 10
   capacity: 5
+  worldScale: 1
   unitsHere: []
 --- !u!1001 &4715946238563056973
 PrefabInstance:

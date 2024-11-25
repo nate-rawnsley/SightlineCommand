@@ -16,10 +16,7 @@ public abstract class Building : MonoBehaviour {
         unitEntered.transform.localScale = Vector3.zero;
         if (unitIndicator == null) {
             GameObject indicatorObj = Resources.Load<GameObject>("Billboards/Chevron1");
-            Vector3 indicatorPos = transform.position;
-            //TODO add reference to scale here
-            indicatorPos.y += 10;
-            unitIndicator = Instantiate(indicatorObj, indicatorPos, Quaternion.identity, transform);
+            unitIndicator = Instantiate(indicatorObj, transform);
         }
     }
 }
