@@ -6,8 +6,16 @@ public class GameCursor : CursorControls {
     private Unit activeUnit;
 
     protected override void UnitClickBehaviour(Unit unit) {
-        activeUnit = unit;
-        unit.BeginMove();
+        if (activeUnit == null || activeUnit != unit) {
+            activeUnit = unit;
+            unit.BeginMove();
+        } 
+        //below is debug way of testing buildings can be created
+        else {
+            unit.MakeBuilding(0);
+            activeUnit.EndMove(activeUnit.currentTile);
+            activeUnit = null;
+        }
     }
 
     protected override void TileClickBehaviour(Tile tile){

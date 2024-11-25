@@ -5,7 +5,11 @@ public class Unit : MonoBehaviour {
     [SerializeField, Tooltip("The material adjacent tiles are set to when the unit is moving.")]
     private Material moveableMat;
 
-    private Tile currentTile;
+    public bool canBuild = true;
+    [Tooltip("Every building this unit can create (if applicable)")]
+    public List<Building> createableBuildings;
+
+    public Tile currentTile;
     private float scale;
 
     public void UnitSpawn(Tile tile) {
@@ -20,6 +24,9 @@ public class Unit : MonoBehaviour {
         Vector3 position = currentTile.transform.position;
         position.y += scale * 0.65f;
         transform.position = position;
+        if (currentTile.buildingHere != null) {
+            currentTile.buildingHere.OnEnterBehaviour(this);
+        }
     }
 
     public void BeginMove() {
@@ -36,5 +43,9 @@ public class Unit : MonoBehaviour {
             currentTile = targetTile;
             MoveToTile();
         }
+    }
+
+    public void MakeBuilding(int index) {
+        currentTile.CreateBuilding(createableBuildings[index]);
     }
 }

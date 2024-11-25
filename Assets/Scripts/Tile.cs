@@ -5,6 +5,7 @@ public class Tile : MonoBehaviour {
     public TileTerrain terrainType;
     public List<Tile> adjacentTiles = new List<Tile>();
     public Unit unitHere;
+    public Building buildingHere;
     private GameObject decoration;
 
     public void SetTerrain() {
@@ -24,5 +25,18 @@ public class Tile : MonoBehaviour {
                 decoration.transform.rotation = Quaternion.Euler(decoRotation);
             }
         }
+    }
+
+    public void CreateBuilding(Building building) {
+        if (buildingHere != null) {
+            return;
+        }
+
+        if (decoration != null) {
+            Destroy(decoration.gameObject);
+            decoration = null;
+        }
+
+        buildingHere = Instantiate(building.gameObject, transform).GetComponent<Building>();
     }
 }
