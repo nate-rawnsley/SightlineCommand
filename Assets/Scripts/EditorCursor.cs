@@ -7,6 +7,6 @@ public class EditorCursor : CursorControls {
 
     protected override void TileClickBehaviour(Tile tile) {
         tile.terrainType = terrainBrush;
-        tile.GetComponent<Renderer>().material = terrainBrush.material;
+        tile.SetTerrain();
     }
 }

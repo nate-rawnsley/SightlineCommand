@@ -51,16 +51,39 @@ MonoBehaviour:
     travelSpeed: 1
     walkable: 1
     editorIndex: 0
+    decorations:
+    - {fileID: 270727258609585479, guid: 8f0b4788e00d683448174f76e24a8b01, type: 3}
+    - {fileID: 1648771566205993822, guid: 2767e49e4bd218d409027527c2bc6e53, type: 3}
+    - {fileID: 4947065853307073972, guid: f2b2a0b156efc254bb573ab31301b090, type: 3}
+    - {fileID: 5604806301651022278, guid: 63d6372ef9ddfcb40bda61abc7995a35, type: 3}
+    decorationFrequency: 0.6
   - name: Sand
     material: {fileID: 2100000, guid: 50cd20ee62f767f43b6efbd4b5c2d6a4, type: 2}
     travelSpeed: 0.5
     walkable: 1
     editorIndex: 1
+    decorations:
+    - {fileID: 3408387375846706127, guid: 8b17bf72e78a23e4ba4784dedc34357c, type: 3}
+    - {fileID: 7411070782128801531, guid: 30d65ddea22198c4ba346b9b88c76c7d, type: 3}
+    - {fileID: 4426004633842549620, guid: 37eb9ead6cb5da24184da9e5bb69cd9b, type: 3}
+    decorationFrequency: 0.25
   - name: Water
     material: {fileID: 2100000, guid: fc7fc1e1ecfbec545af37122e6654ab8, type: 2}
     travelSpeed: 0.25
     walkable: 0
     editorIndex: 2
+    decorations: []
+    decorationFrequency: 0
+  - name: City
+    material: {fileID: 2100000, guid: 744d4db8014d834449b755a746f87638, type: 2}
+    travelSpeed: 1
+    walkable: 1
+    editorIndex: 3
+    decorations:
+    - {fileID: 8656991695000812791, guid: 791e32bef0047e449942dd7065516092, type: 3}
+    - {fileID: 4789660626776217637, guid: 039a582a6d8fd8f49a675ceecbdb3da3, type: 3}
+    decorationFrequency: 0.75
+  levelSave: {fileID: 0}
   scale: 1
   gapScale: 1.05
   width: 10

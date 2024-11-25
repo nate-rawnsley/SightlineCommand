@@ -66,7 +66,7 @@ public class GridGenerator : MonoBehaviour {
                 position.x = (x * scale * gapScale) - xOffset;
                 position.z = (z * scale * gapScale) - zOffset;
                 GameObject gridTile = Instantiate(tile, position, Quaternion.identity, gridParent.transform);
-                gridTile.transform.localScale = new Vector3(scale, scale * 0.2f, scale);
+                gridTile.transform.localScale = new Vector3(scale, scale, scale);
 
                 Tile tileScript = gridTile.AddComponent<Tile>();
                 gridParentScript.tiles[x,z] = tileScript;
@@ -76,7 +76,7 @@ public class GridGenerator : MonoBehaviour {
                 } else {
                     tileScript.terrainType = terrainTypes[Random.Range(0, terrainTypes.Count)];
                 }
-                gridTile.GetComponent<Renderer>().material = tileScript.terrainType.material;
+                tileScript.SetTerrain();
 
                 if (x > 0) {
                     tileScript.adjacentTiles.Add(gridParentScript.tiles[x - 1, z]);

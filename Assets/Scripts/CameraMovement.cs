@@ -7,7 +7,6 @@ public class CameraMovement : MonoBehaviour {
     public void SetInitialPosition(float scale) {
         Vector3 newPos = transform.position;
         newPos.y = scale * 10;
-        Debug.Log($"{speed}, {scale}, {speed * scale}");
         speed *= scale;
         transform.position = newPos;
     }
