@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour {
+public class Unit : MonoBehaviour
+{
     [SerializeField, Tooltip("The material adjacent tiles are set to when the unit is moving.")]
-    protected Material[] moveableMat;
-    protected Material CurrentMoveableMat;
+    public Material[] moveableMat;
+    public Material CurrentMoveableMat;
+    
+    public Tile currentTile;
 
-    protected Tile currentTile;
     protected float scale;
 
     [Header("Troop Settings")]
@@ -20,22 +22,25 @@ public class Unit : MonoBehaviour {
     public int AttackRange;
 
 
-    protected int CurrentMove;
+    public int CurrentMove;
 
     public void Start()
     {
         CurrentMoveableMat = moveableMat[0]; //sets up the moveable material
-        CurrentMove = MaxMovement; 
+        CurrentMove = MaxMovement;
     }
     //Movement///////////////////////////////////////////// Base Movement done by Nate, Limiting Movement Distance and changing movement material Done By Dylan
-    public void UnitSpawn(Tile tile) {
+    public void UnitSpawn(Tile tile)
+    {
         tile.unitHere = this;
         currentTile = tile;
+
         scale = currentTile.transform.localScale.x;
         transform.localScale = transform.localScale * scale * 0.5f;
         MoveToTile();
     }
-    protected void MoveToTile() {
+    protected void MoveToTile()
+    {        
         Vector3 position = currentTile.transform.position;
         position.y += scale * 0.65f;
         transform.position = position;
@@ -44,66 +49,83 @@ public class Unit : MonoBehaviour {
             CurrentMoveableMat = moveableMat[1]; //changes material to the NotMoveable
         }
     }
-    public void BeginMove() {
+    public void BeginMove()
+    {
         foreach (Tile adjacentTile in currentTile.adjacentTiles)
         {
-            
+
             adjacentTile.GetComponent<Renderer>().material = CurrentMoveableMat;
-            //foreach (Tile var in adjacentTile.adjacentTiles)
-            //{
-            //    var.GetComponent<Renderer>().material = CurrentMoveableMat;
-            //}
+                 
 
 
 
-        }    
+        }
     }
-    public void EndMove(Tile targetTile) {
+    public void EndMove(Tile targetTile)
+    {
         
 
         if (CurrentMove > 0)
         {
-            foreach (Tile adjacentTile in currentTile.adjacentTiles) {
+            targetTile.unitHere = this;
+            EndTargeting(currentTile, 0);
+            foreach (Tile adjacentTile in currentTile.adjacentTiles)
+            {
                 adjacentTile.GetComponent<Renderer>().material = adjacentTile.terrainType.material;
+                
             }
-            if (currentTile.adjacentTiles.Contains(targetTile)) {
+            if (currentTile.adjacentTiles.Contains(targetTile))
+            {
                 currentTile = targetTile;
                 CurrentMove--;
                 Debug.Log(CurrentMove);
                 MoveToTile();
-
-
+                
             }
         }
+        
     }
     //End Of Movement////////////////////////////////////////
 
-    //Health/////////////////////////////////////////////////
+    //Health///////////////////////////////////////////////// Done By Dylan
 
-    protected void TakeDamage()
+    public void TakeDamage()
     {
         Health--;
-  
-    }
-    //
-
-    //Damage and Targeting///////////////////////////////////
-    public void BeginAttack()
-    {
-        foreach (Tile adjacentTile in currentTile.adjacentTiles)
+        if(Health <= 0)
         {
+            Destroy(this.gameObject);
+        }
 
+    }
+    //End of Health//////////////////////////////////////////
+
+    //Damage and Targeting/////////////////////////////////// Done By Dylan
+
+    public void MarkAdjacentTiles(Tile tileToCheck, int loopNo)
+    {
+        loopNo++;
+        foreach (Tile adjacentTile in tileToCheck.adjacentTiles)
+        {
             adjacentTile.GetComponent<Renderer>().material = CurrentMoveableMat;
-            foreach (Tile var in adjacentTile.adjacentTiles)
+            if (loopNo < AttackRange)
             {
-                var.GetComponent<Renderer>().material = CurrentMoveableMat;
+                MarkAdjacentTiles(adjacentTile, loopNo);
             }
-
-
-
         }
     }
-    //
+    public void EndTargeting(Tile tileToCheck, int loopNo)
+    {
+        loopNo++;
+        foreach (Tile adjacentTile in tileToCheck.adjacentTiles)
+        {
+            adjacentTile.GetComponent<Renderer>().material = adjacentTile.terrainType.material;
+            if (loopNo < AttackRange)
+            {
+                EndTargeting(adjacentTile, loopNo);
+            }
+        }
+    }
 
-
+    //End Of Damage and Targeting/////////////////////////////
 }
