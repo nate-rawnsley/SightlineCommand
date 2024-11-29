@@ -132,7 +132,7 @@ public class Unit : MonoBehaviour
 
     //End Of Damage and Targeting/////////////////////////////
 
-    //Colour lerping and creating buildings/////////////////// Done by Nate
+    //Creating buildings////////////////////////////////////// Done by Nate
 
     public void CreateBuilding(int index) {
         if (canBuild) {
@@ -140,5 +140,5 @@ public class Unit : MonoBehaviour
         }
     }
 
-    //End of colour and buildings////////////////////////////
+    //End of creating buildings//////////////////////////////
 }
