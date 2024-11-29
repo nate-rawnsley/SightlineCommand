@@ -364,10 +364,6 @@ PrefabInstance:
       propertyPath: testUnitAmount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3568308934959176345, guid: 4c055b2d482c2f84f8cfe6722c92bdb5, type: 3}
-      propertyPath: terrainTypes.Array.data[3].decorations.Array.data[0]
-      value: 
-      objectReference: {fileID: 8656991695000812791, guid: 791e32bef0047e449942dd7065516092, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -80,9 +80,10 @@ MonoBehaviour:
     walkable: 1
     editorIndex: 3
     decorations:
-    - {fileID: 8656991695000812791, guid: 791e32bef0047e449942dd7065516092, type: 3}
-    - {fileID: 4789660626776217637, guid: 039a582a6d8fd8f49a675ceecbdb3da3, type: 3}
-    decorationFrequency: 0.75
+    - {fileID: 3335435013532174719, guid: b744f04e48de1c249833a00bc2a646e5, type: 3}
+    - {fileID: 9037541655311773515, guid: 0df2702b06145d145ae34ac8c68d25ec, type: 3}
+    - {fileID: 1805027507849662327, guid: e4ceec7a0dce6df4db60a77703e73134, type: 3}
+    decorationFrequency: 1
   levelSave: {fileID: 0}
   scale: 1
   gapScale: 1.05
@@ -90,3 +91,4 @@ MonoBehaviour:
   height: 10
   unit: {fileID: 0}
   testUnit: 0
+  testUnitAmount: 0
