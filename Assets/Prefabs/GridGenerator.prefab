@@ -66,7 +66,7 @@ MonoBehaviour:
     - {fileID: 3408387375846706127, guid: 8b17bf72e78a23e4ba4784dedc34357c, type: 3}
     - {fileID: 7411070782128801531, guid: 30d65ddea22198c4ba346b9b88c76c7d, type: 3}
     - {fileID: 4426004633842549620, guid: 37eb9ead6cb5da24184da9e5bb69cd9b, type: 3}
-    decorationFrequency: 0.25
+    decorationFrequency: 0.4
   - name: Water
     material: {fileID: 2100000, guid: fc7fc1e1ecfbec545af37122e6654ab8, type: 2}
     travelSpeed: 0.25
