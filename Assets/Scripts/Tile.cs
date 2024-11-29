@@ -1,13 +1,23 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class Tile : MonoBehaviour {
     public TileTerrain terrainType;
     public List<Tile> adjacentTiles = new List<Tile>();
+
     public Unit unitHere;
     public bool IsSelected;
     public Building buildingHere;
     private GameObject decoration;
+
+    private Renderer thisRenderer;
+    private bool lerpingColour;
+    private float lerpTime;
+
+    private void Awake() {
+        thisRenderer = GetComponent<Renderer>();
+    }
 
     public void SetTerrain() {
         if (decoration != null) {
@@ -39,5 +49,37 @@ public class Tile : MonoBehaviour {
         }
 
         buildingHere = Instantiate(building.gameObject, transform).GetComponent<Building>();
+    }
+
+    public void DisplayColour(Color color) {
+        if (lerpingColour) { 
+            return; 
+        }
+        lerpingColour = true;
+        StartCoroutine(LerpColour(color));
+    }
+
+    public void ResetMaterial()
+    {
+        lerpingColour = false;
+        lerpTime = 0;
+        thisRenderer.material = terrainType.material;
+    }
+
+    private IEnumerator LerpColour(Color color) {
+        //will add a proper easing here later
+        while (lerpingColour) {
+            float perc = lerpTime < 0.5f ? lerpTime * 1.75f : 1 - (lerpTime - 0.5f) * 1.75f;
+            Color newColour = Color.Lerp(terrainType.material.color, color, perc);
+
+            thisRenderer.material.color = newColour;
+
+            lerpTime += Time.deltaTime;
+            if (lerpTime >= 1) {
+                lerpTime = 0;
+            }
+            yield return null;
+        }
+        
     }
 }

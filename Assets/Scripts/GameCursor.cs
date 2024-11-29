@@ -32,7 +32,7 @@ public class GameCursor : CursorControls {
 
             if (AttackMode == true) //attacking
             {
-                unit.CurrentMoveableMat = unit.moveableMat[0];
+                unit.CurrentMoveableCol = unit.moveableCol[0];
                 unit.MarkAdjacentTiles(unit.currentTile, 0);
             }
 

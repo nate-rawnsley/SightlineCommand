@@ -1,11 +1,12 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    [Tooltip("The material adjacent tiles are set to when the unit is moving.")]
-    public Material[] moveableMat;
-    public Material CurrentMoveableMat;
+    [Tooltip("The colour adjacent tiles are set to when the unit is moving.")]
+    public Color[] moveableCol;
+    public Color CurrentMoveableCol;
 
     public bool canBuild = true;
     [Tooltip("Every building this unit can create (if applicable)")]
@@ -30,7 +31,7 @@ public class Unit : MonoBehaviour
 
     public void Start()
     {
-        CurrentMoveableMat = moveableMat[0]; //sets up the moveable material
+        CurrentMoveableCol = moveableCol[0]; //sets up the moveable material
         CurrentMove = MaxMovement;
     }
     //Movement///////////////////////////////////////////// Base Movement done by Nate, Limiting Movement Distance and changing movement material Done By Dylan
@@ -50,19 +51,14 @@ public class Unit : MonoBehaviour
         transform.position = position;
         if (CurrentMove == 0)
         {
-            CurrentMoveableMat = moveableMat[1]; //changes material to the NotMoveable
+            CurrentMoveableCol = moveableCol[1]; //changes material to the NotMoveable
         }
     }
     public void BeginMove()
     {
         foreach (Tile adjacentTile in currentTile.adjacentTiles)
         {
-
-            adjacentTile.GetComponent<Renderer>().material = CurrentMoveableMat;
-                 
-
-
-
+            adjacentTile.DisplayColour(CurrentMoveableCol);
         }
     }
     public void EndMove(Tile targetTile)
@@ -75,8 +71,7 @@ public class Unit : MonoBehaviour
             EndTargeting(currentTile, 0);
             foreach (Tile adjacentTile in currentTile.adjacentTiles)
             {
-                adjacentTile.GetComponent<Renderer>().material = adjacentTile.terrainType.material;
-                
+                adjacentTile.ResetMaterial();
             }
             if (currentTile.adjacentTiles.Contains(targetTile))
             {
@@ -115,7 +110,7 @@ public class Unit : MonoBehaviour
         loopNo++;
         foreach (Tile adjacentTile in tileToCheck.adjacentTiles)
         {
-            adjacentTile.GetComponent<Renderer>().material = CurrentMoveableMat;
+            adjacentTile.DisplayColour(CurrentMoveableCol);
             if (loopNo < AttackRange)
             {
                 MarkAdjacentTiles(adjacentTile, loopNo);
@@ -127,7 +122,7 @@ public class Unit : MonoBehaviour
         loopNo++;
         foreach (Tile adjacentTile in tileToCheck.adjacentTiles)
         {
-            adjacentTile.GetComponent<Renderer>().material = adjacentTile.terrainType.material;
+            adjacentTile.ResetMaterial();
             if (loopNo < AttackRange)
             {
                 EndTargeting(adjacentTile, loopNo);
@@ -137,9 +132,13 @@ public class Unit : MonoBehaviour
 
     //End Of Damage and Targeting/////////////////////////////
 
+    //Colour lerping and creating buildings/////////////////// Done by Nate
+
     public void CreateBuilding(int index) {
         if (canBuild) {
             currentTile.CreateBuilding(createableBuildings[index]);
         }
     }
+
+    //End of colour and buildings////////////////////////////
 }

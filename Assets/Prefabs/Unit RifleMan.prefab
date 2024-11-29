@@ -140,10 +140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cedc0e2ec0eaea345aa4a13cc4ca142c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveableMat:
-  - {fileID: 2100000, guid: 6dcb16a750903944bb68f65411471162, type: 2}
-  - {fileID: 2100000, guid: 85d0e2ea22186a24698553bedb980c56, type: 2}
-  CurrentMoveableMat: {fileID: 0}
+  moveableCol:
+  - {r: 0, g: 0.9400835, b: 1, a: 0}
+  - {r: 1, g: 0, b: 0, a: 0}
+  CurrentMoveableCol: {r: 0, g: 0, b: 0, a: 0}
   canBuild: 1
   createableBuildings:
   - {fileID: 2412454605390128264, guid: 9f08820a5bc856a47b4e02dc25d69d09, type: 3}
