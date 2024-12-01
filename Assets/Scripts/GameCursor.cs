@@ -20,7 +20,7 @@ public class GameCursor : CursorControls {
             switch (currentMode) {
                 case UnitMode.Attack:
                     unit.CurrentMoveableCol = unit.moveableCol[0];
-                    unit.MarkAdjacentTiles(unit.currentTile, 0);
+                    unit.MarkAdjacentTiles(unit.currentTile, 0, unit.AttackRange);
                     break;
 
                 case UnitMode.Move:
@@ -37,6 +37,7 @@ public class GameCursor : CursorControls {
                     break;
             }
         } else if (currentMode == UnitMode.Attack) {
+            //If a unit is clicked in attack mode, deal damage to it as if its tile was clicked on instead.
             TileClickBehaviour(unit.currentTile);
         }
     }
@@ -48,7 +49,7 @@ public class GameCursor : CursorControls {
             switch (currentMode) {
                 case UnitMode.Attack:
                     if (tile.unitHere != activeUnit) {
-                        activeUnit.EndTargeting(activeUnit.currentTile, 0);
+                        activeUnit.EndTargeting(activeUnit.currentTile, 0, activeUnit.AttackRange);
                         doDamage(tile);
                     }
                     break;

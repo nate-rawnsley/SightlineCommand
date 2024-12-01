@@ -68,7 +68,7 @@ public class Unit : MonoBehaviour
         if (CurrentMove > 0)
         {
             targetTile.unitHere = this;
-            EndTargeting(currentTile, 0);
+            EndTargeting(currentTile, 0, 1);
             foreach (Tile adjacentTile in currentTile.adjacentTiles)
             {
                 adjacentTile.ResetMaterial();
@@ -105,27 +105,27 @@ public class Unit : MonoBehaviour
 
     //Damage and Targeting/////////////////////////////////// Done By Dylan
 
-    public void MarkAdjacentTiles(Tile tileToCheck, int loopNo)
+    public void MarkAdjacentTiles(Tile tileToCheck, int loopNo, int maxLoops)
     {
         loopNo++;
         foreach (Tile adjacentTile in tileToCheck.adjacentTiles)
         {
             adjacentTile.DisplayColour(CurrentMoveableCol);
-            if (loopNo < AttackRange)
+            if (loopNo < maxLoops)
             {
-                MarkAdjacentTiles(adjacentTile, loopNo);
+                MarkAdjacentTiles(adjacentTile, loopNo, maxLoops);
             }
         }
     }
-    public void EndTargeting(Tile tileToCheck, int loopNo)
+    public void EndTargeting(Tile tileToCheck, int loopNo, int maxLoops)
     {
         loopNo++;
         foreach (Tile adjacentTile in tileToCheck.adjacentTiles)
         {
             adjacentTile.ResetMaterial();
-            if (loopNo < AttackRange)
+            if (loopNo < maxLoops)
             {
-                EndTargeting(adjacentTile, loopNo);
+                EndTargeting(adjacentTile, loopNo, maxLoops);
             }
         }
     }
