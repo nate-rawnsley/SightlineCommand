@@ -137,6 +137,7 @@ public class Unit : MonoBehaviour
     public void CreateBuilding(int index) {
         if (canBuild) {
             currentTile.CreateBuilding(createableBuildings[index]);
+            currentTile.buildingHere.OnEnterBehaviour(this);
         }
     }
 

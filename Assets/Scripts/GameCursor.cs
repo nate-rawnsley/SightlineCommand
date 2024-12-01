@@ -8,34 +8,36 @@ public class GameCursor : CursorControls {
     private Unit EnemyUnit;
     private bool HasSelection = false;
     //modes
-    [SerializeField]
-    private bool AttackMode;
-    [SerializeField]
-    private bool MoveMode;
-
-
-
+    public enum UnitMode { None, Attack, Move, Build }
+    public UnitMode currentMode = UnitMode.None;
 
     protected override void UnitClickBehaviour(Unit unit) {
         if (HasSelection == false) {
             activeUnit = unit;
             HasSelection = true;
+            Debug.Log(currentMode);
 
-            if (MoveMode == true)//movement
-            {
-                if (activeUnit.CurrentMove != 0) {
-                    unit.BeginMove();
-                    Debug.Log("DIDMOVE");
-                }
+            switch (currentMode) {
+                case UnitMode.Attack:
+                    unit.CurrentMoveableCol = unit.moveableCol[0];
+                    unit.MarkAdjacentTiles(unit.currentTile, 0);
+                    break;
+
+                case UnitMode.Move:
+                    if (activeUnit.CurrentMove != 0) {
+                        unit.BeginMove();
+                        Debug.Log("DIDMOVE");
+                    }
+                    break;
+
+                case UnitMode.Build:
+                    activeUnit.CreateBuilding(0);
+                    activeUnit = null;
+                    HasSelection = false;
+                    break;
             }
-
-
-            if (AttackMode == true) //attacking
-            {
-                unit.CurrentMoveableCol = unit.moveableCol[0];
-                unit.MarkAdjacentTiles(unit.currentTile, 0);
-            }
-
+        } else if (currentMode == UnitMode.Attack) {
+            TileClickBehaviour(unit.currentTile);
         }
     }
 
@@ -43,19 +45,21 @@ public class GameCursor : CursorControls {
         if (activeUnit != null) {
 
             Debug.Log(tile.unitHere);
-            if (AttackMode == true) {
-                if (tile.unitHere != activeUnit) {
-                    activeUnit.EndTargeting(activeUnit.currentTile, 0);
-                    doDamage(tile);
-                }
+            switch (currentMode) {
+                case UnitMode.Attack:
+                    if (tile.unitHere != activeUnit) {
+                        activeUnit.EndTargeting(activeUnit.currentTile, 0);
+                        doDamage(tile);
+                    }
+                    break;
 
-            }
-            if (MoveMode == true) {
-                activeUnit.EndMove(tile); //Clears all highlited Tiles
+                case UnitMode.Move:
+                    activeUnit.EndMove(tile); //Clears all highlighted tiles
+                    break;
+
             }
             activeUnit = null;       //Clears all selections                                       
             HasSelection = false;    //
-
         }
 
     }
@@ -66,44 +70,28 @@ public class GameCursor : CursorControls {
             Debug.Log("DONEDAMAGE2");
         }
     }
-    public void move() {
-        switch (MoveMode) {
-            case true:
-                MoveMode = false; break;
-            case false:
-                MoveMode = true;
-                if (AttackMode == true) {
-                    AttackMode = false;
-                }
-                break;
+
+    public void Move() {
+        if (currentMode == UnitMode.Move) {
+            currentMode = UnitMode.None;
+        } else {
+            currentMode = UnitMode.Move;
         }
     }
 
-    public void attack() {
-        switch (AttackMode) {
-            case true:
-                AttackMode = false;
-                break;
-            case false:
-                AttackMode = true;
-                if (MoveMode == true) {
-                    MoveMode = false;
-                }
-                break;
+    public void Attack() {
+        if (currentMode == UnitMode.Attack) {
+            currentMode = UnitMode.None;
+        } else {
+            currentMode = UnitMode.Attack;
         }
     }
 
-    public void UnitBuild() {
-        if (activeUnit != null) {
-            activeUnit.CreateBuilding(0);
-            if (MoveMode) {
-                activeUnit.EndMove(activeUnit.currentTile);
-            }
-            if (AttackMode) {
-                activeUnit.EndTargeting(activeUnit.currentTile, 0);
-            }
-            activeUnit = null;
-            HasSelection = false;
+    public void Build() {
+        if (currentMode == UnitMode.Build) {
+            currentMode = UnitMode.None;
+        } else {
+            currentMode = UnitMode.Build;
         }
     }
 }
