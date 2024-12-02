@@ -991,7 +991,7 @@ PrefabInstance:
     - target: {fileID: 3568308934959176345, guid: 4c055b2d482c2f84f8cfe6722c92bdb5, type: 3}
       propertyPath: levelSave
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4900000, guid: cce27531b3cfdcb4c833374d07ac45fc, type: 2}
     - target: {fileID: 3568308934959176345, guid: 4c055b2d482c2f84f8cfe6722c92bdb5, type: 3}
       propertyPath: testUnitAmount
       value: 5
