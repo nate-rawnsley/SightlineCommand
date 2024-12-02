@@ -11,11 +11,16 @@ public class GameCursor : CursorControls {
     public enum UnitMode { None, Attack, Move, Build }
     public UnitMode currentMode = UnitMode.None;
 
-    protected override void UnitClickBehaviour(Unit unit) {
-        if (HasSelection == false) {
+    [SerializeField]
+    private BuildingPanel buildingPanel;
+
+    public override void UnitClickBehaviour(Unit unit) {
+        if (buildingPanel.gameObject.activeSelf) {
+            buildingPanel.HidePanel();
+        }
+        if (HasSelection == false && currentMode != UnitMode.None) {
             activeUnit = unit;
             HasSelection = true;
-            Debug.Log(currentMode);
 
             switch (currentMode) {
                 case UnitMode.Attack:
@@ -27,11 +32,16 @@ public class GameCursor : CursorControls {
                     if (activeUnit.CurrentMove != 0) {
                         unit.BeginMove();
                         Debug.Log("DIDMOVE");
+                    } else {
+                        activeUnit = null;
+                        HasSelection = false;
                     }
                     break;
 
                 case UnitMode.Build:
-                    activeUnit.CreateBuilding(0);
+                    if (activeUnit.currentTile.buildingHere == null) {
+                        activeUnit.CreateBuilding(0);
+                    }
                     activeUnit = null;
                     HasSelection = false;
                     break;
@@ -43,6 +53,9 @@ public class GameCursor : CursorControls {
     }
 
     protected override void TileClickBehaviour(Tile tile) {
+        if (buildingPanel.gameObject.activeSelf) {
+            buildingPanel.HidePanel();
+        }
         if (activeUnit != null) {
 
             Debug.Log(tile.unitHere);
@@ -64,6 +77,19 @@ public class GameCursor : CursorControls {
         }
 
     }
+
+    protected override void BuildingClickBehaviour(Building building) {
+        if (buildingPanel.gameObject.activeSelf) {
+            buildingPanel.HidePanel();
+        }
+        if (activeUnit == null) {
+            buildingPanel.SetBuilding(building);
+        } else {
+            TileClickBehaviour(building.tile);
+        }
+        
+    }
+
     protected void doDamage(Tile tile) {
         if (tile.unitHere) {
             EnemyUnit = tile.unitHere;

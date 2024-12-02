@@ -17,12 +17,17 @@ public abstract class CursorControls : MonoBehaviour {
                     case "Tile":
                         TileClickBehaviour(cursorHit.collider.GetComponent<Tile>());
                         break;
+                    case "Building":
+                        BuildingClickBehaviour(cursorHit.collider.GetComponent<Building>());
+                        break;
                 }
             }
         }
     }
 
-    protected virtual void UnitClickBehaviour(Unit unit) { }
+    public virtual void UnitClickBehaviour(Unit unit) { }
 
     protected virtual void TileClickBehaviour(Tile tile) { }
+
+    protected virtual void BuildingClickBehaviour(Building building) { }
 }

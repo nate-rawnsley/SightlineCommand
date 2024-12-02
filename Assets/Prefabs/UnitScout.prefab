@@ -148,7 +148,8 @@ MonoBehaviour:
   createableBuildings: []
   currentTile: {fileID: 0}
   MaxMovement: 6
-  Health: 2
+  MaxHealth: 2
   Damage: 0
   AttackRange: 2
+  Health: 2
   CurrentMove: 0

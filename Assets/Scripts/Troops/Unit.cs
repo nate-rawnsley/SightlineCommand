@@ -20,19 +20,24 @@ public class Unit : MonoBehaviour
     [SerializeField]
     protected int MaxMovement;
     [SerializeField]
-    protected int Health;
+    public int MaxHealth;
     [SerializeField]
     protected int Damage;
     [SerializeField]
     public int AttackRange;
 
+    [Header("In-game values")]
+    public int Health;
 
     public int CurrentMove;
+
+    public Vector3 unitScale;
 
     public void Start()
     {
         CurrentMoveableCol = moveableCol[0]; //sets up the moveable material
         CurrentMove = MaxMovement;
+        Health = MaxHealth;
     }
     //Movement///////////////////////////////////////////// Base Movement done by Nate, Limiting Movement Distance and changing movement material Done By Dylan
     public void UnitSpawn(Tile tile)
@@ -41,7 +46,8 @@ public class Unit : MonoBehaviour
         currentTile = tile;
 
         scale = currentTile.transform.localScale.x;
-        transform.localScale = transform.localScale * scale * 0.5f;
+        unitScale = transform.localScale * scale * 0.5f;
+        transform.localScale = unitScale;
         MoveToTile();
     }
     protected void MoveToTile()
@@ -137,6 +143,7 @@ public class Unit : MonoBehaviour
     public void CreateBuilding(int index) {
         if (canBuild) {
             currentTile.CreateBuilding(createableBuildings[index]);
+            currentTile.buildingHere.tile = currentTile;
             currentTile.buildingHere.OnEnterBehaviour(this);
         }
     }

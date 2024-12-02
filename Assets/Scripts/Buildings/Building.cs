@@ -6,6 +6,7 @@ public abstract class Building : MonoBehaviour {
     public int capacity = 5;
     public List<GameObject> unitsHere;
     private GameObject unitIndicator;
+    public Tile tile;
 
     public virtual void ActivateBehaviour() { }
 
@@ -17,6 +18,15 @@ public abstract class Building : MonoBehaviour {
         if (unitIndicator == null) {
             GameObject indicatorObj = Resources.Load<GameObject>("Billboards/Chevron1");
             unitIndicator = Instantiate(indicatorObj, transform);
+        }
+    }
+
+    public virtual void OnExitBehaviour(Unit unitLeaving) {
+        unitsHere.Remove(unitLeaving.gameObject);
+        unitLeaving.transform.localScale = unitLeaving.unitScale;
+        if (unitsHere.Count == 0) {
+            Destroy(unitIndicator);
+            unitIndicator = null;
         }
     }
 }
