@@ -61,11 +61,13 @@ public class GridGenerator : MonoBehaviour {
         float xOffset = (width * scale * gapScale) / 2;
         float zOffset = (height * scale * gapScale) / 2;
 
+        //Hexagon generation adapted from https://catlikecoding.com/unity/tutorials/hex-map/part-1/
         for (int x = 0; x < width; x++) {
             for (int z = 0; z < height; z++) {
-                position.x = (x * scale * gapScale) - xOffset;
-                position.z = (z * scale * gapScale) - zOffset;
-                GameObject gridTile = Instantiate(tile, position, Quaternion.identity, gridParent.transform);
+                position.x = ((x + z * 0.5f - z / 2) * scale * gapScale) - xOffset;
+                position.z = (z * 0.866f * scale * gapScale) - zOffset;
+                GameObject gridTile = Instantiate(tile, gridParent.transform);
+                gridTile.transform.localPosition = position;
                 gridTile.transform.localScale = new Vector3(scale, scale, scale);
 
                 Tile tileScript = gridTile.AddComponent<Tile>();
@@ -78,13 +80,31 @@ public class GridGenerator : MonoBehaviour {
                 }
                 tileScript.SetTerrain();
 
-                if (x > 0) {
-                    tileScript.adjacentTiles.Add(gridParentScript.tiles[x - 1, z]);
-                    gridParentScript.tiles[x - 1, z].adjacentTiles.Add(tileScript);
+                tileScript.coords = new Vector2(x, z);
+
+            }
+        }
+        foreach (Tile tile in gridParentScript.tiles) {
+            int x = (int)tile.coords.x;
+            int z = (int)tile.coords.y;
+
+            if (x > 0) {
+                tile.adjacentTiles.Add(gridParentScript.tiles[x - 1, z]);
+                gridParentScript.tiles[x - 1, z].adjacentTiles.Add(tile);
+            }
+            if (z > 0) {
+                tile.adjacentTiles.Add(gridParentScript.tiles[x, z - 1]);
+                gridParentScript.tiles[x, z - 1].adjacentTiles.Add(tile);
+            }
+            if (z % 2 == 0) {
+                if (z > 0 && x > 0) {
+                    tile.adjacentTiles.Add(gridParentScript.tiles[x - 1, z - 1]);
+                    gridParentScript.tiles[x - 1, z - 1].adjacentTiles.Add(tile);
                 }
-                if (z > 0) {
-                    tileScript.adjacentTiles.Add(gridParentScript.tiles[x, z - 1]);
-                    gridParentScript.tiles[x, z - 1].adjacentTiles.Add(tileScript);
+            } else {
+                if (z > 0 && x < width - 1) {
+                    tile.adjacentTiles.Add(gridParentScript.tiles[x + 1, z - 1]);
+                    gridParentScript.tiles[x + 1, z - 1].adjacentTiles.Add(tile);
                 }
             }
         }

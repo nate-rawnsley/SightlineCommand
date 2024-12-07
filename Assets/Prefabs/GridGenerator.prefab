@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115e83f5b0f385447adfcbd0ac761aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tile: {fileID: 5950392750230539959, guid: 307f541c2e38ce444b288cd8e1a7b9aa, type: 3}
+  tile: {fileID: 4047877363848570344, guid: c7025e8c1dbb4ab48b0ae9cb24474d07, type: 3}
   terrainTypes:
   - name: Grass
     material: {fileID: 2100000, guid: efa91acd5cb6fcd4baf5461cced8a77b, type: 2}

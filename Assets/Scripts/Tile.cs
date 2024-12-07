@@ -15,6 +15,8 @@ public class Tile : MonoBehaviour {
     private bool lerpingColour;
     private float lerpTime;
 
+    public Vector2 coords;
+
     private void Awake() {
         thisRenderer = GetComponent<Renderer>();
     }
