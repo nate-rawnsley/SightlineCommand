@@ -56,24 +56,31 @@ public class GameCursor : CursorControls {
         if (buildingPanel.gameObject.activeSelf) {
             buildingPanel.HidePanel();
         }
+        bool acted = false;
         if (activeUnit != null) {
 
-            Debug.Log(tile.unitHere);
             switch (currentMode) {
                 case UnitMode.Attack:
                     if (tile.unitHere != activeUnit) {
                         activeUnit.EndTargeting(activeUnit.currentTile, 0, activeUnit.AttackRange);
                         doDamage(tile);
+                        acted = true;
                     }
                     break;
 
                 case UnitMode.Move:
-                    activeUnit.EndMove(tile); //Clears all highlighted tiles
+                    if (tile.terrainType.walkable)
+                    {
+                        activeUnit.EndMove(tile); //Clears all highlighted tiles
+                        acted = true;
+                    }
                     break;
 
             }
-            activeUnit = null;       //Clears all selections                                       
-            HasSelection = false;    //
+            if (acted) {
+                activeUnit = null;       //Clears all selections                                       
+                HasSelection = false;    //
+            }
         }
 
     }

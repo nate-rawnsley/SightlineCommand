@@ -32,9 +32,9 @@ public class Tile : MonoBehaviour {
                 int index = Random.Range(0, terrainType.decorations.Count);
                 decoration = Instantiate(terrainType.decorations[index], transform);
 
-                int alignment = Random.Range(0, 4);
+                int alignment = Random.Range(0, 6);
                 Vector3 decoRotation = decoration.transform.rotation.eulerAngles;
-                decoRotation.y = alignment * 90;
+                decoRotation.y = alignment * 60;
                 decoration.transform.rotation = Quaternion.Euler(decoRotation);
             }
         }

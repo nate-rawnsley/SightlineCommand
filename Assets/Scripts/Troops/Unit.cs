@@ -64,7 +64,10 @@ public class Unit : MonoBehaviour
     {
         foreach (Tile adjacentTile in currentTile.adjacentTiles)
         {
-            adjacentTile.DisplayColour(CurrentMoveableCol);
+            if (adjacentTile.terrainType.walkable == true)
+            {
+                adjacentTile.DisplayColour(CurrentMoveableCol);
+            }
         }
     }
     public void EndMove(Tile targetTile)
