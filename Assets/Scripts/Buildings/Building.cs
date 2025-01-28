@@ -2,11 +2,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Building : MonoBehaviour {
-    public float price = 10;
-    public int capacity = 5;
     public List<GameObject> unitsHere;
     private GameObject unitIndicator;
     public Tile tile;
+
+    [Header("Values")]
+    public float price = 10;
+    public int capacity = 5;
+
+    [Header("Panel Text")]
+    public string buildingName;
+    public string toolTip;
+    public string command;
 
     public virtual void ActivateBehaviour() { }
 
