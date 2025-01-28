@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 8397045034945365649}
   - component: {fileID: 1525994377440538051}
   - component: {fileID: 3060039964036656435}
-  - component: {fileID: 1182775587085733850}
   - component: {fileID: -8439805222673433636}
-  - component: {fileID: 1295532986441781782}
+  - component: {fileID: -2437437782493172933}
   m_Layer: 0
-  m_Name: Unit RifleMan
+  m_Name: Alien
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,27 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1182775587085733850
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5477471966950854349}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &-8439805222673433636
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -128,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1295532986441781782
+--- !u!114 &-2437437782493172933
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,7 +115,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5477471966950854349}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cedc0e2ec0eaea345aa4a13cc4ca142c, type: 3}
+  m_Script: {fileID: 11500000, guid: ee9af21f3c2ec5945983d7cde63cc1ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveableCol:
@@ -145,13 +123,15 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0, a: 0}
   CurrentMoveableCol: {r: 0, g: 0, b: 0, a: 0}
   canBuild: 1
-  createableBuildings:
-  - {fileID: 2412454605390128264, guid: 9f08820a5bc856a47b4e02dc25d69d09, type: 3}
+  createableBuildings: []
   currentTile: {fileID: 0}
+  team: 1
   MaxMovement: 5
   MaxHealth: 5
   Damage: 1
   AttackRange: 3
+  MaxAttack: 1
   Health: 5
   CurrentMove: 0
+  CurrentAttacks: 0
   unitScale: {x: 0, y: 0, z: 0}
