@@ -11,6 +11,7 @@ public class GameCursor : CursorControls {
     private bool HasSelection = false;
 
     public Unit.Teams CurrentTeam;
+    public UnitLists UnitLists;
 
     private TextMeshPro Values;
     //modes
@@ -165,12 +166,23 @@ public class GameCursor : CursorControls {
     }
     public void EndTurn()
     {
+ 
         switch (CurrentTeam) {
             case Unit.Teams.Team1:
                 CurrentTeam = Unit.Teams.Team2;
+                foreach(Unit Alien in UnitLists.Aliens)
+                {
+                    Alien.ResetUnit();
+                }
+        
+                
                 break;
             case Unit.Teams.Team2:
                 CurrentTeam = Unit.Teams.Team1;
+                foreach (Unit Soldier in UnitLists.Soldiers)
+                {
+                    Soldier.ResetUnit();
+                }
                 break;
                 }
         

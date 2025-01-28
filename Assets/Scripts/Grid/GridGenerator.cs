@@ -2,7 +2,10 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class GridGenerator : MonoBehaviour {
-    [SerializeField, Tooltip("The tile to populate the grid with.")]
+
+    public UnitLists UnitLists;
+
+[SerializeField, Tooltip("The tile to populate the grid with.")]
     private GameObject tile;
 
     [SerializeField, Tooltip("Define the different types of terrain in this map.")]
@@ -125,6 +128,8 @@ public class GridGenerator : MonoBehaviour {
                 GameObject FriendObj = Instantiate(Humanunit);
                 Humanunit.name = ("Soldier" + p).ToString();
                 FriendObj.GetComponent<Unit>().UnitSpawn(gridParentScript.tiles[0, p]);
+                UnitLists.Soldiers.Add(FriendObj.GetComponent<Unit>());
+                
 
 
                 
@@ -135,6 +140,8 @@ public class GridGenerator : MonoBehaviour {
                 GameObject EnemyObj = Instantiate(Alienunit);
                 Alienunit.name = ("Alien" + e).ToString();
                 EnemyObj.GetComponent<Unit>().UnitSpawn(gridParentScript.tiles[width - 1, e]);
+                UnitLists.Aliens.Add(EnemyObj.GetComponent<Unit>());
+
             }
         }
     }
