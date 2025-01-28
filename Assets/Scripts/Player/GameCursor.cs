@@ -91,7 +91,7 @@ public class GameCursor : CursorControls {
 
             switch (currentMode) {
                 case UnitMode.Attack:
-                    if (tile.unitHere != activeUnit & tile.unitHere.team != activeUnit.team) {
+                    if (tile.unitHere != activeUnit & tile.unitHere.team != activeUnit.team && tile.adjacentTiles.Contains(tile)) {
                         activeUnit.EndTargeting(activeUnit.currentTile, 0, activeUnit.AttackRange);
                         doDamage(tile);
                         acted = true;
@@ -133,7 +133,7 @@ public class GameCursor : CursorControls {
     }
 
     protected void doDamage(Tile tile) {
-        if (tile.unitHere) {
+        if (tile.unitHere) {            
             EnemyUnit = tile.unitHere;
             EnemyUnit.TakeDamage();
             activeUnit.CurrentAttacks--;
