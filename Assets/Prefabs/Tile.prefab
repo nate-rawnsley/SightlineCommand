@@ -376,9 +376,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cone
       objectReference: {fileID: 0}
+    - target: {fileID: 4052364682394262433, guid: c7025e8c1dbb4ab48b0ae9cb24474d07, type: 3}
+      propertyPath: m_UnmodifiedMeshVersion
+      value: 815
+      objectReference: {fileID: 0}
     - target: {fileID: 7477957424967124397, guid: c7025e8c1dbb4ab48b0ae9cb24474d07, type: 3}
       propertyPath: m_VersionIndex
-      value: 801
+      value: 818
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
