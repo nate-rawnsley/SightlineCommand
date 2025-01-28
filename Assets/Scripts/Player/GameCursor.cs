@@ -10,7 +10,7 @@ public class GameCursor : CursorControls {
     private Unit EnemyUnit;
     private bool HasSelection = false;
 
-    private int CurrentTeam = 1;
+    public Unit.Teams CurrentTeam;
 
     private TextMeshPro Values;
     //modes
@@ -28,41 +28,52 @@ public class GameCursor : CursorControls {
             activeUnit = unit;
             HasSelection = true;
             Values = unit.GetComponentInChildren<TextMeshPro>();
-            
 
-            switch (currentMode) {
-                case UnitMode.Attack:
-                    if (unit.CurrentAttacks > 0)
-                    {
-                        Values.text = unit.CurrentAttacks.ToString();
-                        unit.CurrentMoveableCol = unit.moveableCol[0];
-                        unit.MarkAdjacentTiles(unit.currentTile, 0, unit.AttackRange);
-                        
-                    }
-                    else
-                    {
+            if (activeUnit.team == CurrentTeam)
+            {
+                switch (currentMode)
+                {
+                    case UnitMode.Attack:
+                        if (unit.CurrentAttacks > 0)
+                        {
+                            Values.text = unit.CurrentAttacks.ToString();
+                            unit.CurrentMoveableCol = unit.moveableCol[0];
+                            unit.MarkAdjacentTiles(unit.currentTile, 0, unit.AttackRange);
+
+                        }
+                        else
+                        {
+                            CLEARALL();
+                        }
+                        break;
+
+                    case UnitMode.Move:
+                        Debug.Log("click");
+                        Values.text = unit.CurrentMove.ToString();
+                        if (activeUnit.CurrentMove != 0)
+                        {
+                            unit.BeginMove();
+                            Debug.Log("DID MOVE");
+                        }
+                        else
+                        {
+                            CLEARALL();
+
+                        }
+                        break;
+
+                    case UnitMode.Build:
+                        if (activeUnit.currentTile.buildingHere == null)
+                        {
+                            activeUnit.CreateBuilding(0);
+                        }
                         CLEARALL();
-                    }
-                    break;
-
-                case UnitMode.Move:
-                    Debug.Log("click");
-                    Values.text = unit.CurrentMove.ToString();
-                    if (activeUnit.CurrentMove != 0) {
-                        unit.BeginMove();
-                        Debug.Log("DID MOVE");
-                    } else {
-                        CLEARALL();
-
-                    }
-                    break;
-
-                case UnitMode.Build:
-                    if (activeUnit.currentTile.buildingHere == null) {
-                        activeUnit.CreateBuilding(0);
-                    }
-                    CLEARALL();
-                    break;
+                        break;
+                }
+            }
+            else
+            {
+                CLEARALL();
             }
         } else if (currentMode == UnitMode.Attack) {
             //If a unit is clicked in attack mode, deal damage to it as if its tile was clicked on instead.
@@ -155,12 +166,11 @@ public class GameCursor : CursorControls {
     public void EndTurn()
     {
         switch (CurrentTeam) {
-            case 1:
-                CurrentTeam = 2;
-
+            case Unit.Teams.Team1:
+                CurrentTeam = Unit.Teams.Team2;
                 break;
-            case 2:
-                CurrentTeam = 1;
+            case Unit.Teams.Team2:
+                CurrentTeam = Unit.Teams.Team1;
                 break;
                 }
         
