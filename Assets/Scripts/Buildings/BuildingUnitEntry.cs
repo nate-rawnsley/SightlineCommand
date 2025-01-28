@@ -25,6 +25,7 @@ public class BuildingUnitEntry : MonoBehaviour {
         currentHP.text = $"HP: {unit.Health}/{unit.MaxHealth}";
         building = thisBuilding;
         buildPanel = bp;
+        Debug.Log(GetComponent<RectTransform>().localPosition);
     }
 
     public void SelectUnit() {

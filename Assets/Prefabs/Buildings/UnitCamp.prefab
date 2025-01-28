@@ -46,9 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db314fb93c1f39499fb22a0667bfbf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitsHere: []
+  tile: {fileID: 0}
   price: 10
   capacity: 5
-  unitsHere: []
+  buildingName: Unit Camp
+  toolTip: A bootcamp where you can buy troops.
+  command: Spawn troop
 --- !u!65 &-6780716543572538985
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -80,15 +84,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 6e0e679257287aa49ac97009ba65c468, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.035
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6e0e679257287aa49ac97009ba65c468, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.035
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6e0e679257287aa49ac97009ba65c468, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.035
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6e0e679257287aa49ac97009ba65c468, type: 3}
       propertyPath: m_LocalPosition.x

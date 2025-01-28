@@ -25,6 +25,7 @@ public class BuildingPanel : MonoBehaviour {
     }
 
     public void SetBuilding(Building selectedBuilding) {
+        entries.Clear();
         Debug.Log(building);
         gameObject.SetActive(true);
         building = selectedBuilding;
@@ -36,8 +37,8 @@ public class BuildingPanel : MonoBehaviour {
             newEntry.transform.SetParent(scrollContent, true);
 
             RectTransform trans = newEntry.GetComponent<RectTransform>();
-            trans.localPosition = new Vector2(200, -75 + i * -125);
-            trans.localScale = new Vector2(1, 1);
+            trans.localPosition = new Vector2(181.381424f, -75 + i * -125);
+            Debug.Log(trans.localPosition);
 
             Unit unit = building.unitsHere[i].GetComponent<Unit>();
             newEntry.GetComponent<BuildingUnitEntry>().Initialize(unit, building, this);
