@@ -26,10 +26,14 @@ public class GridGenerator : MonoBehaviour {
     private GameObject unit;
 
     [SerializeField]
-    private bool testUnit;
+    private bool testUnits;
 
     [SerializeField]
-    private int testUnitAmount;
+    private int testSoldierAmount;
+    [SerializeField]
+    private int testAlienAmount;
+
+
 
     private void Awake() {
         if (levelSave != null) {
@@ -50,6 +54,7 @@ public class GridGenerator : MonoBehaviour {
         }
         GenerateGrid();
     }
+    
 
     private void GenerateGrid() {
         GameObject gridParent = new GameObject("Grid");
@@ -110,12 +115,19 @@ public class GridGenerator : MonoBehaviour {
         }
         Camera.main.GetComponent<CameraMovement>().SetInitialPosition(scale);
         //here for testing unit movement
-        if (testUnit) {
-            for (int p = 0; p < testUnitAmount; p++) //multiple test units done by Dylan
+
+        if (testUnits)
+        {
+            for (int p = 0; p < testSoldierAmount; p++) //multiple test units done by Dylan
             {
-                GameObject unitObj = Instantiate(unit);
-                unit.name = ("Unit" + p).ToString();
-                unitObj.GetComponent<Unit>().UnitSpawn(gridParentScript.tiles[0, p]);
+                GameObject FriendObj = Instantiate(unit);
+                unit.name = ("Soldier" + p).ToString();
+                unit.tag = ("Team1");
+                FriendObj.GetComponent<Unit>().UnitSpawn(gridParentScript.tiles[0, p]);
+                GameObject EnemyObj = Instantiate(unit);
+                unit.name = ("Alien" + p).ToString();
+                unit.tag = ("Team2");
+                EnemyObj.GetComponent<Unit>().UnitSpawn(gridParentScript.tiles[width, p]);
             }
         }
     }

@@ -19,12 +19,17 @@ public class Unit : MonoBehaviour
     [Header("Troop Settings")]
     [SerializeField]
     protected int MaxMovement;
+
+
     [SerializeField]
     public int MaxHealth;
+
     [SerializeField]
-    protected int Damage;
+    protected float Damage;
     [SerializeField]
     public int AttackRange;
+    [SerializeField]
+    public int MaxAttack;
 
     [Header("In-game values")]
     public int Health;
@@ -96,6 +101,11 @@ public class Unit : MonoBehaviour
             }
         }
         
+    }
+
+    public void ResetMove()
+    {
+        CurrentMove = MaxMovement;
     }
     //End Of Movement////////////////////////////////////////
 
