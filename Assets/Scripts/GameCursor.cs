@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,8 @@ public class GameCursor : CursorControls {
     private bool HasSelection = false;
 
     private int CurrentTeam = 1;
+
+    private TextMeshPro Values;
     //modes
     public enum UnitMode { None, Attack, Move, Build, End}
     public UnitMode currentMode = UnitMode.None;
@@ -24,30 +27,33 @@ public class GameCursor : CursorControls {
         if (HasSelection == false && currentMode != UnitMode.None) {
             activeUnit = unit;
             HasSelection = true;
+            Values = unit.GetComponentInChildren<TextMeshPro>();
+            
 
             switch (currentMode) {
                 case UnitMode.Attack:
                     if (unit.CurrentAttacks > 0)
                     {
+                        Values.text = unit.CurrentAttacks.ToString();
                         unit.CurrentMoveableCol = unit.moveableCol[0];
                         unit.MarkAdjacentTiles(unit.currentTile, 0, unit.AttackRange);
                         
                     }
                     else
                     {
-                        activeUnit = null;                                       
-                        HasSelection = false;    
+                        CLEARALL();
                     }
                     break;
 
                 case UnitMode.Move:
                     Debug.Log("click");
+                    Values.text = unit.CurrentMove.ToString();
                     if (activeUnit.CurrentMove != 0) {
                         unit.BeginMove();
                         Debug.Log("DID MOVE");
                     } else {
-                        activeUnit = null;
-                        HasSelection = false;
+                        CLEARALL();
+
                     }
                     break;
 
@@ -55,8 +61,7 @@ public class GameCursor : CursorControls {
                     if (activeUnit.currentTile.buildingHere == null) {
                         activeUnit.CreateBuilding(0);
                     }
-                    activeUnit = null;
-                    HasSelection = false;
+                    CLEARALL();
                     break;
             }
         } else if (currentMode == UnitMode.Attack) {
@@ -91,10 +96,8 @@ public class GameCursor : CursorControls {
 
             }
             if (acted) {
-           
-                activeUnit.EndTargeting(activeUnit.currentTile, 0, activeUnit.AttackRange);
-                activeUnit = null;       //Clears all selections                                       
-                HasSelection = false;    //
+
+                CLEARALL();
             }
         }
 
@@ -114,9 +117,7 @@ public class GameCursor : CursorControls {
 
     protected override void RightClickBehaviour()
     {
-        activeUnit.EndTargeting(activeUnit.currentTile, 0, activeUnit.AttackRange);
-        activeUnit = null;       //Clears all selections                                       
-        HasSelection = false;    //
+        CLEARALL();  //
     }
 
     protected void doDamage(Tile tile) {
@@ -163,5 +164,14 @@ public class GameCursor : CursorControls {
                 break;
                 }
         
+    }
+
+    public void CLEARALL()
+    {
+        activeUnit.EndTargeting(activeUnit.currentTile, 0, activeUnit.AttackRange);
+        activeUnit = null;       //Clears all selections                                       
+        HasSelection = false;    //
+        Values.text = "";
+        Values = null;
     }
 }
