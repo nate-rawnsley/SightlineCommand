@@ -23,7 +23,9 @@ public class GridGenerator : MonoBehaviour {
 
     //temporarily here for testing & creating unit functionality
     [SerializeField]
-    private GameObject unit;
+    private GameObject Humanunit;
+    [SerializeField]
+    private GameObject Alienunit;
 
     [SerializeField]
     private bool testUnits;
@@ -120,14 +122,19 @@ public class GridGenerator : MonoBehaviour {
         {
             for (int p = 0; p < testSoldierAmount; p++) //multiple test units done by Dylan
             {
-                GameObject FriendObj = Instantiate(unit);
-                unit.name = ("Soldier" + p).ToString();
-                unit.tag = ("Team1");
+                GameObject FriendObj = Instantiate(Humanunit);
+                Humanunit.name = ("Soldier" + p).ToString();
                 FriendObj.GetComponent<Unit>().UnitSpawn(gridParentScript.tiles[0, p]);
-                GameObject EnemyObj = Instantiate(unit);
-                unit.name = ("Alien" + p).ToString();
-                unit.tag = ("Team2");
-                EnemyObj.GetComponent<Unit>().UnitSpawn(gridParentScript.tiles[width, p]);
+
+
+                
+                
+
+            }
+            for (int e = 0; e < testAlienAmount; e++) {
+                GameObject EnemyObj = Instantiate(Alienunit);
+                Alienunit.name = ("Alien" + e).ToString();
+                EnemyObj.GetComponent<Unit>().UnitSpawn(gridParentScript.tiles[width - 1, e]);
             }
         }
     }

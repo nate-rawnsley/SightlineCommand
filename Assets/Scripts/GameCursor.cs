@@ -27,15 +27,21 @@ public class GameCursor : CursorControls {
 
             switch (currentMode) {
                 case UnitMode.Attack:
-                    if (unit.MaxAttack > 0)
+                    if (unit.CurrentAttacks > 0)
                     {
                         unit.CurrentMoveableCol = unit.moveableCol[0];
                         unit.MarkAdjacentTiles(unit.currentTile, 0, unit.AttackRange);
                         
                     }
+                    else
+                    {
+                        activeUnit = null;                                       
+                        HasSelection = false;    
+                    }
                     break;
 
                 case UnitMode.Move:
+                    Debug.Log("click");
                     if (activeUnit.CurrentMove != 0) {
                         unit.BeginMove();
                         Debug.Log("DID MOVE");
@@ -68,7 +74,7 @@ public class GameCursor : CursorControls {
 
             switch (currentMode) {
                 case UnitMode.Attack:
-                    if (tile.unitHere != activeUnit & activeUnit.tag != tile.unitHere.tag) {
+                    if (tile.unitHere != activeUnit & tile.unitHere.team != activeUnit.team) {
                         activeUnit.EndTargeting(activeUnit.currentTile, 0, activeUnit.AttackRange);
                         doDamage(tile);
                         acted = true;
@@ -85,9 +91,10 @@ public class GameCursor : CursorControls {
 
             }
             if (acted) {
+           
+                activeUnit.EndTargeting(activeUnit.currentTile, 0, activeUnit.AttackRange);
                 activeUnit = null;       //Clears all selections                                       
                 HasSelection = false;    //
-                activeUnit.EndTargeting(activeUnit.currentTile, 0, activeUnit.AttackRange);
             }
         }
 
@@ -105,11 +112,18 @@ public class GameCursor : CursorControls {
         
     }
 
+    protected override void RightClickBehaviour()
+    {
+        activeUnit.EndTargeting(activeUnit.currentTile, 0, activeUnit.AttackRange);
+        activeUnit = null;       //Clears all selections                                       
+        HasSelection = false;    //
+    }
+
     protected void doDamage(Tile tile) {
         if (tile.unitHere) {
             EnemyUnit = tile.unitHere;
             EnemyUnit.TakeDamage();
-            activeUnit.MaxAttack--;
+            activeUnit.CurrentAttacks--;
             Debug.Log("DONEDAMAGE2");
         }
     }
@@ -142,6 +156,7 @@ public class GameCursor : CursorControls {
         switch (CurrentTeam) {
             case 1:
                 CurrentTeam = 2;
+
                 break;
             case 2:
                 CurrentTeam = 1;

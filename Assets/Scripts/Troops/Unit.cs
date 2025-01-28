@@ -16,14 +16,15 @@ public class Unit : MonoBehaviour
 
     protected float scale;
 
+    [SerializeField]
+    public enum Teams { Team1, Team2 };
+
     [Header("Troop Settings")]
+    public Teams team;
     [SerializeField]
     protected int MaxMovement;
-
-
     [SerializeField]
     public int MaxHealth;
-
     [SerializeField]
     protected float Damage;
     [SerializeField]
@@ -33,13 +34,13 @@ public class Unit : MonoBehaviour
 
     [Header("In-game values")]
     public int Health;
-
     public int CurrentMove;
-
+    public int CurrentAttacks;
     public Vector3 unitScale;
 
     public void Start()
     {
+        CurrentAttacks = MaxAttack;
         CurrentMoveableCol = moveableCol[0]; //sets up the moveable material
         CurrentMove = MaxMovement;
         Health = MaxHealth;

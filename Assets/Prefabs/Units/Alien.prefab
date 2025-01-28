@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1525994377440538051}
   - component: {fileID: 3060039964036656435}
   - component: {fileID: -8439805222673433636}
-  - component: {fileID: -7963936134096693854}
+  - component: {fileID: -2437437782493172933}
   m_Layer: 0
-  m_Name: UnitScout
+  m_Name: Alien
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-7963936134096693854
+--- !u!114 &-2437437782493172933
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5477471966950854349}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf9f888299461ea498bbf25a48bc9ed4, type: 3}
+  m_Script: {fileID: 11500000, guid: ee9af21f3c2ec5945983d7cde63cc1ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveableCol:
@@ -125,13 +125,13 @@ MonoBehaviour:
   canBuild: 1
   createableBuildings: []
   currentTile: {fileID: 0}
-  team: 0
-  MaxMovement: 6
-  MaxHealth: 2
+  team: 1
+  MaxMovement: 5
+  MaxHealth: 5
   Damage: 1
-  AttackRange: 2
+  AttackRange: 3
   MaxAttack: 1
-  Health: 2
+  Health: 5
   CurrentMove: 0
   CurrentAttacks: 0
   unitScale: {x: 0, y: 0, z: 0}

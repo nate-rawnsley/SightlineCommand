@@ -23,6 +23,10 @@ public abstract class CursorControls : MonoBehaviour {
                 }
             }
         }
+        if (Input.GetMouseButtonDown(1))
+        {
+            RightClickBehaviour();
+        }
     }
 
     public virtual void UnitClickBehaviour(Unit unit) { }
@@ -30,4 +34,6 @@ public abstract class CursorControls : MonoBehaviour {
     protected virtual void TileClickBehaviour(Tile tile) { }
 
     protected virtual void BuildingClickBehaviour(Building building) { }
+
+    protected virtual void RightClickBehaviour() { }
 }
