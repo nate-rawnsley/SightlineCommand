@@ -25,7 +25,6 @@ public class BuildingPanel : MonoBehaviour {
     }
 
     public void SetBuilding(Building selectedBuilding) {
-        entries.Clear();
         Debug.Log(building);
         gameObject.SetActive(true);
         building = selectedBuilding;
