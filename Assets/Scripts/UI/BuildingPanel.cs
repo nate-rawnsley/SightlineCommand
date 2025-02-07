@@ -25,7 +25,6 @@ public class BuildingPanel : MonoBehaviour {
     }
 
     public void SetBuilding(Building selectedBuilding) {
-        Debug.Log(building);
         gameObject.SetActive(true);
         building = selectedBuilding;
         nameText.text = building.buildingName;
@@ -35,12 +34,10 @@ public class BuildingPanel : MonoBehaviour {
             GameObject newEntry = Instantiate(buildingUnitEntry);
             newEntry.transform.SetParent(scrollContent, true);
 
-            RectTransform trans = newEntry.GetComponent<RectTransform>();
-            trans.localPosition = new Vector2(181.381424f, -75 + i * -125);
-            Debug.Log(trans.localPosition);
+            Vector2 entryPos = new Vector2(181.381424f, -75 + i * -125);
 
             Unit unit = building.unitsHere[i].GetComponent<Unit>();
-            newEntry.GetComponent<BuildingUnitEntry>().Initialize(unit, building, this);
+            newEntry.GetComponent<BuildingUnitEntry>().Initialize(unit, building, this, entryPos);
             entries.Add(newEntry);
         }
     }
