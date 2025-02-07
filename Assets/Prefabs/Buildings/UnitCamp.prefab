@@ -48,11 +48,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitsHere: []
   tile: {fileID: 0}
+  team: 0
+  unitInCreation: {fileID: 0}
+  turnsToCreate: 0
   price: 10
   capacity: 5
   buildingName: Unit Camp
   toolTip: A bootcamp where you can buy troops.
   command: Spawn troop
+  availableUnits:
+  - unitPrefab: {fileID: 5477471966950854349, guid: 615d2a27b948abc45b022e717603062f, type: 3}
+    price: 200
+    createSpeed: 1
+  - unitPrefab: {fileID: 5477471966950854349, guid: 5f9d89677fbfec54bb8e39807da9da98, type: 3}
+    price: 400
+    createSpeed: 2
+  buyMenu: {fileID: 8942280044256999528, guid: a49a25bba7e36fb4689fb23451ac2e3f, type: 3}
 --- !u!65 &-6780716543572538985
 BoxCollider:
   m_ObjectHideFlags: 0

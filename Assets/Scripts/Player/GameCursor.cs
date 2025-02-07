@@ -67,6 +67,7 @@ public class GameCursor : CursorControls {
                         if (activeUnit.currentTile.buildingHere == null)
                         {
                             activeUnit.CreateBuilding(0);
+
                         }
                         CLEARALL();
                         break;

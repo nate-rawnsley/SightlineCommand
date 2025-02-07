@@ -39,7 +39,6 @@ public class GridGenerator : MonoBehaviour {
     private int testAlienAmount;
 
 
-
     private void Awake() {
         if (levelSave != null) {
             string[] rawLines = levelSave.text.Split('\n');

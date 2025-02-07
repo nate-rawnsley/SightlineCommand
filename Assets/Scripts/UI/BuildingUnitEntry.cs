@@ -17,7 +17,6 @@ public class BuildingUnitEntry : MonoBehaviour {
     private GameCursor gameCursor;
     private BuildingPanel buildPanel;
     private RectTransform rect;
-    private Vector2 test;
 
     private void Awake() {
         gameCursor = Camera.main.GetComponent<GameCursor>();
@@ -31,19 +30,15 @@ public class BuildingUnitEntry : MonoBehaviour {
         building = thisBuilding;
         buildPanel = bp;
         
-        test = position;
         StartCoroutine(DelayPosition(position));
     }
 
+    //Due to a bug, the first time the entries are displayed, they are set to the wrong position.
+    //This coroutine delays the action of setting its position by a frame, circumventing this issue.
     private IEnumerator DelayPosition(Vector2 pos)
     {
         yield return null;
         rect.localPosition = pos;
-    }
-
-    private void LateUpdate()
-    {
-        Debug.Log($"{rect.localPosition}, {test}");
     }
 
     public void SelectUnit() {

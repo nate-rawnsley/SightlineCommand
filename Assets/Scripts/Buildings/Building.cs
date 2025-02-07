@@ -5,6 +5,9 @@ public abstract class Building : MonoBehaviour {
     public List<GameObject> unitsHere;
     private GameObject unitIndicator;
     public Tile tile;
+    public Unit.Teams team;
+    public GameObject unitInCreation;
+    public int turnsToCreate;
 
     [Header("Values")]
     public float price = 10;
@@ -15,10 +18,15 @@ public abstract class Building : MonoBehaviour {
     public string toolTip;
     public string command;
 
-    public virtual void ActivateBehaviour() { }
+    [Header("Units sold here (if applicable)"), SerializeField]
+    public List<UnitShopValue> availableUnits = new List<UnitShopValue>();
+
+    //Returns whether to hide the main buiding menu after.
+    public virtual bool ActivateBehaviour() { return false; }
 
     public virtual void DeactivateBehaviour() { }
 
+    //When a unit enters the tile this building is on, add it to the list, hide it and display a chevron.
     public virtual void OnEnterBehaviour(Unit unitEntered) {
         unitsHere.Add(unitEntered.gameObject);
         unitEntered.transform.localScale = Vector3.zero;
@@ -34,6 +42,27 @@ public abstract class Building : MonoBehaviour {
         if (unitsHere.Count == 0) {
             Destroy(unitIndicator);
             unitIndicator = null;
+        }
+    }
+
+    public bool BuyUnit(UnitShopValue unitVals) {
+        if (unitInCreation == null ) { //TODO && money > cost
+            unitInCreation = unitVals.unitPrefab;
+            turnsToCreate = unitVals.createSpeed;
+            //TODO deduct money
+            return true;
+        }
+        return false;
+    }
+
+    public void ProgressUnitCreation() {
+        if (unitInCreation != null) {
+            turnsToCreate--;
+            if (turnsToCreate <= 0) {
+                GameObject unitSpawn = Instantiate(unitInCreation);
+                unitSpawn.GetComponent<Unit>().UnitSpawn(tile);
+                unitInCreation = null;
+            }
         }
     }
 }

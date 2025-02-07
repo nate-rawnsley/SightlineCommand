@@ -9,6 +9,7 @@ TagManager:
   - Building
   - Team1
   - Team2
+  - MainCanvas
   layers:
   - Default
   - TransparentFX

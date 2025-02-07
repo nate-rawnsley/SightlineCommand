@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class BuildingPanel : MonoBehaviour {
@@ -29,6 +28,9 @@ public class BuildingPanel : MonoBehaviour {
         building = selectedBuilding;
         nameText.text = building.buildingName;
         tipText.text = building.toolTip;
+        if (building.unitInCreation != null) {
+            tipText.text += $"\nHiring: {building.unitInCreation}, complete in {building.turnsToCreate} turn(s)";
+        }
         commandText.text = building.command;
         for (int i = 0; i < building.unitsHere.Count; i++) {
             GameObject newEntry = Instantiate(buildingUnitEntry);
@@ -52,7 +54,9 @@ public class BuildingPanel : MonoBehaviour {
 
     public void ActivateBuilding()
     {
-        building.ActivateBehaviour();
+        if (building.ActivateBehaviour()) {
+            HidePanel();
+        }
     }
 
 }

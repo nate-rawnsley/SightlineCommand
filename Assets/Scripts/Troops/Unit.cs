@@ -22,11 +22,11 @@ public class Unit : MonoBehaviour
     [Header("Troop Settings")]
     public Teams team;
     [SerializeField]
-    protected int MaxMovement;
+    public int MaxMovement;
     [SerializeField]
     public int MaxHealth;
     [SerializeField]
-    protected float Damage;
+    public float Damage;
     [SerializeField]
     public int AttackRange;
     [SerializeField]
@@ -37,6 +37,9 @@ public class Unit : MonoBehaviour
     public int CurrentMove;
     public int CurrentAttacks;
     public Vector3 unitScale;
+
+    //Nate - temporary list here, will be in a central class in future
+    public List<Building> buildings = new List<Building>();
 
     public void Start()
     {
@@ -159,6 +162,7 @@ public class Unit : MonoBehaviour
             currentTile.CreateBuilding(createableBuildings[index]);
             currentTile.buildingHere.tile = currentTile;
             currentTile.buildingHere.OnEnterBehaviour(this);
+            buildings.Add(currentTile.buildingHere);
         }
     }
 
@@ -168,5 +172,8 @@ public class Unit : MonoBehaviour
     {
         CurrentMove = MaxMovement;
         CurrentAttacks = MaxAttack;
+        foreach (var building in buildings) {
+            building.ProgressUnitCreation();
+        }
     }
 }
