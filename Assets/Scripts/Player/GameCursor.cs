@@ -11,6 +11,7 @@ public class GameCursor : CursorControls {
     private bool HasSelection = false;
 
     public Unit.Teams CurrentTeam;
+    public UnitLists UnitLists;
 
     private TextMeshPro Values;
     //modes
@@ -90,7 +91,7 @@ public class GameCursor : CursorControls {
 
             switch (currentMode) {
                 case UnitMode.Attack:
-                    if (tile.unitHere != activeUnit & tile.unitHere.team != activeUnit.team) {
+                    if (tile.unitHere != activeUnit & tile.unitHere.team != activeUnit.team && tile.adjacentTiles.Contains(tile)) {
                         activeUnit.EndTargeting(activeUnit.currentTile, 0, activeUnit.AttackRange);
                         doDamage(tile);
                         acted = true;
@@ -132,7 +133,7 @@ public class GameCursor : CursorControls {
     }
 
     protected void doDamage(Tile tile) {
-        if (tile.unitHere) {
+        if (tile.unitHere) {            
             EnemyUnit = tile.unitHere;
             EnemyUnit.TakeDamage();
             activeUnit.CurrentAttacks--;
@@ -165,12 +166,23 @@ public class GameCursor : CursorControls {
     }
     public void EndTurn()
     {
+ 
         switch (CurrentTeam) {
             case Unit.Teams.Team1:
                 CurrentTeam = Unit.Teams.Team2;
+                foreach(Unit Alien in UnitLists.Aliens)
+                {
+                    Alien.ResetUnit();
+                }
+        
+                
                 break;
             case Unit.Teams.Team2:
                 CurrentTeam = Unit.Teams.Team1;
+                foreach (Unit Soldier in UnitLists.Soldiers)
+                {
+                    Soldier.ResetUnit();
+                }
                 break;
                 }
         

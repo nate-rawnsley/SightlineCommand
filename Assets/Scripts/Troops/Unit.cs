@@ -164,4 +164,9 @@ public class Unit : MonoBehaviour
 
 
     //End of creating buildings//////////////////////////////
+    public void ResetUnit()
+    {
+        CurrentMove = MaxMovement;
+        CurrentAttacks = MaxAttack;
+    }
 }
