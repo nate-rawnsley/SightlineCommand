@@ -5,7 +5,7 @@ public abstract class Building : MonoBehaviour {
     public List<GameObject> unitsHere;
     private GameObject unitIndicator;
     public Tile tile;
-    public Unit.Teams team;
+    public PlayerTeam team;
     public GameObject unitInCreation;
     public int turnsToCreate;
 
@@ -55,7 +55,7 @@ public abstract class Building : MonoBehaviour {
         return false;
     }
 
-    public void ProgressUnitCreation() {
+    public void NewTurn() {
         if (unitInCreation != null) {
             turnsToCreate--;
             if (turnsToCreate <= 0) {

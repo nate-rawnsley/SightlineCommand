@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameCursor : CursorControls {
     [SerializeField]
@@ -10,8 +7,7 @@ public class GameCursor : CursorControls {
     private Unit EnemyUnit;
     private bool HasSelection = false;
 
-    public Unit.Teams CurrentTeam;
-    public UnitLists UnitLists;
+    public PlayerTeam CurrentTeam;
 
     private TextMeshPro Values;
     //modes
@@ -20,6 +16,9 @@ public class GameCursor : CursorControls {
 
     [SerializeField]
     private BuildingPanel buildingPanel;
+
+    [SerializeField]
+    private GameStats gameStats;
 
     public override void UnitClickBehaviour(Unit unit) {
         if (buildingPanel.gameObject.activeSelf) {
@@ -169,20 +168,20 @@ public class GameCursor : CursorControls {
     {
  
         switch (CurrentTeam) {
-            case Unit.Teams.Team1:
-                CurrentTeam = Unit.Teams.Team2;
-                foreach(Unit Alien in UnitLists.Aliens)
+            case PlayerTeam.HUMAN:
+                CurrentTeam = PlayerTeam.ALIEN;
+                foreach(Unit alien in gameStats.players[PlayerTeam.ALIEN].units)
                 {
-                    Alien.ResetUnit();
+                    alien.ResetUnit();
                 }
         
                 
                 break;
-            case Unit.Teams.Team2:
-                CurrentTeam = Unit.Teams.Team1;
-                foreach (Unit Soldier in UnitLists.Soldiers)
+            case PlayerTeam.ALIEN:
+                CurrentTeam = PlayerTeam.HUMAN;
+                foreach (Unit soldier in gameStats.players[PlayerTeam.HUMAN].units)
                 {
-                    Soldier.ResetUnit();
+                    soldier.ResetUnit();
                 }
                 break;
                 }

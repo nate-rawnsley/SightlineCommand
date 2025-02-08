@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 public class GridGenerator : MonoBehaviour {
 
-    public UnitLists UnitLists;
+    [SerializeField]
+    private GameStats gameStats;
 
-[SerializeField, Tooltip("The tile to populate the grid with.")]
+    [SerializeField, Tooltip("The tile to populate the grid with.")]
     private GameObject tile;
 
     [SerializeField, Tooltip("Define the different types of terrain in this map.")]
@@ -127,19 +128,14 @@ public class GridGenerator : MonoBehaviour {
                 GameObject FriendObj = Instantiate(Humanunit);
                 Humanunit.name = ("Soldier" + p).ToString();
                 FriendObj.GetComponent<Unit>().UnitSpawn(gridParentScript.tiles[0, p]);
-                UnitLists.Soldiers.Add(FriendObj.GetComponent<Unit>());
-                
-
-
-                
-                
+                gameStats.players[PlayerTeam.HUMAN].units.Add(FriendObj.GetComponent<Unit>());
 
             }
             for (int e = 0; e < testAlienAmount; e++) {
                 GameObject EnemyObj = Instantiate(Alienunit);
                 Alienunit.name = ("Alien" + e).ToString();
                 EnemyObj.GetComponent<Unit>().UnitSpawn(gridParentScript.tiles[width - 1, e]);
-                UnitLists.Aliens.Add(EnemyObj.GetComponent<Unit>());
+                gameStats.players[PlayerTeam.ALIEN].units.Add(EnemyObj.GetComponent<Unit>());
 
             }
         }

@@ -1,18 +1,22 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+public class PlayerStats {
+    public PlayerTeam team;
+    public List<Unit> units = new List<Unit>();
+    public List<Building> buildings = new List<Building>();
+    public PlayerStats otherPlayer;
+    public int gold = 0;
+
+    public PlayerStats(PlayerTeam team) {
+        this.team = team;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void StartTurn() {
+        foreach (var unit in units) {
+            unit.ResetUnit();
+        }
+        foreach (var building in buildings) {
+            building.NewTurn();
+        }
     }
 }

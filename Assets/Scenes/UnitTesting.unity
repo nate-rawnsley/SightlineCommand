@@ -436,6 +436,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8748231e8314d348b0c0f9e9fdf374b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &488460761
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 488460763}
+  - component: {fileID: 488460762}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &488460762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488460761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f995827b6fd1121438655d1555688e06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &488460763
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488460761}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1689.8049, y: 0.15062231, z: 267.90964}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &563214570
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,7 +865,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 775632302131645232, guid: 4c055b2d482c2f84f8cfe6722c92bdb5, type: 3}
       propertyPath: m_Name
-      value: GridGenerator
+      value: Grid Generator
       objectReference: {fileID: 0}
     - target: {fileID: 1884540489468443584, guid: 4c055b2d482c2f84f8cfe6722c92bdb5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2175,7 +2219,7 @@ GameObject:
   - component: {fileID: 1810087177}
   - component: {fileID: 1810087176}
   m_Layer: 0
-  m_Name: EventSystem
+  m_Name: Event System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2240,3 +2284,4 @@ SceneRoots:
   - {fileID: 806977801}
   - {fileID: 994889480}
   - {fileID: 1810087178}
+  - {fileID: 488460763}

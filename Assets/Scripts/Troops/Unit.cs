@@ -16,11 +16,11 @@ public class Unit : MonoBehaviour
 
     protected float scale;
 
-    [SerializeField]
-    public enum Teams { Team1, Team2 };
+    //[SerializeField] 
+    //public enum Teams { Team1, Team2 }; replaced with PlayerTeam, from GameStats.cs
 
     [Header("Troop Settings")]
-    public Teams team;
+    public PlayerTeam team;
     [SerializeField]
     public int MaxMovement;
     [SerializeField]
@@ -173,7 +173,7 @@ public class Unit : MonoBehaviour
         CurrentMove = MaxMovement;
         CurrentAttacks = MaxAttack;
         foreach (var building in buildings) {
-            building.ProgressUnitCreation();
+            building.NewTurn();
         }
     }
 }
