@@ -10,6 +10,7 @@ TagManager:
   - Team1
   - Team2
   - MainCanvas
+  - GameManager
   layers:
   - Default
   - TransparentFX

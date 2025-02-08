@@ -18,7 +18,7 @@ public class GameCursor : CursorControls {
     private BuildingPanel buildingPanel;
 
     [SerializeField]
-    private GameStats gameStats;
+    private GameManager gameStats;
 
     public override void UnitClickBehaviour(Unit unit) {
         if (buildingPanel.gameObject.activeSelf) {
@@ -27,7 +27,7 @@ public class GameCursor : CursorControls {
         if (HasSelection == false && currentMode != UnitMode.None) {
             activeUnit = unit;
             HasSelection = true;
-            Values = unit.GetComponentInChildren<TextMeshPro>();
+            Values = unit.valuesText;
 
             if (activeUnit.team == CurrentTeam)
             {
@@ -141,59 +141,32 @@ public class GameCursor : CursorControls {
         }
     }
 
-    public void Move() {
-        if (currentMode == UnitMode.Move) {
+    //Instead of separate functions for each button, it parses an index and uses the same one.
+    public void SetBehaviour(int modeIndex) {
+        UnitMode unitMode = (UnitMode)modeIndex;
+        if (currentMode == unitMode) {
             currentMode = UnitMode.None;
         } else {
-            currentMode = UnitMode.Move;
+            currentMode = unitMode;
         }
+        CLEARALL();
     }
 
-    public void Attack() {
-        if (currentMode == UnitMode.Attack) {
-            currentMode = UnitMode.None;
-        } else {
-            currentMode = UnitMode.Attack;
-        }
-    }
-
-    public void Build() {
-        if (currentMode == UnitMode.Build) {
-            currentMode = UnitMode.None;
-        } else {
-            currentMode = UnitMode.Build;
-        }
-    }
     public void EndTurn()
     {
- 
-        switch (CurrentTeam) {
-            case PlayerTeam.HUMAN:
-                CurrentTeam = PlayerTeam.ALIEN;
-                foreach(Unit alien in gameStats.players[PlayerTeam.ALIEN].units)
-                {
-                    alien.ResetUnit();
-                }
-        
-                
-                break;
-            case PlayerTeam.ALIEN:
-                CurrentTeam = PlayerTeam.HUMAN;
-                foreach (Unit soldier in gameStats.players[PlayerTeam.HUMAN].units)
-                {
-                    soldier.ResetUnit();
-                }
-                break;
-                }
-        
+        CLEARALL();
+        CurrentTeam = CurrentTeam == PlayerTeam.HUMAN ? PlayerTeam.ALIEN : PlayerTeam.HUMAN;
+        gameStats.NewTurn(CurrentTeam);
     }
 
     public void CLEARALL()
     {
-        activeUnit.EndTargeting(activeUnit.currentTile, 0, activeUnit.AttackRange);
-        activeUnit = null;       //Clears all selections                                       
-        HasSelection = false;    //
-        Values.text = "";
-        Values = null;
+        if (activeUnit != null) {
+            activeUnit.EndTargeting(activeUnit.currentTile, 0, activeUnit.AttackRange);
+            activeUnit = null;       //Clears all selections                                       
+            HasSelection = false;    //
+            Values.text = "";
+            Values = null;
+        }
     }
 }

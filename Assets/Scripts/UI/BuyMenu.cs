@@ -30,4 +30,8 @@ public class BuyMenu : MonoBehaviour {
             gameObject.SetActive(false);
         }
     }
+
+    public void HideMenu() {
+        gameObject.SetActive(false);
+    }
 }

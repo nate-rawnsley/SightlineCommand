@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerStats {
     public PlayerTeam team;
@@ -9,6 +10,14 @@ public class PlayerStats {
 
     public PlayerStats(PlayerTeam team) {
         this.team = team;
+    }
+    public void Destroy() {
+        foreach (var unit in units) {
+            GameObject.Destroy(unit.gameObject);
+        }
+        foreach (var building in buildings) { 
+            GameObject.Destroy(building.gameObject);
+        }
     }
 
     public void StartTurn() {

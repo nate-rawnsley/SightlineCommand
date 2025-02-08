@@ -7,4 +7,10 @@ public class GridParent : MonoBehaviour {
     public void SetGridSize(int x, int z) {
         tiles = new Tile[x,z];
     }
+
+    private void OnDestroy() {
+        foreach (var tile in tiles) { 
+            Destroy(tile.gameObject);
+        }
+    }
 }

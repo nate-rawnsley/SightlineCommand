@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class GridGenerator : MonoBehaviour {
 
     [SerializeField]
-    private GameStats gameStats;
+    private GameManager gameStats;
 
     [SerializeField, Tooltip("The tile to populate the grid with.")]
     private GameObject tile;
@@ -57,14 +57,14 @@ public class GridGenerator : MonoBehaviour {
                 
             }
         }
-        GenerateGrid();
     }
     
 
-    private void GenerateGrid() {
+    public void GenerateGrid() {
         GameObject gridParent = new GameObject("Grid");
         GridParent gridParentScript = gridParent.AddComponent<GridParent>();
         gridParentScript.SetGridSize(width, height);
+        gameStats.gridParent = gridParentScript;
 
         Vector3 position = new Vector3(0, 0, 0);
 
@@ -123,7 +123,6 @@ public class GridGenerator : MonoBehaviour {
 
         if (testUnits)
         {
-            gameStats.StartGame();
             for (int p = 0; p < testSoldierAmount; p++) //multiple test units done by Dylan
             {
                 GameObject FriendObj = Instantiate(Humanunit);

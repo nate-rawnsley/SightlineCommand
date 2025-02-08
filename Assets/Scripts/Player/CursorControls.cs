@@ -12,7 +12,7 @@ public abstract class CursorControls : MonoBehaviour {
             if (Physics.Raycast(cursorRay, out cursorHit)) {
                 switch(cursorHit.collider.tag) {
                     case "Unit":
-                        UnitClickBehaviour(cursorHit.collider.GetComponent<Unit>());
+                        UnitClickBehaviour(cursorHit.collider.GetComponentInParent<Unit>());
                         break;
                     case "Tile":
                         TileClickBehaviour(cursorHit.collider.GetComponent<Tile>());

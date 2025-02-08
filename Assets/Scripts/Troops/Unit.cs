@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
+    [Tooltip("The name this unit displays in UI.")]
+    public string displayName;
+
     [Tooltip("The colour adjacent tiles are set to when the unit is moving.")]
     public Color[] moveableCol;
     public Color CurrentMoveableCol;
@@ -37,9 +41,8 @@ public class Unit : MonoBehaviour
     public int CurrentMove;
     public int CurrentAttacks;
     public Vector3 unitScale;
-
-    //Nate - temporary list here, will be in a central class in future
-    public List<Building> buildings = new List<Building>();
+    public HealthBar healthBar;
+    public TextMeshPro valuesText;
 
     public void Start()
     {
@@ -47,6 +50,10 @@ public class Unit : MonoBehaviour
         CurrentMoveableCol = moveableCol[0]; //sets up the moveable material
         CurrentMove = MaxMovement;
         Health = MaxHealth;
+        healthBar = GetComponentInChildren<HealthBar>();
+        healthBar.DisplaySpecified(MaxHealth, MaxHealth);
+        //healthBar.gameObject.SetActive(false);
+        valuesText = GetComponentInChildren<TextMeshPro>();
     }
     //Movement///////////////////////////////////////////// Base Movement done by Nate, Limiting Movement Distance and changing movement material Done By Dylan
     public void UnitSpawn(Tile tile)
@@ -118,6 +125,7 @@ public class Unit : MonoBehaviour
     public void TakeDamage()
     {
         Health--;
+        healthBar.Damage(1);
         if(Health <= 0)
         {
             Destroy(this.gameObject);
@@ -162,7 +170,9 @@ public class Unit : MonoBehaviour
             currentTile.CreateBuilding(createableBuildings[index]);
             currentTile.buildingHere.tile = currentTile;
             currentTile.buildingHere.OnEnterBehaviour(this);
-            buildings.Add(currentTile.buildingHere);
+
+            GameManager gameStats = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+            gameStats.players[team].buildings.Add(currentTile.buildingHere);
         }
     }
 
@@ -172,8 +182,5 @@ public class Unit : MonoBehaviour
     {
         CurrentMove = MaxMovement;
         CurrentAttacks = MaxAttack;
-        foreach (var building in buildings) {
-            building.NewTurn();
-        }
     }
 }

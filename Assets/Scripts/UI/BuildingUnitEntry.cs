@@ -25,7 +25,7 @@ public class BuildingUnitEntry : MonoBehaviour {
 
     public void Initialize(Unit thisUnit, Building thisBuilding, BuildingPanel bp, Vector2 position) { 
         unit = thisUnit;
-        unitType.text = unit.gameObject.name;
+        unitType.text = unit.displayName;
         currentHP.text = $"HP: {unit.Health}/{unit.MaxHealth}";
         building = thisBuilding;
         buildPanel = bp;

@@ -8,8 +8,8 @@ public class UnitCamp : Building {
     private GameObject menuInstance;
 
     public override bool ActivateBehaviour() {
-        canvas = GameObject.FindGameObjectWithTag("MainCanvas");
         if (menuInstance == null) {
+            canvas = GameObject.FindGameObjectWithTag("MainCanvas");
             menuInstance = Instantiate(buyMenu, canvas.transform);
             menuInstance.GetComponent<BuyMenu>().Initialize(this);
         } else {

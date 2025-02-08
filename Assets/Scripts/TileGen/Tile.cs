@@ -21,6 +21,12 @@ public class Tile : MonoBehaviour {
         thisRenderer = GetComponent<Renderer>();
     }
 
+    public void OnDestroy() {
+        if (decoration != null) { 
+            Destroy(decoration);
+        }
+    }
+
     public void SetTerrain() {
         if (decoration != null) {
             Destroy(decoration);

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2412454605390128264}
   - component: {fileID: -6780716543572538985}
   m_Layer: 0
-  m_Name: UnitCamp
+  m_Name: Human UnitCamp
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,10 +57,10 @@ MonoBehaviour:
   toolTip: A bootcamp where you can buy troops.
   command: Spawn troop
   availableUnits:
-  - unitPrefab: {fileID: 5477471966950854349, guid: 615d2a27b948abc45b022e717603062f, type: 3}
+  - unitPrefab: {fileID: 3234725756433866760, guid: 517fab5a9be86c444847490a07dad9c6, type: 3}
     price: 200
     createSpeed: 1
-  - unitPrefab: {fileID: 5477471966950854349, guid: 5f9d89677fbfec54bb8e39807da9da98, type: 3}
+  - unitPrefab: {fileID: 2944488960459763846, guid: 7c42676599fcd1a4ebfda2a17caefb3b, type: 3}
     price: 400
     createSpeed: 2
   buyMenu: {fileID: 8942280044256999528, guid: a49a25bba7e36fb4689fb23451ac2e3f, type: 3}

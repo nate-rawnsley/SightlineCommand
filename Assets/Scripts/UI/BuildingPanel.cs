@@ -29,7 +29,7 @@ public class BuildingPanel : MonoBehaviour {
         nameText.text = building.buildingName;
         tipText.text = building.toolTip;
         if (building.unitInCreation != null) {
-            tipText.text += $"\nHiring: {building.unitInCreation}, complete in {building.turnsToCreate} turn(s)";
+            tipText.text += $"\nHiring: {building.unitInCreation.GetComponent<Unit>().displayName}, complete in {building.turnsToCreate} turn(s)";
         }
         commandText.text = building.command;
         for (int i = 0; i < building.unitsHere.Count; i++) {
