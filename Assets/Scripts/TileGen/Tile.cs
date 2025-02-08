@@ -88,6 +88,24 @@ public class Tile : MonoBehaviour {
             }
             yield return null;
         }
-        
+    }
+
+    public List<Tile> GetAdjacentGroup(int maxLoops) {
+        List<Tile> tileList = new List<Tile>();
+        tileList = AdjacentSearch(this, 0, maxLoops, tileList);
+        return tileList;
+    }
+
+    public List<Tile> AdjacentSearch(Tile tileToCheck, int loopNo, int maxLoops, List<Tile> tileList) {
+        loopNo++;
+        foreach (Tile adjacentTile in tileToCheck.adjacentTiles) {
+            if (!tileList.Contains(adjacentTile)) { 
+                tileList.Add(adjacentTile);
+            }
+            if (loopNo < maxLoops) {
+                tileList = AdjacentSearch(adjacentTile, loopNo, maxLoops, tileList);
+            }
+        }
+        return tileList;
     }
 }

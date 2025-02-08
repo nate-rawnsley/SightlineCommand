@@ -5,7 +5,6 @@ public class GameCursor : CursorControls {
     [SerializeField]
     private Unit activeUnit = null;
     private Unit EnemyUnit;
-    private bool HasSelection = false;
 
     public PlayerTeam CurrentTeam;
 
@@ -24,9 +23,9 @@ public class GameCursor : CursorControls {
         if (buildingPanel.gameObject.activeSelf) {
             buildingPanel.HidePanel();
         }
-        if (HasSelection == false && currentMode != UnitMode.None) {
+        if (activeUnit == null && currentMode != UnitMode.None) {
             activeUnit = unit;
-            HasSelection = true;
+            //HasSelection = false  -- N - This was replaced by checking activeUnit == null instead
             Values = unit.valuesText;
 
             if (activeUnit.team == CurrentTeam)
@@ -38,8 +37,7 @@ public class GameCursor : CursorControls {
                         {
                             Values.text = unit.CurrentAttacks.ToString();
                             unit.CurrentMoveableCol = unit.moveableCol[0];
-                            unit.MarkAdjacentTiles(unit.currentTile, 0, unit.AttackRange);
-
+                            unit.MarkAdjacentTiles(unit.currentTile, unit.AttackRange, true);
                         }
                         else
                         {
@@ -91,8 +89,12 @@ public class GameCursor : CursorControls {
 
             switch (currentMode) {
                 case UnitMode.Attack:
-                    if (tile.unitHere != activeUnit & tile.unitHere.team != activeUnit.team && tile.adjacentTiles.Contains(tile)) {
-                        activeUnit.EndTargeting(activeUnit.currentTile, 0, activeUnit.AttackRange);
+                    if (!tile.unitHere) {
+                        acted = true;
+                        break;
+                    }
+                    if (tile.unitHere.team != activeUnit.team) { //&& tile.adjacentTiles.Contains(tile)) -- N - I don't remember what this was for but it broke stuff
+                        activeUnit.EndTargeting(activeUnit.currentTile, activeUnit.AttackRange, true);
                         doDamage(tile);
                         acted = true;
                     }
@@ -162,9 +164,8 @@ public class GameCursor : CursorControls {
     public void CLEARALL()
     {
         if (activeUnit != null) {
-            activeUnit.EndTargeting(activeUnit.currentTile, 0, activeUnit.AttackRange);
+            activeUnit.EndTargeting(activeUnit.currentTile, activeUnit.AttackRange, true);
             activeUnit = null;       //Clears all selections                                       
-            HasSelection = false;    //
             Values.text = "";
             Values = null;
         }

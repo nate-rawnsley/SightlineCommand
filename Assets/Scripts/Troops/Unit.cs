@@ -93,7 +93,7 @@ public class Unit : MonoBehaviour
         if (CurrentMove > 0)
         {
             targetTile.unitHere = this;
-            EndTargeting(currentTile, 0, 1);
+            EndTargeting(currentTile, 1, false);
             foreach (Tile adjacentTile in currentTile.adjacentTiles)
             {
                 adjacentTile.ResetMaterial();
@@ -134,29 +134,29 @@ public class Unit : MonoBehaviour
     }
     //End of Health//////////////////////////////////////////
 
-    //Damage and Targeting/////////////////////////////////// Done By Dylan
+    //Damage and Targeting/////////////////////////////////// Done By Dylan & Nate
 
-    public void MarkAdjacentTiles(Tile tileToCheck, int loopNo, int maxLoops)
+    //N - Moved the recursive search to Tile for other uses. Still called through here (GetAdjacentGroup)
+
+    public void MarkAdjacentTiles(Tile tileToCheck, int maxLoops, bool dmgIndicate)
     {
-        loopNo++;
-        foreach (Tile adjacentTile in tileToCheck.adjacentTiles)
-        {
-            adjacentTile.DisplayColour(CurrentMoveableCol);
-            if (loopNo < maxLoops)
-            {
-                MarkAdjacentTiles(adjacentTile, loopNo, maxLoops);
+        foreach (Tile tile in tileToCheck.GetAdjacentGroup(maxLoops)) {
+            tile.DisplayColour(CurrentMoveableCol);
+            if (dmgIndicate && tile.unitHere) {
+                if (tile.unitHere.team != team) {
+                    tile.unitHere.healthBar.IndicateDamage(Damage);
+                }
             }
         }
     }
-    public void EndTargeting(Tile tileToCheck, int loopNo, int maxLoops)
+    public void EndTargeting(Tile tileToCheck, int maxLoops, bool dmgIndicate)
     {
-        loopNo++;
-        foreach (Tile adjacentTile in tileToCheck.adjacentTiles)
-        {
-            adjacentTile.ResetMaterial();
-            if (loopNo < maxLoops)
-            {
-                EndTargeting(adjacentTile, loopNo, maxLoops);
+        foreach (Tile tile in tileToCheck.GetAdjacentGroup(maxLoops)) {
+            tile.ResetMaterial();
+            if (dmgIndicate && tile.unitHere) {
+                if (tile.unitHere.team != team) {
+                    tile.unitHere.healthBar.StopIndicating();
+                }
             }
         }
     }
@@ -175,7 +175,6 @@ public class Unit : MonoBehaviour
             gameStats.players[team].buildings.Add(currentTile.buildingHere);
         }
     }
-
 
     //End of creating buildings//////////////////////////////
     public void ResetUnit()
