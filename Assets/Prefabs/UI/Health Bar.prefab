@@ -303,6 +303,9 @@ MonoBehaviour:
   healthFill: {fileID: 9001888423830990859}
   healthLoss: {fileID: 2776831918301620093}
   textDisplay: {fileID: 8645755724913540643}
+  healthColors:
+  - {r: 0.08030403, g: 1, b: 0, a: 1}
+  - {r: 0.5737526, g: 0.3050313, b: 1, a: 1}
 --- !u!1 &8201705964819011567
 GameObject:
   m_ObjectHideFlags: 0
