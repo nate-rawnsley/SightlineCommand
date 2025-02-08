@@ -123,6 +123,7 @@ public class GridGenerator : MonoBehaviour {
 
         if (testUnits)
         {
+            gameStats.StartGame();
             for (int p = 0; p < testSoldierAmount; p++) //multiple test units done by Dylan
             {
                 GameObject FriendObj = Instantiate(Humanunit);
