@@ -12,5 +12,11 @@ public class GameStatsEditor : Editor
         if (GUILayout.Button("Restart Game")) {
             script.RestartGame();
         }
+        if (GUILayout.Button("Hurt Buildings")) {
+            foreach (var building in script.players[PlayerTeam.HUMAN].buildings) {
+                Debug.Log(building.name);
+                building.TakeDamage(1);
+            }
+        }
     }
 }

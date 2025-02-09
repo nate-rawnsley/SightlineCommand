@@ -66,7 +66,7 @@ public class Unit : MonoBehaviour
         transform.localScale = unitScale;
         MoveToTile();
     }
-    protected void MoveToTile()
+    public void MoveToTile()
     {        
         Vector3 position = currentTile.transform.position;
         position.y += scale * 0.65f;
@@ -92,22 +92,26 @@ public class Unit : MonoBehaviour
 
         if (CurrentMove > 0)
         {
-            targetTile.unitHere = this;
             EndTargeting(currentTile, 1, false);
             foreach (Tile adjacentTile in currentTile.adjacentTiles)
             {
                 adjacentTile.ResetMaterial();
             }
-            if (currentTile.adjacentTiles.Contains(targetTile))
-            {
+
+            if (targetTile.unitHere == null && currentTile.adjacentTiles.Contains(targetTile)) {
+                currentTile.unitHere = null;
+                targetTile.unitHere = this;
                 currentTile = targetTile;
                 CurrentMove--;
                 Debug.Log(CurrentMove);
                 MoveToTile();
-                
             }
 
-            if (currentTile.buildingHere != null) {
+            if (targetTile.buildingHere) {
+                currentTile.unitHere = null;
+                currentTile = targetTile;
+                CurrentMove--;
+                MoveToTile();
                 currentTile.buildingHere.OnEnterBehaviour(this);
             }
         }
@@ -171,8 +175,8 @@ public class Unit : MonoBehaviour
             currentTile.buildingHere.tile = currentTile;
             currentTile.buildingHere.OnEnterBehaviour(this);
 
-            GameManager gameStats = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-            gameStats.players[team].buildings.Add(currentTile.buildingHere);
+            GameManager gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+            gameManager.players[team].buildings.Add(currentTile.buildingHere);
         }
     }
 

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Building : MonoBehaviour {
-    public List<GameObject> unitsHere;
+    public List<Unit> unitsHere;
     private GameObject unitIndicator;
     public Tile tile;
     public PlayerTeam team;
@@ -12,6 +12,7 @@ public abstract class Building : MonoBehaviour {
     [Header("Values")]
     public float price = 10;
     public int capacity = 5;
+    public int health;
 
     [Header("Panel Text")]
     public string buildingName;
@@ -26,9 +27,21 @@ public abstract class Building : MonoBehaviour {
 
     public virtual void DeactivateBehaviour() { }
 
+    protected virtual void OnDestroy() {
+        List<Unit> unitsToRemove = new List<Unit>(unitsHere); //Made temporary list to avoid errors
+        foreach (var unit in unitsToRemove) {
+            if (unit != null) {
+                OnExitBehaviour(unit);
+            }
+        }
+        GameManager gameStats = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        gameStats.players[team].buildings.Remove(this);
+    }
+
     //When a unit enters the tile this building is on, add it to the list, hide it and display a chevron.
     public virtual void OnEnterBehaviour(Unit unitEntered) {
-        unitsHere.Add(unitEntered.gameObject);
+        unitsHere.Add(unitEntered);
+        tile.unitHere = null;
         unitEntered.transform.localScale = Vector3.zero;
         if (unitIndicator == null) {
             GameObject indicatorObj = Resources.Load<GameObject>("Billboards/Chevron1");
@@ -37,7 +50,14 @@ public abstract class Building : MonoBehaviour {
     }
 
     public virtual void OnExitBehaviour(Unit unitLeaving) {
-        unitsHere.Remove(unitLeaving.gameObject);
+        Tile exitTile = tile;
+        if (tile.unitHere != null) {
+            exitTile = tile.FindEmptyTile();
+            unitLeaving.currentTile = exitTile;
+            unitLeaving.MoveToTile();
+        }
+        unitsHere.Remove(unitLeaving);
+        exitTile.unitHere = unitLeaving;
         unitLeaving.transform.localScale = unitLeaving.unitScale;
         if (unitsHere.Count == 0) {
             Destroy(unitIndicator);
@@ -63,6 +83,13 @@ public abstract class Building : MonoBehaviour {
                 unitSpawn.GetComponent<Unit>().UnitSpawn(tile);
                 unitInCreation = null;
             }
+        }
+    }
+
+    public void TakeDamage(int damage) {
+        health -= damage;
+        if (health <= 0) {
+            Destroy(gameObject);
         }
     }
 }

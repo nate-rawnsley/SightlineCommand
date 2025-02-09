@@ -53,6 +53,7 @@ MonoBehaviour:
   turnsToCreate: 0
   price: 10
   capacity: 5
+  health: 5
   buildingName: Unit Camp
   toolTip: A bootcamp where you can buy troops.
   command: Spawn troop

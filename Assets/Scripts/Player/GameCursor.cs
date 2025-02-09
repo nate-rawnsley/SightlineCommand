@@ -89,7 +89,7 @@ public class GameCursor : CursorControls {
 
             switch (currentMode) {
                 case UnitMode.Attack:
-                    if (!tile.unitHere) {
+                    if (tile.unitHere) {
                         acted = true;
                         break;
                     }

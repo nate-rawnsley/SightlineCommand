@@ -108,4 +108,16 @@ public class Tile : MonoBehaviour {
         }
         return tileList;
     }
+
+    public Tile FindEmptyTile() {
+        if (!unitHere) {
+            return this;
+        } 
+        foreach (Tile tile in adjacentTiles) {
+            if (!tile.unitHere && tile.terrainType.walkable) {
+                return tile;
+            }
+        }
+        return this;
+    }
 }
