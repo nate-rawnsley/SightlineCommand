@@ -48,18 +48,22 @@ public class HealthBar : MonoBehaviour {
     }
 
     public void Damage(float dmg) {
-        active = true;
+        StopAllCoroutines();
         StartCoroutine(AnimateChange(currentHealth, currentHealth - dmg));
         currentHealth -= dmg;
     }
 
     public void Heal(float hp) {
-        active = true;
+        if (hp == 0) {
+            return;
+        }
+        StopAllCoroutines();
         StartCoroutine(AnimateChange(currentHealth, currentHealth + hp));
         currentHealth += hp;
     }
 
     private IEnumerator AnimateChange(float start, float end) {
+        active = true;
         float time = 0;
         start = start / maxHealth;
         end = end / maxHealth;
@@ -69,7 +73,7 @@ public class HealthBar : MonoBehaviour {
             yield return null;
         }
         UpdateDisplay();
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.75f);
         active = false;
     }
 

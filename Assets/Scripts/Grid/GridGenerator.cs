@@ -4,10 +4,10 @@ using System.Collections.Generic;
 public class GridGenerator : MonoBehaviour {
 
     [SerializeField]
-    private GameManager gameStats;
+    private GameManager gameManager;
 
     [SerializeField, Tooltip("The tile to populate the grid with.")]
-    private GameObject tile;
+    private GameObject tilePrefab;
 
     [SerializeField, Tooltip("Define the different types of terrain in this map.")]
     public List<TileTerrain> terrainTypes = new List<TileTerrain>();
@@ -39,6 +39,8 @@ public class GridGenerator : MonoBehaviour {
     [SerializeField]
     private int testAlienAmount;
 
+    GameObject gridParent;
+
 
     private void Awake() {
         if (levelSave != null) {
@@ -57,14 +59,12 @@ public class GridGenerator : MonoBehaviour {
                 
             }
         }
+        gridParent = new GameObject("Grid");
     }
     
 
     public void GenerateGrid() {
-        GameObject gridParent = new GameObject("Grid");
-        GridParent gridParentScript = gridParent.AddComponent<GridParent>();
-        gridParentScript.SetGridSize(width, height);
-        gameStats.gridParent = gridParentScript;
+        gameManager.SetGridSize(width, height);
 
         Vector3 position = new Vector3(0, 0, 0);
 
@@ -76,12 +76,12 @@ public class GridGenerator : MonoBehaviour {
             for (int z = 0; z < height; z++) {
                 position.x = ((x + z * 0.5f - z / 2) * scale * gapScale) - xOffset;
                 position.z = (z * 0.866f * scale * gapScale) - zOffset;
-                GameObject gridTile = Instantiate(tile, gridParent.transform);
+                GameObject gridTile = Instantiate(tilePrefab, gridParent.transform);
                 gridTile.transform.localPosition = position;
                 gridTile.transform.localScale = new Vector3(scale, scale, scale);
 
                 Tile tileScript = gridTile.AddComponent<Tile>();
-                gridParentScript.tiles[x,z] = tileScript;
+                gameManager.tiles[x,z] = tileScript;
 
                 if (loadedTiles != null) {
                     tileScript.terrainType = terrainTypes[loadedTiles[x, z]];
@@ -94,27 +94,24 @@ public class GridGenerator : MonoBehaviour {
 
             }
         }
-        foreach (Tile tile in gridParentScript.tiles) {
+        foreach (Tile tile in gameManager.tiles) {
             int x = (int)tile.coords.x;
             int z = (int)tile.coords.y;
+            Vector2 index = new Vector2(x, z);
 
             if (x > 0) {
-                tile.adjacentTiles.Add(gridParentScript.tiles[x - 1, z]);
-                gridParentScript.tiles[x - 1, z].adjacentTiles.Add(tile);
+                AddAdjacentTiles(tile, gameManager.tiles[x - 1, z]);
             }
             if (z > 0) {
-                tile.adjacentTiles.Add(gridParentScript.tiles[x, z - 1]);
-                gridParentScript.tiles[x, z - 1].adjacentTiles.Add(tile);
+                AddAdjacentTiles(tile, gameManager.tiles[x, z - 1]);
             }
             if (z % 2 == 0) {
                 if (z > 0 && x > 0) {
-                    tile.adjacentTiles.Add(gridParentScript.tiles[x - 1, z - 1]);
-                    gridParentScript.tiles[x - 1, z - 1].adjacentTiles.Add(tile);
+                    AddAdjacentTiles(tile, gameManager.tiles[x - 1, z - 1]);
                 }
             } else {
                 if (z > 0 && x < width - 1) {
-                    tile.adjacentTiles.Add(gridParentScript.tiles[x + 1, z - 1]);
-                    gridParentScript.tiles[x + 1, z - 1].adjacentTiles.Add(tile);
+                    AddAdjacentTiles(tile, gameManager.tiles[x + 1, z - 1]);
                 }
             }
         }
@@ -127,17 +124,22 @@ public class GridGenerator : MonoBehaviour {
             {
                 GameObject FriendObj = Instantiate(Humanunit);
                 Humanunit.name = ("Soldier" + p).ToString();
-                FriendObj.GetComponent<Unit>().UnitSpawn(gridParentScript.tiles[0, p]);
-                gameStats.players[PlayerTeam.HUMAN].units.Add(FriendObj.GetComponent<Unit>());
+                FriendObj.GetComponent<Unit>().UnitSpawn(gameManager.tiles[0, p]);
+                gameManager.players[PlayerTeam.HUMAN].units.Add(FriendObj.GetComponent<Unit>());
 
             }
             for (int e = 0; e < testAlienAmount; e++) {
                 GameObject EnemyObj = Instantiate(Alienunit);
                 Alienunit.name = ("Alien" + e).ToString();
-                EnemyObj.GetComponent<Unit>().UnitSpawn(gridParentScript.tiles[width - 1, e]);
-                gameStats.players[PlayerTeam.ALIEN].units.Add(EnemyObj.GetComponent<Unit>());
+                EnemyObj.GetComponent<Unit>().UnitSpawn(gameManager.tiles[width - 1, e]);
+                gameManager.players[PlayerTeam.ALIEN].units.Add(EnemyObj.GetComponent<Unit>());
 
             }
         }
+    }
+
+    private void AddAdjacentTiles(Tile tile1, Tile tile2) {
+        tile1.adjacentTiles.Add(tile2);
+        tile2.adjacentTiles.Add(tile1);
     }
 }

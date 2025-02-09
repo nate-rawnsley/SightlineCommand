@@ -88,31 +88,28 @@ public class Unit : MonoBehaviour
     }
     public void EndMove(Tile targetTile)
     {
-        
+        EndTargeting(currentTile, 1, false);
 
-        if (CurrentMove > 0)
+        if (CurrentMove > 0 && currentTile.adjacentTiles.Contains(targetTile))
         {
-            EndTargeting(currentTile, 1, false);
-            foreach (Tile adjacentTile in currentTile.adjacentTiles)
-            {
-                adjacentTile.ResetMaterial();
-            }
-
-            if (targetTile.unitHere == null && currentTile.adjacentTiles.Contains(targetTile)) {
+            bool moved = false;
+            if (!targetTile.unitHere) {
                 currentTile.unitHere = null;
                 targetTile.unitHere = this;
+                moved = true;
+            }
+
+            if (targetTile.buildingHere && targetTile.buildingHere.team == team) {
+                currentTile.unitHere = null;
+                targetTile.buildingHere.OnEnterBehaviour(this);
+                moved = true;
+            }
+
+            if (moved) {
                 currentTile = targetTile;
                 CurrentMove--;
                 Debug.Log(CurrentMove);
                 MoveToTile();
-            }
-
-            if (targetTile.buildingHere) {
-                currentTile.unitHere = null;
-                currentTile = targetTile;
-                CurrentMove--;
-                MoveToTile();
-                currentTile.buildingHere.OnEnterBehaviour(this);
             }
         }
         
@@ -126,10 +123,10 @@ public class Unit : MonoBehaviour
 
     //Health///////////////////////////////////////////////// Done By Dylan
 
-    public void TakeDamage()
+    public void TakeDamage(int damageDealt)
     {
-        Health--;
-        healthBar.Damage(1);
+        Health -= damageDealt;
+        healthBar.Damage(damageDealt);
         if(Health <= 0)
         {
             Destroy(this.gameObject);
@@ -137,6 +134,12 @@ public class Unit : MonoBehaviour
 
     }
     //End of Health//////////////////////////////////////////
+
+    public void Heal(int healingDealt) {
+        int trueHeal = Mathf.Min(healingDealt, MaxHealth - Health);
+        Health += trueHeal;
+        healthBar.Heal(trueHeal);
+    }
 
     //Damage and Targeting/////////////////////////////////// Done By Dylan & Nate
 
@@ -191,5 +194,6 @@ public class Unit : MonoBehaviour
     {
         CurrentMove = MaxMovement;
         CurrentAttacks = MaxAttack;
+        CurrentMoveableCol = moveableCol[0];
     }
 }

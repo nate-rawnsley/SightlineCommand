@@ -509,9 +509,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Current Team: 1
-
-'
+  m_text: 'Current Team: HUMAN'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -954,6 +952,14 @@ PrefabInstance:
       propertyPath: testUnits
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3568308934959176345, guid: 4c055b2d482c2f84f8cfe6722c92bdb5, type: 3}
+      propertyPath: tilePrefab
+      value: 
+      objectReference: {fileID: 4047877363848570344, guid: c7025e8c1dbb4ab48b0ae9cb24474d07, type: 3}
+    - target: {fileID: 3568308934959176345, guid: 4c055b2d482c2f84f8cfe6722c92bdb5, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 488460762}
     - target: {fileID: 3568308934959176345, guid: 4c055b2d482c2f84f8cfe6722c92bdb5, type: 3}
       propertyPath: testSoldier
       value: 0

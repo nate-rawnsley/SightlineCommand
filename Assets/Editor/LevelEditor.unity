@@ -2035,7 +2035,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115e83f5b0f385447adfcbd0ac761aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tile: {fileID: 4047877363848570344, guid: c7025e8c1dbb4ab48b0ae9cb24474d07, type: 3}
+  gameManager: {fileID: 0}
+  tilePrefab: {fileID: 0}
   terrainTypes:
   - name: Grass
     material: {fileID: 2100000, guid: efa91acd5cb6fcd4baf5461cced8a77b, type: 2}
@@ -2053,9 +2054,11 @@ MonoBehaviour:
   gapScale: 1.025
   width: 10
   height: 10
-  unit: {fileID: 0}
-  testUnit: 0
-  testUnitAmount: 0
+  Humanunit: {fileID: 0}
+  Alienunit: {fileID: 0}
+  testUnits: 0
+  testSoldierAmount: 0
+  testAlienAmount: 0
 --- !u!1 &1670541710
 GameObject:
   m_ObjectHideFlags: 0

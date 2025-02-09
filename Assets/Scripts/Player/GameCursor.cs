@@ -122,7 +122,7 @@ public class GameCursor : CursorControls {
     }
 
     protected override void BuildingClickBehaviour(Building building) {
-        if (activeUnit && activeUnit.team != building.team) {
+        if (currentMode == UnitMode.Attack && activeUnit && activeUnit.team != building.team) {
             activeUnit.EndTargeting(activeUnit.currentTile, activeUnit.AttackRange, true);
             DamageBuilding(building);
             CLEARALL();
@@ -147,7 +147,7 @@ public class GameCursor : CursorControls {
     protected void doDamage(Tile tile) {
         if (tile.unitHere) {            
             EnemyUnit = tile.unitHere;
-            EnemyUnit.TakeDamage();
+            EnemyUnit.TakeDamage(activeUnit.Damage);
             activeUnit.CurrentAttacks--;
             Debug.Log("DONEDAMAGE2");
         }
@@ -174,6 +174,7 @@ public class GameCursor : CursorControls {
     public void EndTurn()
     {
         CLEARALL();
+        currentMode = UnitMode.None;
         CurrentTeam = CurrentTeam == PlayerTeam.HUMAN ? PlayerTeam.ALIEN : PlayerTeam.HUMAN;
         gameStats.NewTurn(CurrentTeam);
     }

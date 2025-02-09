@@ -8,7 +8,7 @@ public class GridParent : MonoBehaviour {
         tiles = new Tile[x,z];
     }
 
-    private void OnDestroy() {
+    public void ClearTiles() {
         foreach (var tile in tiles) { 
             Destroy(tile.gameObject);
         }

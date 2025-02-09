@@ -23,6 +23,7 @@ public class EditorFunction : MonoBehaviour {
     private GridParent gridParent;
 
     private void Start() {
+        genUse.GenerateGrid();
         terrains = gridGeneratorPrefab.terrainTypes;
         List<string> terrainNames = new List<string>();
         foreach (var terrain in terrains) {

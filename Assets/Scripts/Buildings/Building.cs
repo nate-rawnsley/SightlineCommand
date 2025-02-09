@@ -98,7 +98,7 @@ public abstract class Building : MonoBehaviour {
 
     public void TakeDamage(int damage) {
         health -= damage;
-        StartCoroutine(DelayHealthBarDisplay(damage));
+        StartCoroutine(DelayHealthBarDisplay(damage, false));
         if (health <= 0) {
             List<Unit> unitsToRemove = new List<Unit>(unitsHere); //Made temporary list to avoid errors
             foreach (var unit in unitsToRemove) {
@@ -112,10 +112,20 @@ public abstract class Building : MonoBehaviour {
         }
     }
 
-    private IEnumerator DelayHealthBarDisplay(int damage) {
+    public void RepairDamage(int heal) {
+        int trueHeal = Mathf.Min(heal, maxHealth - health);
+        health += trueHeal;
+        StartCoroutine(DelayHealthBarDisplay(trueHeal, true));
+    }
+
+    private IEnumerator DelayHealthBarDisplay(int value, bool heal) {
         yield return new WaitForEndOfFrame(); //Delays display as it sometimes gets disabled multiple times
         healthBar.gameObject.SetActive(true);
-        healthBar.Damage(damage);
+        if (heal) {
+            healthBar.Heal(value);
+        } else {
+            healthBar.Damage(value);
+        }
         while (healthBar.active) {
             yield return null;
         }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static GameCursor;
 
 public enum PlayerTeam {
     HUMAN,
@@ -20,21 +21,32 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private GameUI gameUI;
 
-    public GridParent gridParent;
     public Dictionary<PlayerTeam, PlayerStats> players = new Dictionary<PlayerTeam, PlayerStats>();
+    public Tile[,] tiles;
 
     private void Start() {
         StartGame();
     }
 
+    public void SetGridSize(int x, int z) {
+        tiles = new Tile[x, z];
+    }
+
+    public void ClearTiles() {
+        foreach (var tile in tiles) {
+            Destroy(tile.gameObject);
+        }
+    }
+
     public void RestartGame() {
         gameCursor.CurrentTeam = PlayerTeam.HUMAN;
+        gameCursor.currentMode = UnitMode.None;
         gameCursor.CLEARALL();
         gameUI.UpdateModeDisplay();
         gameUI.UpdateTeamDisplay();
         players[PlayerTeam.HUMAN].Destroy();
         players[PlayerTeam.ALIEN].Destroy();
-        Destroy(gridParent.gameObject);
+        ClearTiles();
         StartGame();
     }
 
