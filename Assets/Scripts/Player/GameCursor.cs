@@ -89,18 +89,22 @@ public class GameCursor : CursorControls {
 
             switch (currentMode) {
                 case UnitMode.Attack:
-                    if (tile.unitHere) {
-                        acted = true;
-                        break;
-                    }
-                    if (tile.unitHere.team != activeUnit.team) { //&& tile.adjacentTiles.Contains(tile)) -- N - I don't remember what this was for but it broke stuff
+                    if (tile.unitHere && tile.unitHere.team != activeUnit.team) { //&& tile.adjacentTiles.Contains(tile)) -- N - I don't remember what this was for but it broke stuff
                         activeUnit.EndTargeting(activeUnit.currentTile, activeUnit.AttackRange, true);
                         doDamage(tile);
+                        acted = true;
+                    } else if (tile.buildingHere.team != activeUnit.team) {
+                        activeUnit.EndTargeting(activeUnit.currentTile, activeUnit.AttackRange, true);
+                        DamageBuilding(tile.buildingHere);
                         acted = true;
                     }
                     break;
 
                 case UnitMode.Move:
+                    if (tile.unitHere) {
+                        acted = true;
+                        break;
+                    }
                     if (tile.terrainType.walkable)
                     {
                         activeUnit.EndMove(tile); //Clears all highlighted tiles
@@ -118,6 +122,12 @@ public class GameCursor : CursorControls {
     }
 
     protected override void BuildingClickBehaviour(Building building) {
+        if (activeUnit && activeUnit.team != building.team) {
+            activeUnit.EndTargeting(activeUnit.currentTile, activeUnit.AttackRange, true);
+            DamageBuilding(building);
+            CLEARALL();
+            return;
+        }
         if (buildingPanel.gameObject.activeSelf) {
             buildingPanel.HidePanel();
         }
@@ -140,6 +150,13 @@ public class GameCursor : CursorControls {
             EnemyUnit.TakeDamage();
             activeUnit.CurrentAttacks--;
             Debug.Log("DONEDAMAGE2");
+        }
+    }
+
+    protected void DamageBuilding(Building building) {
+        if (building) {
+            building.TakeDamage(activeUnit.Damage);
+            activeUnit.CurrentAttacks--;
         }
     }
 

@@ -100,7 +100,7 @@ MonoBehaviour:
   CurrentMoveableCol: {r: 0, g: 0, b: 0, a: 0}
   canBuild: 1
   createableBuildings:
-  - {fileID: 2412454605390128264, guid: 9f08820a5bc856a47b4e02dc25d69d09, type: 3}
+  - {fileID: 9201917336908375676, guid: 014e078f80375a540af1d71a5af9b799, type: 3}
   currentTile: {fileID: 0}
   team: 0
   MaxMovement: 6

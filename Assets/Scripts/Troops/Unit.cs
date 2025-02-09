@@ -30,7 +30,7 @@ public class Unit : MonoBehaviour
     [SerializeField]
     public int MaxHealth;
     [SerializeField]
-    public float Damage;
+    public int Damage;
     [SerializeField]
     public int AttackRange;
     [SerializeField]
@@ -146,9 +146,12 @@ public class Unit : MonoBehaviour
     {
         foreach (Tile tile in tileToCheck.GetAdjacentGroup(maxLoops)) {
             tile.DisplayColour(CurrentMoveableCol);
-            if (dmgIndicate && tile.unitHere) {
-                if (tile.unitHere.team != team) {
+            if (dmgIndicate) {
+                if (tile.unitHere && tile.unitHere.team != team) {
                     tile.unitHere.healthBar.IndicateDamage(Damage);
+                }
+                if (tile.buildingHere && tile.buildingHere.team != team) {
+                    tile.buildingHere.IndicateHealth(Damage);
                 }
             }
         }
@@ -157,9 +160,12 @@ public class Unit : MonoBehaviour
     {
         foreach (Tile tile in tileToCheck.GetAdjacentGroup(maxLoops)) {
             tile.ResetMaterial();
-            if (dmgIndicate && tile.unitHere) {
-                if (tile.unitHere.team != team) {
+            if (dmgIndicate) {
+                if (tile.unitHere) {
                     tile.unitHere.healthBar.StopIndicating();
+                }
+                if (tile.buildingHere) {
+                    tile.buildingHere.StopIndicateHealth();
                 }
             }
         }

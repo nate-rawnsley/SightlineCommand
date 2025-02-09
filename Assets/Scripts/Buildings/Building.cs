@@ -1,18 +1,13 @@
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public abstract class Building : MonoBehaviour {
-    public List<Unit> unitsHere;
-    private GameObject unitIndicator;
-    public Tile tile;
-    public PlayerTeam team;
-    public GameObject unitInCreation;
-    public int turnsToCreate;
-
     [Header("Values")]
     public float price = 10;
     public int capacity = 5;
-    public int health;
+    public int maxHealth = 5;
 
     [Header("Panel Text")]
     public string buildingName;
@@ -22,31 +17,37 @@ public abstract class Building : MonoBehaviour {
     [Header("Units sold here (if applicable)"), SerializeField]
     public List<UnitShopValue> availableUnits = new List<UnitShopValue>();
 
+    [Header("In-game values (read only)")]
+    public List<Unit> unitsHere;
+    public Tile tile;
+    public PlayerTeam team;
+    public GameObject unitInCreation;
+    public int turnsToCreate;
+    public int health;
+
+    private HealthBar healthBar;
+    private SpriteRenderer unitIndicator;
+
+    private void Awake() {
+        health = maxHealth;
+        healthBar = GetComponentInChildren<HealthBar>();
+        healthBar.DisplaySpecified(maxHealth, maxHealth, team, true);
+        healthBar.gameObject.SetActive(false);
+        unitIndicator = GetComponentInChildren<SpriteRenderer>();
+    }
+
     //Returns whether to hide the main buiding menu after.
     public virtual bool ActivateBehaviour() { return false; }
 
     public virtual void DeactivateBehaviour() { }
-
-    protected virtual void OnDestroy() {
-        List<Unit> unitsToRemove = new List<Unit>(unitsHere); //Made temporary list to avoid errors
-        foreach (var unit in unitsToRemove) {
-            if (unit != null) {
-                OnExitBehaviour(unit);
-            }
-        }
-        GameManager gameStats = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        gameStats.players[team].buildings.Remove(this);
-    }
 
     //When a unit enters the tile this building is on, add it to the list, hide it and display a chevron.
     public virtual void OnEnterBehaviour(Unit unitEntered) {
         unitsHere.Add(unitEntered);
         tile.unitHere = null;
         unitEntered.transform.localScale = Vector3.zero;
-        if (unitIndicator == null) {
-            GameObject indicatorObj = Resources.Load<GameObject>("Billboards/Chevron1");
-            unitIndicator = Instantiate(indicatorObj, transform);
-        }
+        Sprite indicatorSprite = Resources.Load<Sprite>("Billboards/Chevron1");
+        unitIndicator.sprite = indicatorSprite;
     }
 
     public virtual void OnExitBehaviour(Unit unitLeaving) {
@@ -60,8 +61,7 @@ public abstract class Building : MonoBehaviour {
         exitTile.unitHere = unitLeaving;
         unitLeaving.transform.localScale = unitLeaving.unitScale;
         if (unitsHere.Count == 0) {
-            Destroy(unitIndicator);
-            unitIndicator = null;
+            unitIndicator.sprite = null;
         }
     }
 
@@ -86,10 +86,39 @@ public abstract class Building : MonoBehaviour {
         }
     }
 
+    public void IndicateHealth(int damage) {
+        healthBar.gameObject.SetActive(true);
+        healthBar.IndicateDamage(damage);
+    }
+
+    public void StopIndicateHealth() {
+        healthBar.gameObject.SetActive(false);
+        healthBar.StopIndicating();
+    }
+
     public void TakeDamage(int damage) {
         health -= damage;
+        StartCoroutine(DelayHealthBarDisplay(damage));
         if (health <= 0) {
+            List<Unit> unitsToRemove = new List<Unit>(unitsHere); //Made temporary list to avoid errors
+            foreach (var unit in unitsToRemove) {
+                if (unit != null) {
+                    OnExitBehaviour(unit); //All units exit when this is destroyed.
+                }
+            }
+            GameManager gameStats = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+            gameStats.players[team].buildings.Remove(this);
             Destroy(gameObject);
         }
+    }
+
+    private IEnumerator DelayHealthBarDisplay(int damage) {
+        yield return new WaitForEndOfFrame(); //Delays display as it sometimes gets disabled multiple times
+        healthBar.gameObject.SetActive(true);
+        healthBar.Damage(damage);
+        while (healthBar.active) {
+            yield return null;
+        }
+        healthBar.gameObject.SetActive(false);
     }
 }

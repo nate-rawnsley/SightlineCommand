@@ -10,6 +10,9 @@ public class BuildingPanel : MonoBehaviour {
     [SerializeField]
     private Transform scrollContent;
 
+    [SerializeField]
+    private HealthBar healthBar;
+
     private Building building;
     private List<GameObject> entries = new List<GameObject>();
 
@@ -42,6 +45,8 @@ public class BuildingPanel : MonoBehaviour {
             newEntry.GetComponent<BuildingUnitEntry>().Initialize(unit, building, this, entryPos);
             entries.Add(newEntry);
         }
+        Debug.Log($"{building.maxHealth}, {building.health}, {building.team}");
+        healthBar.DisplaySpecified(building.maxHealth, building.health, building.team, true);
     }
     
     public void HidePanel() {

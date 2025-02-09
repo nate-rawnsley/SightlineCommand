@@ -55,8 +55,10 @@ public class Tile : MonoBehaviour {
             Destroy(decoration.gameObject);
             decoration = null;
         }
+        
 
         buildingHere = Instantiate(building.gameObject, transform).GetComponent<Building>();
+        Debug.Log(buildingHere);
     }
 
     public void DisplayColour(Color color) {
@@ -118,6 +120,6 @@ public class Tile : MonoBehaviour {
                 return tile;
             }
         }
-        return this;
+        return this; //currently returns self as a fallback. might add additional check layer later
     }
 }

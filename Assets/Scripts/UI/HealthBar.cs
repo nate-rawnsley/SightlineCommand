@@ -14,22 +14,24 @@ public class HealthBar : MonoBehaviour {
     [SerializeField]
     private TextMeshProUGUI textDisplay;
 
-    [SerializeField, Tooltip("What colours the health bar should be.\nFirst is for humans, second for aliens.")]
-    private Color[] healthColors = new Color[2];
+    [SerializeField, Tooltip("What colours the health bar should be.\n0: Human Unit\n1: Alien Unit\n2: Human Building\n3: Alien Building")]
+    private Color[] healthColors = new Color[4];
 
     private float maxHealth;
     private float currentHealth;
+    public bool active;
 
-    public void DisplaySpecified(float max, float current, PlayerTeam team) { 
+    public void DisplaySpecified(float max, float current, PlayerTeam team, bool building = false) { 
         maxHealth = max;
         currentHealth = current;
+        Color fillColor = Color.white;
         if (team == PlayerTeam.ALIEN) {
-            healthFill.color = healthColors[1];
-            healthLoss.color = healthColors[1];
+            fillColor = building ? healthColors[3] : healthColors[1];
         } else {
-            healthFill.color = healthColors[0];
-            healthLoss.color = healthColors[0];
+            fillColor = building ? healthColors[2] : healthColors[0];
         }
+        healthFill.color = fillColor;
+        healthLoss.color = fillColor;
         UpdateDisplay();
     }
 
@@ -46,13 +48,13 @@ public class HealthBar : MonoBehaviour {
     }
 
     public void Damage(float dmg) {
-        StopIndicating();
+        active = true;
         StartCoroutine(AnimateChange(currentHealth, currentHealth - dmg));
         currentHealth -= dmg;
     }
 
     public void Heal(float hp) {
-        StopIndicating();
+        active = true;
         StartCoroutine(AnimateChange(currentHealth, currentHealth + hp));
         currentHealth += hp;
     }
@@ -67,6 +69,8 @@ public class HealthBar : MonoBehaviour {
             yield return null;
         }
         UpdateDisplay();
+        yield return new WaitForSeconds(0.5f);
+        active = false;
     }
 
     private void UpdateDisplay() {

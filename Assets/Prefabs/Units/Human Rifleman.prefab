@@ -93,16 +93,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cedc0e2ec0eaea345aa4a13cc4ca142c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayName: Rifleman
+  displayName: Human Rifleman
   moveableCol:
   - {r: 0, g: 0.9400835, b: 1, a: 0}
   - {r: 1, g: 0, b: 0, a: 0}
   CurrentMoveableCol: {r: 0, g: 0, b: 0, a: 0}
   canBuild: 1
   createableBuildings:
-  - {fileID: 2412454605390128264, guid: 9f08820a5bc856a47b4e02dc25d69d09, type: 3}
-  healthBar: {fileID: 1707380729862281766}
-  valuesText: {fileID: 8809769225128397946}
+  - {fileID: 9201917336908375676, guid: 014e078f80375a540af1d71a5af9b799, type: 3}
   currentTile: {fileID: 0}
   team: 0
   MaxMovement: 5
@@ -114,6 +112,8 @@ MonoBehaviour:
   CurrentMove: 0
   CurrentAttacks: 0
   unitScale: {x: 0, y: 0, z: 0}
+  healthBar: {fileID: 1707380729862281766}
+  valuesText: {fileID: 8809769225128397946}
 --- !u!114 &8809769225128397946 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2206087409135071793, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
