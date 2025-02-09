@@ -51,7 +51,7 @@ public class Unit : MonoBehaviour
         CurrentMove = MaxMovement;
         Health = MaxHealth;
         healthBar = GetComponentInChildren<HealthBar>();
-        healthBar.DisplaySpecified(MaxHealth, MaxHealth);
+        healthBar.DisplaySpecified(MaxHealth, MaxHealth, team);
         //healthBar.gameObject.SetActive(false);
         valuesText = GetComponentInChildren<TextMeshPro>();
     }

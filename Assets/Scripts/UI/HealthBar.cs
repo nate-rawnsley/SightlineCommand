@@ -14,12 +14,22 @@ public class HealthBar : MonoBehaviour {
     [SerializeField]
     private TextMeshProUGUI textDisplay;
 
+    [SerializeField, Tooltip("What colours the health bar should be.\nFirst is for humans, second for aliens.")]
+    private Color[] healthColors = new Color[2];
+
     private float maxHealth;
     private float currentHealth;
 
-    public void DisplaySpecified(float max, float current) { 
+    public void DisplaySpecified(float max, float current, PlayerTeam team) { 
         maxHealth = max;
         currentHealth = current;
+        if (team == PlayerTeam.ALIEN) {
+            healthFill.color = healthColors[1];
+            healthLoss.color = healthColors[1];
+        } else {
+            healthFill.color = healthColors[0];
+            healthLoss.color = healthColors[0];
+        }
         UpdateDisplay();
     }
 
@@ -53,7 +63,6 @@ public class HealthBar : MonoBehaviour {
         end = end / maxHealth;
         while (time < 1) {
             healthFill.fillAmount = Mathf.Lerp(start, end, time);
-            Debug.Log($"{healthFill.fillAmount}, {time}, {start}, {end}");
             time += Time.deltaTime * 4;
             yield return null;
         }
