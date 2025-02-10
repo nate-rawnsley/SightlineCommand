@@ -89,11 +89,11 @@ public class GameCursor : CursorControls {
 
             switch (currentMode) {
                 case UnitMode.Attack:
-                    if (tile.unitHere && tile.unitHere.team != activeUnit.team) { //&& tile.adjacentTiles.Contains(tile)) -- N - I don't remember what this was for but it broke stuff
+                    if (tile.unitHere && activeUnit.enemiesInSight.Contains(tile.unitHere)) {
                         activeUnit.EndTargeting(activeUnit.currentTile, activeUnit.AttackRange, true);
                         doDamage(tile);
                         acted = true;
-                    } else if (tile.buildingHere.team != activeUnit.team) {
+                    } else if (tile.buildingHere && activeUnit.buildingsInSight.Contains(tile.buildingHere)) {
                         activeUnit.EndTargeting(activeUnit.currentTile, activeUnit.AttackRange, true);
                         DamageBuilding(tile.buildingHere);
                         acted = true;

@@ -43,6 +43,8 @@ public class Unit : MonoBehaviour
     public Vector3 unitScale;
     public HealthBar healthBar;
     public TextMeshPro valuesText;
+    public List<Unit> enemiesInSight;
+    public List<Building> buildingsInSight;
 
     public void Start()
     {
@@ -54,6 +56,7 @@ public class Unit : MonoBehaviour
         healthBar.DisplaySpecified(MaxHealth, MaxHealth, team);
         //healthBar.gameObject.SetActive(false);
         valuesText = GetComponentInChildren<TextMeshPro>();
+        enemiesInSight = new List<Unit>();
     }
     //Movement///////////////////////////////////////////// Base Movement done by Nate, Limiting Movement Distance and changing movement material Done By Dylan
     public void UnitSpawn(Tile tile)
@@ -150,11 +153,13 @@ public class Unit : MonoBehaviour
         foreach (Tile tile in tileToCheck.GetAdjacentGroup(maxLoops)) {
             tile.DisplayColour(CurrentMoveableCol);
             if (dmgIndicate) {
-                if (tile.unitHere && tile.unitHere.team != team) {
+                if (tile.unitHere && tile.unitHere.team != team && !enemiesInSight.Contains(tile.unitHere)) {
                     tile.unitHere.healthBar.IndicateDamage(Damage);
+                    enemiesInSight.Add(tile.unitHere);
                 }
-                if (tile.buildingHere && tile.buildingHere.team != team) {
+                if (tile.buildingHere && tile.buildingHere.team != team && !buildingsInSight.Contains(tile.buildingHere)) {
                     tile.buildingHere.IndicateHealth(Damage);
+                    buildingsInSight.Add(tile.buildingHere);
                 }
             }
         }
@@ -164,12 +169,14 @@ public class Unit : MonoBehaviour
         foreach (Tile tile in tileToCheck.GetAdjacentGroup(maxLoops)) {
             tile.ResetMaterial();
             if (dmgIndicate) {
-                if (tile.unitHere) {
-                    tile.unitHere.healthBar.StopIndicating();
+                foreach (Unit unit in enemiesInSight) {
+                    unit.healthBar.StopIndicating();
                 }
-                if (tile.buildingHere) {
-                    tile.buildingHere.StopIndicateHealth();
+                enemiesInSight.Clear();
+                foreach (Building building in buildingsInSight) {
+                    building.StopIndicateHealth();
                 }
+                buildingsInSight.Clear();
             }
         }
     }
