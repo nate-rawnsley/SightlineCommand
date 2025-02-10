@@ -174,7 +174,6 @@ public class GameCursor : CursorControls {
     public void EndTurn()
     {
         CLEARALL();
-        currentMode = UnitMode.None;
         CurrentTeam = CurrentTeam == PlayerTeam.HUMAN ? PlayerTeam.ALIEN : PlayerTeam.HUMAN;
         gameStats.NewTurn(CurrentTeam);
     }
