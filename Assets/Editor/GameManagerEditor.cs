@@ -12,6 +12,7 @@ public class GameManagerEditor : Editor {
         EditorGUILayout.EndHorizontal();
         return returnVal;
     }
+
     public override void OnInspectorGUI() {
         DrawDefaultInspector();
         GameManager script = (GameManager)target;

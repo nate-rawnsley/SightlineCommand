@@ -1,29 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEditor;
 
 public class EditorFunction : MonoBehaviour {
-    [SerializeField]
-    private GridGenerator gridGeneratorPrefab;
+    public GridGenerator gridGeneratorPrefab;
 
-    [SerializeField]
-    private GridGenerator genUse;
+    public GridGenerator genUse;
 
-    [SerializeField]
-    private TMP_Dropdown terrainSelect;
+    public TMP_Dropdown terrainSelect;
 
-    [SerializeField]
-    private EditorCursor editorCursor;
+    public EditorCursor editorCursor;
 
-    [SerializeField]
-    private TMP_InputField nameInput;
+    public TMP_InputField nameInput;
 
-    private List<TileTerrain> terrains;
-    private GridParent gridParent;
+    public GameManager gameManager;
+
+    public List<TileTerrain> terrains;
 
     private void Start() {
-        genUse.GenerateGrid();
         terrains = gridGeneratorPrefab.terrainTypes;
         List<string> terrainNames = new List<string>();
         foreach (var terrain in terrains) {
@@ -31,15 +25,15 @@ public class EditorFunction : MonoBehaviour {
         }
         terrainSelect.AddOptions(terrainNames);
         editorCursor.terrainBrush = terrains[0];
-        gridParent = FindAnyObjectByType<GridParent>();
+        //gridParent = FindAnyObjectByType<GridParent>();
     }
 
     public void DropdownValueChanged(int index) {
         editorCursor.terrainBrush = terrains[index];
     }
 
-    public void Save() {
-        Tile[,] tileData = gridParent.tiles;
+    public string SaveString() {
+        Tile[,] tileData = gameManager.tiles;
         string saveString = string.Empty;
         saveString += $"{genUse.scale} {genUse.gapScale} {genUse.width} {genUse.height}\n";
         for (int x = 0; x < tileData.GetLength(0); x++) {
@@ -48,8 +42,6 @@ public class EditorFunction : MonoBehaviour {
             }
             saveString += tileData[x, tileData.GetLength(1) - 1].terrainType.editorIndex + "\n";
         }
-        AssetDatabase.Refresh();
-        TextAsset levelSave = new TextAsset(saveString);
-        AssetDatabase.CreateAsset(levelSave, $"Assets/Level Saves/{nameInput.text}.asset");
+        return saveString;
     }
 }
