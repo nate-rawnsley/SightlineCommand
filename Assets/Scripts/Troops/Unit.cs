@@ -59,7 +59,7 @@ public class Unit : MonoBehaviour
         healthBar.DisplaySpecified(MaxHealth, MaxHealth, team);
         //healthBar.gameObject.SetActive(false);
         valuesText = GetComponentInChildren<TextMeshPro>();
-        animator = transform.Find("Mesh").GetComponent<Animator>();
+        animator = transform.Find("Model").GetComponent<Animator>();
     }
     //Movement///////////////////////////////////////////// Base Movement done by Nate, Limiting Movement Distance and changing movement material Done By Dylan
     public void UnitSpawn(Tile tile)
