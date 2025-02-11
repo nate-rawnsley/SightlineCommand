@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3296595986147294602, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4761088077109589735, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -15,6 +19,10 @@ PrefabInstance:
     - target: {fileID: 5477471966950854349, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
       propertyPath: m_Name
       value: Human Rifleman
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477471966950854349, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8397045034945365649, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -114,6 +122,8 @@ MonoBehaviour:
   unitScale: {x: 0, y: 0, z: 0}
   healthBar: {fileID: 1707380729862281766}
   valuesText: {fileID: 8809769225128397946}
+  enemiesInSight: []
+  buildingsInSight: []
 --- !u!114 &8809769225128397946 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2206087409135071793, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}

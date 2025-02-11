@@ -287,6 +287,8 @@ MonoBehaviour:
   unitScale: {x: 0, y: 0, z: 0}
   healthBar: {fileID: 8317826466646500461}
   valuesText: {fileID: 2206087409135071793}
+  enemiesInSight: []
+  buildingsInSight: []
 --- !u!1 &6866352278539743479
 GameObject:
   m_ObjectHideFlags: 0
