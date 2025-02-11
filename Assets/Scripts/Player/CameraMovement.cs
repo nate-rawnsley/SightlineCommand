@@ -17,6 +17,8 @@ public class CameraMovement : MonoBehaviour {
     }
 
     private void Update() {
+        sprint();
+
         Vector3 newPos = transform.position;
         //this is not a neat way of doing this so i might change it later but it works for now.
         if (Input.GetKey(KeyCode.W)) {
@@ -39,5 +41,18 @@ public class CameraMovement : MonoBehaviour {
         }
 
         transform.position = newPos;
+    }
+
+    private void sprint() //Added By Dylan
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            speed = 60f;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            speed = 25f;
+        }
     }
 }
