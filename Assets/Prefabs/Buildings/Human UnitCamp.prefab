@@ -12,6 +12,22 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: availableUnits.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: availableUnits.Array.data[2].price
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: availableUnits.Array.data[2].unitPrefab
+      value: 
+      objectReference: {fileID: 3734930054502818528, guid: 5a51f050645416f40b22c2041806e27e, type: 3}
+    - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: availableUnits.Array.data[2].createSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3052113932177222970, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
