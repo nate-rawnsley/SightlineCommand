@@ -160,6 +160,7 @@ public class Unit : MonoBehaviour
         if(Health <= 0)
         {
             animator.SetTrigger("Defeated");
+            healthBar.gameObject.SetActive(false);
             StartCoroutine(WaitForDeathAnim());
         } else
         {
@@ -170,7 +171,8 @@ public class Unit : MonoBehaviour
     //End of Health//////////////////////////////////////////
 
     private IEnumerator WaitForDeathAnim() {
-        while (animator.GetCurrentAnimatorStateInfo(0).IsName("Defeat")) {
+
+        while (animator.GetCurrentAnimatorStateInfo(0).IsName("Defeat") || animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
             yield return new WaitForSeconds(0.5f);
         }
         Destroy(this.gameObject);
