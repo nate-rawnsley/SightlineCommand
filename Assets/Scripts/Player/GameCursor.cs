@@ -23,7 +23,7 @@ public class GameCursor : CursorControls {
         if (buildingPanel.gameObject.activeSelf) {
             buildingPanel.HidePanel();
         }
-        if (activeUnit == null && currentMode != UnitMode.None) {
+        if (activeUnit == null && currentMode != UnitMode.None && unit.Health != 0) {
             activeUnit = unit;
             //HasSelection = false  -- N - This was replaced by checking activeUnit == null instead
             Values = unit.valuesText;
@@ -48,7 +48,7 @@ public class GameCursor : CursorControls {
                     case UnitMode.Move:
                         Debug.Log("click");
                         Values.text = unit.CurrentMove.ToString();
-                        if (activeUnit.CurrentMove != 0)
+                        if (activeUnit.CurrentMove > 0)
                         {
                             unit.BeginMove();
                             Debug.Log("DID MOVE");
@@ -90,11 +90,11 @@ public class GameCursor : CursorControls {
             switch (currentMode) {
                 case UnitMode.Attack:
                     if (tile.unitHere && activeUnit.enemiesInSight.Contains(tile.unitHere)) {
-                        activeUnit.EndTargeting(activeUnit.currentTile, activeUnit.AttackRange, true);
+                        activeUnit.Attack();
                         doDamage(tile);
                         acted = true;
                     } else if (tile.buildingHere && activeUnit.buildingsInSight.Contains(tile.buildingHere)) {
-                        activeUnit.EndTargeting(activeUnit.currentTile, activeUnit.AttackRange, true);
+                        activeUnit.Attack();
                         DamageBuilding(tile.buildingHere);
                         acted = true;
                     }
@@ -123,7 +123,7 @@ public class GameCursor : CursorControls {
 
     protected override void BuildingClickBehaviour(Building building) {
         if (currentMode == UnitMode.Attack && activeUnit && activeUnit.team != building.team) {
-            activeUnit.EndTargeting(activeUnit.currentTile, activeUnit.AttackRange, true);
+            activeUnit.Attack();
             DamageBuilding(building);
             CLEARALL();
             return;
@@ -181,7 +181,7 @@ public class GameCursor : CursorControls {
     public void CLEARALL()
     {
         if (activeUnit != null) {
-            activeUnit.EndTargeting(activeUnit.currentTile, activeUnit.AttackRange, true);
+            activeUnit.EndTargeting();
             activeUnit = null;       //Clears all selections                                       
             Values.text = "";
             Values = null;

@@ -43,8 +43,11 @@ public class Unit : MonoBehaviour
     public Vector3 unitScale;
     public HealthBar healthBar;
     public TextMeshPro valuesText;
-    public List<Unit> enemiesInSight;
-    public List<Building> buildingsInSight;
+    public List<Unit> enemiesInSight = new List<Unit>();
+    public List<Building> buildingsInSight = new List<Building>();
+    private List<Tile> tilesTargetted = new List<Tile>();
+
+    private Animator animator;
 
     public void Start()
     {
@@ -56,66 +59,90 @@ public class Unit : MonoBehaviour
         healthBar.DisplaySpecified(MaxHealth, MaxHealth, team);
         //healthBar.gameObject.SetActive(false);
         valuesText = GetComponentInChildren<TextMeshPro>();
-        enemiesInSight = new List<Unit>();
+        animator = transform.Find("Model").GetComponent<Animator>();
     }
     //Movement///////////////////////////////////////////// Base Movement done by Nate, Limiting Movement Distance and changing movement material Done By Dylan
     public void UnitSpawn(Tile tile)
     {
         tile.unitHere = this;
-        currentTile = tile;
 
-        scale = currentTile.transform.localScale.x;
+        scale = tile.transform.localScale.x;
         unitScale = transform.localScale * scale * 0.5f;
         transform.localScale = unitScale;
-        MoveToTile();
+
+        MoveToTile(tile);
     }
-    public void MoveToTile()
-    {        
-        Vector3 position = currentTile.transform.position;
-        position.y += scale * 0.65f;
-        transform.position = position;
+    public void MoveToTile(Tile tile, bool animate = false)
+    {
+        currentTile = tile;
+        if (animate) {
+            StopAllCoroutines();
+            StartCoroutine(AnimateToTile());
+        } else {
+            Vector3 position = currentTile.transform.position;
+            position.y += scale * 0.5f;
+            transform.position = position;
+        }
         if (CurrentMove == 0)
         {
             CurrentMoveableCol = moveableCol[1]; //changes material to the NotMoveable
         }
     }
+
+    private IEnumerator AnimateToTile() {
+        animator.SetBool("Walking", true);
+        Vector3 startPosition = transform.position;
+        Vector3 targetPosition = currentTile.transform.position;
+        targetPosition.y += scale * 0.5f;
+        float time = 0;
+        while (time < 1) {
+            Vector3 pos = Vector3.Lerp(startPosition, targetPosition, time);
+            transform.position = pos;
+            time += Time.deltaTime * 0.5f;
+            yield return null;
+        }
+        transform.position = targetPosition;
+        animator.SetBool("Walking", false);
+    }
+
     public void BeginMove()
     {
-        foreach (Tile adjacentTile in currentTile.adjacentTiles)
+        EndTargeting();
+        tilesTargetted = currentTile.GetAdjacentGroup(1);
+        foreach (Tile adjacentTile in tilesTargetted)
         {
             if (adjacentTile.terrainType.walkable == true)
             {
                 adjacentTile.DisplayColour(CurrentMoveableCol);
             }
         }
+        
     }
     public void EndMove(Tile targetTile)
     {
-        EndTargeting(currentTile, 1, false);
+        
 
-        if (CurrentMove > 0 && currentTile.adjacentTiles.Contains(targetTile))
+        if (CurrentMove > 0 && tilesTargetted.Contains(targetTile))
         {
             bool moved = false;
             if (!targetTile.unitHere) {
-                currentTile.unitHere = null;
                 targetTile.unitHere = this;
                 moved = true;
             }
 
             if (targetTile.buildingHere && targetTile.buildingHere.team == team) {
-                currentTile.unitHere = null;
                 targetTile.buildingHere.OnEnterBehaviour(this);
                 moved = true;
             }
 
             if (moved) {
-                currentTile = targetTile;
+                currentTile.unitHere = null;
                 CurrentMove--;
                 Debug.Log(CurrentMove);
-                MoveToTile();
+                MoveToTile(targetTile, true);
+                EndTargeting();
             }
         }
-        
     }
 
     public void ResetMove()
@@ -132,11 +159,24 @@ public class Unit : MonoBehaviour
         healthBar.Damage(damageDealt);
         if(Health <= 0)
         {
-            Destroy(this.gameObject);
+            animator.SetTrigger("Defeated");
+            healthBar.gameObject.SetActive(false);
+            StartCoroutine(WaitForDeathAnim());
+        } else
+        {
+            animator.SetTrigger("Damaged");
         }
 
     }
     //End of Health//////////////////////////////////////////
+
+    private IEnumerator WaitForDeathAnim() {
+
+        while (animator.GetCurrentAnimatorStateInfo(0).IsName("Defeat") || animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
+            yield return new WaitForSeconds(0.5f);
+        }
+        Destroy(this.gameObject);
+    }
 
     public void Heal(int healingDealt) {
         int trueHeal = Mathf.Min(healingDealt, MaxHealth - Health);
@@ -148,40 +188,46 @@ public class Unit : MonoBehaviour
 
     //N - Moved the recursive search to Tile for other uses. Still called through here (GetAdjacentGroup)
 
-    public void MarkAdjacentTiles(Tile tileToCheck, int maxLoops, bool dmgIndicate)
+    public void MarkAdjacentTiles(Tile tileToCheck, int maxLoops, bool dmgIndicate = false)
     {
-        foreach (Tile tile in tileToCheck.GetAdjacentGroup(maxLoops)) {
+        EndTargeting(); //Hopefully doesn't cause issues, but if multiple things are targetted at once it will (Shouldn't happen but might).
+        tilesTargetted = tileToCheck.GetAdjacentGroup(maxLoops);
+        foreach (Tile tile in tilesTargetted) {
             tile.DisplayColour(CurrentMoveableCol);
             if (dmgIndicate) {
-                if (tile.unitHere && tile.unitHere.team != team && !enemiesInSight.Contains(tile.unitHere)) {
+                if (tile.unitHere && tile.unitHere.team != team) {
                     tile.unitHere.healthBar.IndicateDamage(Damage);
                     enemiesInSight.Add(tile.unitHere);
                 }
-                if (tile.buildingHere && tile.buildingHere.team != team && !buildingsInSight.Contains(tile.buildingHere)) {
+                if (tile.buildingHere && tile.buildingHere.team != team) {
                     tile.buildingHere.IndicateHealth(Damage);
                     buildingsInSight.Add(tile.buildingHere);
                 }
             }
         }
     }
-    public void EndTargeting(Tile tileToCheck, int maxLoops, bool dmgIndicate)
-    {
-        foreach (Tile tile in tileToCheck.GetAdjacentGroup(maxLoops)) {
+    public void EndTargeting() {
+        
+        foreach (Tile tile in tilesTargetted) {
             tile.ResetMaterial();
-            if (dmgIndicate) {
-                foreach (Unit unit in enemiesInSight) {
-                    unit.healthBar.StopIndicating();
-                }
-                enemiesInSight.Clear();
-                foreach (Building building in buildingsInSight) {
-                    building.StopIndicateHealth();
-                }
-                buildingsInSight.Clear();
-            }
         }
+        tilesTargetted.Clear();
+        foreach (Unit unit in enemiesInSight) {
+            unit.healthBar.StopIndicating();
+        }
+        enemiesInSight.Clear();
+        foreach (Building building in buildingsInSight) {
+            building.StopIndicateHealth();
+        }
+        buildingsInSight.Clear();
     }
 
     //End Of Damage and Targeting/////////////////////////////
+
+    public void Attack() {
+        EndTargeting();
+        animator.SetTrigger("Attacking");
+    }
 
     //Creating buildings////////////////////////////////////// Done by Nate
 

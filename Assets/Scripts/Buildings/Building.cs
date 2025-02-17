@@ -54,8 +54,7 @@ public abstract class Building : MonoBehaviour {
         Tile exitTile = tile;
         if (tile.unitHere != null) {
             exitTile = tile.FindEmptyTile();
-            unitLeaving.currentTile = exitTile;
-            unitLeaving.MoveToTile();
+            unitLeaving.MoveToTile(exitTile);
         }
         unitsHere.Remove(unitLeaving);
         exitTile.unitHere = unitLeaving;
