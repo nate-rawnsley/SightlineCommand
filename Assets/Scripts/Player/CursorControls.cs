@@ -15,7 +15,7 @@ public abstract class CursorControls : MonoBehaviour {
                         UnitClickBehaviour(cursorHit.collider.GetComponentInParent<Unit>());
                         break;
                     case "Tile":
-                        TileClickBehaviour(cursorHit.collider.GetComponent<Tile>());
+                        TileClickBehaviour(cursorHit.collider.GetComponentInParent<Tile>());
                         break;
                     case "Building":
                         BuildingClickBehaviour(cursorHit.collider.GetComponent<Building>());

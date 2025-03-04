@@ -36,18 +36,21 @@ public class Unit : MonoBehaviour
     [SerializeField]
     public int MaxAttack;
 
-    [Header("In-game values")]
-    public int Health;
-    public int CurrentMove;
-    public int CurrentAttacks;
-    public Vector3 unitScale;
-    public HealthBar healthBar;
-    public TextMeshPro valuesText;
-    public List<Unit> enemiesInSight = new List<Unit>();
-    public List<Building> buildingsInSight = new List<Building>();
+    [HideInInspector] public int Health;
+    [HideInInspector] public int CurrentMove;
+    [HideInInspector] public int CurrentAttacks;
+    [HideInInspector] public Vector3 unitScale;
+    [HideInInspector] public HealthBar healthBar;
+    [HideInInspector] public TextMeshPro valuesText;
+    [HideInInspector] public List<Unit> enemiesInSight = new List<Unit>();
+    [HideInInspector] public List<Building> buildingsInSight = new List<Building>();
     private List<Tile> tilesTargetted = new List<Tile>();
 
     private Animator animator;
+
+    private Vector3 targetPos;
+    private Quaternion targetRot;
+    private Transform model;
 
     public void Start()
     {
@@ -59,7 +62,8 @@ public class Unit : MonoBehaviour
         healthBar.DisplaySpecified(MaxHealth, MaxHealth, team);
         //healthBar.gameObject.SetActive(false);
         valuesText = GetComponentInChildren<TextMeshPro>();
-        animator = transform.Find("Model").GetComponent<Animator>();
+        model = transform.Find("Model");
+        animator = model.GetComponent<Animator>();
     }
     //Movement///////////////////////////////////////////// Base Movement done by Nate, Limiting Movement Distance and changing movement material Done By Dylan
     public void UnitSpawn(Tile tile)
@@ -82,6 +86,7 @@ public class Unit : MonoBehaviour
             Vector3 position = currentTile.transform.position;
             position.y += scale * 0.5f;
             transform.position = position;
+            targetPos = position;
         }
         if (CurrentMove == 0)
         {
@@ -89,20 +94,30 @@ public class Unit : MonoBehaviour
         }
     }
 
+    private IEnumerator RotateToTarget(Vector3 targetPos) {
+        Vector3 direction = targetPos - transform.position;
+        targetRot = Quaternion.FromToRotation(model.forward, direction);
+        float t = 0;
+        while (t < 1) {
+            model.rotation = Quaternion.Lerp(transform.rotation, targetRot, t);
+            yield return null;
+            t += Time.deltaTime;
+        }
+    }
+
     private IEnumerator AnimateToTile() {
         animator.SetBool("Walking", true);
         Vector3 startPosition = transform.position;
-        Vector3 targetPosition = currentTile.transform.position;
-        targetPosition.y += scale * 0.5f;
-        transform.LookAt(targetPosition);
+        targetPos = currentTile.transform.position;
+        targetPos.y += scale * 0.5f;
+        StartCoroutine(RotateToTarget(targetPos));
         float time = 0;
         while (time < 1) {
-            Vector3 pos = Vector3.Lerp(startPosition, targetPosition, time);
+            Vector3 pos = Vector3.Lerp(startPosition, targetPos, time);
             transform.position = pos;
             time += Time.deltaTime * 0.5f;
             yield return null;
         }
-        transform.position = targetPosition;
         animator.SetBool("Walking", false);
     }
 
@@ -228,7 +243,8 @@ public class Unit : MonoBehaviour
     public void Attack(Vector3 attackPos) {
         EndTargeting();
         attackPos.y += scale * 0.5f;
-        transform.LookAt(attackPos);
+        StopCoroutine("RotateToTarget");
+        RotateToTarget(attackPos);
         animator.SetTrigger("Attacking");
     }
 
