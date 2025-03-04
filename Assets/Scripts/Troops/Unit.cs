@@ -94,6 +94,7 @@ public class Unit : MonoBehaviour
         Vector3 startPosition = transform.position;
         Vector3 targetPosition = currentTile.transform.position;
         targetPosition.y += scale * 0.5f;
+        transform.LookAt(targetPosition);
         float time = 0;
         while (time < 1) {
             Vector3 pos = Vector3.Lerp(startPosition, targetPosition, time);
@@ -224,8 +225,10 @@ public class Unit : MonoBehaviour
 
     //End Of Damage and Targeting/////////////////////////////
 
-    public void Attack() {
+    public void Attack(Vector3 attackPos) {
         EndTargeting();
+        attackPos.y += scale * 0.5f;
+        transform.LookAt(attackPos);
         animator.SetTrigger("Attacking");
     }
 

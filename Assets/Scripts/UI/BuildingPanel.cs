@@ -45,7 +45,6 @@ public class BuildingPanel : MonoBehaviour {
             newEntry.GetComponent<BuildingUnitEntry>().Initialize(unit, building, this, entryPos);
             entries.Add(newEntry);
         }
-        Debug.Log($"{building.maxHealth}, {building.health}, {building.team}");
         healthBar.DisplaySpecified(building.maxHealth, building.health, building.team, true);
     }
     

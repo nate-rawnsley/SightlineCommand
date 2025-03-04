@@ -90,11 +90,11 @@ public class GameCursor : CursorControls {
             switch (currentMode) {
                 case UnitMode.Attack:
                     if (tile.unitHere && activeUnit.enemiesInSight.Contains(tile.unitHere)) {
-                        activeUnit.Attack();
+                        activeUnit.Attack(tile.transform.position);
                         doDamage(tile);
                         acted = true;
                     } else if (tile.buildingHere && activeUnit.buildingsInSight.Contains(tile.buildingHere)) {
-                        activeUnit.Attack();
+                        activeUnit.Attack(tile.transform.position);
                         DamageBuilding(tile.buildingHere);
                         acted = true;
                     }
@@ -123,7 +123,7 @@ public class GameCursor : CursorControls {
 
     protected override void BuildingClickBehaviour(Building building) {
         if (currentMode == UnitMode.Attack && activeUnit && activeUnit.team != building.team) {
-            activeUnit.Attack();
+            activeUnit.Attack(building.tile.transform.position);
             DamageBuilding(building);
             CLEARALL();
             return;
