@@ -8,6 +8,7 @@ public abstract class Building : MonoBehaviour {
     public float price = 10;
     public int capacity = 5;
     public int maxHealth = 5;
+    public PlayerTeam team;
 
     [Header("Panel Text")]
     public string buildingName;
@@ -17,14 +18,12 @@ public abstract class Building : MonoBehaviour {
     [Header("Units sold here (if applicable)"), SerializeField]
     public List<UnitShopValue> availableUnits = new List<UnitShopValue>();
 
-    [Header("In-game values (read only)")]
-    public List<Unit> unitsHere;
-    public Tile tile;
-    public PlayerTeam team;
-    public GameObject unitInCreation;
-    public int turnsToCreate;
-    public int health;
+    [HideInInspector] public List<Unit> unitsHere;
+    [HideInInspector] public Tile tile;
 
+    [HideInInspector] public GameObject unitInCreation;
+    [HideInInspector] public int turnsToCreate;
+    [HideInInspector] public int health;
     private HealthBar healthBar;
     private SpriteRenderer unitIndicator;
 
@@ -40,6 +39,18 @@ public abstract class Building : MonoBehaviour {
     public virtual bool ActivateBehaviour() { return false; }
 
     public virtual void DeactivateBehaviour() { }
+
+    protected virtual void DeathBehaviour() {
+        List<Unit> unitsToRemove = new List<Unit>(unitsHere); //Made temporary list to avoid errors
+        foreach (var unit in unitsToRemove) {
+            if (unit != null) {
+                OnExitBehaviour(unit); //All units exit when this is destroyed.
+            }
+        }
+        GameManager gameStats = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        gameStats.players[team].buildings.Remove(this);
+        Destroy(gameObject);
+    }
 
     //When a unit enters the tile this building is on, add it to the list, hide it and display a chevron.
     public virtual void OnEnterBehaviour(Unit unitEntered) {
@@ -76,6 +87,7 @@ public abstract class Building : MonoBehaviour {
 
     public void NewTurn() {
         if (unitInCreation != null) {
+            Debug.Log(turnsToCreate);
             turnsToCreate--;
             if (turnsToCreate <= 0) {
                 GameObject unitSpawn = Instantiate(unitInCreation);
@@ -99,15 +111,7 @@ public abstract class Building : MonoBehaviour {
         health -= damage;
         StartCoroutine(DelayHealthBarDisplay(damage, false));
         if (health <= 0) {
-            List<Unit> unitsToRemove = new List<Unit>(unitsHere); //Made temporary list to avoid errors
-            foreach (var unit in unitsToRemove) {
-                if (unit != null) {
-                    OnExitBehaviour(unit); //All units exit when this is destroyed.
-                }
-            }
-            GameManager gameStats = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-            gameStats.players[team].buildings.Remove(this);
-            Destroy(gameObject);
+            DeathBehaviour();
         }
     }
 

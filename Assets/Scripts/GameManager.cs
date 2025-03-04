@@ -12,19 +12,22 @@ public enum PlayerTeam {
 /// It is a MonoBehaviour, a component of the 'Game Manager' object in the scene.
 /// </summary>
 public class GameManager : MonoBehaviour {
-    [SerializeField]
     private GridGenerator gridGenerator;
-
-    [SerializeField]
     private GameCursor gameCursor;
-
-    [SerializeField]
     private GameUI gameUI;
 
     public Dictionary<PlayerTeam, PlayerStats> players = new Dictionary<PlayerTeam, PlayerStats>();
     public Tile[,] tiles;
 
     private void Start() {
+        gridGenerator = FindObjectOfType<GridGenerator>();
+        gridGenerator.gameManager = this;
+        gameCursor = FindObjectOfType<GameCursor>();
+        gameCursor.gameManager = this;
+        gameUI = FindObjectOfType<GameUI>();
+        gameUI.gameManager = this;
+        gameUI.gameCursor = gameCursor;
+        gameCursor.buildingPanel = gameUI.buildingPanel.GetComponent<BuildingPanel>();
         StartGame();
     }
 
@@ -40,9 +43,8 @@ public class GameManager : MonoBehaviour {
 
     public void RestartGame() {
         gameCursor.CurrentTeam = PlayerTeam.HUMAN;
-        gameCursor.currentMode = UnitMode.None;
         gameCursor.CLEARALL();
-        gameUI.UpdateModeDisplay();
+        gameUI.UpdateModeDisplay(0);
         gameUI.UpdateTeamDisplay();
         players[PlayerTeam.HUMAN].Destroy();
         players[PlayerTeam.ALIEN].Destroy();
@@ -51,14 +53,21 @@ public class GameManager : MonoBehaviour {
     }
 
     public void StartGame() {
-        players[PlayerTeam.HUMAN] = new PlayerStats(PlayerTeam.HUMAN);
-        players[PlayerTeam.ALIEN] = new PlayerStats(PlayerTeam.ALIEN);
-        players[PlayerTeam.HUMAN].otherPlayer = players[PlayerTeam.ALIEN];
-        players[PlayerTeam.ALIEN].otherPlayer = players[PlayerTeam.HUMAN];
+        PlayerStats humanStats = new PlayerStats(PlayerTeam.HUMAN);
+        PlayerStats alienStats = new PlayerStats(PlayerTeam.ALIEN);
+        humanStats.otherPlayer = alienStats;
+        alienStats.otherPlayer = humanStats;
+        players[PlayerTeam.HUMAN] = humanStats;
+        players[PlayerTeam.ALIEN] = alienStats;
+        gameUI.GameStart();
         gridGenerator.GenerateGrid();
     }
 
     public void NewTurn(PlayerTeam team) {
         players[team].StartTurn();
+    }
+
+    public void EndGame(PlayerTeam defeatedTeam) {
+        gameUI.DisplayGameOver(defeatedTeam);
     }
 }

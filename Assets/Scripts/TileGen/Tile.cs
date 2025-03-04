@@ -58,7 +58,8 @@ public class Tile : MonoBehaviour {
         
 
         buildingHere = Instantiate(building.gameObject, transform).GetComponent<Building>();
-        Debug.Log(buildingHere);
+        buildingHere.tile = this;
+        FindObjectOfType<GameManager>().players[building.team].buildings.Add(buildingHere);
     }
 
     public void DisplayColour(Color color) {

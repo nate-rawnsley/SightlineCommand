@@ -70,6 +70,8 @@ public class Unit : MonoBehaviour
     {
         tile.unitHere = this;
 
+        FindObjectOfType<GameManager>().players[team].units.Add(this);
+
         scale = tile.transform.localScale.x;
         unitScale = transform.localScale * scale * 0.5f;
         transform.localScale = unitScale;
@@ -253,11 +255,7 @@ public class Unit : MonoBehaviour
     public void CreateBuilding(int index) {
         if (canBuild) {
             currentTile.CreateBuilding(createableBuildings[index]);
-            currentTile.buildingHere.tile = currentTile;
             currentTile.buildingHere.OnEnterBehaviour(this);
-
-            GameManager gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-            gameManager.players[team].buildings.Add(currentTile.buildingHere);
         }
     }
 

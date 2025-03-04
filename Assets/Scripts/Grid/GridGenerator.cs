@@ -2,13 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class GridGenerator : MonoBehaviour {
-
-    [SerializeField]
-    private GameManager gameManager;
-
-    [SerializeField, Tooltip("The tile to populate the grid with.")]
-    private GameObject tilePrefab;
-
     [SerializeField, Tooltip("Define the different types of terrain in this map.")]
     public List<TileTerrain> terrainTypes = new List<TileTerrain>();
 
@@ -25,21 +18,28 @@ public class GridGenerator : MonoBehaviour {
     [SerializeField, Tooltip("The number of tiles in the grid."), Range(1,50)]
     public int width = 10, height = 10;
 
+    [SerializeField]
+    private Building humanFOB;
+
+    [SerializeField]
+    private Building alienFOB;
+
     //temporarily here for testing & creating unit functionality
+    [SerializeField]
+    private bool testUnits;
+
     [SerializeField]
     private GameObject Humanunit;
     [SerializeField]
     private GameObject Alienunit;
 
     [SerializeField]
-    private bool testUnits;
-
-    [SerializeField]
     private int testSoldierAmount;
     [SerializeField]
     private int testAlienAmount;
 
-    GameObject gridParent;
+    private GameObject gridParent;
+    [HideInInspector] public GameManager gameManager;
 
 
     private void Awake() {
@@ -76,6 +76,7 @@ public class GridGenerator : MonoBehaviour {
             for (int z = 0; z < height; z++) {
                 position.x = ((x + z * 0.5f - z / 2) * scale * gapScale) - xOffset;
                 position.z = (z * 0.866f * scale * gapScale) - zOffset;
+                GameObject tilePrefab = (GameObject)Resources.Load("HexTile");
                 GameObject gridTile = Instantiate(tilePrefab, gridParent.transform);
                 gridTile.transform.localPosition = position;
                 gridTile.transform.localScale = new Vector3(scale, scale, scale);
@@ -116,6 +117,7 @@ public class GridGenerator : MonoBehaviour {
             }
         }
         Camera.main.GetComponent<CameraMovement>().SetInitialPosition(scale);
+
         //here for testing unit movement
 
         if (testUnits)
@@ -125,16 +127,15 @@ public class GridGenerator : MonoBehaviour {
                 GameObject FriendObj = Instantiate(Humanunit);
                 Humanunit.name = ("Soldier" + p).ToString();
                 FriendObj.GetComponent<Unit>().UnitSpawn(gameManager.tiles[0, p]);
-                gameManager.players[PlayerTeam.HUMAN].units.Add(FriendObj.GetComponent<Unit>());
-
             }
             for (int e = 0; e < testAlienAmount; e++) {
                 GameObject EnemyObj = Instantiate(Alienunit);
                 Alienunit.name = ("Alien" + e).ToString();
                 EnemyObj.GetComponent<Unit>().UnitSpawn(gameManager.tiles[width - 1, e]);
-                gameManager.players[PlayerTeam.ALIEN].units.Add(EnemyObj.GetComponent<Unit>());
-
             }
+        } else {
+            gameManager.tiles[0, 0].CreateBuilding(humanFOB);
+            gameManager.tiles[width-1, height-1].CreateBuilding(alienFOB);
         }
     }
 

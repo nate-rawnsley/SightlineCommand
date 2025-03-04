@@ -2,8 +2,7 @@ using TMPro;
 using UnityEngine;
 
 public class GameCursor : CursorControls {
-    [SerializeField]
-    private Unit activeUnit = null;
+    public Unit activeUnit = null;
     private Unit EnemyUnit;
 
     public PlayerTeam CurrentTeam;
@@ -13,11 +12,8 @@ public class GameCursor : CursorControls {
     public enum UnitMode { None, Attack, Move, Build, End}
     public UnitMode currentMode = UnitMode.None;
 
-    [SerializeField]
-    private BuildingPanel buildingPanel;
-
-    [SerializeField]
-    private GameManager gameStats;
+    [HideInInspector] public BuildingPanel buildingPanel;
+    [HideInInspector] public GameManager gameManager;
 
     public override void UnitClickBehaviour(Unit unit) {
         if (buildingPanel.gameObject.activeSelf) {
@@ -175,7 +171,7 @@ public class GameCursor : CursorControls {
     {
         CLEARALL();
         CurrentTeam = CurrentTeam == PlayerTeam.HUMAN ? PlayerTeam.ALIEN : PlayerTeam.HUMAN;
-        gameStats.NewTurn(CurrentTeam);
+        gameManager.NewTurn(CurrentTeam);
     }
 
     public void CLEARALL()

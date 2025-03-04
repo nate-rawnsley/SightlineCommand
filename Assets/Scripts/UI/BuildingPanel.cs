@@ -13,6 +13,8 @@ public class BuildingPanel : MonoBehaviour {
     [SerializeField]
     private HealthBar healthBar;
 
+    private GameUI gameUI;
+
     private Building building;
     private List<GameObject> entries = new List<GameObject>();
 
@@ -21,13 +23,14 @@ public class BuildingPanel : MonoBehaviour {
     private TextMeshProUGUI commandText;
 
     private void Awake() {
+        gameUI = GetComponentInParent<GameUI>();
         nameText = transform.Find("BuildingName").GetComponent<TextMeshProUGUI>();
         tipText = transform.Find("ToolTip").GetComponent<TextMeshProUGUI>();
         commandText = transform.Find("ActiveButton/Action").GetComponent<TextMeshProUGUI>();
     }
 
     public void SetBuilding(Building selectedBuilding) {
-        gameObject.SetActive(true);
+        gameUI.ShowBuildingPanel();
         building = selectedBuilding;
         nameText.text = building.buildingName;
         tipText.text = building.toolTip;
@@ -53,11 +56,12 @@ public class BuildingPanel : MonoBehaviour {
             Destroy(entry);
         }
         entries.Clear();
-        gameObject.SetActive(false);
+        gameUI.HideBuildingPanel();
     }
 
     public void ActivateBuilding()
     {
+        Debug.Log("a");
         if (building.ActivateBehaviour()) {
             HidePanel();
         }

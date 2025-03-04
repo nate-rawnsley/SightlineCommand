@@ -1,18 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class OperatingBase : Building
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+public class OperatingBase : UnitCamp {
+    protected override void DeathBehaviour() {
+        GameManager gameStats = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        gameStats.EndGame(team);
     }
 }
