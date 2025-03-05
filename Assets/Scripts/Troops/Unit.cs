@@ -48,8 +48,6 @@ public class Unit : MonoBehaviour
 
     private Animator animator;
 
-    private Vector3 targetPos;
-    private Quaternion targetRot;
     private Transform model;
 
     public void Start()
@@ -88,7 +86,6 @@ public class Unit : MonoBehaviour
             Vector3 position = currentTile.transform.position;
             position.y += scale * 0.5f;
             transform.position = position;
-            targetPos = position;
         }
         if (CurrentMove == 0)
         {
@@ -97,20 +94,21 @@ public class Unit : MonoBehaviour
     }
 
     private IEnumerator RotateToTarget(Vector3 targetPos) {
-        Vector3 direction = targetPos - transform.position;
-        targetRot = Quaternion.FromToRotation(model.forward, direction);
-        float t = 0;
-        while (t < 1) {
-            model.rotation = Quaternion.Lerp(transform.rotation, targetRot, t);
+        float angle = model.eulerAngles.y;
+        model.LookAt(targetPos);
+        float endRot = model.eulerAngles.y;
+        float currentVelocity = 0;
+        while (Mathf.Abs(angle - endRot) > 0.1f) {
+            angle = Mathf.SmoothDampAngle(angle, endRot, ref currentVelocity, 0.25f);
+            model.rotation = Quaternion.Euler(0, angle, 0);
             yield return null;
-            t += Time.deltaTime;
         }
     }
 
     private IEnumerator AnimateToTile() {
         animator.SetBool("Walking", true);
         Vector3 startPosition = transform.position;
-        targetPos = currentTile.transform.position;
+        Vector3 targetPos = currentTile.transform.position;
         targetPos.y += scale * 0.5f;
         StartCoroutine(RotateToTarget(targetPos));
         float time = 0;
@@ -246,7 +244,7 @@ public class Unit : MonoBehaviour
         EndTargeting();
         attackPos.y += scale * 0.5f;
         StopCoroutine("RotateToTarget");
-        RotateToTarget(attackPos);
+        StartCoroutine(RotateToTarget(attackPos));
         animator.SetTrigger("Attacking");
     }
 
