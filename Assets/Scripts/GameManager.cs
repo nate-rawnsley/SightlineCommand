@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static GameCursor;
 
 public enum PlayerTeam {
     HUMAN,
@@ -10,8 +9,11 @@ public enum PlayerTeam {
 /// <summary>
 /// This class holds data relating the game, most prominently the stats of both players.
 /// It is a MonoBehaviour, a component of the 'Game Manager' object in the scene.
+/// It is also a singleton, with one instance that is publically available and static.
 /// </summary>
 public class GameManager : MonoBehaviour {
+    public static GameManager instance {  get; private set; }
+
     private GridGenerator gridGenerator;
     private GameCursor gameCursor;
     private GameUI gameUI;
@@ -19,13 +21,18 @@ public class GameManager : MonoBehaviour {
     public Dictionary<PlayerTeam, PlayerStats> players = new Dictionary<PlayerTeam, PlayerStats>();
     public Tile[,] tiles;
 
+    private void Awake() {
+        if (instance == null) {
+            instance = this;
+        } else if (instance != this) {
+            Destroy(this);
+        }
+    }
+
     private void Start() {
         gridGenerator = FindObjectOfType<GridGenerator>();
-        gridGenerator.gameManager = this;
         gameCursor = FindObjectOfType<GameCursor>();
-        gameCursor.gameManager = this;
         gameUI = FindObjectOfType<GameUI>();
-        gameUI.gameManager = this;
         gameUI.gameCursor = gameCursor;
         gameCursor.buildingPanel = gameUI.buildingPanel.GetComponent<BuildingPanel>();
         StartGame();

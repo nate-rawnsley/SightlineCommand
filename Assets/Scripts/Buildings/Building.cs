@@ -47,8 +47,7 @@ public abstract class Building : MonoBehaviour {
                 OnExitBehaviour(unit); //All units exit when this is destroyed.
             }
         }
-        GameManager gameStats = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        gameStats.players[team].buildings.Remove(this);
+        GameManager.instance.players[team].buildings.Remove(this);
         Destroy(gameObject);
     }
 
@@ -76,11 +75,14 @@ public abstract class Building : MonoBehaviour {
     }
 
     public bool BuyUnit(UnitShopValue unitVals) {
-        if (unitInCreation == null ) { //TODO && money > cost
-            unitInCreation = unitVals.unitPrefab;
-            turnsToCreate = unitVals.createSpeed;
-            //TODO deduct money
-            return true;
+        if (unitInCreation == null) { //TODO && money > cost
+            if (GameManager.instance.players[team].troopTokens >= unitVals.price) {
+                unitInCreation = unitVals.unitPrefab;
+                turnsToCreate = unitVals.createSpeed;
+                GameManager.instance.players[team].troopTokens -= unitVals.price;
+                return true;
+            }
+            //TODO? add 'need more tokens' indicator
         }
         return false;
     }

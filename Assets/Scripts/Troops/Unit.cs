@@ -68,7 +68,7 @@ public class Unit : MonoBehaviour
     {
         tile.unitHere = this;
 
-        FindObjectOfType<GameManager>().players[team].units.Add(this);
+        GameManager.instance.players[team].units.Add(this);
 
         scale = tile.transform.localScale.x;
         unitScale = transform.localScale * scale * 0.5f;

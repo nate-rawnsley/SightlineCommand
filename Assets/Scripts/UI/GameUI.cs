@@ -13,7 +13,6 @@ public class GameUI : MonoBehaviour {
 
     private GameObject turnPanel;
     [HideInInspector] public GameObject buildingPanel;
-    [HideInInspector] public GameManager gameManager;
     private GameObject winPanel;
 
     private void Awake() {
@@ -66,6 +65,6 @@ public class GameUI : MonoBehaviour {
     }
 
     public void RestartGame() {
-        gameManager.RestartGame();
+        GameManager.instance.RestartGame();
     }
 }

@@ -39,8 +39,6 @@ public class GridGenerator : MonoBehaviour {
     private int testAlienAmount;
 
     private GameObject gridParent;
-    [HideInInspector] public GameManager gameManager;
-
 
     private void Awake() {
         if (levelSave != null) {
@@ -64,7 +62,7 @@ public class GridGenerator : MonoBehaviour {
     
 
     public void GenerateGrid() {
-        gameManager.SetGridSize(width, height);
+        GameManager.instance.SetGridSize(width, height);
 
         Vector3 position = new Vector3(0, 0, 0);
 
@@ -82,7 +80,7 @@ public class GridGenerator : MonoBehaviour {
                 gridTile.transform.localScale = new Vector3(scale, scale, scale);
 
                 Tile tileScript = gridTile.AddComponent<Tile>();
-                gameManager.tiles[x,z] = tileScript;
+                GameManager.instance.tiles[x,z] = tileScript;
 
                 if (loadedTiles != null) {
                     tileScript.terrainType = terrainTypes[loadedTiles[x, z]];
@@ -95,24 +93,24 @@ public class GridGenerator : MonoBehaviour {
 
             }
         }
-        foreach (Tile tile in gameManager.tiles) {
+        foreach (Tile tile in GameManager.instance.tiles) {
             int x = (int)tile.coords.x;
             int z = (int)tile.coords.y;
             Vector2 index = new Vector2(x, z);
 
             if (x > 0) {
-                AddAdjacentTiles(tile, gameManager.tiles[x - 1, z]);
+                AddAdjacentTiles(tile, GameManager.instance.tiles[x - 1, z]);
             }
             if (z > 0) {
-                AddAdjacentTiles(tile, gameManager.tiles[x, z - 1]);
+                AddAdjacentTiles(tile, GameManager.instance.tiles[x, z - 1]);
             }
             if (z % 2 == 0) {
                 if (z > 0 && x > 0) {
-                    AddAdjacentTiles(tile, gameManager.tiles[x - 1, z - 1]);
+                    AddAdjacentTiles(tile, GameManager.instance.tiles[x - 1, z - 1]);
                 }
             } else {
                 if (z > 0 && x < width - 1) {
-                    AddAdjacentTiles(tile, gameManager.tiles[x + 1, z - 1]);
+                    AddAdjacentTiles(tile, GameManager.instance.tiles[x + 1, z - 1]);
                 }
             }
         }
@@ -126,16 +124,16 @@ public class GridGenerator : MonoBehaviour {
             {
                 GameObject FriendObj = Instantiate(Humanunit);
                 Humanunit.name = ("Soldier" + p).ToString();
-                FriendObj.GetComponent<Unit>().UnitSpawn(gameManager.tiles[0, p]);
+                FriendObj.GetComponent<Unit>().UnitSpawn(GameManager.instance.tiles[0, p]);
             }
             for (int e = 0; e < testAlienAmount; e++) {
                 GameObject EnemyObj = Instantiate(Alienunit);
                 Alienunit.name = ("Alien" + e).ToString();
-                EnemyObj.GetComponent<Unit>().UnitSpawn(gameManager.tiles[width - 1, e]);
+                EnemyObj.GetComponent<Unit>().UnitSpawn(GameManager.instance.tiles[width - 1, e]);
             }
         } else {
-            gameManager.tiles[0, 0].CreateBuilding(humanFOB);
-            gameManager.tiles[width-1, height-1].CreateBuilding(alienFOB);
+            GameManager.instance.tiles[0, 0].CreateBuilding(humanFOB);
+            GameManager.instance.tiles[width-1, height-1].CreateBuilding(alienFOB);
         }
     }
 

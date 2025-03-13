@@ -13,7 +13,6 @@ public class GameCursor : CursorControls {
     public UnitMode currentMode = UnitMode.None;
 
     [HideInInspector] public BuildingPanel buildingPanel;
-    [HideInInspector] public GameManager gameManager;
 
     public override void UnitClickBehaviour(Unit unit) {
         if (buildingPanel.gameObject.activeSelf) {
@@ -171,7 +170,7 @@ public class GameCursor : CursorControls {
     {
         CLEARALL();
         CurrentTeam = CurrentTeam == PlayerTeam.HUMAN ? PlayerTeam.ALIEN : PlayerTeam.HUMAN;
-        gameManager.NewTurn(CurrentTeam);
+        GameManager.instance.NewTurn(CurrentTeam);
     }
 
     public void CLEARALL()

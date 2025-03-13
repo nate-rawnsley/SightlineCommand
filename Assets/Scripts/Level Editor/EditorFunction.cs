@@ -13,8 +13,6 @@ public class EditorFunction : MonoBehaviour {
 
     public TMP_InputField nameInput;
 
-    public GameManager gameManager;
-
     public List<TileTerrain> terrains;
 
     private void Start() {
@@ -33,7 +31,7 @@ public class EditorFunction : MonoBehaviour {
     }
 
     public string SaveString() {
-        Tile[,] tileData = gameManager.tiles;
+        Tile[,] tileData = GameManager.instance.tiles;
         string saveString = string.Empty;
         saveString += $"{genUse.scale} {genUse.gapScale} {genUse.width} {genUse.height}\n";
         for (int x = 0; x < tileData.GetLength(0); x++) {
