@@ -502,7 +502,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Current Team: HUMAN'
+  m_text: 'Team: Human'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1650,10 +1650,10 @@ MonoBehaviour:
   winDisplay: {fileID: 7352059415349065678}
   gameCursor: {fileID: 0}
   teamUI:
-  - team: 0
+  - team: Human
     background: {fileID: 21300000, guid: 367fdb9e760447441a22c521c0064b62, type: 3}
     textColor: {r: 0, g: 0, b: 0, a: 1}
-  - team: 1
+  - team: Alien
     background: {fileID: 21300000, guid: 5f3abbdbf49252248bdc90d7338ee830, type: 3}
     textColor: {r: 0.1767478, g: 1, b: 0, a: 1}
   buildingPanel: {fileID: 0}
@@ -2252,7 +2252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6470292134265365288, guid: f012707a77873e04a8a105a341a532b5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0002007547
+      value: 0.00011187659
       objectReference: {fileID: 0}
     - target: {fileID: 6522620133749987059, guid: f012707a77873e04a8a105a341a532b5, type: 3}
       propertyPath: m_AnchorMax.x

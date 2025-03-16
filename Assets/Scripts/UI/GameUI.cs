@@ -33,9 +33,10 @@ public class GameUI : MonoBehaviour {
     }
 
     public void UpdateTeamDisplay() {
-        teamDisplay.text = $"Current Team: {gameCursor.CurrentTeam}";
-        teamBackground.sprite = teamUI[(int)gameCursor.CurrentTeam].background;
-        teamDisplay.color = teamUI[(int)gameCursor.CurrentTeam].textColor;
+        TeamUIParams team = teamUI[(int)gameCursor.CurrentTeam];
+        teamDisplay.text = $"Team: {team.team}";
+        teamBackground.sprite = team.background;
+        teamDisplay.color = team.textColor;
     }
 
     public void EndTurn() {
