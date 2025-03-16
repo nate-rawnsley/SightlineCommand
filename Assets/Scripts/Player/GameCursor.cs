@@ -134,6 +134,12 @@ public class GameCursor : CursorControls {
         
     }
 
+    //protected override void TileHoverBehaviour(Tile tile) {
+    //    if (activeUnit != null && currentMode == UnitMode.Attack) { 
+    //        activeUnit.HighlightTile(tile);
+    //    }
+    //}
+
     protected override void RightClickBehaviour()
     {
         CLEARALL();  //

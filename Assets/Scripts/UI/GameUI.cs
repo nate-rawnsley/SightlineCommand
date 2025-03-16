@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class GameUI : MonoBehaviour {
@@ -7,9 +8,14 @@ public class GameUI : MonoBehaviour {
     [SerializeField]
     private TextMeshProUGUI teamDisplay;
     [SerializeField]
+    private Image teamBackground;
+    [SerializeField]
     private TextMeshProUGUI winDisplay;
 
     [HideInInspector] public GameCursor gameCursor;
+
+    [SerializeField]
+    private Sprite[] teamBackgrounds = new Sprite[2];
 
     private GameObject turnPanel;
     [HideInInspector] public GameObject buildingPanel;
@@ -28,6 +34,7 @@ public class GameUI : MonoBehaviour {
 
     public void UpdateTeamDisplay() {
         teamDisplay.text = $"Current Team: {gameCursor.CurrentTeam}";
+        teamBackground.sprite = teamBackgrounds[(int)gameCursor.CurrentTeam];
     }
 
     public void EndTurn() {

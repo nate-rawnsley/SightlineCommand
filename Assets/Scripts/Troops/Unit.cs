@@ -25,16 +25,12 @@ public class Unit : MonoBehaviour
 
     [Header("Troop Settings")]
     public PlayerTeam team;
-    [SerializeField]
     public int MaxMovement;
-    [SerializeField]
     public int MaxHealth;
-    [SerializeField]
     public int Damage;
-    [SerializeField]
     public int AttackRange;
-    [SerializeField]
     public int MaxAttack;
+    public bool AOEAttack;
 
     [HideInInspector] public int Health;
     [HideInInspector] public int CurrentMove;
@@ -45,6 +41,7 @@ public class Unit : MonoBehaviour
     [HideInInspector] public List<Unit> enemiesInSight = new List<Unit>();
     [HideInInspector] public List<Building> buildingsInSight = new List<Building>();
     private List<Tile> tilesTargetted = new List<Tile>();
+    private Tile tileHighlighted;
 
     private Animator animator;
 
@@ -202,8 +199,6 @@ public class Unit : MonoBehaviour
 
     //Damage and Targeting/////////////////////////////////// Done By Dylan & Nate
 
-    //N - Moved the recursive search to Tile for other uses. Still called through here (GetAdjacentGroup)
-
     public void MarkAdjacentTiles(Tile tileToCheck, int maxLoops, bool dmgIndicate = false)
     {
         EndTargeting(); //Hopefully doesn't cause issues, but if multiple things are targetted at once it will (Shouldn't happen but might).
@@ -222,6 +217,7 @@ public class Unit : MonoBehaviour
             }
         }
     }
+
     public void EndTargeting() {
         
         foreach (Tile tile in tilesTargetted) {
@@ -237,6 +233,39 @@ public class Unit : MonoBehaviour
         }
         buildingsInSight.Clear();
     }
+
+    // Currently unused code for highlighting the currently hovered tile, with AOE attacks
+
+    //public void HighlightTile(Tile tile) {
+    //    if (tile == tileHighlighted) {
+    //        return;
+    //    }
+    //    if (tileHighlighted != null) {
+    //        UnHighlightTiles();
+    //    }
+    //    if (!tilesTargetted.Contains(tile)) {
+    //        return;
+    //    }
+    //    tileHighlighted = tile;
+    //    foreach (Tile tileToHighlight in tile.GetAdjacentGroup(AOEAttack ? 2 : 1)) {
+    //        tileToHighlight.DisplayColour(moveableCol[1]);
+    //    }
+    //}
+
+    //public void UnHighlightTiles() {
+    //    float startTime = 0;
+    //    foreach (Tile markedTile in tilesTargetted) {
+    //        if (!markedTile.highlighted) {
+    //            startTime = markedTile.lerpTime;
+    //            break;
+    //        }
+    //    }
+    //    foreach (Tile oldTile in tileHighlighted.GetAdjacentGroup(AOEAttack ? 2 : 1)) {
+    //        oldTile.lerpTime = startTime;
+    //        oldTile.DisplayColour(CurrentMoveableCol);
+    //    }
+    //    tileHighlighted = null;
+    //}
 
     //End Of Damage and Targeting/////////////////////////////
 

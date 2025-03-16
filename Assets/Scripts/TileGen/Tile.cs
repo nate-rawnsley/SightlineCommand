@@ -12,8 +12,9 @@ public class Tile : MonoBehaviour {
     private GameObject decoration;
 
     private Renderer thisRenderer;
-    private bool lerpingColour;
-    private float lerpTime;
+    public bool lerpingColour;
+    public bool highlighted;
+    public float lerpTime;
 
     public Vector2 coords;
 
