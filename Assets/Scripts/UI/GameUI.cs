@@ -15,7 +15,7 @@ public class GameUI : MonoBehaviour {
     [HideInInspector] public GameCursor gameCursor;
 
     [SerializeField]
-    private Sprite[] teamBackgrounds = new Sprite[2];
+    private TeamUIParams[] teamUI = new TeamUIParams[2];
 
     private GameObject turnPanel;
     [HideInInspector] public GameObject buildingPanel;
@@ -34,7 +34,8 @@ public class GameUI : MonoBehaviour {
 
     public void UpdateTeamDisplay() {
         teamDisplay.text = $"Current Team: {gameCursor.CurrentTeam}";
-        teamBackground.sprite = teamBackgrounds[(int)gameCursor.CurrentTeam];
+        teamBackground.sprite = teamUI[(int)gameCursor.CurrentTeam].background;
+        teamDisplay.color = teamUI[(int)gameCursor.CurrentTeam].textColor;
     }
 
     public void EndTurn() {

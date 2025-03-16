@@ -1486,8 +1486,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 80.40443, y: 374.90005}
-  m_SizeDelta: {x: 422.1192, y: 50}
+  m_AnchoredPosition: {x: 80.74193, y: 374.90005}
+  m_SizeDelta: {x: 470.9378, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6094269395931856054
 CanvasRenderer:
@@ -1517,8 +1517,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 367fdb9e760447441a22c521c0064b62, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1649,9 +1649,13 @@ MonoBehaviour:
   teamBackground: {fileID: 8945208296903590135}
   winDisplay: {fileID: 7352059415349065678}
   gameCursor: {fileID: 0}
-  teamBackgrounds:
-  - {fileID: 21300000, guid: 220bc6f003455f74c921c1bfbd81ceb4, type: 3}
-  - {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  teamUI:
+  - team: 0
+    background: {fileID: 21300000, guid: 367fdb9e760447441a22c521c0064b62, type: 3}
+    textColor: {r: 0, g: 0, b: 0, a: 1}
+  - team: 1
+    background: {fileID: 21300000, guid: 5f3abbdbf49252248bdc90d7338ee830, type: 3}
+    textColor: {r: 0.1767478, g: 1, b: 0, a: 1}
   buildingPanel: {fileID: 0}
 --- !u!1 &7741668551215161039
 GameObject:
@@ -2248,7 +2252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6470292134265365288, guid: f012707a77873e04a8a105a341a532b5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00033577648
+      value: 0.0002007547
       objectReference: {fileID: 0}
     - target: {fileID: 6522620133749987059, guid: f012707a77873e04a8a105a341a532b5, type: 3}
       propertyPath: m_AnchorMax.x
