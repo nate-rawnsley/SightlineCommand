@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TroopTesting.unity
     guid: 1e897b0ba3df8c44098893f27f04655d
+  - enabled: 1
+    path: Assets/Scenes/GameTesting.unity
+    guid: 8466f43b54e71844c912157ceb5c5280
   m_configObjects: {}
