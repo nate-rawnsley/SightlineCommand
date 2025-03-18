@@ -126,7 +126,7 @@ public class GameCursor : CursorControls {
         if (buildingPanel.gameObject.activeSelf) {
             buildingPanel.HidePanel();
         }
-        if (activeUnit == null) {
+        if (activeUnit == null && building.team == CurrentTeam) {
             buildingPanel.SetBuilding(building);
         } else {
             TileClickBehaviour(building.tile);

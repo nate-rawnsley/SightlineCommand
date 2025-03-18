@@ -46,7 +46,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -2400833351189193328, guid: 5b551943aca5407479c0fd8437511751, type: 3}
+  m_Motion: {fileID: 569611281860828342, guid: 7a4b3503589d63a4f8e06741f0c4b990, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -120,7 +120,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -5179785421388635773, guid: 5b551943aca5407479c0fd8437511751, type: 3}
+  m_Motion: {fileID: -5179785421388635773, guid: 7a4b3503589d63a4f8e06741f0c4b990, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -147,7 +147,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -6544428077046268240, guid: 5b551943aca5407479c0fd8437511751, type: 3}
+  m_Motion: {fileID: 8349542763059015795, guid: 7a4b3503589d63a4f8e06741f0c4b990, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -159,7 +159,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Tyrannis Controller
+  m_Name: MechV Controller
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Damaged
@@ -272,7 +272,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -8945691123924629249, guid: 5b551943aca5407479c0fd8437511751, type: 3}
+  m_Motion: {fileID: -5179785421388635773, guid: 7a4b3503589d63a4f8e06741f0c4b990, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -299,7 +299,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -6788532455012819382, guid: 5b551943aca5407479c0fd8437511751, type: 3}
+  m_Motion: {fileID: -6788532455012819382, guid: 80f70fd4696caab42a6a728f1a2e3533, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -325,7 +325,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 569611281860828342, guid: 7a4b3503589d63a4f8e06741f0c4b990, type: 3}
+  m_Motion: {fileID: -6788532455012819382, guid: 80f70fd4696caab42a6a728f1a2e3533, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

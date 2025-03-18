@@ -307,15 +307,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 478568160149202573, guid: 643577c1059446b44bdb91b856e5a2b8, type: 3}
       propertyPath: teamUI.Array.data[0].textColor.b
-      value: 0.6226415
+      value: 0.41960785
       objectReference: {fileID: 0}
     - target: {fileID: 478568160149202573, guid: 643577c1059446b44bdb91b856e5a2b8, type: 3}
       propertyPath: teamUI.Array.data[0].textColor.g
-      value: 0.6226415
+      value: 0.8392157
       objectReference: {fileID: 0}
     - target: {fileID: 478568160149202573, guid: 643577c1059446b44bdb91b856e5a2b8, type: 3}
       propertyPath: teamUI.Array.data[0].textColor.r
-      value: 0.6226415
+      value: 0.9372549
+      objectReference: {fileID: 0}
+    - target: {fileID: 1014567037062162196, guid: 643577c1059446b44bdb91b856e5a2b8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 71.44
       objectReference: {fileID: 0}
     - target: {fileID: 1867970265174040999, guid: 643577c1059446b44bdb91b856e5a2b8, type: 3}
       propertyPath: m_Size
@@ -463,11 +467,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9097097533654116417, guid: 643577c1059446b44bdb91b856e5a2b8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.000022470951
+      value: 0.000045776367
       objectReference: {fileID: 0}
     - target: {fileID: 9097097533654116417, guid: 643577c1059446b44bdb91b856e5a2b8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00018775566
+      value: 0.00023615397
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
