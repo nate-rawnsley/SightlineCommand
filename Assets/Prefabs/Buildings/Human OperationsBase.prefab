@@ -96,13 +96,13 @@ MonoBehaviour:
   command: Spawn Troop
   availableUnits:
   - unitPrefab: {fileID: 3734930054502818528, guid: 5a51f050645416f40b22c2041806e27e, type: 3}
-    price: 1
-    createSpeed: 1
+    price: 5
+    createSpeed: 2
   - unitPrefab: {fileID: 3734930054502818528, guid: 08d19b3794c6cca478ecb391cc4c65f1, type: 3}
-    price: 1
+    price: 4
     createSpeed: 1
   - unitPrefab: {fileID: 3734930054502818528, guid: 74318742dd9b0c24d8ac2cf297a64c1b, type: 3}
-    price: 1
+    price: 3
     createSpeed: 1
   unitsHere: []
   tile: {fileID: 0}

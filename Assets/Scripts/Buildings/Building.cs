@@ -26,6 +26,7 @@ public abstract class Building : MonoBehaviour {
     [HideInInspector] public int health;
     private HealthBar healthBar;
     private SpriteRenderer unitIndicator;
+    private TextMeshProUGUI createIndicator;
 
     private void Awake() {
         health = maxHealth;
@@ -33,6 +34,8 @@ public abstract class Building : MonoBehaviour {
         healthBar.DisplaySpecified(maxHealth, maxHealth, team, true);
         healthBar.gameObject.SetActive(false);
         unitIndicator = GetComponentInChildren<SpriteRenderer>();
+        createIndicator = transform.Find("Canvas/Creation Indicator").GetComponent<TextMeshProUGUI>();
+        createIndicator.gameObject.SetActive(false);
     }
 
     //Returns whether to hide the main buiding menu after.
@@ -79,6 +82,8 @@ public abstract class Building : MonoBehaviour {
             if (GameManager.instance.players[team].troopTokens >= unitVals.price) {
                 unitInCreation = unitVals.unitPrefab;
                 turnsToCreate = unitVals.createSpeed;
+                createIndicator.gameObject.SetActive(true);
+                createIndicator.text = $"Unit Creating: {turnsToCreate} turn(s)";
                 return true;
             }
         }
@@ -93,6 +98,9 @@ public abstract class Building : MonoBehaviour {
                 GameObject unitSpawn = Instantiate(unitInCreation);
                 unitSpawn.GetComponent<Unit>().UnitSpawn(tile);
                 unitInCreation = null;
+                createIndicator.gameObject.SetActive(false);
+            } else {
+                createIndicator.text = $"Unit Creating: {turnsToCreate} turn(s)";
             }
         }
     }
