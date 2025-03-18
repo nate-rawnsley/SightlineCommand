@@ -79,13 +79,11 @@ public abstract class Building : MonoBehaviour {
 
     public bool BuyUnit(UnitShopValue unitVals) {
         if (unitInCreation == null && GameManager.instance.UseTokens(team, unitVals.price)) {
-            if (GameManager.instance.players[team].troopTokens >= unitVals.price) {
-                unitInCreation = unitVals.unitPrefab;
-                turnsToCreate = unitVals.createSpeed;
-                createIndicator.gameObject.SetActive(true);
-                createIndicator.text = $"Unit Creating: {turnsToCreate} turn(s)";
-                return true;
-            }
+            unitInCreation = unitVals.unitPrefab;
+            turnsToCreate = unitVals.createSpeed;
+            createIndicator.gameObject.SetActive(true);
+            createIndicator.text = $"Unit Creating: {turnsToCreate} turn(s)";
+            return true;
         }
         return false;
     }
