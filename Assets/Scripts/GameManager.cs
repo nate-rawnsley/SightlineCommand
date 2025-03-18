@@ -33,8 +33,11 @@ public class GameManager : MonoBehaviour {
         gridGenerator = FindObjectOfType<GridGenerator>();
         gameCursor = FindObjectOfType<GameCursor>();
         gameUI = FindObjectOfType<GameUI>();
-        gameUI.gameCursor = gameCursor;
-        gameCursor.buildingPanel = gameUI.buildingPanel.GetComponent<BuildingPanel>();
+        if (gameUI != null) {
+            gameUI.gameCursor = gameCursor;
+            gameCursor.buildingPanel = gameUI.buildingPanel.GetComponent<BuildingPanel>();
+        }
+        
         StartGame();
     }
 
@@ -66,7 +69,10 @@ public class GameManager : MonoBehaviour {
         alienStats.otherPlayer = humanStats;
         players[PlayerTeam.HUMAN] = humanStats;
         players[PlayerTeam.ALIEN] = alienStats;
-        gameUI.GameStart();
+        if (gameUI != null) {
+            gameUI.GameStart();
+        }
+        
         gridGenerator.GenerateGrid();
     }
 
