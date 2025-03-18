@@ -89,6 +89,7 @@ public abstract class Building : MonoBehaviour {
     }
 
     public void NewTurn() {
+        GameManager.instance.players[team].troopTokens++;
         if (unitInCreation != null) {
             Debug.Log(turnsToCreate);
             turnsToCreate--;

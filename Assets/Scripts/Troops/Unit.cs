@@ -280,7 +280,7 @@ public class Unit : MonoBehaviour
     //Creating buildings////////////////////////////////////// Done by Nate
 
     public void CreateBuilding(int index) {
-        if (canBuild) {
+        if (canBuild && GameManager.instance.UseMaterial(team, 50)) {
             currentTile.CreateBuilding(createableBuildings[index]);
             currentTile.buildingHere.OnEnterBehaviour(this);
         }

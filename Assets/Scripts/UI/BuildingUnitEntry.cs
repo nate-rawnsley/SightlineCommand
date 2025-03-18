@@ -43,7 +43,7 @@ public class BuildingUnitEntry : MonoBehaviour {
 
     public void SelectUnit() {
         building.OnExitBehaviour(unit);
-        gameCursor.UnitClickBehaviour(unit);
         buildPanel.HidePanel();
+        gameCursor.UnitClickBehaviour(unit);
     }
 }

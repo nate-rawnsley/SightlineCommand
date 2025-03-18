@@ -26,9 +26,8 @@ public class BuyMenu : MonoBehaviour {
     }
 
     public void OptionSelected(UnitShopValue unitVals) {
-        if (building.BuyUnit(unitVals)) {
+        building.BuyUnit(unitVals);
             HideMenu();
-        }
         //add need more tokens indicator
     }
 
