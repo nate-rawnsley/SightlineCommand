@@ -8,7 +8,9 @@ public class GameUI : MonoBehaviour {
     [SerializeField]
     private TextMeshProUGUI teamDisplay;
     [SerializeField]
-    private Image teamBackground;
+    private TextMeshProUGUI statsDisplay;
+    [SerializeField]
+    private Image[] teamBackgrounds;
     [SerializeField]
     private TextMeshProUGUI winDisplay;
 
@@ -35,8 +37,18 @@ public class GameUI : MonoBehaviour {
     public void UpdateTeamDisplay() {
         TeamUIParams team = teamUI[(int)gameCursor.CurrentTeam];
         teamDisplay.text = $"Team: {team.team}";
-        teamBackground.sprite = team.background;
+        foreach (var background in teamBackgrounds) {
+            background.sprite = team.background;
+        }
         teamDisplay.color = team.textColor;
+        statsDisplay.color = team.textColor;
+        UpdateStats();
+    }
+
+    public void UpdateStats() {
+        int material = GameManager.instance.players[gameCursor.CurrentTeam].material;
+        int tokens = GameManager.instance.players[gameCursor.CurrentTeam].troopTokens;
+        statsDisplay.text = $"Material: {material}\nUnit Tokens: {tokens}";
     }
 
     public void EndTurn() {
@@ -58,6 +70,7 @@ public class GameUI : MonoBehaviour {
         turnPanel.SetActive(true);
         buildingPanel.SetActive(false);
         winPanel.SetActive(false);
+        UpdateTeamDisplay();
     }
 
     public void DisplayGameOver(PlayerTeam defeatedTeam) {

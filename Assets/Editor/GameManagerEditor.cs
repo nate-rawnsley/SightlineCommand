@@ -74,5 +74,13 @@ public class GameManagerEditor : Editor {
             }
         }
         EditorGUILayout.EndHorizontal();
+
+        if (GUILayout.Button("Reduce human material", GUILayout.Height(25))) {
+            script.UseMaterial(PlayerTeam.HUMAN, 5);
+        }
+        if (GUILayout.Button("Reduce human tokens", GUILayout.Height(25)))
+        {
+            script.UseTokens(PlayerTeam.HUMAN, 1);
+        }
     }
 }

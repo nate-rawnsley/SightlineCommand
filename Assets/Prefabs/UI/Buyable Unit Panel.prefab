@@ -198,7 +198,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Cost:     0 gold
+  m_text: 'Cost:     0 tokens
 
     Speed:  0 turn(s)'
   m_isRightToLeft: 0

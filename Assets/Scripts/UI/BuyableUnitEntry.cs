@@ -19,7 +19,7 @@ public class BuyableUnitEntry : MonoBehaviour {
         unitName.text = unit.displayName;
         unitStats.text = $"Attack: {unit.Damage}    Range: {unit.AttackRange}\n" +
             $"Health: {unit.MaxHealth}    Moves: {unit.MaxMovement}";
-        buyStats.text = $"Cost:     {newShopValue.price} gold\nSpeed:  {newShopValue.createSpeed} turn(s)";
+        buyStats.text = $"Cost:     {newShopValue.price} tokens\nSpeed:  {newShopValue.createSpeed} turn(s)";
 
         buyMenu = source;
     }

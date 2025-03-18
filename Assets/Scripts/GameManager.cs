@@ -77,4 +77,22 @@ public class GameManager : MonoBehaviour {
     public void EndGame(PlayerTeam defeatedTeam) {
         gameUI.DisplayGameOver(defeatedTeam);
     }
+
+    public bool UseMaterial(PlayerTeam team, int material) {
+        if (players[team].material >= material) {
+            players[team].material -= material;
+            gameUI.UpdateStats();
+            return true;
+        }
+        return false;
+    }
+
+    public bool UseTokens(PlayerTeam team, int tokens) {
+        if (players[team].troopTokens >= tokens) {
+            players[team].troopTokens -= tokens;
+            gameUI.UpdateStats();
+            return true;
+        }
+        return false;
+    }
 }
