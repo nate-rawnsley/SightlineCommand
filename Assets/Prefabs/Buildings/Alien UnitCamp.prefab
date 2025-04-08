@@ -100,6 +100,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Alien UnitCamp
       objectReference: {fileID: 0}
+    - target: {fileID: 8810305986892400634, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
