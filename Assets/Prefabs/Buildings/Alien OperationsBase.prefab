@@ -240,19 +240,13 @@ MonoBehaviour:
   buildingName: Forward Operations Base
   toolTip: The heart of the alien army. Keep this alive and use it to spawn troops.
   command: Spawn Troop
-  availableUnits:
-  - unitPrefab: {fileID: 39589110105085414, guid: b7cae24eb92fd8c4caa924588987f263, type: 3}
-    price: 4
-    createSpeed: 1
-  - unitPrefab: {fileID: 39589110105085414, guid: d165fc284cb78eb428136ee8d0191c3b, type: 3}
-    price: 3
-    createSpeed: 1
   unitsHere: []
   tile: {fileID: 0}
   unitInCreation: {fileID: 0}
   turnsToCreate: 0
   health: 0
   buyMenu: {fileID: 8942280044256999528, guid: a49a25bba7e36fb4689fb23451ac2e3f, type: 3}
+  availableUnits: {fileID: 11400000, guid: 8ffeea12f82f224498ca3239f9a3ed29, type: 2}
 --- !u!1001 &4317637540446626273
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -236,22 +236,12 @@ MonoBehaviour:
   buildingName: Forward Operations Base
   toolTip: The heart of the human army. Keep this alive and use it to spawn troops.
   command: Spawn Troop
-  availableUnits:
-  - unitPrefab: {fileID: 3734930054502818528, guid: 5a51f050645416f40b22c2041806e27e, type: 3}
-    price: 5
-    createSpeed: 2
-  - unitPrefab: {fileID: 3734930054502818528, guid: 08d19b3794c6cca478ecb391cc4c65f1, type: 3}
-    price: 4
-    createSpeed: 1
-  - unitPrefab: {fileID: 3734930054502818528, guid: 74318742dd9b0c24d8ac2cf297a64c1b, type: 3}
-    price: 3
-    createSpeed: 1
   unitsHere: []
   tile: {fileID: 0}
   unitInCreation: {fileID: 0}
   turnsToCreate: 0
   health: 0
-  buyMenu: {fileID: 8942280044256999528, guid: a49a25bba7e36fb4689fb23451ac2e3f, type: 3}
+  availableUnits: {fileID: 11400000, guid: 35a57f8aff6db7c4f9b2cb0ef9ef875a, type: 2}
 --- !u!1001 &4317637540446626273
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,27 +11,29 @@ public class GameUI : MonoBehaviour {
     [SerializeField]
     private TextMeshProUGUI statsDisplay;
     [SerializeField]
-    private Image[] teamBackgrounds;
-    [SerializeField]
     private TextMeshProUGUI winDisplay;
-    
+    [SerializeField]
+    private BuyMenu buyMenu;
+
 
     private GameCursor gameCursor;
 
+    [Header("Team UI")]
     [SerializeField]
-    private TeamUIParams[] teamUI = new TeamUIParams[2];
+    private TeamUIParams humanUI;
+    [SerializeField]
+    private TeamUIParams alienUI;
+    [SerializeField]
+    private Image[] teamBackgrounds;
+    [SerializeField]
+    private TextMeshProUGUI[] teamText;
+    [SerializeField]
+    private Image[] teamButtons;
 
     private GameObject turnPanel;
     public GameObject buildingPanel;
     private GameObject winPanel;
-    [SerializeField]
-    private BuyMenu buyMenu;
-
-    private void Start() {
-        turnPanel = transform.Find("Turn Panel").gameObject;
-        winPanel = transform.Find("Game End Panel").gameObject;
-        gameCursor = GameManager.Instance.gameCursor;
-    }
+    
 
     public void UpdateModeDisplay(int modeIndex) {
         gameCursor.SetBehaviour(modeIndex);
@@ -39,13 +41,17 @@ public class GameUI : MonoBehaviour {
     }
 
     public void UpdateTeamDisplay() {
-        TeamUIParams team = teamUI[(int)gameCursor.CurrentTeam];
-        teamDisplay.text = $"Team: {team.team}";
+        TeamUIParams team = gameCursor.CurrentTeam == PlayerTeam.HUMAN ? humanUI : alienUI;
+        teamDisplay.text = $"Team: {team.teamName}";
         foreach (var background in teamBackgrounds) {
             background.sprite = team.background;
         }
-        teamDisplay.color = team.textColor;
-        statsDisplay.color = team.textColor;
+        foreach (var text in teamText) {
+            text.color = team.textColor;
+        }
+        foreach (var button in teamButtons) {
+            button.color = team.buttonColor;
+        }
         UpdateStats();
     }
 
@@ -71,6 +77,9 @@ public class GameUI : MonoBehaviour {
     }
 
     public void GameStart() {
+        turnPanel = transform.Find("Turn Panel").gameObject;
+        winPanel = transform.Find("Game End Panel").gameObject;
+        gameCursor = GameManager.Instance.gameCursor;
         turnPanel.SetActive(true);
         buildingPanel.SetActive(false);
         winPanel.SetActive(false);
