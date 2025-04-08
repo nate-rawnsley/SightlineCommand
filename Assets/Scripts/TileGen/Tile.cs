@@ -12,13 +12,14 @@ public class Tile : MonoBehaviour {
     private GameObject decoration;
 
     private Renderer thisRenderer;
-    private bool lerpingColour;
-    private float lerpTime;
+    public bool lerpingColour;
+    public bool highlighted;
+    public float lerpTime;
 
     public Vector2 coords;
 
     private void Awake() {
-        thisRenderer = GetComponent<Renderer>();
+        thisRenderer = transform.Find("TileMesh").GetComponent<Renderer>();
     }
 
     public void OnDestroy() {
@@ -32,7 +33,7 @@ public class Tile : MonoBehaviour {
             Destroy(decoration);
             decoration = null;
         }
-        GetComponent<Renderer>().material = terrainType.material;
+        thisRenderer.material = terrainType.material;
         if (terrainType.decorations.Count > 0) {
             if (Random.value <= terrainType.decorationFrequency) {
                 int index = Random.Range(0, terrainType.decorations.Count);
@@ -58,7 +59,8 @@ public class Tile : MonoBehaviour {
         
 
         buildingHere = Instantiate(building.gameObject, transform).GetComponent<Building>();
-        Debug.Log(buildingHere);
+        buildingHere.tile = this;
+        FindObjectOfType<GameManager>().players[building.team].buildings.Add(buildingHere);
     }
 
     public void DisplayColour(Color color) {

@@ -404,7 +404,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -538,17 +539,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee157710cce864d439eff23d517a8d18, type: 3}
---- !u!114 &132739473 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1895032717227715728, guid: ee157710cce864d439eff23d517a8d18, type: 3}
-  m_PrefabInstance: {fileID: 132739472}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f995827b6fd1121438655d1555688e06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &468453444
 GameObject:
   m_ObjectHideFlags: 0
@@ -1257,7 +1247,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1480,7 +1471,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1784,7 +1776,6 @@ MonoBehaviour:
   terrainSelect: {fileID: 99167084}
   editorCursor: {fileID: 1125465673}
   nameInput: {fileID: 505972529}
-  gameManager: {fileID: 132739473}
   terrains: []
 --- !u!4 &999229358
 Transform:
@@ -1989,7 +1980,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -2275,8 +2267,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115e83f5b0f385447adfcbd0ac761aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 132739473}
-  tilePrefab: {fileID: 4047877363848570344, guid: c7025e8c1dbb4ab48b0ae9cb24474d07, type: 3}
   terrainTypes:
   - name: Grass
     material: {fileID: 2100000, guid: efa91acd5cb6fcd4baf5461cced8a77b, type: 2}
@@ -2294,9 +2284,11 @@ MonoBehaviour:
   gapScale: 1.025
   width: 10
   height: 10
+  humanFOB: {fileID: 0}
+  alienFOB: {fileID: 0}
+  testUnits: 0
   Humanunit: {fileID: 0}
   Alienunit: {fileID: 0}
-  testUnits: 0
   testSoldierAmount: 0
   testAlienAmount: 0
 --- !u!1 &1688140080

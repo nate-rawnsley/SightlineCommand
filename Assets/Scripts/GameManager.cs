@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static GameCursor;
 
 public enum PlayerTeam {
     HUMAN,
@@ -10,19 +9,25 @@ public enum PlayerTeam {
 /// <summary>
 /// This class holds data relating the game, most prominently the stats of both players.
 /// It is a MonoBehaviour, a component of the 'Game Manager' object in the scene.
+/// It is also a singleton, with one instance that is publically available and static.
 /// </summary>
 public class GameManager : MonoBehaviour {
-    [SerializeField]
-    private GridGenerator gridGenerator;
+    public static GameManager Instance {  get; private set; }
 
-    [SerializeField]
-    private GameCursor gameCursor;
-
-    [SerializeField]
-    private GameUI gameUI;
+    public GridGenerator gridGenerator;
+    public GameCursor gameCursor;
+    public GameUI gameUI;
 
     public Dictionary<PlayerTeam, PlayerStats> players = new Dictionary<PlayerTeam, PlayerStats>();
     public Tile[,] tiles;
+
+    private void Awake() {
+        if (Instance == null) {
+            Instance = this;
+        } else if (Instance != this) {
+            Destroy(this);
+        }
+    }
 
     private void Start() {
         StartGame();
@@ -40,9 +45,8 @@ public class GameManager : MonoBehaviour {
 
     public void RestartGame() {
         gameCursor.CurrentTeam = PlayerTeam.HUMAN;
-        gameCursor.currentMode = UnitMode.None;
         gameCursor.CLEARALL();
-        gameUI.UpdateModeDisplay();
+        gameUI.UpdateModeDisplay(0);
         gameUI.UpdateTeamDisplay();
         players[PlayerTeam.HUMAN].Destroy();
         players[PlayerTeam.ALIEN].Destroy();
@@ -51,14 +55,42 @@ public class GameManager : MonoBehaviour {
     }
 
     public void StartGame() {
-        players[PlayerTeam.HUMAN] = new PlayerStats(PlayerTeam.HUMAN);
-        players[PlayerTeam.ALIEN] = new PlayerStats(PlayerTeam.ALIEN);
-        players[PlayerTeam.HUMAN].otherPlayer = players[PlayerTeam.ALIEN];
-        players[PlayerTeam.ALIEN].otherPlayer = players[PlayerTeam.HUMAN];
+        PlayerStats humanStats = new PlayerStats(PlayerTeam.HUMAN);
+        PlayerStats alienStats = new PlayerStats(PlayerTeam.ALIEN);
+        humanStats.otherPlayer = alienStats;
+        alienStats.otherPlayer = humanStats;
+        players[PlayerTeam.HUMAN] = humanStats;
+        players[PlayerTeam.ALIEN] = alienStats;
+        if (gameUI != null) {
+            gameUI.GameStart();
+        }
+        
         gridGenerator.GenerateGrid();
     }
 
     public void NewTurn(PlayerTeam team) {
         players[team].StartTurn();
+    }
+
+    public void EndGame(PlayerTeam defeatedTeam) {
+        gameUI.DisplayGameOver(defeatedTeam);
+    }
+
+    public bool UseMaterial(PlayerTeam team, int material) {
+        if (players[team].material >= material) {
+            players[team].material -= material;
+            gameUI.UpdateStats();
+            return true;
+        }
+        return false;
+    }
+
+    public bool UseTokens(PlayerTeam team, int tokens) {
+        if (players[team].troopTokens >= tokens) {
+            players[team].troopTokens -= tokens;
+            gameUI.UpdateStats();
+            return true;
+        }
+        return false;
     }
 }

@@ -2,8 +2,7 @@ using TMPro;
 using UnityEngine;
 
 public class GameCursor : CursorControls {
-    [SerializeField]
-    private Unit activeUnit = null;
+    public Unit activeUnit = null;
     private Unit EnemyUnit;
 
     public PlayerTeam CurrentTeam;
@@ -13,17 +12,17 @@ public class GameCursor : CursorControls {
     public enum UnitMode { None, Attack, Move, Build, End}
     public UnitMode currentMode = UnitMode.None;
 
-    [SerializeField]
-    private BuildingPanel buildingPanel;
+   private BuildingPanel buildingPanel;
 
-    [SerializeField]
-    private GameManager gameStats;
+    private void Start() {
+        buildingPanel = GameManager.Instance.gameUI.buildingPanel.GetComponent<BuildingPanel>();
+    }
 
     public override void UnitClickBehaviour(Unit unit) {
         if (buildingPanel.gameObject.activeSelf) {
             buildingPanel.HidePanel();
         }
-        if (activeUnit == null && currentMode != UnitMode.None) {
+        if (activeUnit == null && currentMode != UnitMode.None && unit.Health != 0) {
             activeUnit = unit;
             //HasSelection = false  -- N - This was replaced by checking activeUnit == null instead
             Values = unit.valuesText;
@@ -48,7 +47,7 @@ public class GameCursor : CursorControls {
                     case UnitMode.Move:
                         Debug.Log("click");
                         Values.text = unit.CurrentMove.ToString();
-                        if (activeUnit.CurrentMove != 0)
+                        if (activeUnit.CurrentMove > 0)
                         {
                             unit.BeginMove();
                             Debug.Log("DID MOVE");
@@ -90,11 +89,11 @@ public class GameCursor : CursorControls {
             switch (currentMode) {
                 case UnitMode.Attack:
                     if (tile.unitHere && activeUnit.enemiesInSight.Contains(tile.unitHere)) {
-                        activeUnit.EndTargeting(activeUnit.currentTile, activeUnit.AttackRange, true);
+                        activeUnit.Attack(tile.transform.position);
                         doDamage(tile);
                         acted = true;
                     } else if (tile.buildingHere && activeUnit.buildingsInSight.Contains(tile.buildingHere)) {
-                        activeUnit.EndTargeting(activeUnit.currentTile, activeUnit.AttackRange, true);
+                        activeUnit.Attack(tile.transform.position);
                         DamageBuilding(tile.buildingHere);
                         acted = true;
                     }
@@ -123,7 +122,7 @@ public class GameCursor : CursorControls {
 
     protected override void BuildingClickBehaviour(Building building) {
         if (currentMode == UnitMode.Attack && activeUnit && activeUnit.team != building.team) {
-            activeUnit.EndTargeting(activeUnit.currentTile, activeUnit.AttackRange, true);
+            activeUnit.Attack(building.tile.transform.position);
             DamageBuilding(building);
             CLEARALL();
             return;
@@ -131,13 +130,19 @@ public class GameCursor : CursorControls {
         if (buildingPanel.gameObject.activeSelf) {
             buildingPanel.HidePanel();
         }
-        if (activeUnit == null) {
+        if (activeUnit == null && building.team == CurrentTeam) {
             buildingPanel.SetBuilding(building);
         } else {
             TileClickBehaviour(building.tile);
         }
         
     }
+
+    //protected override void TileHoverBehaviour(Tile tile) {
+    //    if (activeUnit != null && currentMode == UnitMode.Attack) { 
+    //        activeUnit.HighlightTile(tile);
+    //    }
+    //}
 
     protected override void RightClickBehaviour()
     {
@@ -175,13 +180,13 @@ public class GameCursor : CursorControls {
     {
         CLEARALL();
         CurrentTeam = CurrentTeam == PlayerTeam.HUMAN ? PlayerTeam.ALIEN : PlayerTeam.HUMAN;
-        gameStats.NewTurn(CurrentTeam);
+        GameManager.Instance.NewTurn(CurrentTeam);
     }
 
     public void CLEARALL()
     {
         if (activeUnit != null) {
-            activeUnit.EndTargeting(activeUnit.currentTile, activeUnit.AttackRange, true);
+            activeUnit.EndTargeting();
             activeUnit = null;       //Clears all selections                                       
             Values.text = "";
             Values = null;

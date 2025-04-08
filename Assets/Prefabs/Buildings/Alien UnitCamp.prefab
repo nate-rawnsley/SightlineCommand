@@ -21,13 +21,49 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: availableUnits
+      value: 
+      objectReference: {fileID: 11400000, guid: 8ffeea12f82f224498ca3239f9a3ed29, type: 2}
+    - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: availableUnits.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: availableUnits.Array.data[0].price
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: availableUnits.Array.data[1].price
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: availableUnits.Array.data[2].price
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       propertyPath: availableUnits.Array.data[0].unitPrefab
       value: 
-      objectReference: {fileID: 940255228191217076, guid: 36ff0dfa82ccbe44cbfe66d7379fe4ff, type: 3}
+      objectReference: {fileID: 39589110105085414, guid: b7cae24eb92fd8c4caa924588987f263, type: 3}
     - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       propertyPath: availableUnits.Array.data[1].unitPrefab
       value: 
-      objectReference: {fileID: 7367183044799343249, guid: 81f9e07495f04594ba22f47056a01f92, type: 3}
+      objectReference: {fileID: 39589110105085414, guid: d165fc284cb78eb428136ee8d0191c3b, type: 3}
+    - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: availableUnits.Array.data[2].unitPrefab
+      value: 
+      objectReference: {fileID: 39589110105085414, guid: b7cae24eb92fd8c4caa924588987f263, type: 3}
+    - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: availableUnits.Array.data[0].createSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: availableUnits.Array.data[1].createSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: availableUnits.Array.data[2].createSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3052113932177222970, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -71,6 +107,10 @@ PrefabInstance:
     - target: {fileID: 8503684528012979269, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       propertyPath: m_Name
       value: Alien UnitCamp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8810305986892400634, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
