@@ -26,11 +26,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       propertyPath: availableUnits.Array.data[0].price
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       propertyPath: availableUnits.Array.data[1].price
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       propertyPath: availableUnits.Array.data[2].price
@@ -39,18 +39,22 @@ PrefabInstance:
     - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       propertyPath: availableUnits.Array.data[0].unitPrefab
       value: 
-      objectReference: {fileID: 7367183044799343249, guid: 81f9e07495f04594ba22f47056a01f92, type: 3}
+      objectReference: {fileID: 39589110105085414, guid: b7cae24eb92fd8c4caa924588987f263, type: 3}
     - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       propertyPath: availableUnits.Array.data[1].unitPrefab
       value: 
-      objectReference: {fileID: 39589110105085414, guid: b7cae24eb92fd8c4caa924588987f263, type: 3}
+      objectReference: {fileID: 39589110105085414, guid: d165fc284cb78eb428136ee8d0191c3b, type: 3}
     - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       propertyPath: availableUnits.Array.data[2].unitPrefab
       value: 
       objectReference: {fileID: 39589110105085414, guid: b7cae24eb92fd8c4caa924588987f263, type: 3}
     - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       propertyPath: availableUnits.Array.data[0].createSpeed
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: availableUnits.Array.data[1].createSpeed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       propertyPath: availableUnits.Array.data[2].createSpeed

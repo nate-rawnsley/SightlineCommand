@@ -18,8 +18,8 @@ public class BuildingUnitEntry : MonoBehaviour {
     private BuildingPanel buildPanel;
     private RectTransform rect;
 
-    private void Awake() {
-        gameCursor = Camera.main.GetComponent<GameCursor>();
+    private void Start() {
+        gameCursor = GameManager.Instance.gameCursor;
         rect = GetComponent<RectTransform>();
     }
 

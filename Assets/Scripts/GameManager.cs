@@ -12,32 +12,24 @@ public enum PlayerTeam {
 /// It is also a singleton, with one instance that is publically available and static.
 /// </summary>
 public class GameManager : MonoBehaviour {
-    public static GameManager instance {  get; private set; }
+    public static GameManager Instance {  get; private set; }
 
-    private GridGenerator gridGenerator;
-    private GameCursor gameCursor;
-    private GameUI gameUI;
+    public GridGenerator gridGenerator;
+    public GameCursor gameCursor;
+    public GameUI gameUI;
 
     public Dictionary<PlayerTeam, PlayerStats> players = new Dictionary<PlayerTeam, PlayerStats>();
     public Tile[,] tiles;
 
     private void Awake() {
-        if (instance == null) {
-            instance = this;
-        } else if (instance != this) {
+        if (Instance == null) {
+            Instance = this;
+        } else if (Instance != this) {
             Destroy(this);
         }
     }
 
     private void Start() {
-        gridGenerator = FindObjectOfType<GridGenerator>();
-        gameCursor = FindObjectOfType<GameCursor>();
-        gameUI = FindObjectOfType<GameUI>();
-        if (gameUI != null) {
-            gameUI.gameCursor = gameCursor;
-            gameCursor.buildingPanel = gameUI.buildingPanel.GetComponent<BuildingPanel>();
-        }
-        
         StartGame();
     }
 

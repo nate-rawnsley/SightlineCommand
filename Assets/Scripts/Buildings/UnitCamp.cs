@@ -4,17 +4,12 @@ using UnityEngine;
 
 public class UnitCamp : Building {
     [SerializeField] private GameObject buyMenu;
-    private GameObject canvas;
-    private GameObject menuInstance;
+
+    [Header("Units sold here"), SerializeField]
+    public List<UnitShopValue> availableUnits = new List<UnitShopValue>();
 
     public override bool ActivateBehaviour() {
-        if (menuInstance == null) {
-            canvas = GameObject.FindGameObjectWithTag("MainCanvas");
-            menuInstance = Instantiate(buyMenu, canvas.transform);
-            menuInstance.GetComponent<BuyMenu>().Initialize(this);
-        } else {
-            menuInstance.SetActive(true);
-        }
+        GameManager.Instance.gameUI.ShowBuyMenu(this);
         return true;
     }
 }

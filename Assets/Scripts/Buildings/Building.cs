@@ -15,9 +15,6 @@ public abstract class Building : MonoBehaviour {
     public string toolTip;
     public string command;
 
-    [Header("Units sold here (if applicable)"), SerializeField]
-    public List<UnitShopValue> availableUnits = new List<UnitShopValue>();
-
     [HideInInspector] public List<Unit> unitsHere;
     [HideInInspector] public Tile tile;
 
@@ -50,7 +47,7 @@ public abstract class Building : MonoBehaviour {
                 OnExitBehaviour(unit); //All units exit when this is destroyed.
             }
         }
-        GameManager.instance.players[team].buildings.Remove(this);
+        GameManager.Instance.players[team].buildings.Remove(this);
         Destroy(gameObject);
     }
 
@@ -78,7 +75,7 @@ public abstract class Building : MonoBehaviour {
     }
 
     public bool BuyUnit(UnitShopValue unitVals) {
-        if (unitInCreation == null && GameManager.instance.UseTokens(team, unitVals.price)) {
+        if (unitInCreation == null && GameManager.Instance.UseTokens(team, unitVals.price)) {
             unitInCreation = unitVals.unitPrefab;
             turnsToCreate = unitVals.createSpeed;
             createIndicator.gameObject.SetActive(true);
@@ -89,7 +86,7 @@ public abstract class Building : MonoBehaviour {
     }
 
     public void NewTurn() {
-        GameManager.instance.players[team].troopTokens++;
+        GameManager.Instance.players[team].troopTokens++;
         if (unitInCreation != null) {
             Debug.Log(turnsToCreate);
             turnsToCreate--;

@@ -65,7 +65,7 @@ public class Unit : MonoBehaviour
     {
         tile.unitHere = this;
 
-        GameManager.instance.players[team].units.Add(this);
+        GameManager.Instance.players[team].units.Add(this);
 
         scale = tile.transform.localScale.x;
         unitScale = transform.localScale * scale * 0.5f;
@@ -280,7 +280,7 @@ public class Unit : MonoBehaviour
     //Creating buildings////////////////////////////////////// Done by Nate
 
     public void CreateBuilding(int index) {
-        if (canBuild && GameManager.instance.UseMaterial(team, 50)) {
+        if (canBuild && GameManager.Instance.UseMaterial(team, 50)) {
             currentTile.CreateBuilding(createableBuildings[index]);
             currentTile.buildingHere.OnEnterBehaviour(this);
         }

@@ -62,7 +62,7 @@ public class GridGenerator : MonoBehaviour {
     
 
     public void GenerateGrid() {
-        GameManager.instance.SetGridSize(width, height);
+        GameManager.Instance.SetGridSize(width, height);
 
         Vector3 position = new Vector3(0, 0, 0);
 
@@ -80,7 +80,7 @@ public class GridGenerator : MonoBehaviour {
                 gridTile.transform.localScale = new Vector3(scale, scale, scale);
 
                 Tile tileScript = gridTile.AddComponent<Tile>();
-                GameManager.instance.tiles[x,z] = tileScript;
+                GameManager.Instance.tiles[x,z] = tileScript;
 
                 if (loadedTiles != null) {
                     tileScript.terrainType = terrainTypes[loadedTiles[x, z]];
@@ -93,24 +93,24 @@ public class GridGenerator : MonoBehaviour {
 
             }
         }
-        foreach (Tile tile in GameManager.instance.tiles) {
+        foreach (Tile tile in GameManager.Instance.tiles) {
             int x = (int)tile.coords.x;
             int z = (int)tile.coords.y;
             Vector2 index = new Vector2(x, z);
 
             if (x > 0) {
-                AddAdjacentTiles(tile, GameManager.instance.tiles[x - 1, z]);
+                AddAdjacentTiles(tile, GameManager.Instance.tiles[x - 1, z]);
             }
             if (z > 0) {
-                AddAdjacentTiles(tile, GameManager.instance.tiles[x, z - 1]);
+                AddAdjacentTiles(tile, GameManager.Instance.tiles[x, z - 1]);
             }
             if (z % 2 == 0) {
                 if (z > 0 && x > 0) {
-                    AddAdjacentTiles(tile, GameManager.instance.tiles[x - 1, z - 1]);
+                    AddAdjacentTiles(tile, GameManager.Instance.tiles[x - 1, z - 1]);
                 }
             } else {
                 if (z > 0 && x < width - 1) {
-                    AddAdjacentTiles(tile, GameManager.instance.tiles[x + 1, z - 1]);
+                    AddAdjacentTiles(tile, GameManager.Instance.tiles[x + 1, z - 1]);
                 }
             }
         }
@@ -124,16 +124,16 @@ public class GridGenerator : MonoBehaviour {
             {
                 GameObject FriendObj = Instantiate(Humanunit);
                 Humanunit.name = ("Soldier" + p).ToString();
-                FriendObj.GetComponent<Unit>().UnitSpawn(GameManager.instance.tiles[0, p]);
+                FriendObj.GetComponent<Unit>().UnitSpawn(GameManager.Instance.tiles[0, p]);
             }
             for (int e = 0; e < testAlienAmount; e++) {
                 GameObject EnemyObj = Instantiate(Alienunit);
                 Alienunit.name = ("Alien" + e).ToString();
-                EnemyObj.GetComponent<Unit>().UnitSpawn(GameManager.instance.tiles[width - 1, e]);
+                EnemyObj.GetComponent<Unit>().UnitSpawn(GameManager.Instance.tiles[width - 1, e]);
             }
         } else {
-            GameManager.instance.tiles[0, 0].CreateBuilding(humanFOB);
-            GameManager.instance.tiles[width-1, height-1].CreateBuilding(alienFOB);
+            GameManager.Instance.tiles[0, 0].CreateBuilding(humanFOB);
+            GameManager.Instance.tiles[width-1, height-1].CreateBuilding(alienFOB);
         }
     }
 

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BuyMenu : MonoBehaviour {
@@ -7,11 +8,11 @@ public class BuyMenu : MonoBehaviour {
     [SerializeField]
     private Transform scrollContent;
 
-    public Building building;
+    public UnitCamp building;
 
-    public void Initialize(Building source) {
+    public void Initialize(UnitCamp source) {
         building = source;
-        for (int i = 0; i < building.availableUnits.Count; i++) {
+        for (int i = 0; i < building.availableUnits.Count; i++) { 
             GameObject newEntry = Instantiate(buyableUnitEntry);
             newEntry.transform.SetParent(scrollContent, true);
 

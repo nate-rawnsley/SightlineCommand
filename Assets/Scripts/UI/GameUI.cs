@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class GameUI : MonoBehaviour {
     [SerializeField]
@@ -13,20 +14,23 @@ public class GameUI : MonoBehaviour {
     private Image[] teamBackgrounds;
     [SerializeField]
     private TextMeshProUGUI winDisplay;
+    
 
-    [HideInInspector] public GameCursor gameCursor;
+    private GameCursor gameCursor;
 
     [SerializeField]
     private TeamUIParams[] teamUI = new TeamUIParams[2];
 
     private GameObject turnPanel;
-    [HideInInspector] public GameObject buildingPanel;
+    public GameObject buildingPanel;
     private GameObject winPanel;
+    [SerializeField]
+    private BuyMenu buyMenu;
 
-    private void Awake() {
+    private void Start() {
         turnPanel = transform.Find("Turn Panel").gameObject;
-        buildingPanel = transform.Find("Building Panel").gameObject;
         winPanel = transform.Find("Game End Panel").gameObject;
+        gameCursor = GameManager.Instance.gameCursor;
     }
 
     public void UpdateModeDisplay(int modeIndex) {
@@ -46,8 +50,8 @@ public class GameUI : MonoBehaviour {
     }
 
     public void UpdateStats() {
-        int material = GameManager.instance.players[gameCursor.CurrentTeam].material;
-        int tokens = GameManager.instance.players[gameCursor.CurrentTeam].troopTokens;
+        int material = GameManager.Instance.players[gameCursor.CurrentTeam].material;
+        int tokens = GameManager.Instance.players[gameCursor.CurrentTeam].troopTokens;
         statsDisplay.text = $"Material: {material}\nUnit Tokens: {tokens}";
     }
 
@@ -73,6 +77,12 @@ public class GameUI : MonoBehaviour {
         UpdateTeamDisplay();
     }
 
+    public void ShowBuyMenu(UnitCamp source) {
+        buyMenu.gameObject.SetActive(true);
+        buyMenu.Initialize(source);
+        buildingPanel.SetActive(false);
+    }
+
     public void DisplayGameOver(PlayerTeam defeatedTeam) {
         turnPanel.SetActive(false);
         winPanel.SetActive(true);
@@ -87,6 +97,6 @@ public class GameUI : MonoBehaviour {
     }
 
     public void RestartGame() {
-        GameManager.instance.RestartGame();
+        GameManager.Instance.RestartGame();
     }
 }

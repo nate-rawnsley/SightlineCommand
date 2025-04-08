@@ -31,7 +31,7 @@ public class EditorFunction : MonoBehaviour {
     }
 
     public string SaveString() {
-        Tile[,] tileData = GameManager.instance.tiles;
+        Tile[,] tileData = GameManager.Instance.tiles;
         string saveString = string.Empty;
         saveString += $"{genUse.scale} {genUse.gapScale} {genUse.width} {genUse.height}\n";
         for (int x = 0; x < tileData.GetLength(0); x++) {
