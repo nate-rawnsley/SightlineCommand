@@ -143,9 +143,14 @@ public class Unit : MonoBehaviour
                 moved = true;
             }
 
-            if (targetTile.buildingHere && targetTile.buildingHere.team == team) {
-                targetTile.buildingHere.OnEnterBehaviour(this);
-                moved = true;
+            if (targetTile.buildingHere) {
+                if (targetTile.buildingHere.team == team) {
+                    targetTile.buildingHere.OnEnterBehaviour(this);
+                    moved = true;
+                }
+                else {
+                    moved = false;
+                }
             }
 
             if (moved) {

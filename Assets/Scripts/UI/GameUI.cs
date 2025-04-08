@@ -89,7 +89,12 @@ public class GameUI : MonoBehaviour {
     public void ShowBuyMenu(UnitCamp source) {
         buyMenu.gameObject.SetActive(true);
         buyMenu.Initialize(source);
-        buildingPanel.SetActive(false);
+        buildingPanel.gameObject.SetActive(false);
+    }
+
+    public void HideBuyMenu() {
+        buildingPanel.gameObject.SetActive(true);
+        buyMenu.HideMenu();
     }
 
     public void DisplayGameOver(PlayerTeam defeatedTeam) {
