@@ -1415,7 +1415,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 10
+    type: 2
     angle: 21.48
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -1502,7 +1502,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1.6478387
+      value: 0.87
       mode: 0
       spread: 0
       speed:
@@ -1731,7 +1731,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 30
+        scalar: 158
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -1795,8 +1795,8 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0.008262634
-          value: 0.92307764
+          time: 0.0033035278
+          value: 0.37352663
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -15470,7 +15470,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8.43, y: 2.5, z: 9.35}
+  m_Size: {x: 21.4, y: 9.54, z: 16.58}
   m_Center: {x: 0, y: 0.6316768, z: 0}
 --- !u!4 &1712879070
 Transform:
