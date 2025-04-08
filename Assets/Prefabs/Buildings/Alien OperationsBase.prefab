@@ -186,6 +186,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Alien OperationsBase
       objectReference: {fileID: 0}
+    - target: {fileID: 8810305986892400634, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
     m_RemovedGameObjects:
