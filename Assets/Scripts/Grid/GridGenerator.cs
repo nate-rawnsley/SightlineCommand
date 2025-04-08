@@ -131,6 +131,8 @@ public class GridGenerator : MonoBehaviour {
                 Alienunit.name = ("Alien" + e).ToString();
                 EnemyObj.GetComponent<Unit>().UnitSpawn(GameManager.Instance.tiles[width - 1, e]);
             }
+            GameManager.Instance.tiles[0, 0].CreateBuilding(humanFOB);
+            GameManager.Instance.tiles[width - 1, height - 1].CreateBuilding(alienFOB);
         } else {
             GameManager.Instance.tiles[0, 0].CreateBuilding(humanFOB);
             GameManager.Instance.tiles[width-1, height-1].CreateBuilding(alienFOB);
