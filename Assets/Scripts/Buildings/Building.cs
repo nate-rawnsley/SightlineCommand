@@ -35,6 +35,10 @@ public abstract class Building : MonoBehaviour {
         createIndicator.gameObject.SetActive(false);
     }
 
+    private void OnDestroy() {
+        GameManager.Instance.players[team].buildings.Remove(this);
+    }
+
     //Returns whether to hide the main buiding menu after.
     public virtual bool ActivateBehaviour() { return false; }
 
@@ -47,7 +51,6 @@ public abstract class Building : MonoBehaviour {
                 OnExitBehaviour(unit); //All units exit when this is destroyed.
             }
         }
-        GameManager.Instance.players[team].buildings.Remove(this);
         Destroy(gameObject);
     }
 

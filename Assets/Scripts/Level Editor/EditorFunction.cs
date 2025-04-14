@@ -3,6 +3,8 @@ using UnityEngine;
 using TMPro;
 
 public class EditorFunction : MonoBehaviour {
+    public static EditorFunction Instance;
+
     public GridGenerator gridGeneratorPrefab;
 
     public GridGenerator genUse;
@@ -15,31 +17,41 @@ public class EditorFunction : MonoBehaviour {
 
     public List<TileTerrain> terrains;
 
+    public TileData[,] tileData;
+
+    private void Awake() {
+        if (Instance == null) { 
+            Instance = this;
+        } else {
+            Destroy(this);
+        }
+        genUse.inEditor = true;
+        GameManager.Instance.editorStart = true;
+    }
+
     private void Start() {
         terrains = gridGeneratorPrefab.terrainTypes;
         List<string> terrainNames = new List<string>();
         foreach (var terrain in terrains) {
-            terrainNames.Add(terrain.name);
+            terrainNames.Add(terrain.terrainName);
         }
         terrainSelect.AddOptions(terrainNames);
         editorCursor.terrainBrush = terrains[0];
-        //gridParent = FindAnyObjectByType<GridParent>();
+        genUse.GenerateGrid();
+        tileData = new TileData[genUse.width, genUse.height];
+        foreach (var tile in GameManager.Instance.tiles) {
+            var newTileData = new TileData(tile);
+            int x = (int)tile.coords[0];
+            int z = (int)tile.coords[1];
+            tileData[x,z] = newTileData;
+        }
+    }
+
+    public void UpdateTileData(Tile tile) {
+        tileData[(int)tile.coords[0], (int)tile.coords[1]].UpdateTerrain(tile);
     }
 
     public void DropdownValueChanged(int index) {
         editorCursor.terrainBrush = terrains[index];
-    }
-
-    public string SaveString() {
-        Tile[,] tileData = GameManager.Instance.tiles;
-        string saveString = string.Empty;
-        saveString += $"{genUse.scale} {genUse.gapScale} {genUse.width} {genUse.height}\n";
-        for (int x = 0; x < tileData.GetLength(0); x++) {
-            for (int z = 0; z < tileData.GetLength(1) - 1; z++) {
-                saveString += tileData[x, z].terrainType.editorIndex + " ";
-            }
-            saveString += tileData[x, tileData.GetLength(1) - 1].terrainType.editorIndex + "\n";
-        }
-        return saveString;
     }
 }

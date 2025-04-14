@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour {
     public Dictionary<PlayerTeam, PlayerStats> players = new Dictionary<PlayerTeam, PlayerStats>();
     public Tile[,] tiles;
 
+    [HideInInspector]
+    public bool editorStart = false;
+
     private void Awake() {
         if (Instance == null) {
             Instance = this;
@@ -65,7 +68,9 @@ public class GameManager : MonoBehaviour {
             gameUI.GameStart();
         }
         
-        gridGenerator.GenerateGrid();
+        if (!editorStart) {
+            gridGenerator.GenerateGrid();
+        }
     }
 
     public void NewTurn(PlayerTeam team) {

@@ -298,4 +298,8 @@ public class Unit : MonoBehaviour
         CurrentAttacks = MaxAttack;
         CurrentMoveableCol = moveableCol[0];
     }
+
+    private void OnDestroy() {
+        GameManager.Instance.players[team].units.Remove(this);
+    }
 }

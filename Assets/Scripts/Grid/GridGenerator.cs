@@ -6,8 +6,8 @@ public class GridGenerator : MonoBehaviour {
     public List<TileTerrain> terrainTypes = new List<TileTerrain>();
 
     [SerializeField, Tooltip("Which level to load. Leave blank if you want to randomly generate a new one with below paramters.")]
-    private TextAsset levelSave;
-    private int[,] loadedTiles;
+    private LevelSave levelSave;
+    private TileData[,] loadedTiles;
 
     [SerializeField, Tooltip("How big each tile is."), Range(0.1f, 10)]
     public float scale = 1;
@@ -40,22 +40,22 @@ public class GridGenerator : MonoBehaviour {
 
     private GameObject gridParent;
 
+    [HideInInspector]
+    public bool inEditor = false;
+
     private void Awake() {
         if (levelSave != null) {
-            string[] rawLines = levelSave.text.Split('\n');
-            string[] rawParamters = rawLines[0].Split(' ');
-            scale = float.Parse(rawParamters[0]);
-            gapScale = float.Parse(rawParamters[1]);
-            width = int.Parse(rawParamters[2]);
-            height = int.Parse(rawParamters[3]);
-            loadedTiles = new int[width, height];
-            for (int i = 0; i < rawLines.Length - 2; i++) {
-                string[] rawValues = rawLines[i + 1].Split(' ');
-                for (int j = 0; j < rawValues.Length; j++) {
-                    loadedTiles[i,j] = int.Parse(rawValues[j]);
-                }
-                
+            scale = levelSave.scale;
+            gapScale = levelSave.gapScale;
+            width = levelSave.width;
+            height = levelSave.height;
+            loadedTiles = new TileData[width,height];
+            foreach (var tile in levelSave.tiles) {
+                int x = (int)tile.coords.x;
+                int z = (int)tile.coords.y;
+                loadedTiles[x, z] = tile;
             }
+            Debug.Log(levelSave.tiles);
         }
         gridParent = new GameObject("Grid");
     }
@@ -83,14 +83,12 @@ public class GridGenerator : MonoBehaviour {
                 GameManager.Instance.tiles[x,z] = tileScript;
 
                 if (loadedTiles != null) {
-                    tileScript.terrainType = terrainTypes[loadedTiles[x, z]];
+                    tileScript.LoadTile(loadedTiles[x, z]);
                 } else {
                     tileScript.terrainType = terrainTypes[Random.Range(0, terrainTypes.Count)];
+                    tileScript.SetTerrain();
                 }
-                tileScript.SetTerrain();
-
                 tileScript.coords = new Vector2(x, z);
-
             }
         }
         foreach (Tile tile in GameManager.Instance.tiles) {
@@ -131,7 +129,7 @@ public class GridGenerator : MonoBehaviour {
                 Alienunit.name = ("Alien" + e).ToString();
                 EnemyObj.GetComponent<Unit>().UnitSpawn(GameManager.Instance.tiles[width - 1, e]);
             }
-        } else {
+        } else if (!inEditor) {
             GameManager.Instance.tiles[0, 0].CreateBuilding(humanFOB);
             GameManager.Instance.tiles[width-1, height-1].CreateBuilding(alienFOB);
         }

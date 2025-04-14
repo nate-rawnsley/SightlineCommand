@@ -8,5 +8,6 @@ public class EditorCursor : CursorControls {
     protected override void TileClickBehaviour(Tile tile) {
         tile.terrainType = terrainBrush;
         tile.SetTerrain();
+        EditorFunction.Instance.UpdateTileData(tile);
     }
 }
