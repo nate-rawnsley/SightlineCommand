@@ -7,8 +7,8 @@ public class TileData {
     public TileTerrain terrainType;
     public GameObject decoration;
     public Vector3 decorationRotation;
-    public Building buildingHere;
-    public Unit unitHere;
+    public GameObject buildingHere;
+    public GameObject unitHere;
     public Vector2 coords;
 
     public TileData(Tile tile) {

@@ -15,7 +15,13 @@ public class EditorFunction : MonoBehaviour {
 
     public TMP_InputField nameInput;
 
+    public List<GameObject> buildings;
+
+    public List<GameObject> units;
+
     public List<TileTerrain> terrains;
+
+    public TileEditorPanel tileEditorPanel;
 
     public TileData[,] tileData;
 
@@ -27,10 +33,10 @@ public class EditorFunction : MonoBehaviour {
         }
         genUse.inEditor = true;
         GameManager.Instance.editorStart = true;
+        terrains = gridGeneratorPrefab.terrainTypes;
     }
 
     private void Start() {
-        terrains = gridGeneratorPrefab.terrainTypes;
         List<string> terrainNames = new List<string>();
         foreach (var terrain in terrains) {
             terrainNames.Add(terrain.terrainName);
@@ -51,7 +57,19 @@ public class EditorFunction : MonoBehaviour {
         tileData[(int)tile.coords[0], (int)tile.coords[1]].UpdateTerrain(tile);
     }
 
-    public void DropdownValueChanged(int index) {
+    public void EditorModeChanged(int index) {
+        terrainSelect.gameObject.SetActive(index == 1);
+        if (index == 1) {
+            tileEditorPanel.HideTile();
+        }
+        editorCursor.mode = (EditorMode)index;
+    }
+
+    public void SelectTile(Tile tile) {
+        tileEditorPanel.ShowTile(tile, tileData[(int)tile.coords[0], (int)tile.coords[1]]);
+    }
+
+    public void TerrainValueChanged(int index) {
         editorCursor.terrainBrush = terrains[index];
     }
 }

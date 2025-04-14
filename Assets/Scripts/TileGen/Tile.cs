@@ -9,7 +9,7 @@ public class Tile : MonoBehaviour {
     public Unit unitHere;
     public bool IsSelected;
     public Building buildingHere;
-    private GameObject decoration;
+    public GameObject decoration;
 
     private Renderer thisRenderer;
     public bool lerpingColour;
@@ -79,10 +79,11 @@ public class Tile : MonoBehaviour {
             decoration.transform.rotation = Quaternion.Euler(loadTile.decorationRotation);
         }
         if (loadTile.buildingHere != null) { 
-            CreateBuilding(loadTile.buildingHere);
+            CreateBuilding(loadTile.buildingHere.GetComponent<Building>());
         }
         if (loadTile.unitHere != null) {
-            loadTile.unitHere.UnitSpawn(this);
+            GameObject unitObj = Instantiate(loadTile.unitHere);
+            unitObj.GetComponent<Unit>().UnitSpawn(this);
         }
     }
 
