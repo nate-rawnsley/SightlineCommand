@@ -1900,6 +1900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainBrush: {fileID: 0}
+  mode: 1
 --- !u!114 &1125465674
 MonoBehaviour:
   m_ObjectHideFlags: 0

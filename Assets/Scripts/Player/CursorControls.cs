@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class CursorControls : MonoBehaviour {
 
     //More efficient ways of doing this can be made later
-    private void Update() {
+    protected virtual void Update() {
         if (Input.GetMouseButtonDown(1)) {
             RightClickBehaviour();
         }
