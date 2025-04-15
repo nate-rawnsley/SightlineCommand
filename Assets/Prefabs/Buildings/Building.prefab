@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 3052113932177222970}
   - component: {fileID: 2412454605390128264}
   - component: {fileID: -6780716543572538985}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Building
   m_TagString: Building
   m_Icon: {fileID: 0}
@@ -402,19 +402,12 @@ MonoBehaviour:
   buildingName: Unit Camp
   toolTip: A bootcamp where you can buy troops.
   command: Spawn troop
-  availableUnits:
-  - unitPrefab: {fileID: 3234725756433866760, guid: 517fab5a9be86c444847490a07dad9c6, type: 3}
-    price: 200
-    createSpeed: 1
-  - unitPrefab: {fileID: 2944488960459763846, guid: 7c42676599fcd1a4ebfda2a17caefb3b, type: 3}
-    price: 400
-    createSpeed: 2
   unitsHere: []
   tile: {fileID: 0}
   unitInCreation: {fileID: 0}
   turnsToCreate: 0
   health: 5
-  buyMenu: {fileID: 8942280044256999528, guid: a49a25bba7e36fb4689fb23451ac2e3f, type: 3}
+  availableUnits: {fileID: 0}
 --- !u!65 &-6780716543572538985
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -500,9 +493,49 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: 6e0e679257287aa49ac97009ba65c468, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -7640558969779515294, guid: 6e0e679257287aa49ac97009ba65c468, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -7146521406498821007, guid: 6e0e679257287aa49ac97009ba65c468, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -6733177361254619370, guid: 6e0e679257287aa49ac97009ba65c468, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: 6e0e679257287aa49ac97009ba65c468, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -1599826595754709761, guid: 6e0e679257287aa49ac97009ba65c468, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -516098083770646512, guid: 6e0e679257287aa49ac97009ba65c468, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6e0e679257287aa49ac97009ba65c468, type: 3}
       propertyPath: m_Name
       value: FOB
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6e0e679257287aa49ac97009ba65c468, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416272007918961125, guid: 6e0e679257287aa49ac97009ba65c468, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8513859187771203891, guid: 6e0e679257287aa49ac97009ba65c468, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

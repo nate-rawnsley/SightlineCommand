@@ -15,6 +15,7 @@ public class TileEditorPanel : MonoBehaviour {
     [SerializeField] private Slider decoRotation;
 
     private Tile currentTile;
+    private bool loadingData;
 
     private void Start() {
         List<string> terrainNames = new List<string>();
@@ -37,6 +38,7 @@ public class TileEditorPanel : MonoBehaviour {
     }
 
     public void ShowTile(Tile tile, TileData tileData) {
+        loadingData = true;
         content.SetActive(true);
         noContent.SetActive(false);
 
@@ -47,6 +49,7 @@ public class TileEditorPanel : MonoBehaviour {
         terrain.value = EditorFunction.Instance.terrains.IndexOf(tile.terrainType);
         building.value = EditorFunction.Instance.buildings.IndexOf(tileData.buildingHere) + 1;
         unit.value = EditorFunction.Instance.units.IndexOf(tileData.unitHere) + 1;
+        loadingData = false;
     }
 
     private void SetDecorationNames() {
@@ -65,7 +68,6 @@ public class TileEditorPanel : MonoBehaviour {
         } else {
             decoRotation.gameObject.SetActive(false);
         }
-        
     }
 
     public void HideTile() {
@@ -74,14 +76,20 @@ public class TileEditorPanel : MonoBehaviour {
     }
 
     public void RotationUpdate(float value) {
+        if (loadingData) { 
+            return;
+        }
         float incValue = Mathf.Round(value / 60) * 60;
         decoRotation.value = incValue;
-        Vector3 newRotation = new Vector3(0, incValue, 0);
-        currentTile.decoration.transform.rotation = Quaternion.Euler(newRotation);
+        currentTile.decoRotation = new Vector3(0, incValue, 0);
+        currentTile.decoration.transform.rotation = Quaternion.Euler(currentTile.decoRotation);
         EditorFunction.Instance.UpdateTileData(currentTile);
     }
 
     public void TerrainUpdate(int index) {
+        if (loadingData) {
+            return;
+        }
         var terrainType = EditorFunction.Instance.terrains[index];
         currentTile.terrainType = terrainType;
         currentTile.SetTerrain();
@@ -90,6 +98,63 @@ public class TileEditorPanel : MonoBehaviour {
     }
 
     public void DecorationUpdate(int index) {
+        if (loadingData) {
+            return;
+        }
+        if (currentTile.decoration != null) { 
+            Destroy(currentTile.decoration);
+            currentTile.decoration = null;
+        }
+        currentTile.decoIndex = index - 1;
+        if (currentTile.decoIndex != -1) {
+            building.value = 0;
+            decoRotation.gameObject.SetActive(true);
+            GameObject newDecoration = Instantiate(currentTile.terrainType.decorations[currentTile.decoIndex], currentTile.transform);
+            newDecoration.transform.rotation = Quaternion.Euler(currentTile.decoRotation);
+            currentTile.decoration = newDecoration;
+        } else {
+            decoRotation.gameObject.SetActive(false);
+        }
+        EditorFunction.Instance.UpdateTileData(currentTile);
+    }
 
+    public void BuildingUpdate(int index) {
+        if (loadingData) {
+            return;
+        }
+        if (currentTile.buildingHere != null) {
+            Destroy(currentTile.buildingHere.gameObject);
+            currentTile.buildingHere = null;
+        }
+        
+        GameObject returnBuilding = null;
+        int buildingIndex = index - 1;
+        if (buildingIndex != -1) {
+            decoration.value = 0;
+            unit.value = 0;
+            returnBuilding = EditorFunction.Instance.buildings[buildingIndex];
+            currentTile.CreateBuilding(returnBuilding.GetComponent<Building>());
+        }
+        EditorFunction.Instance.UpdateBuilding(returnBuilding, currentTile);
+    }
+
+    public void UnitUpdate(int index) {
+        if (loadingData) {
+            return;
+        }
+        if (currentTile.unitHere != null) {
+            Destroy(currentTile.unitHere.gameObject);
+            currentTile.unitHere = null;
+        }
+        GameObject returnUnit = null;
+        int unitIndex = index - 1;
+        if (unitIndex != -1) {
+            building.value = 0;
+            returnUnit = EditorFunction.Instance.units[unitIndex];
+            GameObject newUnit = Instantiate(returnUnit, currentTile.transform);
+            newUnit.transform.localScale = new Vector3(0.5f,0.5f,0.5f);
+            currentTile.unitHere = newUnit.GetComponent<Unit>();
+        }
+        EditorFunction.Instance.UpdateUnit(returnUnit, currentTile);
     }
 }

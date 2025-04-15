@@ -69,6 +69,8 @@ public class GridGenerator : MonoBehaviour {
         float xOffset = (width * scale * gapScale) / 2;
         float zOffset = (height * scale * gapScale) / 2;
 
+        Camera.main.GetComponent<CameraMovement>().SetInitialPosition(scale);
+
         //Hexagon generation adapted from https://catlikecoding.com/unity/tutorials/hex-map/part-1/
         for (int x = 0; x < width; x++) {
             for (int z = 0; z < height; z++) {
@@ -112,7 +114,7 @@ public class GridGenerator : MonoBehaviour {
                 }
             }
         }
-        Camera.main.GetComponent<CameraMovement>().SetInitialPosition(scale);
+        
 
         //here for testing unit movement
 
@@ -129,7 +131,7 @@ public class GridGenerator : MonoBehaviour {
                 Alienunit.name = ("Alien" + e).ToString();
                 EnemyObj.GetComponent<Unit>().UnitSpawn(GameManager.Instance.tiles[width - 1, e]);
             }
-        } else if (!inEditor) {
+        } else if (!inEditor && levelSave == null) {
             GameManager.Instance.tiles[0, 0].CreateBuilding(humanFOB);
             GameManager.Instance.tiles[width-1, height-1].CreateBuilding(alienFOB);
         }

@@ -57,6 +57,14 @@ public class EditorFunction : MonoBehaviour {
         tileData[(int)tile.coords[0], (int)tile.coords[1]].UpdateTerrain(tile);
     }
 
+    public void UpdateBuilding(GameObject building, Tile tile) {
+        tileData[(int)tile.coords[0], (int)tile.coords[1]].buildingHere = building;
+    }
+
+    public void UpdateUnit(GameObject unit, Tile tile) {
+        tileData[(int)tile.coords[0], (int)tile.coords[1]].unitHere = unit;
+    }
+
     public void EditorModeChanged(int index) {
         terrainSelect.gameObject.SetActive(index == 1);
         if (index == 1) {

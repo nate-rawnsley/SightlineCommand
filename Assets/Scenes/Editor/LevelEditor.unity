@@ -664,7 +664,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 161, y: 30.8}
+  m_AnchoredPosition: {x: 161, y: 30.800049}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &99167086
@@ -1712,7 +1712,19 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 975223874}
+        m_TargetAssemblyTypeName: TileEditorPanel, Assembly-CSharp
+        m_MethodName: DecorationUpdate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &381611328
 MonoBehaviour:
@@ -3563,7 +3575,19 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 975223874}
+        m_TargetAssemblyTypeName: TileEditorPanel, Assembly-CSharp
+        m_MethodName: BuildingUpdate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &745896434
 MonoBehaviour:
@@ -5767,6 +5791,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8036765e77bca6043a47e6df5acde429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rayLayers:
+    serializedVersion: 2
+    m_Bits: 1
   terrainBrush: {fileID: 0}
   mode: 1
 --- !u!114 &1125465674
@@ -9589,7 +9616,19 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 975223874}
+        m_TargetAssemblyTypeName: TileEditorPanel, Assembly-CSharp
+        m_MethodName: UnitUpdate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &2096613320
 MonoBehaviour:

@@ -344,7 +344,7 @@ PrefabInstance:
     - target: {fileID: 3568308934959176345, guid: 4c055b2d482c2f84f8cfe6722c92bdb5, type: 3}
       propertyPath: levelSave
       value: 
-      objectReference: {fileID: 11400000, guid: 08ff01a55ea688549bb3bdde857d8448, type: 2}
+      objectReference: {fileID: 11400000, guid: 05b77df18c875ad4a9d0a5e4d8f2db92, type: 2}
     - target: {fileID: 3568308934959176345, guid: 4c055b2d482c2f84f8cfe6722c92bdb5, type: 3}
       propertyPath: testUnits
       value: 0
@@ -587,11 +587,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9097097533654116417, guid: 643577c1059446b44bdb91b856e5a2b8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -193.3984
+      value: -193.39925
       objectReference: {fileID: 0}
     - target: {fileID: 9097097533654116417, guid: 643577c1059446b44bdb91b856e5a2b8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000047683716
+      value: 0.000038987822
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -937,6 +937,10 @@ PrefabInstance:
     - target: {fileID: 3051645901638339059, guid: d0bcfeb9d355ace4dbcbe3dd96373194, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3929423656527765925, guid: d0bcfeb9d355ace4dbcbe3dd96373194, type: 3}
+      propertyPath: rayLayers.m_Bits
+      value: 193
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

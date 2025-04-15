@@ -67,8 +67,8 @@ public class Unit : MonoBehaviour
 
         GameManager.Instance.players[team].units.Add(this);
 
-        scale = tile.transform.localScale.x;
-        unitScale = transform.localScale * scale * 0.5f;
+        scale = tile.transform.localScale.x * 0.5f;
+        unitScale = new Vector3(scale, scale, scale);
         transform.localScale = unitScale;
 
         MoveToTile(tile);

@@ -50,10 +50,13 @@ public class Tile : MonoBehaviour {
 
 
     public void SetTerrain() {
-        ClearTerrain();
+        if (decoration != null) {
+            Destroy(decoration);
+            decoration = null;
+        }
         thisRenderer.material = terrainType.material;
         bool hasDecoration = false;
-        if (terrainType.decorations.Count > 0) {
+        if (terrainType.decorations.Count > 0 && buildingHere == null) {
             if (Random.value <= terrainType.decorationFrequency) {
                 decoIndex = Random.Range(0, terrainType.decorations.Count);
                 decoration = Instantiate(terrainType.decorations[decoIndex], transform);
