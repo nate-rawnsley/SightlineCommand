@@ -7,8 +7,13 @@ public abstract class CursorControls : MonoBehaviour {
     [SerializeField]
     private LayerMask rayLayers = 193;
 
+    public bool active;
+
     //More efficient ways of doing this can be made later
     protected virtual void Update() {
+        if (!active) {
+            return;
+        }
         if (Input.GetMouseButtonDown(1)) {
             RightClickBehaviour();
         }

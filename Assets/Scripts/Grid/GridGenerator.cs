@@ -55,7 +55,6 @@ public class GridGenerator : MonoBehaviour {
                 int z = (int)tile.coords.y;
                 loadedTiles[x, z] = tile;
             }
-            Debug.Log(levelSave.tiles);
         }
         gridParent = new GameObject("Grid");
     }

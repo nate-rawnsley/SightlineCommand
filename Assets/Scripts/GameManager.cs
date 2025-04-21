@@ -70,7 +70,10 @@ public class GameManager : MonoBehaviour {
         
         if (!editorStart) {
             gridGenerator.GenerateGrid();
+            gameCursor.active = true;
         }
+
+        
     }
 
     public void NewTurn(PlayerTeam team) {
@@ -78,6 +81,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void EndGame(PlayerTeam defeatedTeam) {
+        gameCursor.active = false;
         gameUI.DisplayGameOver(defeatedTeam);
     }
 
