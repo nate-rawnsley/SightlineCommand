@@ -9,7 +9,7 @@ public class Tile : MonoBehaviour {
     public Unit unitHere;
     public bool IsSelected;
     public Building buildingHere;
-    private GameObject decoration;
+    public GameObject decoration;
 
     private Renderer thisRenderer;
     public bool lerpingColour;
@@ -17,6 +17,11 @@ public class Tile : MonoBehaviour {
     public float lerpTime;
 
     public Vector2 coords;
+
+    [HideInInspector]
+    public int decoIndex;
+    [HideInInspector]
+    public Vector3 decoRotation;
 
     private void Awake() {
         thisRenderer = transform.Find("TileMesh").GetComponent<Renderer>();
@@ -28,22 +33,60 @@ public class Tile : MonoBehaviour {
         }
     }
 
+    public void ClearTerrain() {
+        if (decoration != null) {
+            Destroy(decoration);
+            decoration = null;
+        }
+        if (buildingHere != null) {
+            Destroy(buildingHere.gameObject);
+            buildingHere = null;
+        }
+        if (unitHere != null) { 
+            Destroy(unitHere.gameObject);
+            unitHere = null;
+        }
+    }
+
+
     public void SetTerrain() {
         if (decoration != null) {
             Destroy(decoration);
             decoration = null;
         }
         thisRenderer.material = terrainType.material;
-        if (terrainType.decorations.Count > 0) {
+        bool hasDecoration = false;
+        if (terrainType.decorations.Count > 0 && buildingHere == null) {
             if (Random.value <= terrainType.decorationFrequency) {
-                int index = Random.Range(0, terrainType.decorations.Count);
-                decoration = Instantiate(terrainType.decorations[index], transform);
+                decoIndex = Random.Range(0, terrainType.decorations.Count);
+                decoration = Instantiate(terrainType.decorations[decoIndex], transform);
 
                 int alignment = Random.Range(0, 6);
-                Vector3 decoRotation = decoration.transform.rotation.eulerAngles;
+                decoRotation = decoration.transform.rotation.eulerAngles;
                 decoRotation.y = alignment * 60;
                 decoration.transform.rotation = Quaternion.Euler(decoRotation);
+                hasDecoration = true;
             }
+        }
+        if (!hasDecoration) {
+            decoIndex = -1;
+        }
+    }
+
+    public void LoadTile(TileData loadTile) {
+        ClearTerrain();
+        terrainType = loadTile.terrainType;
+        thisRenderer.material = terrainType.material;
+        if (loadTile.decoration != null) {
+            decoration = Instantiate(loadTile.decoration, transform);
+            decoration.transform.rotation = Quaternion.Euler(loadTile.decorationRotation);
+        }
+        if (loadTile.buildingHere != null) { 
+            CreateBuilding(loadTile.buildingHere.GetComponent<Building>());
+        }
+        if (loadTile.unitHere != null) {
+            GameObject unitObj = Instantiate(loadTile.unitHere);
+            unitObj.GetComponent<Unit>().UnitSpawn(this);
         }
     }
 

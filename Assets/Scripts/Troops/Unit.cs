@@ -67,8 +67,8 @@ public class Unit : MonoBehaviour
 
         GameManager.Instance.players[team].units.Add(this);
 
-        scale = tile.transform.localScale.x;
-        unitScale = transform.localScale * scale * 0.5f;
+        scale = tile.transform.localScale.x * 0.5f;
+        unitScale = new Vector3(scale, scale, scale);
         transform.localScale = unitScale;
 
         MoveToTile(tile);
@@ -143,9 +143,14 @@ public class Unit : MonoBehaviour
                 moved = true;
             }
 
-            if (targetTile.buildingHere && targetTile.buildingHere.team == team) {
-                targetTile.buildingHere.OnEnterBehaviour(this);
-                moved = true;
+            if (targetTile.buildingHere) {
+                if (targetTile.buildingHere.team == team) {
+                    targetTile.buildingHere.OnEnterBehaviour(this);
+                    moved = true;
+                }
+                else {
+                    moved = false;
+                }
             }
 
             if (moved) {
@@ -292,5 +297,9 @@ public class Unit : MonoBehaviour
         CurrentMove = MaxMovement;
         CurrentAttacks = MaxAttack;
         CurrentMoveableCol = moveableCol[0];
+    }
+
+    private void OnDestroy() {
+        GameManager.Instance.players[team].units.Remove(this);
     }
 }

@@ -61,9 +61,8 @@ public class BuildingPanel : MonoBehaviour {
 
     public void ActivateBuilding()
     {
-        Debug.Log("a");
         if (building.ActivateBehaviour()) {
-            HidePanel();
+            //HidePanel();
         }
     }
 

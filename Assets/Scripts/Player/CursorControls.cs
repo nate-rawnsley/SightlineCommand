@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class CursorControls : MonoBehaviour {
+    //By default, the cursor can hit layers 'Default' (1), 'Building' (64), and 'Unit' (128).
+    [SerializeField]
+    private LayerMask rayLayers = 193;
+
+    public bool active;
 
     //More efficient ways of doing this can be made later
-    private void Update() {
+    protected virtual void Update() {
+        if (!active) {
+            return;
+        }
         if (Input.GetMouseButtonDown(1)) {
             RightClickBehaviour();
         }
         Ray cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit cursorHit;
-        if (Physics.Raycast(cursorRay, out cursorHit)) {
+        if (Physics.Raycast(cursorRay, out cursorHit, Mathf.Infinity, rayLayers)) {
             switch (cursorHit.collider.tag) {
                 case "Tile":
                     //TileHoverBehaviour(cursorHit.collider.GetComponentInParent<Tile>());

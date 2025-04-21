@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4761088077109589735}
   - component: {fileID: 7153531564896008425}
   - component: {fileID: 3642570586166094796}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Unit
   m_Icon: {fileID: 0}
@@ -303,6 +303,7 @@ MonoBehaviour:
   Damage: 1
   AttackRange: 1
   MaxAttack: 1
+  AOEAttack: 0
   Health: 0
   CurrentMove: 0
   CurrentAttacks: 0
