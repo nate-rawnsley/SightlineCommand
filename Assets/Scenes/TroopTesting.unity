@@ -461,8 +461,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c055b2d482c2f84f8cfe6722c92bdb5, type: 3}
-<<<<<<< Updated upstream
-=======
 --- !u!1001 &830632186
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1636,7 +1634,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
->>>>>>> Stashed changes
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2425,11 +2422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9097097533654116417, guid: 643577c1059446b44bdb91b856e5a2b8, type: 3}
       propertyPath: m_AnchoredPosition.y
-<<<<<<< Updated upstream
-      value: -0.00068233686
-=======
       value: 207.26697
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 478568160149202573, guid: 643577c1059446b44bdb91b856e5a2b8, type: 3}

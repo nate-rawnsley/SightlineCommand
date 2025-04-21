@@ -1,4 +1,5 @@
 using Leap;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -11,9 +12,14 @@ public class HandCasting : MonoBehaviour
     private Vector3 OriginFinger;
 
     public bool Check;
-
+    public bool active;
+    
     private void Update()
     {
+        if (!active)
+        {
+            return;
+        }
         Vector3 OriginFinger = Fingertip.transform.position;
         RaycastHit FingerHit;
         Physics.Raycast(OriginFinger, Fingertip.transform.right, out FingerHit, 500f);
