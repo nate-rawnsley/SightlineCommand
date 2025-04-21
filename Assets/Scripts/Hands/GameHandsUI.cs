@@ -3,7 +3,8 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 
-public class GameUI : MonoBehaviour {
+public class GameHandsUI : MonoBehaviour {
+
     [SerializeField]
     private TextMeshProUGUI modeDisplay;
     [SerializeField]
@@ -16,7 +17,6 @@ public class GameUI : MonoBehaviour {
     private BuyMenu buyMenu;
 
 
-    private GameCursor gameCursor;
     private HandCursor handCursor;
 
     [Header("Team UI")]
@@ -34,15 +34,16 @@ public class GameUI : MonoBehaviour {
     private GameObject turnPanel;
     public GameObject buildingPanel;
     private GameObject winPanel;
+    private int CamAngle;
     
 
     public void UpdateModeDisplay(int modeIndex) {
-        gameCursor.SetBehaviour(modeIndex);
-        modeDisplay.text = $"Current mode: {gameCursor.currentMode}";
+        handCursor.SetBehaviour(modeIndex);
+        modeDisplay.text = $"Current mode: {handCursor.currentMode}";
     }
 
     public void UpdateTeamDisplay() {
-        TeamUIParams team = gameCursor.CurrentTeam == PlayerTeam.HUMAN ? humanUI : alienUI;
+        TeamUIParams team = handCursor.CurrentTeam == PlayerTeam.HUMAN ? humanUI : alienUI;
         teamDisplay.text = $"Team: {team.teamName}";
         foreach (var background in teamBackgrounds) {
             background.sprite = team.background;
@@ -57,13 +58,14 @@ public class GameUI : MonoBehaviour {
     }
 
     public void UpdateStats() {
-        int material = GameManager.Instance.players[gameCursor.CurrentTeam].material;
-        int tokens = GameManager.Instance.players[gameCursor.CurrentTeam].troopTokens;
+        int material = GameManager.Instance.players[handCursor.CurrentTeam].material;
+        int tokens = GameManager.Instance.players[handCursor.CurrentTeam].troopTokens;
         statsDisplay.text = $"Material: {material}\nUnit Tokens: {tokens}";
     }
 
-    public void EndTurn() {
-        gameCursor.EndTurn();
+    public void EndTurn()
+    {
+        handCursor.EndTurn();
         UpdateTeamDisplay();
     }
 
@@ -80,7 +82,6 @@ public class GameUI : MonoBehaviour {
     public void GameStart() {
         turnPanel = transform.Find("Turn Panel").gameObject;
         winPanel = transform.Find("Game End Panel").gameObject;
-        //gameCursor = GameManager.Instance.gameCursor;
         handCursor = GameObject.Find("GhostHands").GetComponent<HandCursor>();
         turnPanel.SetActive(true);
         buildingPanel.SetActive(false);
@@ -91,7 +92,12 @@ public class GameUI : MonoBehaviour {
     public void ShowBuyMenu(UnitCamp source) {
         buyMenu.gameObject.SetActive(true);
         buyMenu.Initialize(source);
-        buildingPanel.SetActive(false);
+        buildingPanel.gameObject.SetActive(false);
+    }
+
+    public void HideBuyMenu() {
+        buildingPanel.gameObject.SetActive(true);
+        buyMenu.HideMenu();
     }
 
     public void DisplayGameOver(PlayerTeam defeatedTeam) {

@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour {
     public static GameManager Instance {  get; private set; }
 
     public GridGenerator gridGenerator;
-    public GameCursor gameCursor;
-    public GameUI gameUI;
+    public HandCursor gameCursor;
+    public GameHandsUI gameUI; //change these to gameUI/cursor For Mouse Controls
 
     public Dictionary<PlayerTeam, PlayerStats> players = new Dictionary<PlayerTeam, PlayerStats>();
     public Tile[,] tiles;

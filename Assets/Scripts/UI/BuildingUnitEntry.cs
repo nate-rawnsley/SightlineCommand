@@ -14,7 +14,7 @@ public class BuildingUnitEntry : MonoBehaviour {
     private Unit unit;
     private Building building;
 
-    private GameCursor gameCursor;
+    private HandCursor gameCursor;
     private BuildingPanel buildPanel;
     private RectTransform rect;
 

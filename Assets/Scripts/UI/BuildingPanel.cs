@@ -13,7 +13,7 @@ public class BuildingPanel : MonoBehaviour {
     [SerializeField]
     private HealthBar healthBar;
 
-    private GameUI gameUI;
+    private GameHandsUI gameUI;
 
     private Building building;
     private List<GameObject> entries = new List<GameObject>();
@@ -23,7 +23,7 @@ public class BuildingPanel : MonoBehaviour {
     private TextMeshProUGUI commandText;
 
     private void Awake() {
-        gameUI = GetComponentInParent<GameUI>();
+        gameUI = GetComponentInParent<GameHandsUI>();
         nameText = transform.Find("BuildingName").GetComponent<TextMeshProUGUI>();
         tipText = transform.Find("ToolTip").GetComponent<TextMeshProUGUI>();
         commandText = transform.Find("ActiveButton/Action").GetComponent<TextMeshProUGUI>();
