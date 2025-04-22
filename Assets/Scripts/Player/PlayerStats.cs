@@ -20,6 +20,12 @@ public class PlayerStats {
             GameObject.Destroy(building.gameObject);
         }
     }
+    
+    public void EndTurn() {
+        foreach (var building in buildings) {
+            building.EndTurn();
+        }
+    }
 
     public void StartTurn() {
         foreach (var unit in units) {

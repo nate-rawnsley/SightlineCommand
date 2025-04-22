@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1313397598504304407}
   - component: {fileID: 844074320322658978}
   m_Layer: 5
-  m_Name: Hire Button
+  m_Name: Build Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 96, y: -54}
+  m_AnchoredPosition: {x: 96, y: -56.1}
   m_SizeDelta: {x: 114.43, y: 42.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3762488030369935240
@@ -121,8 +121,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5993014054063381414}
-        m_TargetAssemblyTypeName: BuyableUnitEntry, Assembly-CSharp
+      - m_Target: {fileID: 2705370253003198148}
+        m_TargetAssemblyTypeName: BuyableBuildingEntry, Assembly-CSharp
         m_MethodName: OptionSelected
         m_Mode: 1
         m_Arguments:
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 7036620419454043576}
   - component: {fileID: 960549266577742631}
   m_Layer: 5
-  m_Name: Buy Stats
+  m_Name: Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198,9 +198,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Cost:     0 tokens
-
-    Speed:  0 turn(s)'
+  m_text: 0 Material
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -227,15 +225,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22
-  m_fontSizeBase: 22
+  m_fontSize: 33.9
+  m_fontSizeBase: 33.9
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -303,8 +301,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 53, y: 51}
-  m_SizeDelta: {x: 200, y: 60}
+  m_AnchoredPosition: {x: 53, y: 61.9}
+  m_SizeDelta: {x: 200, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8112862559559428718
 CanvasRenderer:
@@ -334,9 +332,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Unit Name
-
-    Unit Name'
+  m_text: Building Name
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -366,9 +362,9 @@ MonoBehaviour:
   m_fontSize: 22
   m_fontSizeBase: 22
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 14
+  m_fontSizeMax: 22
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
@@ -376,7 +372,7 @@ MonoBehaviour:
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
-  m_lineSpacingMax: 0
+  m_lineSpacingMax: -1
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
@@ -416,9 +412,9 @@ GameObject:
   - component: {fileID: 2588097872809748547}
   - component: {fileID: 4714265656027860905}
   - component: {fileID: 6027241422843827965}
-  - component: {fileID: 5993014054063381414}
+  - component: {fileID: 2705370253003198148}
   m_Layer: 5
-  m_Name: Buyable Unit Panel
+  m_Name: Buyable Building Entry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -486,7 +482,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5993014054063381414
+--- !u!114 &2705370253003198148
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -495,12 +491,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2782011400429194992}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a7d1f83d5937e1489a93d73da21459b, type: 3}
+  m_Script: {fileID: 11500000, guid: c728c73cefc4a8342bd8e4b06f36ffa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitName: {fileID: 3283169255961784781}
-  unitStats: {fileID: 1564743997169587082}
-  buyStats: {fileID: 960549266577742631}
+  buildingName: {fileID: 3283169255961784781}
+  buldingDescription: {fileID: 1564743997169587082}
+  buildingCost: {fileID: 960549266577742631}
 --- !u!1 &3876802411619134341
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,9 +562,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Hire
-
-'
+  m_text: Build
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -724,7 +718,7 @@ GameObject:
   - component: {fileID: 7888229973466776516}
   - component: {fileID: 1564743997169587082}
   m_Layer: 5
-  m_Name: Unit Stats
+  m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -777,9 +771,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Attack: 1    Range: 1
-
-    Health: 1    Moves: 1'
+  m_text: Building description here
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -806,8 +798,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22
-  m_fontSizeBase: 22
+  m_fontSize: 17
+  m_fontSizeBase: 17
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -842,7 +834,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: -18.8609, z: 18.5177, w: -9.232971}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

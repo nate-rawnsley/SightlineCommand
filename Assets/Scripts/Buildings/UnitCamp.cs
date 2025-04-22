@@ -9,7 +9,7 @@ public class UnitCamp : Building {
     }
 
     public override bool ActivateBehaviour() {
-        GameManager.Instance.gameUI.ShowBuyMenu(this);
+        GameManager.Instance.gameUI.ShowUnitBuyMenu(this);
         return true;
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -284,11 +285,19 @@ public class Unit : MonoBehaviour
 
     //Creating buildings////////////////////////////////////// Done by Nate
 
-    public void CreateBuilding(int index) {
-        if (canBuild && GameManager.Instance.UseMaterial(team, 50)) {
-            currentTile.CreateBuilding(createableBuildings[index]);
-            currentTile.buildingHere.OnEnterBehaviour(this);
+    public void ShowBuildMenu() {
+        if (canBuild && currentTile.buildingHere == null) {
+            GameManager.Instance.gameUI.ShowBuildingBuyMenu(this);
         }
+    }
+
+    public bool CreateBuilding(Building building) {
+        if (GameManager.Instance.UseMaterial(team, building.price)) {
+            currentTile.CreateBuilding(building);
+            currentTile.buildingHere.OnEnterBehaviour(this);
+            return true;
+        }
+        return false;
     }
 
     //End of creating buildings//////////////////////////////

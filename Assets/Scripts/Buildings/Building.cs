@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Building : MonoBehaviour {
     [Header("Values")]
-    public float price = 10;
+    public int price = 10;
     public int capacity = 5;
     public int maxHealth = 5;
     public PlayerTeam team;
@@ -91,9 +91,12 @@ public class Building : MonoBehaviour {
         return false;
     }
 
-    public void NewTurn() {
+    public void EndTurn() { 
         GameManager.Instance.players[team].material += materialYield;
         GameManager.Instance.players[team].troopTokens++;
+    }
+
+    public void NewTurn() {
         if (unitInCreation != null) {
             turnsToCreate--;
             if (turnsToCreate <= 0) {

@@ -222,7 +222,7 @@ MonoBehaviour:
   team: 0
   materialYield: 20
   buildingName: Factory
-  toolTip: Produces material for making more buildings!
+  toolTip: Produces material for making more buildings! (20 mat/turn)
   command: 
   canActivate: 0
   unitsHere: []

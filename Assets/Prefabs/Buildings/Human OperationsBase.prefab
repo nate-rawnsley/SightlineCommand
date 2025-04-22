@@ -321,6 +321,7 @@ MonoBehaviour:
   materialYield: 10
   buildingName: Forward Operations Base
   toolTip: The heart of the human army. Keep this alive and use it to spawn troops.
+    Produces 10 mat/turn.
   command: Spawn Troop
   canActivate: 0
   unitsHere: []

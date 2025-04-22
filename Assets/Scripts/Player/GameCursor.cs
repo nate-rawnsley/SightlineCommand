@@ -19,9 +19,6 @@ public class GameCursor : CursorControls {
     }
 
     public override void UnitClickBehaviour(Unit unit) {
-        if (buildingPanel.gameObject.activeSelf) {
-            buildingPanel.HidePanel();
-        }
         if (activeUnit == null && currentMode != UnitMode.None && unit.Health != 0) {
             activeUnit = unit;
             //HasSelection = false  -- N - This was replaced by checking activeUnit == null instead
@@ -62,7 +59,7 @@ public class GameCursor : CursorControls {
                     case UnitMode.Build:
                         if (activeUnit.currentTile.buildingHere == null)
                         {
-                            activeUnit.CreateBuilding(0);
+                            activeUnit.ShowBuildMenu();
 
                         }
                         CLEARALL();
@@ -80,9 +77,6 @@ public class GameCursor : CursorControls {
     }
 
     protected override void TileClickBehaviour(Tile tile) {
-        if (buildingPanel.gameObject.activeSelf) {
-            buildingPanel.HidePanel();
-        }
         bool acted = false;
         if (activeUnit != null) {
 
@@ -126,9 +120,6 @@ public class GameCursor : CursorControls {
             DamageBuilding(building);
             CLEARALL();
             return;
-        }
-        if (buildingPanel.gameObject.activeSelf) {
-            buildingPanel.HidePanel();
         }
         if (activeUnit == null && building.team == CurrentTeam) {
             buildingPanel.SetBuilding(building);
@@ -179,6 +170,7 @@ public class GameCursor : CursorControls {
     public void EndTurn()
     {
         CLEARALL();
+        GameManager.Instance.EndTurn(CurrentTeam);
         CurrentTeam = CurrentTeam == PlayerTeam.HUMAN ? PlayerTeam.ALIEN : PlayerTeam.HUMAN;
         GameManager.Instance.NewTurn(CurrentTeam);
     }

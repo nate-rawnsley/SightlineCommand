@@ -86,15 +86,38 @@ public class GameUI : MonoBehaviour {
         UpdateTeamDisplay();
     }
 
-    public void ShowBuyMenu(UnitCamp source) {
+    public void ShowUnitBuyMenu(UnitCamp source) {
         buyMenu.gameObject.SetActive(true);
-        buyMenu.Initialize(source);
+        buyMenu.InitializeBuilding(source);
         buildingPanel.gameObject.SetActive(false);
+        GameManager.SelectionChanged += HideUnitBuyMenu;
     }
 
-    public void HideBuyMenu() {
+    public void HideUnitBuyMenu() {
+        GameManager.SelectionChanged -= HideUnitBuyMenu;
         buildingPanel.gameObject.SetActive(true);
         buyMenu.HideMenu();
+    }
+
+    public void ShowBuildingBuyMenu(Unit source) {
+        buyMenu.gameObject.SetActive(true);
+        buyMenu.InitializeUnit(source);
+        turnPanel.gameObject.SetActive(false);
+        GameManager.SelectionChanged += HideBuildingBuyMenu;
+    }
+
+    public void HideBuildingBuyMenu() {
+        GameManager.SelectionChanged -= HideBuildingBuyMenu;
+        turnPanel.gameObject.SetActive(true);
+        buyMenu.HideMenu();
+    }
+
+    public void HideAnyBuyMenu() {
+        if (buyMenu.building != null) {
+            HideUnitBuyMenu();
+        } else if (buyMenu.unit != null) { 
+            HideBuildingBuyMenu();
+        }
     }
 
     public void DisplayGameOver(PlayerTeam defeatedTeam) {

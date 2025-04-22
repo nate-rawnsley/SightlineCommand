@@ -91,6 +91,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: toolTip
+      value: Does nothing at the moment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       propertyPath: buildingName
       value: Defence
       objectReference: {fileID: 0}

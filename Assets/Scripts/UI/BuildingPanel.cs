@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using JetBrains.Rider.Unity.Editor;
 
 public class BuildingPanel : MonoBehaviour {
 
@@ -27,6 +28,14 @@ public class BuildingPanel : MonoBehaviour {
         nameText = transform.Find("BuildingName").GetComponent<TextMeshProUGUI>();
         tipText = transform.Find("ToolTip").GetComponent<TextMeshProUGUI>();
         commandText = transform.Find("ActiveButton/Action").GetComponent<TextMeshProUGUI>();
+    }
+
+    public void OnEnable() {
+        GameManager.SelectionChanged += HidePanel;
+    }
+
+    public void OnDisable() {
+        GameManager.SelectionChanged -= HidePanel;
     }
 
     public void SetBuilding(Building selectedBuilding) {

@@ -83,7 +83,7 @@ MonoBehaviour:
     decoration: {fileID: 9037541655311773515, guid: 0df2702b06145d145ae34ac8c68d25ec, type: 3}
     decorationRotation: {x: -0, y: 120, z: -0}
     buildingHere: {fileID: 0}
-    unitHere: {fileID: 0}
+    unitHere: {fileID: 3734930054502818528, guid: 5a51f050645416f40b22c2041806e27e, type: 3}
     coords: {x: 1, y: 3}
   - terrainType: {fileID: 11400000, guid: 98e40cc50689bce46b7fc44b054593bc, type: 2}
     decoration: {fileID: 4947065853307073972, guid: f2b2a0b156efc254bb573ab31301b090, type: 3}

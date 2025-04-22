@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour {
 
     public Dictionary<PlayerTeam, PlayerStats> players = new Dictionary<PlayerTeam, PlayerStats>();
     public Tile[,] tiles;
+
+    public static Action SelectionChanged;
 
     [HideInInspector]
     public bool editorStart = false;
@@ -74,6 +77,10 @@ public class GameManager : MonoBehaviour {
         }
 
         
+    }
+
+    public void EndTurn(PlayerTeam team) {
+        players[team].EndTurn();
     }
 
     public void NewTurn(PlayerTeam team) {
