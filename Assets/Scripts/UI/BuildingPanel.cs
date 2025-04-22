@@ -37,7 +37,11 @@ public class BuildingPanel : MonoBehaviour {
         if (building.unitInCreation != null) {
             tipText.text += $"\nHiring: {building.unitInCreation.GetComponent<Unit>().displayName}, complete in {building.turnsToCreate} turn(s)";
         }
-        commandText.text = building.command;
+        commandText.gameObject.SetActive(building.canActivate);
+        if (building.canActivate) {
+            commandText.text = building.command;
+        }
+        
         for (int i = 0; i < building.unitsHere.Count; i++) {
             GameObject newEntry = Instantiate(buildingUnitEntry);
             newEntry.transform.SetParent(scrollContent, true);

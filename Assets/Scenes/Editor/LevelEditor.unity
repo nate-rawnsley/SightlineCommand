@@ -5439,6 +5439,8 @@ MonoBehaviour:
   - {fileID: 6369790764795462625, guid: 724a03601f91c6940b68d964356b994c, type: 3}
   - {fileID: 5550437763015166831, guid: dca15a599da6fc44a94ccec05a0dfbcc, type: 3}
   - {fileID: 2939211979402047153, guid: 014e078f80375a540af1d71a5af9b799, type: 3}
+  - {fileID: 6035193366664698950, guid: 02b5e0eddda97b94ead68556d8180ee1, type: 3}
+  - {fileID: 1251988465070527545, guid: 2da46748b3d97624fb028e6ed6a7ad13, type: 3}
   units:
   - {fileID: 3734930054502818528, guid: 08d19b3794c6cca478ecb391cc4c65f1, type: 3}
   - {fileID: 3734930054502818528, guid: 5a51f050645416f40b22c2041806e27e, type: 3}
@@ -5794,6 +5796,7 @@ MonoBehaviour:
   rayLayers:
     serializedVersion: 2
     m_Bits: 1
+  active: 0
   terrainBrush: {fileID: 0}
   mode: 1
 --- !u!114 &1125465674

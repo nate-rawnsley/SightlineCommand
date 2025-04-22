@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public abstract class Building : MonoBehaviour {
+public class Building : MonoBehaviour {
     [Header("Values")]
     public float price = 10;
     public int capacity = 5;
     public int maxHealth = 5;
     public PlayerTeam team;
+    public int materialYield;
 
     [Header("Panel Text")]
     public string buildingName;
     public string toolTip;
     public string command;
+
+    [HideInInspector] public bool canActivate;
 
     [HideInInspector] public List<Unit> unitsHere;
     [HideInInspector] public Tile tile;
@@ -89,9 +92,9 @@ public abstract class Building : MonoBehaviour {
     }
 
     public void NewTurn() {
+        GameManager.Instance.players[team].material += materialYield;
         GameManager.Instance.players[team].troopTokens++;
         if (unitInCreation != null) {
-            Debug.Log(turnsToCreate);
             turnsToCreate--;
             if (turnsToCreate <= 0) {
                 GameObject unitSpawn = Instantiate(unitInCreation);
