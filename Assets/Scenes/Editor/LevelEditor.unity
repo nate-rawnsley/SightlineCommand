@@ -5794,6 +5794,7 @@ MonoBehaviour:
   rayLayers:
     serializedVersion: 2
     m_Bits: 1
+  active: 0
   terrainBrush: {fileID: 0}
   mode: 1
 --- !u!114 &1125465674
@@ -7751,8 +7752,8 @@ MonoBehaviour:
   levelSave: {fileID: 0}
   scale: 2
   gapScale: 1.025
-  width: 10
-  height: 10
+  width: 20
+  height: 20
   humanFOB: {fileID: 0}
   alienFOB: {fileID: 0}
   testUnits: 0

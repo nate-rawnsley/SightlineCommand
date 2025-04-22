@@ -30,7 +30,7 @@ public class BuildingPanel : MonoBehaviour {
     }
 
     public void SetBuilding(Building selectedBuilding) {
-        gameUI.ShowBuildingPanel();
+        //gameUI.ShowBuildingPanel();
         building = selectedBuilding;
         nameText.text = building.buildingName;
         tipText.text = building.toolTip;
@@ -56,7 +56,7 @@ public class BuildingPanel : MonoBehaviour {
             Destroy(entry);
         }
         entries.Clear();
-        gameUI.HideBuildingPanel();
+        //gameUI.HideBuildingPanel();
     }
 
     public void ActivateBuilding()

@@ -3,7 +3,9 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 
-public class GameHandsUI : MonoBehaviour {
+public class GameHandsUI : MonoBehaviour
+{
+    //Code made by Nate/Edited into Hand Tracking System By Dylan
 
     [SerializeField]
     private TextMeshProUGUI modeDisplay;
@@ -69,22 +71,22 @@ public class GameHandsUI : MonoBehaviour {
         UpdateTeamDisplay();
     }
 
-    public void ShowBuildingPanel() {
-        buildingPanel.SetActive(true);
-        turnPanel.SetActive(false);
-    }
+    //public void ShowBuildingPanel() {
+    //    buildingPanel.SetActive(true);
+    //    turnPanel.SetActive(false);
+    //}
 
-    public void HideBuildingPanel() {
-        buildingPanel.SetActive(false);
-        turnPanel.SetActive(true);
-    }
+    //public void HideBuildingPanel() {
+    //    buildingPanel.SetActive(false);
+    //    turnPanel.SetActive(true);
+    //}
 
     public void GameStart() {
         turnPanel = transform.Find("Turn Panel").gameObject;
         winPanel = transform.Find("Game End Panel").gameObject;
         handCursor = GameObject.Find("GhostHands").GetComponent<HandCursor>();
         turnPanel.SetActive(true);
-        buildingPanel.SetActive(false);
+        //buildingPanel.SetActive(false);
         winPanel.SetActive(false);
         UpdateTeamDisplay();
     }
@@ -92,12 +94,12 @@ public class GameHandsUI : MonoBehaviour {
     public void ShowBuyMenu(UnitCamp source) {
         buyMenu.gameObject.SetActive(true);
         buyMenu.Initialize(source);
-        buildingPanel.gameObject.SetActive(false);
+        //buildingPanel.gameObject.SetActive(false);
     }
 
     public void HideBuyMenu() {
         buildingPanel.gameObject.SetActive(true);
-        buyMenu.HideMenu();
+        //buyMenu.HideMenu();
     }
 
     public void DisplayGameOver(PlayerTeam defeatedTeam) {

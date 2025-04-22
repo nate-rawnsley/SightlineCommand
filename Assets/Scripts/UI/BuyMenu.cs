@@ -35,11 +35,11 @@ public class BuyMenu : MonoBehaviour {
         //add need more tokens indicator
     }
 
-    public void HideMenu() {
-        foreach (var entry in entries) {
-            Destroy(entry);
-        }
-        entries.Clear();
-        gameObject.SetActive(false);
-    }
+    //public void HideMenu() {
+    //    foreach (var entry in entries) {
+    //        Destroy(entry);
+    //    }
+    //    entries.Clear();
+    //    gameObject.SetActive(false); //Commented out by Dylan: Not needed DUe to Multiple Monitors
+    //}
 }

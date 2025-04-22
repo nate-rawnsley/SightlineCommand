@@ -121,7 +121,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 478568160149202573}
+      - m_Target: {fileID: 4682094516317868892}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
         m_MethodName: UpdateModeDisplay
         m_Mode: 3
@@ -291,8 +291,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 478568160149202573}
-        m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
+      - m_Target: {fileID: 4682094516317868892}
+        m_TargetAssemblyTypeName: GameHandsUI, Assembly-CSharp
         m_MethodName: UpdateModeDisplay
         m_Mode: 3
         m_Arguments:
@@ -1248,9 +1248,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 478568160149202573}
-        m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
+      - m_Target: {fileID: 4682094516317868892}
+        m_TargetAssemblyTypeName: GameHandsUI, Assembly-CSharp
         m_MethodName: EndTurn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3017949371485759499}
+        m_TargetAssemblyTypeName: CameraChange, Assembly-CSharp
+        m_MethodName: ChangeCam
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1564,10 +1576,10 @@ RectTransform:
   - {fileID: 1230647769018743829}
   m_Father: {fileID: 7824986107367941673}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 183, y: 233.90009}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -685, y: -470}
+  m_SizeDelta: {x: -1630, y: -1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &921077273942231139
 CanvasRenderer:
@@ -1651,8 +1663,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 478568160149202573}
-        m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
+      - m_Target: {fileID: 4682094516317868892}
+        m_TargetAssemblyTypeName: GameHandsUI, Assembly-CSharp
         m_MethodName: UpdateModeDisplay
         m_Mode: 3
         m_Arguments:
@@ -1750,7 +1762,8 @@ GameObject:
   - component: {fileID: 7829348248146692067}
   - component: {fileID: 3772625336523769933}
   - component: {fileID: 659210166698578367}
-  - component: {fileID: 478568160149202573}
+  - component: {fileID: 4682094516317868892}
+  - component: {fileID: 3017949371485759499}
   m_Layer: 5
   m_Name: Game UI
   m_TagString: MainCanvas
@@ -1844,7 +1857,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &478568160149202573
+--- !u!114 &4682094516317868892
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1853,7 +1866,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7394047827183422037}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9b1f00d8fffea84ebb0d3171905ea26, type: 3}
+  m_Script: {fileID: 11500000, guid: b5531fbe184fc6740af428d0b0533731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   modeDisplay: {fileID: 6783727052299169931}
@@ -1884,6 +1897,19 @@ MonoBehaviour:
   - {fileID: 7486412818938584206}
   - {fileID: 7088203673053398959}
   buildingPanel: {fileID: 8614207225985161270}
+--- !u!114 &3017949371485759499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7394047827183422037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9d957788452ecc4491cebfdfcb3a053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
 --- !u!1 &7741668551215161039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2093,7 +2119,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 478568160149202573}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
@@ -2605,7 +2631,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 367fdb9e760447441a22c521c0064b62, type: 3}
     - target: {fileID: 4882113738419663554, guid: f012707a77873e04a8a105a341a532b5, type: 3}
       propertyPath: m_Size
-      value: 0.999356
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4882113738419663554, guid: f012707a77873e04a8a105a341a532b5, type: 3}
       propertyPath: m_Value
@@ -2653,11 +2679,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6470292134265365288, guid: f012707a77873e04a8a105a341a532b5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -0.000045776367
       objectReference: {fileID: 0}
     - target: {fileID: 6470292134265365288, guid: f012707a77873e04a8a105a341a532b5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 207.26299
+      value: 207.26694
       objectReference: {fileID: 0}
     - target: {fileID: 6484374883396813780, guid: f012707a77873e04a8a105a341a532b5, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2947,10 +2973,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 8472993629850499898}
-    - target: {fileID: 8629539055525904809, guid: a49a25bba7e36fb4689fb23451ac2e3f, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 478568160149202573}
     - target: {fileID: 8629539055525904809, guid: a49a25bba7e36fb4689fb23451ac2e3f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2

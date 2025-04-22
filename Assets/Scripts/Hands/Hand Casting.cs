@@ -7,7 +7,7 @@ using UnityEngine;
 
 
 public class HandCasting : MonoBehaviour
-{
+{ //Code made by Nate/Edited into Hand Tracking System By Dylan
     public GameObject Fingertip;
     private Vector3 OriginFinger;
 

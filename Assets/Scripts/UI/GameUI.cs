@@ -67,15 +67,15 @@ public class GameUI : MonoBehaviour {
         UpdateTeamDisplay();
     }
 
-    public void ShowBuildingPanel() {
-        buildingPanel.SetActive(true);
-        turnPanel.SetActive(false);
-    }
+    //public void ShowBuildingPanel() {
+    //    buildingPanel.SetActive(true);
+    //    turnPanel.SetActive(false);
+    //}
 
-    public void HideBuildingPanel() {
-        buildingPanel.SetActive(false);
-        turnPanel.SetActive(true);
-    }
+    //public void HideBuildingPanel() {
+    //    buildingPanel.SetActive(false);
+    //    turnPanel.SetActive(true);
+    //}
 
     public void GameStart() {
         turnPanel = transform.Find("Turn Panel").gameObject;
@@ -83,7 +83,7 @@ public class GameUI : MonoBehaviour {
         //gameCursor = GameManager.Instance.gameCursor;
         handCursor = GameObject.Find("GhostHands").GetComponent<HandCursor>();
         turnPanel.SetActive(true);
-        buildingPanel.SetActive(false);
+        //buildingPanel.SetActive(false);
         winPanel.SetActive(false);
         UpdateTeamDisplay();
     }
@@ -91,13 +91,13 @@ public class GameUI : MonoBehaviour {
     public void ShowBuyMenu(UnitCamp source) {
         buyMenu.gameObject.SetActive(true);
         buyMenu.Initialize(source);
-        buildingPanel.gameObject.SetActive(false);
+    //    buildingPanel.gameObject.SetActive(false); //Commented out by Dylan : not needed due to Multiple Monitor display
     }
 
-    public void HideBuyMenu() {
-        buildingPanel.gameObject.SetActive(true);
-        buyMenu.HideMenu();
-    }
+    //public void HideBuyMenu() {
+    //    buildingPanel.gameObject.SetActive(true);
+    //    buyMenu.HideMenu();
+    //}
 
     public void DisplayGameOver(PlayerTeam defeatedTeam) {
         turnPanel.SetActive(false);

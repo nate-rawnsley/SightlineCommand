@@ -272,7 +272,7 @@ public class Unit : MonoBehaviour
     //    tileHighlighted = null;
     //}
 
-    //End Of Damage and Targeting/////////////////////////////
+    //End Of Damage and Targeting///////////////////////////// Done By Dylan
 
     public void Attack(Vector3 attackPos) {
         EndTargeting();

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+//Code made by Nate/Edited into Hand Tracking System By Dylan
 public enum PlayerTeam {
     HUMAN,
     ALIEN
