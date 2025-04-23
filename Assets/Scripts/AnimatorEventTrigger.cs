@@ -5,6 +5,12 @@ public class AnimatorEventTrigger : MonoBehaviour {
     [SerializeField]
     private Animator[] animators;
 
+    [SerializeField]
+    private GameObject particlePrefab;
+
+    [SerializeField]
+    private Transform particlePoint;
+
     public Action AnimEvent;
 
     private string triggerSave;
@@ -25,5 +31,10 @@ public class AnimatorEventTrigger : MonoBehaviour {
 
     public void CallEvent() {
         AnimEvent?.Invoke();
+    }
+
+    public void SpawnParticles(float duration) {
+        GameObject particleInstance = Instantiate(particlePrefab, particlePoint.position, particlePrefab.transform.rotation);
+        particleInstance.AddComponent<TimedParticles>().StartTimer(duration);
     }
 }

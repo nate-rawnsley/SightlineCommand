@@ -927,6 +927,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animators: []
+  particlePrefab: {fileID: 4211873392745583015, guid: 3d53bb619d6b81048ac12afa26a4c029, type: 3}
+  particlePoint: {fileID: 819245407203125948}
 --- !u!1001 &9211761895199353901
 PrefabInstance:
   m_ObjectHideFlags: 0
