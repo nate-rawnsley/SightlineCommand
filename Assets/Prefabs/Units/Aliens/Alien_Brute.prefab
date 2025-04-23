@@ -410,8 +410,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.48261636, y: 0.5240562, z: 0.45946896}
-  m_Center: {x: 0.0000009677169, y: -0.108797826, z: 0.086009875}
+  m_Size: {x: 0.45205417, y: 0.507146, z: 0.42374924}
+  m_Center: {x: -0.0008979176, y: -0.10391496, z: 0.07708097}
 --- !u!4 &3602820597342270957 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9560ed27d1285ea45be7b0ad3c935a18, type: 3}
@@ -456,6 +456,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animators: []
+  particlePrefab: {fileID: 0}
+  particlePoint: {fileID: 0}
+  particles: {fileID: 0}
 --- !u!1001 &5516704683614116651
 PrefabInstance:
   m_ObjectHideFlags: 0
