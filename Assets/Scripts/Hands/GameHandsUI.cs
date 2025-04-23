@@ -93,7 +93,7 @@ public class GameHandsUI : MonoBehaviour
 
     public void ShowBuyMenu(UnitCamp source) {
         buyMenu.gameObject.SetActive(true);
-        buyMenu.Initialize(source);
+        buyMenu.InitializeBuilding(source);
         //buildingPanel.gameObject.SetActive(false);
     }
 
