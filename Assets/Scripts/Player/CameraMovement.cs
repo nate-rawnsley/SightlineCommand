@@ -13,8 +13,7 @@ public class CameraMovement : MonoBehaviour {
         Vector3 newPos = transform.position;
         newPos.y = scale * 10;
         speed = initialSpeed * scale;
-        transform.position = newPos;
-        transform.rotation = Quaternion.Euler(new Vector3(90,0,0));
+
     }
 
     private void Update() {

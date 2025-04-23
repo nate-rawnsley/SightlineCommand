@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class CursorControls : MonoBehaviour {
+public abstract class CursorControls : MonoBehaviour { 
     //By default, the cursor can hit layers 'Default' (1), 'Building' (64), and 'Unit' (128).
     [SerializeField]
     private LayerMask rayLayers = 193;

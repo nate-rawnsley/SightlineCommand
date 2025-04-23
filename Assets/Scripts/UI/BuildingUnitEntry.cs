@@ -14,13 +14,14 @@ public class BuildingUnitEntry : MonoBehaviour {
     private Unit unit;
     private Building building;
 
-    private GameCursor gameCursor;
+    private HandCursor gameCursor;
     private BuildingPanel buildPanel;
     private RectTransform rect;
 
     private void Start() {
         gameCursor = GameManager.Instance.gameCursor;
         rect = GetComponent<RectTransform>();
+        
     }
 
     public void Initialize(Unit thisUnit, Building thisBuilding, BuildingPanel bp, Vector2 position) { 
@@ -42,7 +43,7 @@ public class BuildingUnitEntry : MonoBehaviour {
     }
 
     public void SelectUnit() {
-        building.OnExitBehaviour(unit);
+        building.OnExitBehaviour(unit);        
         buildPanel.HidePanel();
         gameCursor.UnitClickBehaviour(unit);
     }

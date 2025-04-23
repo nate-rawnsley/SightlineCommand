@@ -25,6 +25,6 @@ public class BuyableUnitEntry : MonoBehaviour {
     }
 
     public void OptionSelected() {
-        buyMenu.UnitSelected(shopValue);
+        //buyMenu.UnitSelected(shopValue);
     }
 }

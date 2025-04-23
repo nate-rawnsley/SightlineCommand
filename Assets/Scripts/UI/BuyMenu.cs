@@ -1,91 +1,45 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using Leap;
 
 public class BuyMenu : MonoBehaviour {
     [SerializeField]
     private GameObject buyableUnitEntry;
 
     [SerializeField]
-    private GameObject buyableBuildingEntry;
-
-    [SerializeField]
     private Transform scrollContent;
-
-    [SerializeField]
-    private TextMeshProUGUI errorIndicator;
 
     private List<GameObject> entries = new List<GameObject>();
 
     public UnitCamp building;
-    public Unit unit;
 
-
-    public void InitializeBuilding(UnitCamp source) {
+    public void Initialize(UnitCamp source) {
         building = source;
         for (int i = 0; i < building.availableUnits.units.Count; i++) { 
             GameObject newEntry = Instantiate(buyableUnitEntry);
+            newEntry.transform.SetParent(scrollContent, true);
+
+            Vector2 entryPos = new Vector2(0, -90 + i * -175);
 
             newEntry.GetComponent<BuyableUnitEntry>().Initialize(building.availableUnits.units[i], this);
 
-            SetEntryPosition(newEntry.GetComponent<RectTransform>(), i);
+            RectTransform rect = newEntry.GetComponent<RectTransform>();
+            rect.localPosition = entryPos;
+            rect.localScale = new Vector3(1,1,1);
+            entries.Add(newEntry);
         }
     }
 
-    public void InitializeUnit(Unit source) {
-        unit = source;
-        for (int i = 0; i < unit.createableBuildings.Count; i++) {
-            GameObject newEntry = Instantiate(buyableBuildingEntry);
-
-            newEntry.GetComponent<BuyableBuildingEntry>().Initialize(unit.createableBuildings[i], this);
-
-            SetEntryPosition(newEntry.GetComponent<RectTransform>(), i);
-        }
+    public void OptionSelected(UnitShopValue unitVals) {
+        building.BuyUnit(unitVals);
+        GameManager.Instance.gameUI.HideBuyMenu();
+        //add need more tokens indicator
     }
 
-    private void SetEntryPosition(RectTransform entry, int i) {
-        entry.SetParent(scrollContent, true);
-        Vector2 entryPos = new Vector2(0, -90 + i * -175);
-
-        entry.localPosition = entryPos;
-        entry.localScale = new Vector3(1, 1, 1);
-        entries.Add(entry.gameObject);
-    }
-
-    public void UnitSelected(UnitShopValue unitVals) {
-        if (building.BuyUnit(unitVals)) {
-            GameManager.Instance.gameUI.HideUnitBuyMenu();
-        } else {
-            StartCoroutine(ShowError("Insufficient Troop Tokens!"));
-        }
-    }
-
-    public void BuildingSelected(Building building) {
-        if (unit.CreateBuilding(building)) {
-            GameManager.Instance.gameUI.HideBuildingBuyMenu();
-        } else {
-            StartCoroutine(ShowError("Insufficient Materials!"));
-        }
-    }
-
-    private IEnumerator ShowError(string error) {
-        errorIndicator.text = error;
-        yield return new WaitForSeconds(1);
-        errorIndicator.text = "";
-    }
-
-
-    public void HideMenu() {
-        foreach (var entry in entries) {
-            Destroy(entry);
-        }
-        entries.Clear();
-        StopAllCoroutines();
-        errorIndicator.text = "";
-        building = null;
-        unit = null;
-        gameObject.SetActive(false);
-    }
+    //public void HideMenu() {
+    //    foreach (var entry in entries) {
+    //        Destroy(entry);
+    //    }
+    //    entries.Clear();
+    //    gameObject.SetActive(false); //Commented out by Dylan: Not needed DUe to Multiple Monitors
+    //}
 }

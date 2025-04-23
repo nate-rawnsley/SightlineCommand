@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using JetBrains.Rider.Unity.Editor;
 
 public class BuildingPanel : MonoBehaviour {
 
@@ -14,7 +13,7 @@ public class BuildingPanel : MonoBehaviour {
     [SerializeField]
     private HealthBar healthBar;
 
-    private GameUI gameUI;
+    private GameHandsUI gameUI;
 
     private Building building;
     private List<GameObject> entries = new List<GameObject>();
@@ -24,7 +23,7 @@ public class BuildingPanel : MonoBehaviour {
     private TextMeshProUGUI commandText;
 
     private void Awake() {
-        gameUI = GetComponentInParent<GameUI>();
+        gameUI = GetComponentInParent<GameHandsUI>();
         nameText = transform.Find("BuildingName").GetComponent<TextMeshProUGUI>();
         tipText = transform.Find("ToolTip").GetComponent<TextMeshProUGUI>();
         commandText = transform.Find("ActiveButton/Action").GetComponent<TextMeshProUGUI>();
@@ -39,7 +38,7 @@ public class BuildingPanel : MonoBehaviour {
     }
 
     public void SetBuilding(Building selectedBuilding) {
-        gameUI.ShowBuildingPanel();
+        //gameUI.ShowBuildingPanel();
         building = selectedBuilding;
         nameText.text = building.buildingName;
         tipText.text = building.toolTip;
@@ -65,17 +64,24 @@ public class BuildingPanel : MonoBehaviour {
     }
     
     public void HidePanel() {
+        nameText.text = ("Building");
+        tipText.text = ("No Building Selected");
+        building = null;
         foreach (GameObject entry in entries) {
             Destroy(entry);
         }
         entries.Clear();
-        gameUI.HideBuildingPanel();
+        //gameUI.HideBuildingPanel();
     }
 
     public void ActivateBuilding()
     {
-        if (building.ActivateBehaviour()) {
-            //HidePanel();
+        if (building != null)
+        {
+            if (building.ActivateBehaviour())
+            {
+                //HidePanel();
+            }
         }
     }
 

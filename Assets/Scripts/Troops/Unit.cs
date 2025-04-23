@@ -32,6 +32,7 @@ public class Unit : MonoBehaviour
     public int AttackRange;
     public int MaxAttack;
     public bool AOEAttack;
+    public bool isFlying;
 
     [SerializeField]
     private AnimatorEventTrigger animateTrigger;
@@ -133,7 +134,8 @@ public class Unit : MonoBehaviour
         tilesTargetted = currentTile.GetAdjacentGroup(1);
         foreach (Tile adjacentTile in tilesTargetted)
         {
-            if (adjacentTile.terrainType.walkable == true)
+
+            if (adjacentTile.terrainType.walkable == true || isFlying)
             {
                 adjacentTile.DisplayColour(CurrentMoveableCol);
             }
@@ -144,7 +146,7 @@ public class Unit : MonoBehaviour
     {
         
 
-        if (CurrentMove > 0 && tilesTargetted.Contains(targetTile))
+        if (CurrentMove >= targetTile.terrainType.travelSpeed && tilesTargetted.Contains(targetTile))
         {
             bool moved = false;
             if (!targetTile.unitHere) {
@@ -163,8 +165,8 @@ public class Unit : MonoBehaviour
             }
 
             if (moved) {
-                currentTile.unitHere = null;
-                CurrentMove--;
+                CurrentMove -= targetTile.terrainType.travelSpeed;
+                currentTile.unitHere = null;              
                 Debug.Log(CurrentMove);
                 MoveToTile(targetTile, true);
                 EndTargeting();
@@ -286,7 +288,7 @@ public class Unit : MonoBehaviour
     //    tileHighlighted = null;
     //}
 
-    //End Of Damage and Targeting/////////////////////////////
+    //End Of Damage and Targeting///////////////////////////// Done By Dylan
 
     public void Attack(Vector3 attackPos) {
         EndTargeting();
@@ -335,7 +337,7 @@ public class Unit : MonoBehaviour
 
     public void ShowBuildMenu() {
         if (canBuild && currentTile.buildingHere == null) {
-            GameManager.Instance.gameUI.ShowBuildingBuyMenu(this);
+            //GameManager.Instance.gameUI.ShowBuyMenu(this);  //COMMENTED OUT
         }
     }
 

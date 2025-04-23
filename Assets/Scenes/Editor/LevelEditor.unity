@@ -7754,8 +7754,8 @@ MonoBehaviour:
   levelSave: {fileID: 0}
   scale: 2
   gapScale: 1.025
-  width: 10
-  height: 10
+  width: 20
+  height: 20
   humanFOB: {fileID: 0}
   alienFOB: {fileID: 0}
   testUnits: 0

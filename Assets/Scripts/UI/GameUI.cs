@@ -17,6 +17,7 @@ public class GameUI : MonoBehaviour {
 
 
     private GameCursor gameCursor;
+    private HandCursor handCursor;
 
     [Header("Team UI")]
     [SerializeField]
@@ -66,59 +67,37 @@ public class GameUI : MonoBehaviour {
         UpdateTeamDisplay();
     }
 
-    public void ShowBuildingPanel() {
-        buildingPanel.SetActive(true);
-        turnPanel.SetActive(false);
-    }
+    //public void ShowBuildingPanel() {
+    //    buildingPanel.SetActive(true);
+    //    turnPanel.SetActive(false);
+    //}
 
-    public void HideBuildingPanel() {
-        buildingPanel.SetActive(false);
-        turnPanel.SetActive(true);
-    }
+    //public void HideBuildingPanel() {
+    //    buildingPanel.SetActive(false);
+    //    turnPanel.SetActive(true);
+    //}
 
     public void GameStart() {
         turnPanel = transform.Find("Turn Panel").gameObject;
         winPanel = transform.Find("Game End Panel").gameObject;
-        gameCursor = GameManager.Instance.gameCursor;
+        //gameCursor = GameManager.Instance.gameCursor;
+        handCursor = GameObject.Find("GhostHands").GetComponent<HandCursor>();
         turnPanel.SetActive(true);
-        buildingPanel.SetActive(false);
+        //buildingPanel.SetActive(false);
         winPanel.SetActive(false);
         UpdateTeamDisplay();
     }
 
-    public void ShowUnitBuyMenu(UnitCamp source) {
+    public void ShowBuyMenu(UnitCamp source) {
         buyMenu.gameObject.SetActive(true);
-        buyMenu.InitializeBuilding(source);
-        buildingPanel.gameObject.SetActive(false);
-        GameManager.SelectionChanged += HideUnitBuyMenu;
+        buyMenu.Initialize(source);
+    //    buildingPanel.gameObject.SetActive(false); //Commented out by Dylan : not needed due to Multiple Monitor display
     }
 
-    public void HideUnitBuyMenu() {
-        GameManager.SelectionChanged -= HideUnitBuyMenu;
-        buildingPanel.gameObject.SetActive(true);
-        buyMenu.HideMenu();
-    }
-
-    public void ShowBuildingBuyMenu(Unit source) {
-        buyMenu.gameObject.SetActive(true);
-        buyMenu.InitializeUnit(source);
-        turnPanel.gameObject.SetActive(false);
-        GameManager.SelectionChanged += HideBuildingBuyMenu;
-    }
-
-    public void HideBuildingBuyMenu() {
-        GameManager.SelectionChanged -= HideBuildingBuyMenu;
-        turnPanel.gameObject.SetActive(true);
-        buyMenu.HideMenu();
-    }
-
-    public void HideAnyBuyMenu() {
-        if (buyMenu.building != null) {
-            HideUnitBuyMenu();
-        } else if (buyMenu.unit != null) { 
-            HideBuildingBuyMenu();
-        }
-    }
+    //public void HideBuyMenu() {
+    //    buildingPanel.gameObject.SetActive(true);
+    //    buyMenu.HideMenu();
+    //}
 
     public void DisplayGameOver(PlayerTeam defeatedTeam) {
         turnPanel.SetActive(false);
