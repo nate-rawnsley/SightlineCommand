@@ -33,6 +33,9 @@ public class Unit : MonoBehaviour
     public int MaxAttack;
     public bool AOEAttack;
 
+    [SerializeField]
+    private AnimatorEventTrigger animateTrigger;
+
     [HideInInspector] public int Health;
     [HideInInspector] public int CurrentMove;
     [HideInInspector] public int CurrentAttacks;
@@ -43,6 +46,8 @@ public class Unit : MonoBehaviour
     [HideInInspector] public List<Building> buildingsInSight = new List<Building>();
     private List<Tile> tilesTargetted = new List<Tile>();
     private Tile tileHighlighted;
+    private Unit enemyUnit;
+    private Building enemyBuilding;
 
     private Animator animator;
 
@@ -281,6 +286,41 @@ public class Unit : MonoBehaviour
         StopCoroutine("RotateToTarget");
         StartCoroutine(RotateToTarget(attackPos));
         animator.SetTrigger("Attacking");
+        CurrentAttacks--;
+    }
+
+    public void AttackUnit(Tile enemyTile){
+        enemyUnit = enemyTile.unitHere;
+        Attack(enemyTile.transform.position);
+        if (animateTrigger != null) {
+            animateTrigger.AnimEvent += DamageEnemy;
+        } else {
+            DamageEnemy();
+        }
+    }
+
+    public void AttackBuilding(Tile enemyTile) {
+        enemyBuilding = enemyTile.buildingHere;
+        Attack(enemyTile.transform.position);
+        if (animateTrigger != null) {
+            animateTrigger.AnimEvent += DamageBuilding;
+        } else {
+            DamageBuilding();
+        }
+    }
+
+    public void DamageEnemy() {
+        if (animateTrigger != null) {
+            animateTrigger.AnimEvent -= DamageEnemy;
+        }
+        enemyUnit.TakeDamage(Damage);
+    }
+
+    public void DamageBuilding() {
+        if (animateTrigger != null) {
+            animateTrigger.AnimEvent -= DamageBuilding;
+        }
+        enemyBuilding.TakeDamage(Damage);
     }
 
     //Creating buildings////////////////////////////////////// Done by Nate

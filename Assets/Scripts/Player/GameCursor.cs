@@ -83,12 +83,12 @@ public class GameCursor : CursorControls {
             switch (currentMode) {
                 case UnitMode.Attack:
                     if (tile.unitHere && activeUnit.enemiesInSight.Contains(tile.unitHere)) {
-                        activeUnit.Attack(tile.transform.position);
-                        doDamage(tile);
+                        activeUnit.AttackUnit(tile);
+                        //doDamage(tile);
                         acted = true;
                     } else if (tile.buildingHere && activeUnit.buildingsInSight.Contains(tile.buildingHere)) {
-                        activeUnit.Attack(tile.transform.position);
-                        DamageBuilding(tile.buildingHere);
+                        activeUnit.AttackBuilding(tile);
+                        //DamageBuilding(tile.buildingHere);
                         acted = true;
                     }
                     break;
@@ -116,8 +116,8 @@ public class GameCursor : CursorControls {
 
     protected override void BuildingClickBehaviour(Building building) {
         if (currentMode == UnitMode.Attack && activeUnit && activeUnit.team != building.team) {
-            activeUnit.Attack(building.tile.transform.position);
-            DamageBuilding(building);
+            activeUnit.AttackBuilding(building.tile);
+            //DamageBuilding(building);
             CLEARALL();
             return;
         }
@@ -140,6 +140,7 @@ public class GameCursor : CursorControls {
         CLEARALL();  //
     }
 
+    //unused now
     protected void doDamage(Tile tile) {
         if (tile.unitHere) {            
             EnemyUnit = tile.unitHere;
@@ -149,6 +150,7 @@ public class GameCursor : CursorControls {
         }
     }
 
+    //also unused
     protected void DamageBuilding(Building building) {
         if (building) {
             building.TakeDamage(activeUnit.Damage);
