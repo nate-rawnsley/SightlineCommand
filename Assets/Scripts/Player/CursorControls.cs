@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public abstract class CursorControls : MonoBehaviour { 
     //By default, the cursor can hit layers 'Default' (1), 'Building' (64), and 'Unit' (128).
@@ -25,7 +26,8 @@ public abstract class CursorControls : MonoBehaviour {
                     //TileHoverBehaviour(cursorHit.collider.GetComponentInParent<Tile>());
                     break;
             }
-            if (Input.GetMouseButtonDown(0)) {
+            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) {
+                GameManager.SelectionChanged?.Invoke();
                 switch (cursorHit.collider.tag) {
                     case "Unit":
                         UnitClickBehaviour(cursorHit.collider.GetComponentInParent<Unit>());

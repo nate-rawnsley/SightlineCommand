@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -33,6 +34,9 @@ public class Unit : MonoBehaviour
     public bool AOEAttack;
     public bool isFlying;
 
+    [SerializeField]
+    private AnimatorEventTrigger animateTrigger;
+
     [HideInInspector] public int Health;
     [HideInInspector] public int CurrentMove;
     [HideInInspector] public int CurrentAttacks;
@@ -43,6 +47,8 @@ public class Unit : MonoBehaviour
     [HideInInspector] public List<Building> buildingsInSight = new List<Building>();
     private List<Tile> tilesTargetted = new List<Tile>();
     private Tile tileHighlighted;
+    private Unit enemyUnit;
+    private Building enemyBuilding;
 
     private Animator animator;
 
@@ -181,19 +187,21 @@ public class Unit : MonoBehaviour
         {
             animator.SetTrigger("Defeated");
             healthBar.gameObject.SetActive(false);
-            StartCoroutine(WaitForDeathAnim());
-        } else
-        {
+            if (animateTrigger != null) {
+                animateTrigger.AnimEvent += DestroySelf;
+            } else {
+                DestroySelf();
+            }
+        } else {
             animator.SetTrigger("Damaged");
         }
 
     }
     //End of Health//////////////////////////////////////////
 
-    private IEnumerator WaitForDeathAnim() {
-
-        while (animator.GetCurrentAnimatorStateInfo(0).IsName("Defeat") || animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
-            yield return new WaitForSeconds(0.5f);
+    private void DestroySelf() {
+        if (animateTrigger != null) {
+            animateTrigger.AnimEvent -= DestroySelf;
         }
         Destroy(this.gameObject);
     }
@@ -282,15 +290,58 @@ public class Unit : MonoBehaviour
         StopCoroutine("RotateToTarget");
         StartCoroutine(RotateToTarget(attackPos));
         animator.SetTrigger("Attacking");
+        CurrentAttacks--;
+    }
+
+    public void AttackUnit(Tile enemyTile){
+        enemyUnit = enemyTile.unitHere;
+        Attack(enemyTile.transform.position);
+        if (animateTrigger != null) {
+            animateTrigger.AnimEvent += DamageEnemy;
+        } else {
+            DamageEnemy();
+        }
+    }
+
+    public void AttackBuilding(Tile enemyTile) {
+        enemyBuilding = enemyTile.buildingHere;
+        Attack(enemyTile.transform.position);
+        if (animateTrigger != null) {
+            animateTrigger.AnimEvent += DamageBuilding;
+        } else {
+            DamageBuilding();
+        }
+    }
+
+    public void DamageEnemy() {
+        if (animateTrigger != null) {
+            animateTrigger.AnimEvent -= DamageEnemy;
+        }
+        enemyUnit.TakeDamage(Damage);
+    }
+
+    public void DamageBuilding() {
+        if (animateTrigger != null) {
+            animateTrigger.AnimEvent -= DamageBuilding;
+        }
+        enemyBuilding.TakeDamage(Damage);
     }
 
     //Creating buildings////////////////////////////////////// Done by Nate
 
-    public void CreateBuilding(int index) {
-        if (canBuild && GameManager.Instance.UseMaterial(team, 50)) {
-            currentTile.CreateBuilding(createableBuildings[index]);
-            currentTile.buildingHere.OnEnterBehaviour(this);
+    public void ShowBuildMenu() {
+        if (canBuild && currentTile.buildingHere == null) {
+            GameManager.Instance.gameUI.ShowBuildingBuyMenu(this);
         }
+    }
+
+    public bool CreateBuilding(Building building) {
+        if (GameManager.Instance.UseMaterial(team, building.price)) {
+            currentTile.CreateBuilding(building);
+            currentTile.buildingHere.OnEnterBehaviour(this);
+            return true;
+        }
+        return false;
     }
 
     //End of creating buildings//////////////////////////////

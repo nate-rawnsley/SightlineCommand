@@ -13,6 +13,10 @@ public class EditorCursor : CursorControls {
     private bool painting;
     private List<Tile> paintedTiles;
 
+    private void Awake() {
+        active = true;
+    }
+
     protected override void Update() {
         switch (mode) {
             case EditorMode.Edit:

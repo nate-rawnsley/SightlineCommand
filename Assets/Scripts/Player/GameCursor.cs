@@ -19,9 +19,6 @@ public class GameCursor : CursorControls {
     }
 
     public override void UnitClickBehaviour(Unit unit) {
-        if (buildingPanel.gameObject.activeSelf) {
-            buildingPanel.HidePanel();
-        }
         if (activeUnit == null && currentMode != UnitMode.None && unit.Health != 0) {
             activeUnit = unit;
             //HasSelection = false  -- N - This was replaced by checking activeUnit == null instead
@@ -62,7 +59,7 @@ public class GameCursor : CursorControls {
                     case UnitMode.Build:
                         if (activeUnit.currentTile.buildingHere == null)
                         {
-                            activeUnit.CreateBuilding(0);
+                            activeUnit.ShowBuildMenu();
 
                         }
                         CLEARALL();
@@ -80,21 +77,18 @@ public class GameCursor : CursorControls {
     }
 
     protected override void TileClickBehaviour(Tile tile) {
-        if (buildingPanel.gameObject.activeSelf) {
-            buildingPanel.HidePanel();
-        }
         bool acted = false;
         if (activeUnit != null) {
 
             switch (currentMode) {
                 case UnitMode.Attack:
                     if (tile.unitHere && activeUnit.enemiesInSight.Contains(tile.unitHere)) {
-                        activeUnit.Attack(tile.transform.position);
-                        doDamage(tile);
+                        activeUnit.AttackUnit(tile);
+                        //doDamage(tile);
                         acted = true;
                     } else if (tile.buildingHere && activeUnit.buildingsInSight.Contains(tile.buildingHere)) {
-                        activeUnit.Attack(tile.transform.position);
-                        DamageBuilding(tile.buildingHere);
+                        activeUnit.AttackBuilding(tile);
+                        //DamageBuilding(tile.buildingHere);
                         acted = true;
                     }
                     break;
@@ -122,13 +116,10 @@ public class GameCursor : CursorControls {
 
     protected override void BuildingClickBehaviour(Building building) {
         if (currentMode == UnitMode.Attack && activeUnit && activeUnit.team != building.team) {
-            activeUnit.Attack(building.tile.transform.position);
-            DamageBuilding(building);
+            activeUnit.AttackBuilding(building.tile);
+            //DamageBuilding(building);
             CLEARALL();
             return;
-        }
-        if (buildingPanel.gameObject.activeSelf) {
-            buildingPanel.HidePanel();
         }
         if (activeUnit == null && building.team == CurrentTeam) {
             buildingPanel.SetBuilding(building);
@@ -149,6 +140,7 @@ public class GameCursor : CursorControls {
         CLEARALL();  //
     }
 
+    //unused now
     protected void doDamage(Tile tile) {
         if (tile.unitHere) {            
             EnemyUnit = tile.unitHere;
@@ -158,6 +150,7 @@ public class GameCursor : CursorControls {
         }
     }
 
+    //also unused
     protected void DamageBuilding(Building building) {
         if (building) {
             building.TakeDamage(activeUnit.Damage);
@@ -179,6 +172,7 @@ public class GameCursor : CursorControls {
     public void EndTurn()
     {
         CLEARALL();
+        GameManager.Instance.EndTurn(CurrentTeam);
         CurrentTeam = CurrentTeam == PlayerTeam.HUMAN ? PlayerTeam.ALIEN : PlayerTeam.HUMAN;
         GameManager.Instance.NewTurn(CurrentTeam);
     }

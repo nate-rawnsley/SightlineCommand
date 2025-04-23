@@ -134,6 +134,88 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1001 &1838797533513144189
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 305800052112212638}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 6a1e5fc032eff2d44ab834abc4f61889, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a1e5fc032eff2d44ab834abc4f61889, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a1e5fc032eff2d44ab834abc4f61889, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a1e5fc032eff2d44ab834abc4f61889, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a1e5fc032eff2d44ab834abc4f61889, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.135
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a1e5fc032eff2d44ab834abc4f61889, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a1e5fc032eff2d44ab834abc4f61889, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.6830127
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a1e5fc032eff2d44ab834abc4f61889, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.6830127
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a1e5fc032eff2d44ab834abc4f61889, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.18301274
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a1e5fc032eff2d44ab834abc4f61889, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.18301274
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a1e5fc032eff2d44ab834abc4f61889, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a1e5fc032eff2d44ab834abc4f61889, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a1e5fc032eff2d44ab834abc4f61889, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6a1e5fc032eff2d44ab834abc4f61889, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 6a1e5fc032eff2d44ab834abc4f61889, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: 71805ad249564e44891143b17ddbb356, type: 3}
+    - target: {fileID: 919132149155446097, guid: 6a1e5fc032eff2d44ab834abc4f61889, type: 3}
+      propertyPath: m_Name
+      value: ForwardBase
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6a1e5fc032eff2d44ab834abc4f61889, type: 3}
+--- !u!4 &2165670533341327510 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6a1e5fc032eff2d44ab834abc4f61889, type: 3}
+  m_PrefabInstance: {fileID: 1838797533513144189}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3343116736789508004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -194,6 +276,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3052113932177222970, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4351019346073159178}
+    - targetCorrespondingSourceObject: {fileID: 3052113932177222970, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2165670533341327510}
     - targetCorrespondingSourceObject: {fileID: 3545108026864593716, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7195725843867666915}
@@ -233,9 +318,12 @@ MonoBehaviour:
   capacity: 5
   maxHealth: 5
   team: 0
+  materialYield: 10
   buildingName: Forward Operations Base
   toolTip: The heart of the human army. Keep this alive and use it to spawn troops.
+    Produces 10 mat/turn.
   command: Spawn Troop
+  canActivate: 0
   unitsHere: []
   tile: {fileID: 0}
   unitInCreation: {fileID: 0}
@@ -321,6 +409,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 97c161ab3f0fcd140afdb82b95ff789a, type: 3}
       propertyPath: m_Name
       value: FOB V2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 97c161ab3f0fcd140afdb82b95ff789a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6362670535118921867, guid: 97c161ab3f0fcd140afdb82b95ff789a, type: 3}
       propertyPath: m_Materials.Array.data[0]
