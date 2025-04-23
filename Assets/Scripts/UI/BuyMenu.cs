@@ -86,6 +86,6 @@ public class BuyMenu : MonoBehaviour {
         errorIndicator.text = "";
         building = null;
         unit = null;
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 }

@@ -80,7 +80,7 @@ public class BuildingPanel : MonoBehaviour {
         {
             if (building.ActivateBehaviour())
             {
-                //HidePanel();
+                HidePanel();
             }
         }
     }

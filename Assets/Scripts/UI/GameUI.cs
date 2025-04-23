@@ -81,34 +81,34 @@ public class GameUI : MonoBehaviour {
         winPanel = transform.Find("Game End Panel").gameObject;
         gameCursor = GameManager.Instance.gameCursor;
         turnPanel.SetActive(true);
-        buildingPanel.SetActive(false);
+        //buildingPanel.SetActive(false);
         winPanel.SetActive(false);
         UpdateTeamDisplay();
     }
 
     public void ShowUnitBuyMenu(UnitCamp source) {
-        buyMenu.gameObject.SetActive(true);
+        //buyMenu.gameObject.SetActive(true);
         buyMenu.InitializeBuilding(source);
-        buildingPanel.gameObject.SetActive(false);
+        //buildingPanel.gameObject.SetActive(false);
         GameManager.SelectionChanged += HideUnitBuyMenu;
     }
 
     public void HideUnitBuyMenu() {
         GameManager.SelectionChanged -= HideUnitBuyMenu;
-        buildingPanel.gameObject.SetActive(true);
+        //buildingPanel.gameObject.SetActive(true);
         buyMenu.HideMenu();
     }
 
     public void ShowBuildingBuyMenu(Unit source) {
-        buyMenu.gameObject.SetActive(true);
+        //buyMenu.gameObject.SetActive(true);
         buyMenu.InitializeUnit(source);
-        turnPanel.gameObject.SetActive(false);
+        //turnPanel.gameObject.SetActive(false);
         GameManager.SelectionChanged += HideBuildingBuyMenu;
     }
 
     public void HideBuildingBuyMenu() {
         GameManager.SelectionChanged -= HideBuildingBuyMenu;
-        turnPanel.gameObject.SetActive(true);
+        //turnPanel.gameObject.SetActive(true);
         buyMenu.HideMenu();
     }
 

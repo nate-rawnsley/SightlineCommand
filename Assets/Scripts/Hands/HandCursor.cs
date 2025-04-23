@@ -104,7 +104,7 @@ public class HandCursor : HandCasting {
                         acted = true;
                         break;
                     }
-                    if (tile.terrainType.walkable)
+                    if (tile.terrainType.walkable || activeUnit.isFlying)
                     {
                         activeUnit.EndMove(tile); //Clears all highlighted tiles
                         acted = true;
