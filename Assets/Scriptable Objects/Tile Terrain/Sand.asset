@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrainName: Desert
   material: {fileID: -876546973899608171, guid: 46d512c32696b3f49ae96112dab75f9a, type: 3}
-  travelSpeed: 0.5
+  travelSpeed: 2
   walkable: 1
   decorations:
   - {fileID: 3408387375846706127, guid: 8b17bf72e78a23e4ba4784dedc34357c, type: 3}

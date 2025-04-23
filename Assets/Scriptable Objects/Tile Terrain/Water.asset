@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrainName: Water
   material: {fileID: -876546973899608171, guid: ef2cf1e958fa32245b4e3423c67993be, type: 3}
-  travelSpeed: 0
+  travelSpeed: 1
   walkable: 0
   decorations: []
   decorationFrequency: 0
