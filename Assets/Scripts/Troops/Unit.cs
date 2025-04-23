@@ -185,19 +185,21 @@ public class Unit : MonoBehaviour
         {
             animator.SetTrigger("Defeated");
             healthBar.gameObject.SetActive(false);
-            StartCoroutine(WaitForDeathAnim());
-        } else
-        {
+            if (animateTrigger != null) {
+                animateTrigger.AnimEvent += DestroySelf;
+            } else {
+                DestroySelf();
+            }
+        } else {
             animator.SetTrigger("Damaged");
         }
 
     }
     //End of Health//////////////////////////////////////////
 
-    private IEnumerator WaitForDeathAnim() {
-
-        while (animator.GetCurrentAnimatorStateInfo(0).IsName("Defeat") || animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) {
-            yield return new WaitForSeconds(0.5f);
+    private void DestroySelf() {
+        if (animateTrigger != null) {
+            animateTrigger.AnimEvent -= DestroySelf;
         }
         Destroy(this.gameObject);
     }

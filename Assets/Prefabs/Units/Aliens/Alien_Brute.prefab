@@ -124,6 +124,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Unit
       objectReference: {fileID: 0}
+    - target: {fileID: -6278733181680856728, guid: 9560ed27d1285ea45be7b0ad3c935a18, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: c95315970a48d2343bb1546ec1b3f4ca, type: 3}
     - target: {fileID: -6002937584851627564, guid: 9560ed27d1285ea45be7b0ad3c935a18, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -375,6 +379,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9560ed27d1285ea45be7b0ad3c935a18, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5774719434722877285}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9560ed27d1285ea45be7b0ad3c935a18, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5893770302931067498}
     - targetCorrespondingSourceObject: {fileID: -6392817512330831295, guid: 9560ed27d1285ea45be7b0ad3c935a18, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5579549607593289030}
@@ -436,6 +443,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5893770302931067498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4230035165394218839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f221d74a6eafb449abe3cacbae09f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animators: []
 --- !u!1001 &5516704683614116651
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -468,6 +488,10 @@ PrefabInstance:
       propertyPath: displayName
       value: Alien Brute
       objectReference: {fileID: 0}
+    - target: {fileID: 192178684404589673, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
+      propertyPath: animateTrigger
+      value: 
+      objectReference: {fileID: 5893770302931067498}
     - target: {fileID: 192178684404589673, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
       propertyPath: createableBuildings.Array.size
       value: 1
