@@ -52,6 +52,9 @@ public class BuildingPanel : MonoBehaviour {
     }
     
     public void HidePanel() {
+        nameText.text = ("Building");
+        tipText.text = ("No Building Selected");
+        building = null;
         foreach (GameObject entry in entries) {
             Destroy(entry);
         }
@@ -61,8 +64,12 @@ public class BuildingPanel : MonoBehaviour {
 
     public void ActivateBuilding()
     {
-        if (building.ActivateBehaviour()) {
-            //HidePanel();
+        if (building != null)
+        {
+            if (building.ActivateBehaviour())
+            {
+                //HidePanel();
+            }
         }
     }
 
