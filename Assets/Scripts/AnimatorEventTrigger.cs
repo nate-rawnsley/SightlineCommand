@@ -11,6 +11,9 @@ public class AnimatorEventTrigger : MonoBehaviour {
     [SerializeField]
     private Transform particlePoint;
 
+    [SerializeField]
+    private ParticleSystem particles;
+
     public Action AnimEvent;
 
     private string triggerSave;
@@ -23,6 +26,10 @@ public class AnimatorEventTrigger : MonoBehaviour {
 
     public void SetTrigger(string trigger) {
         triggerSave = trigger;
+    }
+
+    public void PlayParticle() {
+        particles.Play();
     }
 
     public void PlayTriggerIndex(int index) {

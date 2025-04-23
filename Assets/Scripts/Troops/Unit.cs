@@ -36,6 +36,9 @@ public class Unit : MonoBehaviour
     [SerializeField]
     private AnimatorEventTrigger animateTrigger;
 
+    [SerializeField]
+    private ParticleSystem lowHealthParticles;
+
     [HideInInspector] public int Health;
     [HideInInspector] public int CurrentMove;
     [HideInInspector] public int CurrentAttacks;
@@ -181,7 +184,10 @@ public class Unit : MonoBehaviour
     {
         Health -= damageDealt;
         healthBar.Damage(damageDealt);
-        if(Health <= 0)
+        if (Health <= 1 && lowHealthParticles != null && !lowHealthParticles.isPlaying) {
+            lowHealthParticles.Play();
+        }
+        if (Health <= 0)
         {
             animator.SetTrigger("Defeated");
             healthBar.gameObject.SetActive(false);
