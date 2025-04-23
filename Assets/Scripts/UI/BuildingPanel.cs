@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using JetBrains.Rider.Unity.Editor;
 
 public class BuildingPanel : MonoBehaviour {
 

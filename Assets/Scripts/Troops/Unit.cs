@@ -331,7 +331,7 @@ public class Unit : MonoBehaviour
 
     public void ShowBuildMenu() {
         if (canBuild && currentTile.buildingHere == null) {
-            GameManager.Instance.gameUI.ShowBuildingBuyMenu(this);
+            //GameManager.Instance.gameUI.ShowBuyMenu(this);  //COMMENTED OUT
         }
     }
 

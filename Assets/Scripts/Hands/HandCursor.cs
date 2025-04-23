@@ -62,7 +62,7 @@ public class HandCursor : HandCasting {
                     case UnitMode.Build:
                         if (activeUnit.currentTile.buildingHere == null)
                         {
-                            activeUnit.CreateBuilding(0);
+                            activeUnit.ShowBuildMenu();
 
                         }
                         CLEARALL();
