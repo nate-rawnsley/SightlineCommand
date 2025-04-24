@@ -742,7 +742,8 @@ MonoBehaviour:
   - {fileID: 0}
   particlePrefab: {fileID: 0}
   particlePoint: {fileID: 0}
-  particles: {fileID: 4046096495098818446}
+  particles:
+  - {fileID: 4046096495098818446}
 --- !u!1001 &5516704683614116651
 PrefabInstance:
   m_ObjectHideFlags: 0

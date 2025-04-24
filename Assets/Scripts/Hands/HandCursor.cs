@@ -79,7 +79,7 @@ public class HandCursor : HandCasting {
         }
     }
 
-    protected override void TileClickBehaviour(Tile tile) {
+    public override void TileClickBehaviour(Tile tile) {
         if (buildingPanel.gameObject.activeSelf) {
             buildingPanel.HidePanel();
         }
@@ -120,7 +120,7 @@ public class HandCursor : HandCasting {
 
     }
 
-    protected override void BuildingClickBehaviour(Building building) {
+    public override void BuildingClickBehaviour(Building building) {
         if (currentMode == UnitMode.Attack && activeUnit && activeUnit.team != building.team) {
             activeUnit.Attack(building.tile.transform.position);
             DamageBuilding(building);

@@ -12,7 +12,10 @@ public class AnimatorEventTrigger : MonoBehaviour {
     private Transform particlePoint;
 
     [SerializeField]
-    private ParticleSystem particles;
+    private ParticleSystem[] particles;
+
+    [SerializeField]
+    private GameObject[] activatedObjects;
 
     public Action AnimEvent;
 
@@ -29,7 +32,21 @@ public class AnimatorEventTrigger : MonoBehaviour {
     }
 
     public void PlayParticle() {
-        particles.Play();
+        foreach (var system in particles) {
+            system.Play();
+        }
+    }
+
+    public void ActivateObjects() {
+        foreach (var actObject in activatedObjects) {
+            actObject.SetActive(true);
+        }
+    }
+
+    public void DeactivateObjects() {
+        foreach (var actObject in activatedObjects) {
+            actObject.SetActive(false);
+        }
     }
 
     public void PlayTriggerIndex(int index) {

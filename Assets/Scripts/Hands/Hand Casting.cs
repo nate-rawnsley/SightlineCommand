@@ -53,9 +53,9 @@ public class HandCasting : MonoBehaviour
     }
     public virtual void UnitClickBehaviour(Unit unit) { }
 
-    protected virtual void TileClickBehaviour(Tile tile) { }
+    public virtual void TileClickBehaviour(Tile tile) { }
 
-    protected virtual void BuildingClickBehaviour(Building building) { }
+    public virtual void BuildingClickBehaviour(Building building) { }
 
     protected virtual void TileHoverBehaviour(Tile tile) { }
 
