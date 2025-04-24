@@ -78,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e2c843274f3afe741a38a38a180a7605, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0.000013755669
+      value: 0.000014103227
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e2c843274f3afe741a38a38a180a7605, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -665,10 +665,39 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e2c843274f3afe741a38a38a180a7605, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2322338256427128929}
+    - targetCorrespondingSourceObject: {fileID: -8662678336086135554, guid: e2c843274f3afe741a38a38a180a7605, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2968553427574942115}
     - targetCorrespondingSourceObject: {fileID: 205228275063329036, guid: e2c843274f3afe741a38a38a180a7605, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3936248098431126334}
   m_SourcePrefab: {fileID: 100100000, guid: e2c843274f3afe741a38a38a180a7605, type: 3}
+--- !u!1 &11520131486872790 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8662678336086135554, guid: e2c843274f3afe741a38a38a180a7605, type: 3}
+  m_PrefabInstance: {fileID: 571700470919682088}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2968553427574942115
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11520131486872790}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 68b1f363b5572e8408a20ddb42ae1448, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &28622426055786435 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e2c843274f3afe741a38a38a180a7605, type: 3}
@@ -744,6 +773,7 @@ MonoBehaviour:
   particlePoint: {fileID: 0}
   particles:
   - {fileID: 4046096495098818446}
+  activatedObjects: []
 --- !u!1001 &5516704683614116651
 PrefabInstance:
   m_ObjectHideFlags: 0

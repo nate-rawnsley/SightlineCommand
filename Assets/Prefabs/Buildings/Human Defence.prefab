@@ -146,14 +146,51 @@ PrefabInstance:
       propertyPath: m_Name
       value: Human Defence
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3052113932177222970, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 301400642832730343}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8503684528012979269, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2569740521154121934}
   m_SourcePrefab: {fileID: 100100000, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+--- !u!1 &1251988465070527545 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8503684528012979269, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+  m_PrefabInstance: {fileID: 7448070765193771132}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2569740521154121934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251988465070527545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5003d7dd170642c4bb160bf50d37514c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  price: 10
+  capacity: 5
+  maxHealth: 5
+  team: 0
+  materialYield: 0
+  buildingName: Defence Building
+  toolTip: Any enemy unit that enters its range (1 tile) will take damage.
+  command: 
+  canActivate: 0
+  unitsHere: []
+  tile: {fileID: 0}
+  unitInCreation: {fileID: 0}
+  turnsToCreate: 0
+  health: 0
+  range: 1
+  damage: 1
 --- !u!4 &5550569534687614278 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3052113932177222970, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}

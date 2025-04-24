@@ -23,6 +23,6 @@ public class BuyableBuildingEntry : MonoBehaviour {
     }
 
     public void OptionSelected() {
-        //buyMenu.BuildingSelected(building);
+        buyMenu.BuildingSelected(building);
     }
 }

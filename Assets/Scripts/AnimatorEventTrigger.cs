@@ -17,6 +17,9 @@ public class AnimatorEventTrigger : MonoBehaviour {
     [SerializeField]
     private GameObject[] activatedObjects;
 
+    [SerializeField]
+    private AudioSource audioSource;
+
     public Action AnimEvent;
 
     private string triggerSave;
@@ -47,6 +50,10 @@ public class AnimatorEventTrigger : MonoBehaviour {
         foreach (var actObject in activatedObjects) {
             actObject.SetActive(false);
         }
+    }
+
+    public void PlaySoundEffect(AudioClip sound) {
+        audioSource.PlayOneShot(sound);
     }
 
     public void PlayTriggerIndex(int index) {

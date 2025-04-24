@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ public class Tile : MonoBehaviour {
     public bool IsSelected;
     public Building buildingHere;
     public GameObject decoration;
+
+    public Action<Unit> UnitMovedHere;
 
     private Renderer thisRenderer;
     public bool lerpingColour;
@@ -48,7 +51,6 @@ public class Tile : MonoBehaviour {
         }
     }
 
-
     public void SetTerrain() {
         if (decoration != null) {
             Destroy(decoration);
@@ -57,11 +59,11 @@ public class Tile : MonoBehaviour {
         thisRenderer.material = terrainType.material;
         bool hasDecoration = false;
         if (terrainType.decorations.Count > 0 && buildingHere == null) {
-            if (Random.value <= terrainType.decorationFrequency) {
-                decoIndex = Random.Range(0, terrainType.decorations.Count);
+            if (UnityEngine.Random.value <= terrainType.decorationFrequency) {
+                decoIndex = UnityEngine.Random.Range(0, terrainType.decorations.Count);
                 decoration = Instantiate(terrainType.decorations[decoIndex], transform);
 
-                int alignment = Random.Range(0, 6);
+                int alignment = UnityEngine.Random.Range(0, 6);
                 decoRotation = decoration.transform.rotation.eulerAngles;
                 decoRotation.y = alignment * 60;
                 decoration.transform.rotation = Quaternion.Euler(decoRotation);
@@ -91,7 +93,7 @@ public class Tile : MonoBehaviour {
     }
 
     public void CreateBuilding(Building building) {
-        if (buildingHere != null) {
+        if (buildingHere != null || !terrainType.walkable) {
             return;
         }
 
@@ -99,11 +101,11 @@ public class Tile : MonoBehaviour {
             Destroy(decoration.gameObject);
             decoration = null;
         }
-        
 
         buildingHere = Instantiate(building.gameObject, transform).GetComponent<Building>();
         buildingHere.tile = this;
-        FindObjectOfType<GameManager>().players[building.team].buildings.Add(buildingHere);
+        buildingHere.SpawnBehaviour();
+        GameManager.Instance.players[building.team].buildings.Add(buildingHere);
     }
 
     public void DisplayColour(Color color) {

@@ -179,6 +179,7 @@ public class HandCursor : HandCasting {
     public void EndTurn()
     {
         CLEARALL();
+        GameManager.Instance.EndTurn(CurrentTeam);
         CurrentTeam = CurrentTeam == PlayerTeam.HUMAN ? PlayerTeam.ALIEN : PlayerTeam.HUMAN;
         GameManager.Instance.NewTurn(CurrentTeam);
     }

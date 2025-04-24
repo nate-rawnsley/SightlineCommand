@@ -454,7 +454,10 @@ MonoBehaviour:
   - {fileID: 8600804120004204390}
   particlePrefab: {fileID: 4211873392745583015, guid: 3d53bb619d6b81048ac12afa26a4c029, type: 3}
   particlePoint: {fileID: 819245407203125948}
-  particles: {fileID: 0}
+  particles:
+  - {fileID: 0}
+  activatedObjects: []
+  audioSource: {fileID: 0}
 --- !u!4 &814040976158208927 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3ca65f848fed8414390cdb7276c9b75d, type: 3}
@@ -704,7 +707,7 @@ PrefabInstance:
     - target: {fileID: 192178684404589673, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
       propertyPath: createableBuildings.Array.data[2]
       value: 
-      objectReference: {fileID: 5054760929348033780, guid: 2da46748b3d97624fb028e6ed6a7ad13, type: 3}
+      objectReference: {fileID: 2569740521154121934, guid: 2da46748b3d97624fb028e6ed6a7ad13, type: 3}
     - target: {fileID: 5477471966950854349, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
       propertyPath: m_Name
       value: Human_V

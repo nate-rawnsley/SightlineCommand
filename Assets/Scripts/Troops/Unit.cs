@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -86,6 +85,7 @@ public class Unit : MonoBehaviour
     public void MoveToTile(Tile tile, bool animate = false)
     {
         currentTile = tile;
+        tile.UnitMovedHere?.Invoke(this);
         if (animate) {
             StopAllCoroutines();
             StartCoroutine(AnimateToTile());
@@ -337,7 +337,7 @@ public class Unit : MonoBehaviour
 
     public void ShowBuildMenu() {
         if (canBuild && currentTile.buildingHere == null) {
-            //GameManager.Instance.gameUI.ShowBuyMenu(this);  //COMMENTED OUT
+            GameManager.Instance.gameUI.ShowBuildingBuyMenu(this);  //COMMENTED OUT
         }
     }
 

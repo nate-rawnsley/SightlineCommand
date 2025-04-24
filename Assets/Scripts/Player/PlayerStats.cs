@@ -6,7 +6,7 @@ public class PlayerStats {
     public List<Unit> units = new List<Unit>();
     public List<Building> buildings = new List<Building>();
     public PlayerStats otherPlayer;
-    public int material = 0;
+    public int material = 10;
     public int troopTokens = 5;
 
     public PlayerStats(PlayerTeam team) {
@@ -22,6 +22,7 @@ public class PlayerStats {
     }
     
     public void EndTurn() {
+        Debug.Log(buildings.Count);
         foreach (var building in buildings) {
             building.EndTurn();
         }

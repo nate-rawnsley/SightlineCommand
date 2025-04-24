@@ -45,7 +45,7 @@ public class Building : MonoBehaviour {
     //Returns whether to hide the main buiding menu after.
     public virtual bool ActivateBehaviour() { return false; }
 
-    public virtual void DeactivateBehaviour() { }
+    public virtual void SpawnBehaviour() { }
 
     protected virtual void DeathBehaviour() {
         List<Unit> unitsToRemove = new List<Unit>(unitsHere); //Made temporary list to avoid errors
@@ -93,6 +93,7 @@ public class Building : MonoBehaviour {
 
     public void EndTurn() { 
         GameManager.Instance.players[team].material += materialYield;
+        Debug.Log(GameManager.Instance.players[team].material);
         GameManager.Instance.players[team].troopTokens++;
     }
 
