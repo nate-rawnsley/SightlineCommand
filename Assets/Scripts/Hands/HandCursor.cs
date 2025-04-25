@@ -89,12 +89,12 @@ public class HandCursor : HandCasting {
             switch (currentMode) {
                 case UnitMode.Attack:
                     if (tile.unitHere && activeUnit.enemiesInSight.Contains(tile.unitHere)) {
-                        activeUnit.Attack(tile.transform.position);
-                        doDamage(tile);
+                        activeUnit.AttackUnit(tile);
+                        //doDamage(tile);
                         acted = true;
                     } else if (tile.buildingHere && activeUnit.buildingsInSight.Contains(tile.buildingHere)) {
-                        activeUnit.Attack(tile.transform.position);
-                        DamageBuilding(tile.buildingHere);
+                        activeUnit.AttackBuilding(tile);
+                        //DamageBuilding(tile.buildingHere);
                         acted = true;
                     }
                     break;
@@ -122,8 +122,8 @@ public class HandCursor : HandCasting {
 
     public override void BuildingClickBehaviour(Building building) {
         if (currentMode == UnitMode.Attack && activeUnit && activeUnit.team != building.team) {
-            activeUnit.Attack(building.tile.transform.position);
-            DamageBuilding(building);
+            activeUnit.AttackBuilding(building.tile);
+            //DamageBuilding(building);
             CLEARALL();
             return;
         }
@@ -149,6 +149,8 @@ public class HandCursor : HandCasting {
         CLEARALL();  //
     }
 
+
+    //<Legacy functions - currently unused>
     protected void doDamage(Tile tile) {
         if (tile.unitHere) {            
             EnemyUnit = tile.unitHere;
@@ -164,6 +166,7 @@ public class HandCursor : HandCasting {
             activeUnit.CurrentAttacks--;
         }
     }
+    //</Legacy>
 
     //Instead of separate functions for each button, it parses an index and uses the same one.
     public void SetBehaviour(int modeIndex) {

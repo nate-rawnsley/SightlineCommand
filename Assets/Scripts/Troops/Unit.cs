@@ -39,6 +39,8 @@ public class Unit : MonoBehaviour
     [SerializeField]
     private ParticleSystem lowHealthParticles;
 
+    private float rotationOffset;
+
     [HideInInspector] public int Health;
     [HideInInspector] public int CurrentMove;
     [HideInInspector] public int CurrentAttacks;
@@ -67,6 +69,7 @@ public class Unit : MonoBehaviour
         //healthBar.gameObject.SetActive(false);
         valuesText = GetComponentInChildren<TextMeshPro>();
         model = transform.Find("Model");
+        rotationOffset = model.rotation.eulerAngles.y;
         animator = model.GetComponent<Animator>();
     }
     //Movement///////////////////////////////////////////// Base Movement done by Nate, Limiting Movement Distance and changing movement material Done By Dylan
@@ -100,15 +103,24 @@ public class Unit : MonoBehaviour
         }
     }
 
-    private IEnumerator RotateToTarget(Vector3 targetPos) {
-        float angle = model.eulerAngles.y;
+    private IEnumerator RotateToTarget(Vector3 targetPos, bool attack = false) {
+        float angle = model.eulerAngles.y % 360;
         model.LookAt(targetPos);
-        float endRot = model.eulerAngles.y;
+        float endRot = (model.eulerAngles.y + rotationOffset) % 360;
         float currentVelocity = 0;
-        while (Mathf.Abs(angle - endRot) > 0.1f) {
+        Debug.Log(attack);
+        float difference = Mathf.Abs(angle - endRot);
+        while (difference > 1.5f && difference - 360 < -1.5f) {
             angle = Mathf.SmoothDampAngle(angle, endRot, ref currentVelocity, 0.25f);
             model.rotation = Quaternion.Euler(0, angle, 0);
             yield return null;
+            difference = Mathf.Abs(angle - endRot);
+            Debug.Log($"{angle} - {endRot} = {Mathf.Abs(angle - endRot)}");
+        }
+        Debug.Log(attack);
+        if (attack) {
+            
+            animator.SetTrigger("Attacking");
         }
     }
 
@@ -294,8 +306,8 @@ public class Unit : MonoBehaviour
         EndTargeting();
         attackPos.y += scale * 0.5f;
         StopCoroutine("RotateToTarget");
-        StartCoroutine(RotateToTarget(attackPos));
-        animator.SetTrigger("Attacking");
+        StartCoroutine(RotateToTarget(attackPos, true));
+        
         CurrentAttacks--;
     }
 
@@ -304,6 +316,7 @@ public class Unit : MonoBehaviour
         Attack(enemyTile.transform.position);
         if (animateTrigger != null) {
             animateTrigger.AnimEvent += DamageEnemy;
+            Debug.Log("a");
         } else {
             DamageEnemy();
         }
@@ -320,6 +333,7 @@ public class Unit : MonoBehaviour
     }
 
     public void DamageEnemy() {
+        Debug.Log("b");
         if (animateTrigger != null) {
             animateTrigger.AnimEvent -= DamageEnemy;
         }

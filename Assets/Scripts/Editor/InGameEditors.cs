@@ -19,7 +19,7 @@ public class TileEditor : Editor {
     public override void OnInspectorGUI() {
         base.OnInspectorGUI();
 
-        if (GUILayout.Button("Select This Unit")) {
+        if (GUILayout.Button("Select This Tile")) {
             GameManager.Instance.gameCursor.TileClickBehaviour(target as Tile);
         }
     }
@@ -30,7 +30,7 @@ public class BuildingEditor : Editor {
     public override void OnInspectorGUI() {
         base.OnInspectorGUI();
 
-        if (GUILayout.Button("Select This Unit")) {
+        if (GUILayout.Button("Select This Building")) {
             GameManager.Instance.gameCursor.BuildingClickBehaviour(target as Building);
         }
     }

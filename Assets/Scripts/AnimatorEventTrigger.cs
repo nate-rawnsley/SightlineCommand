@@ -34,6 +34,11 @@ public class AnimatorEventTrigger : MonoBehaviour {
         triggerSave = trigger;
     }
 
+
+    public void PlayTriggerIndex(int index) {
+        animators[index].SetTrigger(triggerSave);
+    }
+
     public void PlayParticle() {
         foreach (var system in particles) {
             system.Play();
@@ -54,10 +59,6 @@ public class AnimatorEventTrigger : MonoBehaviour {
 
     public void PlaySoundEffect(AudioClip sound) {
         audioSource.PlayOneShot(sound);
-    }
-
-    public void PlayTriggerIndex(int index) {
-        animators[index].SetTrigger(triggerSave);
     }
 
     public void CallEvent() {
