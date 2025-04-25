@@ -64,10 +64,6 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: a125049097eb4c140910cb8d31782ead, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: b05daed9989374f4e98f231eee901edc, type: 3}
     - target: {fileID: 919132149155446097, guid: a125049097eb4c140910cb8d31782ead, type: 3}
       propertyPath: m_Name
       value: AlienDefense_low
@@ -146,10 +142,6 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: a125049097eb4c140910cb8d31782ead, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: b05daed9989374f4e98f231eee901edc, type: 3}
     - target: {fileID: 919132149155446097, guid: a125049097eb4c140910cb8d31782ead, type: 3}
       propertyPath: m_Name
       value: AlienDefense_low (3)
@@ -228,10 +220,6 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: a125049097eb4c140910cb8d31782ead, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: b05daed9989374f4e98f231eee901edc, type: 3}
     - target: {fileID: 919132149155446097, guid: a125049097eb4c140910cb8d31782ead, type: 3}
       propertyPath: m_Name
       value: AlienDefense_low (2)
@@ -433,10 +421,6 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: a125049097eb4c140910cb8d31782ead, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: b05daed9989374f4e98f231eee901edc, type: 3}
     - target: {fileID: 919132149155446097, guid: a125049097eb4c140910cb8d31782ead, type: 3}
       propertyPath: m_Name
       value: AlienDefense_low (1)

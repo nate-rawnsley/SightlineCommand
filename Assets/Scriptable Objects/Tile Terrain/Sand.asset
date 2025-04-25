@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sand
   m_EditorClassIdentifier: 
   terrainName: Desert
-  material: {fileID: -876546973899608171, guid: 46d512c32696b3f49ae96112dab75f9a, type: 3}
+  material: {fileID: 2100000, guid: 98c48eaf7025f8342b64f005b699c8a9, type: 2}
   travelSpeed: 2
   walkable: 1
   decorations:

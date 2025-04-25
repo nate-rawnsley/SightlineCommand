@@ -124,10 +124,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Unit
       objectReference: {fileID: 0}
-    - target: {fileID: -6278733181680856728, guid: 9560ed27d1285ea45be7b0ad3c935a18, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: c95315970a48d2343bb1546ec1b3f4ca, type: 3}
     - target: {fileID: -6002937584851627564, guid: 9560ed27d1285ea45be7b0ad3c935a18, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -458,7 +454,10 @@ MonoBehaviour:
   animators: []
   particlePrefab: {fileID: 0}
   particlePoint: {fileID: 0}
-  particles: {fileID: 0}
+  particles:
+  - {fileID: 0}
+  activatedObjects: []
+  audioSource: {fileID: 0}
 --- !u!1001 &5516704683614116651
 PrefabInstance:
   m_ObjectHideFlags: 0

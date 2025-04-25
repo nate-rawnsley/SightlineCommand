@@ -7753,7 +7753,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrainTypes:
   - {fileID: 11400000, guid: 98e40cc50689bce46b7fc44b054593bc, type: 2}
-  levelSave: {fileID: 0}
+  levelSave: {fileID: 11400000, guid: d8d317382e74b214ab89b04edc24f796, type: 2}
   scale: 2
   gapScale: 1.025
   width: 20

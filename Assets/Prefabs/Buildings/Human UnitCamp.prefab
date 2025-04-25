@@ -67,7 +67,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: b82209245b2d4264981fe25d4c9bdd4e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -876546973899608171, guid: b96869a5353a4614eb54baf0197256c1, type: 3}
+      objectReference: {fileID: 2100000, guid: 0bc84bc97b298bf4fa2c8690cd306c66, type: 2}
     - target: {fileID: 919132149155446097, guid: b82209245b2d4264981fe25d4c9bdd4e, type: 3}
       propertyPath: m_Name
       value: BarracksBase
