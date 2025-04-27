@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class Billboard : MonoBehaviour {
 
-    private void Awake() { 
-        transform.forward = Camera.main.transform.forward;
+    private void OnEnable() {
+        CameraChange.CameraChanged += SetForward;
     }
 
+    private void OnDisable() {
+        CameraChange.CameraChanged -= SetForward;
+    }
+
+    private void Awake() {
+        SetForward();
+    }
+
+    private void SetForward() {
+        transform.rotation = Camera.main.transform.rotation;
+        //transform.forward = Camera.main.transform.forward;
+    }
 }
