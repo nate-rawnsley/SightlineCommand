@@ -81,6 +81,13 @@ public class Building : MonoBehaviour {
         unitLeaving.transform.localScale = unitLeaving.unitScale;
         if (unitsHere.Count == 0) {
             unitIndicator.sprite = null;
+        } else {
+            string chevronString = "Billboards/Chevron3";
+            if (unitsHere.Count < 3) {
+                chevronString = $"Billboards/Chevron{unitsHere.Count}";
+            }
+            Sprite indicatorSprite = Resources.Load<Sprite>("Billboards/Chevron1");
+            unitIndicator.sprite = indicatorSprite;
         }
     }
 
