@@ -765,8 +765,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animators:
   - {fileID: 0}
-  particlePrefab: {fileID: 0}
-  particlePoint: {fileID: 0}
+  particlePrefab: {fileID: 4211873392745583015, guid: 48dfa7f4dd092df49bdbc3a6ab545c3a, type: 3}
+  particlePoint: {fileID: 4037211353816882618}
   particles:
   - {fileID: 4046096495098818446}
   activatedObjects: []
