@@ -100,7 +100,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6780716543572538985, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       propertyPath: m_Center.y
-      value: 0.05
+      value: 0.14
       objectReference: {fileID: 0}
     - target: {fileID: 3052113932177222970, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -195,7 +195,7 @@ MonoBehaviour:
   price: 10
   capacity: 5
   maxHealth: 5
-  team: 0
+  team: 1
   materialYield: 20
   buildingName: Factory
   toolTip: Produces material for making more buildings! (20 mat/turn)
