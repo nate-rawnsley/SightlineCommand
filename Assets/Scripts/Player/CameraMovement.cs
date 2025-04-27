@@ -4,9 +4,15 @@ public class CameraMovement : MonoBehaviour {
 
     public float speed = 2.5f;
     private float initialSpeed;
+    private int direction = 1;
 
     private void Awake() {
         initialSpeed = speed;
+        CameraChange.CameraChanged += SwapDirection;
+    }
+
+    private void SwapDirection() {
+        direction *= -1;
     }
 
     public void SetInitialPosition(float scale) {
@@ -20,18 +26,19 @@ public class CameraMovement : MonoBehaviour {
         sprint();
 
         Vector3 newPos = transform.position;
-        //this is not a neat way of doing this so i might change it later but it works for now.
+        //this is not a neat way of doing this so I might change it later but it works for now.
+        float difference = Time.deltaTime * speed * direction;
         if (Input.GetKey(KeyCode.W)) {
-            newPos.z += Time.deltaTime * speed;
+            newPos.z += difference;
         }
         if (Input.GetKey(KeyCode.A)) {
-            newPos.x -= Time.deltaTime * speed;
+            newPos.x -= difference;
         }
         if (Input.GetKey(KeyCode.S)) {
-            newPos.z -= Time.deltaTime * speed;
+            newPos.z -= difference;
         }
         if (Input.GetKey(KeyCode.D)) {
-            newPos.x += Time.deltaTime * speed;
+            newPos.x += difference;
         }
         if (Input.GetKey(KeyCode.Q)) {
             newPos.y -= Time.deltaTime * speed; 
