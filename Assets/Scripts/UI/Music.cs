@@ -7,7 +7,8 @@ public class Music : MonoBehaviour
     private int MuteSounds = 0;
     public AudioSource MusicSource;
     private void Awake()
-    {        
+    {
+        
         MusicChange();
     }
     private void Update()
