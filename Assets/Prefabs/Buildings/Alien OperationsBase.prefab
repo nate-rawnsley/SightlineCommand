@@ -142,6 +142,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6780716543572538985, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: m_Size.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -6780716543572538985, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: m_Center.y
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 3052113932177222970, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -315,6 +323,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0ec0b9471c3fb8145abf9a21340517ee, type: 3}
       propertyPath: m_Name
       value: Alien HQ_low
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0ec0b9471c3fb8145abf9a21340517ee, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
