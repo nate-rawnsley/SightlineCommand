@@ -40,6 +40,7 @@ public class Unit : MonoBehaviour
     private ParticleSystem lowHealthParticles;
 
     private float rotationOffset;
+    private Vector3 positionOffset;
 
     [HideInInspector] public int Health;
     [HideInInspector] public int CurrentMove;
@@ -70,6 +71,7 @@ public class Unit : MonoBehaviour
         valuesText = GetComponentInChildren<TextMeshPro>();
         model = transform.Find("Model");
         rotationOffset = model.rotation.eulerAngles.y;
+        positionOffset = model.position;
         animator = model.GetComponent<Animator>();
     }
     //Movement///////////////////////////////////////////// Base Movement done by Nate, Limiting Movement Distance and changing movement material Done By Dylan
@@ -95,7 +97,7 @@ public class Unit : MonoBehaviour
         } else {
             Vector3 position = currentTile.transform.position;
             position.y += scale * 0.5f;
-            transform.position = position;
+            transform.position = position + positionOffset;
         }
         if (CurrentMove == 0)
         {
@@ -127,7 +129,7 @@ public class Unit : MonoBehaviour
     private IEnumerator AnimateToTile() {
         animator.SetBool("Walking", true);
         Vector3 startPosition = transform.position;
-        Vector3 targetPos = currentTile.transform.position;
+        Vector3 targetPos = currentTile.transform.position + positionOffset;
         targetPos.y += scale * 0.5f;
         StartCoroutine(RotateToTarget(targetPos));
         float time = 0;
