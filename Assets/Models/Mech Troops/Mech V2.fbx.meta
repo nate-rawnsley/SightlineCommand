@@ -156,7 +156,7 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.44038156
-        functionName: PlaySoundEffects
+        functionName: PlaySoundEffect
         data: 
         objectReferenceParameter: {fileID: 8300000, guid: af7a45e7254454b498c91be71ffa8246, type: 3}
         floatParameter: 0

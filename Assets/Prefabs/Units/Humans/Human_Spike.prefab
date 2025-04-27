@@ -270,6 +270,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8397045034945365649, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
   m_PrefabInstance: {fileID: 1625926811877592428}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &7373005393226751061 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8125160605115912505, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
+  m_PrefabInstance: {fileID: 1625926811877592428}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3659877579051012188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1004,7 +1009,7 @@ MonoBehaviour:
   particlePoint: {fileID: 7068461369848171517}
   particles: []
   activatedObjects: []
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 7373005393226751061}
 --- !u!4 &6306246227485418792 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 837086364464575415, guid: 80f70fd4696caab42a6a728f1a2e3533, type: 3}
