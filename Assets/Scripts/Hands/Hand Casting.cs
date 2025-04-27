@@ -54,14 +54,14 @@ public class HandCasting : MonoBehaviour
     {
         Check = true;
         Debug.Log("True");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.5f);
         
     }
     private IEnumerator WaitToDeselect()
     {
         Check = false;
         Debug.Log("false");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.5f);
 
     }
     public virtual void UnitClickBehaviour(Unit unit) { }
