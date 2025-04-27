@@ -7,27 +7,32 @@ public class Music : MonoBehaviour
     private int MuteSounds = 0;
     public AudioSource MusicSource;
     private void Awake()
+    {        
+        MusicChange();
+    }
+    private void Update()
     {
         MuteSounds = PlayerPrefs.GetInt("MuteCheck");
     }
-    private void Start()
+    public void MusicChange()
     {
         if (MuteSounds == 1)
         {
             MusicSource.volume = 0;
         }
         else {
-            MusicSource.volume = 0.5f;
+            MusicSource.volume = 1;
                 }
     }
 
-    public void MUTE()
+    public void MUTE(bool Check)
     {
-        if (MuteSounds == 1)
+        Check = !Check;
+        if (Check == true)
         {
             PlayerPrefs.SetInt("MuteCheck", 0);
         }
-        if (MuteSounds == 0) {
+        if (Check == false) {
             PlayerPrefs.SetInt("MuteCheck", 1);
         }
             

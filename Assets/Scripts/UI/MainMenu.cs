@@ -25,6 +25,7 @@ public class MainMenu : MonoBehaviour
         if (FirstGame == 0)
         {
             SceneManager.LoadScene(2);
+            PlayerPrefs.SetInt("FirstTimeCheck", 1);
         }
     }
 
