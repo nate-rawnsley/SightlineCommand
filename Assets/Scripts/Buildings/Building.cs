@@ -66,7 +66,7 @@ public class Building : MonoBehaviour {
         if (unitsHere.Count < 3) {
             chevronString = $"Billboards/Chevron{unitsHere.Count}";
         }
-        Sprite indicatorSprite = Resources.Load<Sprite>("Billboards/Chevron1");
+        Sprite indicatorSprite = Resources.Load<Sprite>(chevronString);
         unitIndicator.sprite = indicatorSprite;
     }
 
@@ -86,7 +86,7 @@ public class Building : MonoBehaviour {
             if (unitsHere.Count < 3) {
                 chevronString = $"Billboards/Chevron{unitsHere.Count}";
             }
-            Sprite indicatorSprite = Resources.Load<Sprite>("Billboards/Chevron1");
+            Sprite indicatorSprite = Resources.Load<Sprite>(chevronString);
             unitIndicator.sprite = indicatorSprite;
         }
     }
