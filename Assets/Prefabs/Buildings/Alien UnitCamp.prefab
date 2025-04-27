@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6780716543572538985, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: m_Size.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -6780716543572538985, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
+      propertyPath: m_Center.y
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       propertyPath: team
       value: 1
@@ -196,6 +204,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d66f8f2858047c04aa12661e82975aeb, type: 3}
       propertyPath: m_Name
       value: Alien Barracks_low
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d66f8f2858047c04aa12661e82975aeb, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
