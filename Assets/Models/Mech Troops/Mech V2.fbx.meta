@@ -24,8 +24,7 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: Event PlaySoundEffect has a time (4.596940) outside
-      the clip's valid range (0.000000..4.583333). It will never be fired
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -153,6 +152,13 @@ ModelImporter:
         functionName: CallEvent
         data: 
         objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.44038156
+        functionName: PlaySoundEffects
+        data: 
+        objectReferenceParameter: {fileID: 8300000, guid: af7a45e7254454b498c91be71ffa8246, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
