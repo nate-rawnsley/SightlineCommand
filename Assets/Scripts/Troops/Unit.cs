@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -50,7 +51,10 @@ public class Unit : MonoBehaviour
     [HideInInspector] public TextMeshPro valuesText;
     [HideInInspector] public List<Unit> enemiesInSight = new List<Unit>();
     [HideInInspector] public List<Building> buildingsInSight = new List<Building>();
+
     private List<Tile> tilesTargetted = new List<Tile>();
+    private List<PathTile> tilesPath = new List<PathTile>();
+
     private Tile tileHighlighted;
     private Unit enemyUnit;
     private Building enemyBuilding;
@@ -93,7 +97,13 @@ public class Unit : MonoBehaviour
         tile.UnitMovedHere?.Invoke(this);
         if (animate) {
             StopAllCoroutines();
-            StartCoroutine(AnimateToTile());
+            PathTile pathToGo = null;
+            foreach (PathTile path in tilesPath) { 
+                if (path.tile == currentTile) {
+                    pathToGo = path;
+                }
+            }
+            StartCoroutine(AnimateToTile(pathToGo));
         } else {
             Vector3 position = currentTile.transform.position;
             position.y += scale * 0.5f;
@@ -126,26 +136,30 @@ public class Unit : MonoBehaviour
         }
     }
 
-    private IEnumerator AnimateToTile() {
+    private IEnumerator AnimateToTile(PathTile tilePath) {
         animator.SetBool("Walking", true);
-        Vector3 startPosition = transform.position;
-        Vector3 targetPos = currentTile.transform.position;
-        targetPos.y += scale * 0.5f;
-        StartCoroutine(RotateToTarget(targetPos));
-        float time = 0;
-        while (time < 1) {
-            Vector3 pos = Vector3.Lerp(startPosition, targetPos, time);
-            transform.position = pos;
-            time += Time.deltaTime * 0.5f;
-            yield return null;
+        foreach (Tile tileToGo in tilePath.path){
+            Vector3 startPosition = transform.position;
+            Vector3 targetPos = tileToGo.transform.position;
+            targetPos.y += scale * 0.5f;
+            StartCoroutine(RotateToTarget(targetPos));
+            float time = 0;
+            while (time < 1) {
+                Vector3 pos = Vector3.Lerp(startPosition, targetPos, time);
+                transform.position = pos;
+                time += Time.deltaTime * 0.5f;
+                yield return null;
+            }
         }
+       
         animator.SetBool("Walking", false);
     }
 
     public void BeginMove()
     {
         EndTargeting();
-        tilesTargetted = currentTile.GetAdjacentGroup(1);
+        tilesPath = currentTile.GetWalkableGroup(CurrentMove, isFlying);
+        tilesTargetted = tilesPath.Select(path => path.tile).ToList();
         foreach (Tile adjacentTile in tilesTargetted)
         {
 
@@ -179,9 +193,9 @@ public class Unit : MonoBehaviour
             }
 
             if (moved) {
-                CurrentMove -= targetTile.terrainType.travelSpeed;
+                CurrentMove = 0;
                 currentTile.unitHere = null;              
-                Debug.Log(CurrentMove);
+                //Debug.Log(CurrentMove);
                 MoveToTile(targetTile, true);
                 EndTargeting();
             }

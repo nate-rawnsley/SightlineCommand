@@ -2,6 +2,19 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+
+public class PathTile {
+    public Tile tile;
+    public int minCost = 99;
+    public List<Tile> path;
+
+    public PathTile(Tile tile, int minCost, List<Tile> path) {
+        this.tile = tile;
+        this.minCost = minCost;
+        this.path = path;
+    }
+}
 
 public class Tile : MonoBehaviour {
     public TileTerrain terrainType;
@@ -31,7 +44,7 @@ public class Tile : MonoBehaviour {
     }
 
     public void OnDestroy() {
-        if (decoration != null) { 
+        if (decoration != null) {
             Destroy(decoration);
         }
     }
@@ -45,7 +58,7 @@ public class Tile : MonoBehaviour {
             Destroy(buildingHere.gameObject);
             buildingHere = null;
         }
-        if (unitHere != null) { 
+        if (unitHere != null) {
             Destroy(unitHere.gameObject);
             unitHere = null;
         }
@@ -83,7 +96,7 @@ public class Tile : MonoBehaviour {
             decoration = Instantiate(loadTile.decoration, transform);
             decoration.transform.rotation = Quaternion.Euler(loadTile.decorationRotation);
         }
-        if (loadTile.buildingHere != null) { 
+        if (loadTile.buildingHere != null) {
             CreateBuilding(loadTile.buildingHere.GetComponent<Building>());
         }
         if (loadTile.unitHere != null) {
@@ -109,8 +122,8 @@ public class Tile : MonoBehaviour {
     }
 
     public void DisplayColour(Color color) {
-        if (lerpingColour) { 
-            return; 
+        if (lerpingColour) {
+            return;
         }
         lerpingColour = true;
         StartCoroutine(LerpColour(color));
@@ -137,6 +150,49 @@ public class Tile : MonoBehaviour {
             }
             yield return null;
         }
+    }
+
+    public List<PathTile> GetWalkableGroup(int maxMovement, bool flying = false) {
+        List<PathTile> tilePaths = new List<PathTile>(); 
+        tilePaths = WeightedSearch(new PathTile(this, 0, new List<Tile>()), 0, maxMovement, tilePaths, flying);
+        return tilePaths;
+    }
+
+    public List<PathTile> WeightedSearch(PathTile tileToCheck, int currentCost, int maxMovement, List<PathTile> pathList, bool flying) {
+
+        foreach (Tile adjacentTile in tileToCheck.tile.adjacentTiles){
+            if (!adjacentTile.terrainType.walkable && !flying) {
+                continue;
+            }
+            int newCost = currentCost + adjacentTile.terrainType.travelSpeed;
+
+            PathTile adjacentPathTile = new PathTile(this, 0, new List<Tile>());
+
+            bool inList = false;
+            foreach (PathTile path in pathList) { 
+                if (adjacentTile == path.tile) {
+                    adjacentPathTile = path;
+                    inList = true;
+                    if (path.minCost > newCost) {
+                        path.minCost = newCost;
+                        //List<Tile> newPath = tileToCheck.path;
+                        //newPath.Add(adjacentTile);
+                        //path.path = newPath;
+                    }
+                    break;
+                }
+            }
+            if (!inList && newCost <= maxMovement) {
+                List<Tile> newPath = new List<Tile>(); //tileToCheck.path;
+                newPath.Add(adjacentTile);
+                adjacentPathTile = new PathTile(adjacentTile, currentCost, newPath);
+                pathList.Add(adjacentPathTile);
+            }
+            if (newCost < maxMovement) {
+                pathList = WeightedSearch(adjacentPathTile, newCost, maxMovement, pathList, flying);
+            }
+        }
+        return pathList;
     }
 
     public List<Tile> GetAdjacentGroup(int maxLoops) {
