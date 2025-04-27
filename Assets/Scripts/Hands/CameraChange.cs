@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class CameraChange : MonoBehaviour
     public Vector3 HumanRotation = new Vector3(50f, 90f, 0f);
     public Vector3 AlienPosition;
     public Vector3 AlienRotation = new Vector3(50f, -90f, 0f);
+
+    public static Action CameraChanged;
 
     private void Awake()
     {
@@ -30,6 +33,7 @@ public class CameraChange : MonoBehaviour
                 CamAngle = 0;
                 break;
         }
+        CameraChanged.Invoke();
     }
 
 }

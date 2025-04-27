@@ -765,8 +765,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animators:
   - {fileID: 0}
-  particlePrefab: {fileID: 0}
-  particlePoint: {fileID: 0}
+  particlePrefab: {fileID: 4211873392745583015, guid: 48dfa7f4dd092df49bdbc3a6ab545c3a, type: 3}
+  particlePoint: {fileID: 4037211353816882618}
   particles:
   - {fileID: 4046096495098818446}
   activatedObjects: []
@@ -813,12 +813,20 @@ PrefabInstance:
       objectReference: {fileID: 2322338256427128929}
     - target: {fileID: 192178684404589673, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
       propertyPath: createableBuildings.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 192178684404589673, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
       propertyPath: createableBuildings.Array.data[0]
       value: 
       objectReference: {fileID: 1909234959291548578, guid: dca15a599da6fc44a94ccec05a0dfbcc, type: 3}
+    - target: {fileID: 192178684404589673, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
+      propertyPath: createableBuildings.Array.data[1]
+      value: 
+      objectReference: {fileID: 3972916244552087916, guid: 2ec67a3887762934785e0c49914fff53, type: 3}
+    - target: {fileID: 192178684404589673, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
+      propertyPath: createableBuildings.Array.data[2]
+      value: 
+      objectReference: {fileID: 2569740521154121934, guid: 30e8c29b72c16cf46a5b2f011e970489, type: 3}
     - target: {fileID: 5477471966950854349, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
       propertyPath: m_Name
       value: Alien_Flying
