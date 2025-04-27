@@ -43,13 +43,26 @@ public class HandCasting : MonoBehaviour
         }
     public void Selections()
     {
-        Check = true;
-        Debug.Log("True");
+        StartCoroutine(WaitToConfirm());
     }
     public void SelectEnd()
     {
+        StartCoroutine(WaitToDeselect());
+    }
+
+    private IEnumerator WaitToConfirm()
+    {
+        Check = true;
+        Debug.Log("True");
+        yield return new WaitForSeconds(2f);
+        
+    }
+    private IEnumerator WaitToDeselect()
+    {
         Check = false;
-        Debug.Log("False");
+        Debug.Log("false");
+        yield return new WaitForSeconds(2f);
+
     }
     public virtual void UnitClickBehaviour(Unit unit) { }
 

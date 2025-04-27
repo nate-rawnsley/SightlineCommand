@@ -18,11 +18,11 @@ public class Music : MonoBehaviour
     {
         if (MuteSounds == 1)
         {
-            MusicSource.volume = 0;
+            MusicSource.Pause();
         }
         else {
-            MusicSource.volume = 1;
-                }
+            MusicSource.Play();
+        }
     }
 
     public void MUTE(bool Check)
