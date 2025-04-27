@@ -97,7 +97,7 @@ public class Unit : MonoBehaviour
         } else {
             Vector3 position = currentTile.transform.position;
             position.y += scale * 0.5f;
-            transform.position = position + positionOffset;
+            transform.position = position;
         }
         if (CurrentMove == 0)
         {
@@ -129,7 +129,7 @@ public class Unit : MonoBehaviour
     private IEnumerator AnimateToTile() {
         animator.SetBool("Walking", true);
         Vector3 startPosition = transform.position;
-        Vector3 targetPos = currentTile.transform.position + positionOffset;
+        Vector3 targetPos = currentTile.transform.position;
         targetPos.y += scale * 0.5f;
         StartCoroutine(RotateToTarget(targetPos));
         float time = 0;
