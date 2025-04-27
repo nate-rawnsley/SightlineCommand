@@ -936,18 +936,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -156.86461
       objectReference: {fileID: 0}
-    - target: {fileID: -5399272218880723207, guid: 5b551943aca5407479c0fd8437511751, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -5399272218880723207, guid: 5b551943aca5407479c0fd8437511751, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -5399272218880723207, guid: 5b551943aca5407479c0fd8437511751, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -0.089623734
-      objectReference: {fileID: 0}
     - target: {fileID: -8957258511254049851, guid: 22fd8b1e2294c0b45a583ece22dd5db7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -0.7778176
@@ -1556,6 +1544,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 91.79347
       objectReference: {fileID: 0}
+    - target: {fileID: -5399272218880723207, guid: 5b551943aca5407479c0fd8437511751, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5399272218880723207, guid: 5b551943aca5407479c0fd8437511751, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5399272218880723207, guid: 5b551943aca5407479c0fd8437511751, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -0.089623734
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -1666,7 +1666,7 @@ MonoBehaviour:
   activatedObjects:
   - {fileID: 9082884633036614998}
   - {fileID: 854796107246455634}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 1086667297293647124}
 --- !u!1001 &9211761895199353901
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1775,5 +1775,10 @@ PrefabInstance:
 --- !u!4 &819245407203125948 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8397045034945365649, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
+  m_PrefabInstance: {fileID: 9211761895199353901}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1086667297293647124 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8125160605115912505, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
   m_PrefabInstance: {fileID: 9211761895199353901}
   m_PrefabAsset: {fileID: 0}
