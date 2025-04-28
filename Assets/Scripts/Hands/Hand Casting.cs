@@ -23,8 +23,8 @@ public class HandCasting : MonoBehaviour
         Vector3 OriginFinger = Fingertip.transform.position;
         RaycastHit FingerHit;
         Physics.Raycast(OriginFinger, Fingertip.transform.right, out FingerHit, 500f);
-        if (Check == true || Input.GetKeyDown(KeyCode.Space))
-        {
+        //if (Check == true || Input.GetKeyDown(KeyCode.Space))
+        //{
 
             Debug.Log(FingerHit.collider.tag);
             switch (FingerHit.collider.tag)
@@ -39,7 +39,7 @@ public class HandCasting : MonoBehaviour
                     BuildingClickBehaviour(FingerHit.collider.GetComponent<Building>());
                     break;
             }
-        }
+        //}
     }
     public void Unitclick()
     {
