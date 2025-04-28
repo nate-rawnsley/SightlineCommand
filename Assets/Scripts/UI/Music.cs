@@ -11,10 +11,6 @@ public class Music : MonoBehaviour
         MuteSounds = PlayerPrefs.GetInt("MuteCheck");
         MusicChange();
     }
-    private void Update()
-    {
-        
-    }
     public void MusicChange()
     {
         if (MuteSounds == 1)
@@ -31,12 +27,13 @@ public class Music : MonoBehaviour
         Check = !Check;
         if (Check == true)
         {
-            PlayerPrefs.SetInt("MuteCheck", 0);
+            PlayerPrefs.SetInt("MuteCheck", 1);
+            MuteSounds = PlayerPrefs.GetInt("MuteCheck");
         }
         if (Check == false) {
-            PlayerPrefs.SetInt("MuteCheck", 1);
+            PlayerPrefs.SetInt("MuteCheck", 0);
+            MuteSounds = PlayerPrefs.GetInt("MuteCheck");
         }
         Debug.Log(PlayerPrefs.GetInt("MuteCheck"));
     }
-
 }
