@@ -164,7 +164,8 @@ public class Tile : MonoBehaviour {
             if (!adjacentTile.terrainType.walkable && !flying) {
                 continue;
             }
-            int newCost = currentCost + adjacentTile.terrainType.travelSpeed;
+            int nextTravelSpeed = flying ? 1 : adjacentTile.terrainType.travelSpeed;
+            int newCost = currentCost + nextTravelSpeed;
 
             PathTile adjacentPathTile = new PathTile(this, 0, new List<Tile>());
 

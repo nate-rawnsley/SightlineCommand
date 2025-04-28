@@ -32,6 +32,7 @@ public class GameUI : MonoBehaviour {
 
     private GameObject turnPanel;
     public GameObject buildingPanel;
+    [SerializeField]
     private GameObject winPanel;
     
 
@@ -78,7 +79,7 @@ public class GameUI : MonoBehaviour {
 
     public void GameStart() {
         turnPanel = transform.Find("Turn Panel").gameObject;
-        winPanel = transform.Find("Game End Panel").gameObject;
+        //winPanel = transform.Find("Game End Panel").gameObject;
         gameCursor = GameManager.Instance.gameCursor;
         turnPanel.SetActive(true);
         //buildingPanel.SetActive(false);
