@@ -13,8 +13,8 @@ public class HandCasting : MonoBehaviour
 
     public bool Check;
     public bool active;
-    
-    private void Update()
+
+    public void Selection()
     {
         if (!active)
         {
@@ -25,7 +25,7 @@ public class HandCasting : MonoBehaviour
         Physics.Raycast(OriginFinger, Fingertip.transform.right, out FingerHit, 500f);
         if (Check == true || Input.GetKeyDown(KeyCode.Space))
         {
-            
+
             Debug.Log(FingerHit.collider.tag);
             switch (FingerHit.collider.tag)
             {
@@ -40,7 +40,11 @@ public class HandCasting : MonoBehaviour
                     break;
             }
         }
-        }
+    }
+    public void Unitclick()
+    {
+
+    }
     public void Selections()
     {
         StartCoroutine(WaitToConfirm());
@@ -55,6 +59,7 @@ public class HandCasting : MonoBehaviour
         Check = true;
         Debug.Log("True");
         yield return new WaitForSeconds(2.5f);
+        Debug.Log("waited");
         
     }
     private IEnumerator WaitToDeselect()
@@ -62,6 +67,7 @@ public class HandCasting : MonoBehaviour
         Check = false;
         Debug.Log("false");
         yield return new WaitForSeconds(2.5f);
+        Debug.Log("waited");
 
     }
     public virtual void UnitClickBehaviour(Unit unit) { }
