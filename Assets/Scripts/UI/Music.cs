@@ -6,14 +6,14 @@ public class Music : MonoBehaviour
 {
     private int MuteSounds = 0;
     public AudioSource MusicSource;
-    private void Awake()
+    private void Start()
     {
-        
+        MuteSounds = PlayerPrefs.GetInt("MuteCheck");
         MusicChange();
     }
     private void Update()
     {
-        MuteSounds = PlayerPrefs.GetInt("MuteCheck");
+        
     }
     public void MusicChange()
     {
@@ -21,7 +21,7 @@ public class Music : MonoBehaviour
         {
             MusicSource.Pause();
         }
-        else {
+        if (MuteSounds == 0) {
             MusicSource.Play();
         }
     }
@@ -36,7 +36,7 @@ public class Music : MonoBehaviour
         if (Check == false) {
             PlayerPrefs.SetInt("MuteCheck", 1);
         }
-            
+        Debug.Log(PlayerPrefs.GetInt("MuteCheck"));
     }
 
 }
