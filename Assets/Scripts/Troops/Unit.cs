@@ -51,6 +51,7 @@ public class Unit : MonoBehaviour
     [HideInInspector] public TextMeshPro valuesText;
     [HideInInspector] public List<Unit> enemiesInSight = new List<Unit>();
     [HideInInspector] public List<Building> buildingsInSight = new List<Building>();
+    [HideInInspector] public bool inAction;
 
     private List<Tile> tilesTargetted = new List<Tile>();
     private List<PathTile> tilesPath = new List<PathTile>();
@@ -138,6 +139,7 @@ public class Unit : MonoBehaviour
 
     private IEnumerator AnimateToTile(PathTile tilePath) {
         animator.SetBool("Walking", true);
+        inAction = true;
         foreach (Tile tileToGo in tilePath.path){
             Vector3 startPosition = transform.position;
             Vector3 targetPos = tileToGo.transform.position;
@@ -151,7 +153,8 @@ public class Unit : MonoBehaviour
                 yield return null;
             }
         }
-       
+        
+        inAction = false;
         animator.SetBool("Walking", false);
     }
 
@@ -323,7 +326,8 @@ public class Unit : MonoBehaviour
         attackPos.y += scale * 0.5f;
         StopCoroutine("RotateToTarget");
         StartCoroutine(RotateToTarget(attackPos, true));
-        
+
+        inAction = true;
         CurrentAttacks--;
     }
 
@@ -354,6 +358,7 @@ public class Unit : MonoBehaviour
             animateTrigger.AnimEvent -= DamageEnemy;
         }
         enemyUnit.TakeDamage(Damage);
+        inAction = false;
     }
 
     public void DamageBuilding() {
@@ -361,6 +366,7 @@ public class Unit : MonoBehaviour
             animateTrigger.AnimEvent -= DamageBuilding;
         }
         enemyBuilding.TakeDamage(Damage);
+        inAction = false;
     }
 
     //Creating buildings////////////////////////////////////// Done by Nate

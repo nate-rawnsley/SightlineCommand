@@ -22,7 +22,7 @@ public class HandCursor : HandCasting {
         if (buildingPanel.gameObject.activeSelf) {
             buildingPanel.HidePanel();
         }
-        if (activeUnit == null && currentMode != UnitMode.None && unit.Health != 0) {
+        if (activeUnit == null && currentMode != UnitMode.None && unit.Health != 0 && !unit.inAction) {
             activeUnit = unit;
             //HasSelection = false  -- N - This was replaced by checking activeUnit == null instead
             Values = unit.valuesText;
@@ -121,10 +121,8 @@ public class HandCursor : HandCasting {
     }
 
     public override void BuildingClickBehaviour(Building building) {
-        if (currentMode == UnitMode.Attack && activeUnit && activeUnit.team != building.team) {
-            activeUnit.AttackBuilding(building.tile);
-            //DamageBuilding(building);
-            CLEARALL();
+        if (activeUnit && activeUnit.team != building.team) {
+            TileClickBehaviour(building.tile);
             return;
         }
         if (buildingPanel.gameObject.activeSelf) {
