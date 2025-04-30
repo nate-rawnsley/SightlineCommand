@@ -7,7 +7,7 @@ public class PlayerStats {
     public List<Building> buildings = new List<Building>();
     public PlayerStats otherPlayer;
     public int material = 10;
-    public int troopTokens = 5;
+    public int troopTokens = 0;
 
     public PlayerStats(PlayerTeam team) {
         this.team = team;

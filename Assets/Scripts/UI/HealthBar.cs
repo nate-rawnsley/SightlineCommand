@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
-using Unity.VisualScripting;
 
 public class HealthBar : MonoBehaviour {
     //https://www.youtube.com/watch?v=0tDPxNB2JNs
@@ -83,10 +82,5 @@ public class HealthBar : MonoBehaviour {
         healthFill.fillAmount = currentHealth / maxHealth;
         textDisplay.text = $"{currentHealth}/{maxHealth}";
     }
-
-
-        
-    
-
 }
 

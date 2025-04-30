@@ -8,6 +8,12 @@ public class UnitCamp : Building {
         canActivate = true;
     }
 
+    public override void SpawnBehaviour() {
+        if (GameManager.Instance != null) {
+            GameManager.Instance.AddTokens(team, 5);
+        }
+    }
+
     public override bool ActivateBehaviour() {
         GameManager.Instance.gameUI.ShowUnitBuyMenu(this);
         return true;

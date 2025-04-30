@@ -394,7 +394,7 @@ public class Unit : MonoBehaviour
 
     private void OnDestroy() {
         if (GameManager.Instance != null) {
-            GameManager.Instance.players[team].troopTokens += tokenCost;
+            GameManager.Instance.AddTokens(team, tokenCost);
             GameManager.Instance.players[team].units.Remove(this);
         }
         

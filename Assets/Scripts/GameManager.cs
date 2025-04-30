@@ -110,10 +110,13 @@ public class GameManager : MonoBehaviour {
         return false;
     }
 
-    public void RefundTokens(PlayerTeam team, int tokens) {
+    public void IncreaseTokenCap(PlayerTeam team) {
+        players[team].troopTokens += 5;
+        gameUI.UpdateStats();
+    }
+
+    public void AddTokens(PlayerTeam team, int tokens) {
         players[team].troopTokens += tokens;
-        if (gameCursor.CurrentTeam == team) {
-            gameUI.UpdateStats();
-        }
+        gameUI.UpdateStats();
     }
 }
