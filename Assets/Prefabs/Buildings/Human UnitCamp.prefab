@@ -116,8 +116,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       propertyPath: price
-      value: 10
-      objectReference: {fileID: 0}
+      value: 
+      objectReference: {fileID: 11400000, guid: 25d6ecaddc82a3c489704ada3094fc84, type: 2}
     - target: {fileID: 2412454605390128264, guid: 72f9463dbf0faf949876cc8f7cbd664b, type: 3}
       propertyPath: health
       value: 0

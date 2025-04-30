@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Building : MonoBehaviour {
     [Header("Values")]
-    public int price = 10;
+    public BuildingCostTree price;
     public int capacity = 5;
     public int maxHealth = 5;
     public PlayerTeam team;
@@ -45,9 +45,16 @@ public class Building : MonoBehaviour {
     //Returns whether to hide the main buiding menu after.
     public virtual bool ActivateBehaviour() { return false; }
 
-    public virtual void SpawnBehaviour() { }
+    public virtual void SpawnBehaviour() {
+        if (price != null) {
+            price.numberActive++;
+        }
+    }
 
     protected virtual void DeathBehaviour() {
+        if (price != null) {
+            price.numberActive--;
+        }
         List<Unit> unitsToRemove = new List<Unit>(unitsHere); //Made temporary list to avoid errors
         foreach (var unit in unitsToRemove) {
             if (unit != null) {

@@ -17,7 +17,8 @@ public class BuyableBuildingEntry : MonoBehaviour {
 
         buildingName.text = building.buildingName;
         buldingDescription.text = building.toolTip;
-        buildingCost.text = $"{building.price} material";
+        int buildingCostVal = building.price.costs[Mathf.Min(building.price.numberActive, building.price.costs.Length - 1)];
+        buildingCost.text = $"{buildingCostVal} material";
 
         buyMenu = source;
     }

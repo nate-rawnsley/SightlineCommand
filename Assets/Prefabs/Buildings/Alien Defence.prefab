@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5003d7dd170642c4bb160bf50d37514c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 10
+  price: {fileID: 11400000, guid: 2a99da91268b9bf48b433d3585eb642b, type: 2}
   capacity: 5
   maxHealth: 5
   team: 1

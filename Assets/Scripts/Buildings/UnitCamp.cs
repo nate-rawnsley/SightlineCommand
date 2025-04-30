@@ -9,6 +9,7 @@ public class UnitCamp : Building {
     }
 
     public override void SpawnBehaviour() {
+        base.SpawnBehaviour();
         if (GameManager.Instance != null) {
             GameManager.Instance.AddTokens(team, 5);
         }

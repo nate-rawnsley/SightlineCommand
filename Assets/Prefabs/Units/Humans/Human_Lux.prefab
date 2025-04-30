@@ -85,6 +85,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e8e99b8f667110438d038dc8de4b284, type: 3}
+--- !u!198 &302730711060557377 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 202814560368431362, guid: 2e8e99b8f667110438d038dc8de4b284, type: 3}
+  m_PrefabInstance: {fileID: 496250549815230275}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4163150236484312240 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4550168531251962867, guid: 2e8e99b8f667110438d038dc8de4b284, type: 3}
@@ -1711,6 +1716,10 @@ PrefabInstance:
       propertyPath: animateTrigger
       value: 
       objectReference: {fileID: 5724700956027826675}
+    - target: {fileID: 192178684404589673, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
+      propertyPath: lowHealthParticles
+      value: 
+      objectReference: {fileID: 302730711060557377}
     - target: {fileID: 192178684404589673, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
       propertyPath: createableBuildings.Array.size
       value: 3

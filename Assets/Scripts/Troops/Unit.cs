@@ -376,7 +376,8 @@ public class Unit : MonoBehaviour
     }
 
     public bool CreateBuilding(Building building) {
-        if (GameManager.Instance.UseMaterial(team, building.price)) {
+        int buildingCost = building.price.costs[Mathf.Min(building.price.numberActive, building.price.costs.Length - 1)];
+        if (GameManager.Instance.UseMaterial(team, buildingCost)) {
             currentTile.CreateBuilding(building);
             currentTile.buildingHere.OnEnterBehaviour(this);
             return true;

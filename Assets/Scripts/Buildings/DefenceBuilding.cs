@@ -8,6 +8,7 @@ public class DefenceBuilding : Building {
     private List<Tile> tilesInRange = new List<Tile>();
 
     public override void SpawnBehaviour() {
+        base.SpawnBehaviour();
         tilesInRange = tile.GetAdjacentGroup(range);
         foreach (var rangeTile in tilesInRange) {
             rangeTile.UnitMovedHere += UnitEnterRange;
