@@ -673,6 +673,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 192178684404589673, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
+      propertyPath: tokenCost
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 192178684404589673, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
       propertyPath: AttackRange
       value: 3
       objectReference: {fileID: 0}
@@ -683,6 +687,10 @@ PrefabInstance:
     - target: {fileID: 192178684404589673, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
       propertyPath: displayName
       value: Mech V
+      objectReference: {fileID: 0}
+    - target: {fileID: 192178684404589673, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
+      propertyPath: turnsToCreate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 192178684404589673, guid: d01275f7858801f4ca78ae1dbee695b9, type: 3}
       propertyPath: animateTrigger

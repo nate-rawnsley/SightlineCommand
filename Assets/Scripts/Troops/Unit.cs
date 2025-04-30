@@ -21,9 +21,6 @@ public class Unit : MonoBehaviour
 
     protected float scale;
 
-    //[SerializeField] 
-    //public enum Teams { Team1, Team2 }; replaced with PlayerTeam, from GameStats.cs
-
     [Header("Troop Settings")]
     public PlayerTeam team;
     public int MaxMovement;
@@ -33,6 +30,8 @@ public class Unit : MonoBehaviour
     public int MaxAttack;
     public bool AOEAttack;
     public bool isFlying;
+    public int tokenCost;
+    public int turnsToCreate;
 
     [SerializeField]
     private AnimatorEventTrigger animateTrigger;
@@ -41,7 +40,6 @@ public class Unit : MonoBehaviour
     private ParticleSystem lowHealthParticles;
 
     private float rotationOffset;
-    private Vector3 positionOffset;
 
     [HideInInspector] public int Health;
     [HideInInspector] public int CurrentMove;
@@ -76,7 +74,7 @@ public class Unit : MonoBehaviour
         valuesText = GetComponentInChildren<TextMeshPro>();
         model = transform.Find("Model");
         rotationOffset = model.rotation.eulerAngles.y;
-        positionOffset = model.position;
+        //positionOffset = model.position;
         animator = model.GetComponent<Animator>();
     }
     //Movement///////////////////////////////////////////// Base Movement done by Nate, Limiting Movement Distance and changing movement material Done By Dylan
@@ -395,6 +393,10 @@ public class Unit : MonoBehaviour
     }
 
     private void OnDestroy() {
-        GameManager.Instance.players[team].units.Remove(this);
+        if (GameManager.Instance != null) {
+            GameManager.Instance.players[team].troopTokens += tokenCost;
+            GameManager.Instance.players[team].units.Remove(this);
+        }
+        
     }
 }

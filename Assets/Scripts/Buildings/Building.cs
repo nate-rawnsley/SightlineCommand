@@ -91,10 +91,10 @@ public class Building : MonoBehaviour {
         }
     }
 
-    public bool BuyUnit(UnitShopValue unitVals) {
-        if (unitInCreation == null && GameManager.Instance.UseTokens(team, unitVals.price)) {
-            unitInCreation = unitVals.unitPrefab;
-            turnsToCreate = unitVals.createSpeed;
+    public bool BuyUnit(Unit newUnit) {
+        if (unitInCreation == null && GameManager.Instance.UseTokens(team, newUnit.tokenCost)) {
+            unitInCreation = newUnit.gameObject;
+            turnsToCreate = newUnit.turnsToCreate;
             createIndicator.gameObject.SetActive(true);
             createIndicator.text = $"Unit Creating: {turnsToCreate} turn(s)";
             return true;
@@ -105,7 +105,7 @@ public class Building : MonoBehaviour {
     public void EndTurn() { 
         GameManager.Instance.players[team].material += materialYield;
         Debug.Log(GameManager.Instance.players[team].material);
-        GameManager.Instance.players[team].troopTokens++;
+        //GameManager.Instance.players[team].troopTokens++;
     }
 
     public void NewTurn() {

@@ -54,8 +54,8 @@ public class BuyMenu : MonoBehaviour {
         entries.Add(entry.gameObject);
     }
 
-    public void UnitSelected(UnitShopValue unitVals) {
-        if (building.BuyUnit(unitVals)) {
+    public void UnitSelected(Unit newUnit) {
+        if (building.BuyUnit(newUnit)) {
             GameManager.Instance.gameUI.HideUnitBuyMenu();
         } else {
             StartCoroutine(ShowError("Insufficient Troop Tokens!"));

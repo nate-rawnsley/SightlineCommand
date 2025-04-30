@@ -13,15 +13,7 @@ MonoBehaviour:
   m_Name: HumanUnits
   m_EditorClassIdentifier: 
   units:
-  - unitPrefab: {fileID: 3734930054502818528, guid: 5a51f050645416f40b22c2041806e27e, type: 3}
-    price: 5
-    createSpeed: 2
-  - unitPrefab: {fileID: 3734930054502818528, guid: 08d19b3794c6cca478ecb391cc4c65f1, type: 3}
-    price: 4
-    createSpeed: 1
-  - unitPrefab: {fileID: 3734930054502818528, guid: 74318742dd9b0c24d8ac2cf297a64c1b, type: 3}
-    price: 3
-    createSpeed: 1
-  - unitPrefab: {fileID: 6526719068018000801, guid: e23b62408a6172149b6f4aed4fbf7595, type: 3}
-    price: 3
-    createSpeed: 1
+  - {fileID: 9042104204704892996, guid: 5a51f050645416f40b22c2041806e27e, type: 3}
+  - {fileID: 9042104204704892996, guid: 08d19b3794c6cca478ecb391cc4c65f1, type: 3}
+  - {fileID: 9042104204704892996, guid: 74318742dd9b0c24d8ac2cf297a64c1b, type: 3}
+  - {fileID: 1457673885203376389, guid: e23b62408a6172149b6f4aed4fbf7595, type: 3}

@@ -3,5 +3,5 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "SightlineCommand/Building Buy Menu")]
 public class BuildingBuyMenu : ScriptableObject {
-    public List<UnitShopValue> units;
+    public List<Unit> units;
 }

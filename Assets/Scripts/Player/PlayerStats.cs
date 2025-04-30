@@ -22,7 +22,6 @@ public class PlayerStats {
     }
     
     public void EndTurn() {
-        Debug.Log(buildings.Count);
         foreach (var building in buildings) {
             building.EndTurn();
         }

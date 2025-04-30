@@ -109,4 +109,11 @@ public class GameManager : MonoBehaviour {
         }
         return false;
     }
+
+    public void RefundTokens(PlayerTeam team, int tokens) {
+        players[team].troopTokens += tokens;
+        if (gameCursor.CurrentTeam == team) {
+            gameUI.UpdateStats();
+        }
+    }
 }
