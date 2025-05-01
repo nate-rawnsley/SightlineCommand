@@ -5,7 +5,7 @@ using UnityEngine;
 public class Billboard : MonoBehaviour {
 
     private void OnEnable() {
-        CameraChange.CameraChanged += SetForward;
+        CameraChange.CameraChanged += SetForward; //makes sure that all of the texts are facing towards the camera once spawned
     }
 
     private void OnDisable() {

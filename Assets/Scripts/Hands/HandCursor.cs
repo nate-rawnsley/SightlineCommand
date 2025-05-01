@@ -1,6 +1,6 @@
 using TMPro;
 using UnityEngine;
-//Code made by Nate/Edited into Hand Tracking System By Dylan
+//Code originaly made by Nate/Edited into Hand Tracking System By Dylan
 public class HandCursor : HandCasting {
     public Unit activeUnit = null;
     private Unit EnemyUnit;

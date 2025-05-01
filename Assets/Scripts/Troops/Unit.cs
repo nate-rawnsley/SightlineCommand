@@ -29,7 +29,7 @@ public class Unit : MonoBehaviour
     public int AttackRange;
     public int MaxAttack;
     public bool AOEAttack;
-    public bool isFlying;
+    public bool isFlying; //flying added by dylan
     public int tokenCost;
     public int turnsToCreate;
 
@@ -255,7 +255,7 @@ public class Unit : MonoBehaviour
     {
         EndTargeting(); //Hopefully doesn't cause issues, but if multiple things are targetted at once it will (Shouldn't happen but might).
         tilesTargetted = tileToCheck.GetAdjacentGroup(maxLoops);
-        foreach (Tile tile in tilesTargetted) {
+        foreach (Tile tile in tilesTargetted) { 
             tile.DisplayColour(CurrentMoveableCol);
             if (dmgIndicate) {
                 if (tile.unitHere && tile.unitHere.team != team) {

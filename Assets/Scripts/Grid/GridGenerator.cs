@@ -123,7 +123,7 @@ public class GridGenerator : MonoBehaviour {
             {
                 GameObject FriendObj = Instantiate(Humanunit);
                 Humanunit.name = ("Soldier" + p).ToString();
-                FriendObj.GetComponent<Unit>().UnitSpawn(GameManager.Instance.tiles[0, p]);
+                FriendObj.GetComponent<Unit>().UnitSpawn(GameManager.Instance.tiles[0, p]); //does a for loop for each team to spawn a set amount of units in inspector for teting
             }
             for (int e = 0; e < testAlienAmount; e++) {
                 GameObject EnemyObj = Instantiate(Alienunit);

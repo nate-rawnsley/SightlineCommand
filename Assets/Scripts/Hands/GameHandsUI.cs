@@ -45,12 +45,12 @@ public class GameHandsUI : MonoBehaviour
     }
 
     public void UpdateTeamDisplay() {
-        TeamUIParams team = handCursor.CurrentTeam == PlayerTeam.HUMAN ? humanUI : alienUI;
+        TeamUIParams team = handCursor.CurrentTeam == PlayerTeam.HUMAN ? humanUI : alienUI; //changing the ui based on team
         teamDisplay.text = $"Team: {team.teamName}";
         foreach (var background in teamBackgrounds) {
             background.sprite = team.background;
         }
-        foreach (var text in teamText) {
+        foreach (var text in teamText) { //finds each text and button to change colours
             text.color = team.textColor;
         }
         foreach (var button in teamButtons) {
@@ -62,7 +62,7 @@ public class GameHandsUI : MonoBehaviour
     public void UpdateStats() {
         int material = GameManager.Instance.players[handCursor.CurrentTeam].material;
         int tokens = GameManager.Instance.players[handCursor.CurrentTeam].troopTokens;
-        statsDisplay.text = $"Material: {material}\nUnit Tokens: {tokens}";
+        statsDisplay.text = $"Material: {material}\nUnit Tokens: {tokens}"; //updates the stats for materials and unit tokens when needed
     }
 
     public void EndTurn()
@@ -82,7 +82,7 @@ public class GameHandsUI : MonoBehaviour
     //}
 
     public void GameStart() {
-        turnPanel = transform.Find("Turn Panel").gameObject;
+        turnPanel = transform.Find("Turn Panel").gameObject; //game start setups
         winPanel = transform.Find("Game End Panel").gameObject;
         handCursor = GameObject.Find("GhostHands").GetComponent<HandCursor>();
         turnPanel.SetActive(true);
@@ -94,11 +94,11 @@ public class GameHandsUI : MonoBehaviour
     public void ShowBuyMenu(UnitCamp source) {
         buyMenu.gameObject.SetActive(true);
         buyMenu.InitializeBuilding(source);
-        //buildingPanel.gameObject.SetActive(false);
+        //buildingPanel.gameObject.SetActive(false); //Redundant
     }
 
     public void HideBuyMenu() {
-        buildingPanel.gameObject.SetActive(true);
+        buildingPanel.gameObject.SetActive(true); //redundant 
         //buyMenu.HideMenu();
     }
 
@@ -108,7 +108,7 @@ public class GameHandsUI : MonoBehaviour
         switch (defeatedTeam) {
             case PlayerTeam.HUMAN:
                 winDisplay.text = "Aliens Win!";
-                break;
+                break; //ui change to who wins
             case PlayerTeam.ALIEN:
                 winDisplay.text = "Humans Win!";
                 break;

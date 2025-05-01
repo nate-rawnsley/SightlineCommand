@@ -7,7 +7,7 @@ using UnityEngine;
 
 
 public class HandCasting : MonoBehaviour
-{ //Code made by Nate/Edited into Hand Tracking System By Dylan
+{ //Code originaly made by Nate/Edited into Hand Tracking System By Dylan
     public GameObject Fingertip;
     private Vector3 OriginFinger;
 
@@ -31,7 +31,7 @@ public class HandCasting : MonoBehaviour
             {
                 case "Unit":
                     UnitClickBehaviour(FingerHit.collider.GetComponentInParent<Unit>());
-                    break;
+                    break; //click behaviour are given values based on what is being selected
                 case "Tile":
                     TileClickBehaviour(FingerHit.collider.GetComponentInParent<Tile>());
                     break;
@@ -58,7 +58,7 @@ public class HandCasting : MonoBehaviour
     {
         Check = true;
         Debug.Log("True");
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.5f); //delays
         Debug.Log("waited");
         
     }
@@ -74,7 +74,7 @@ public class HandCasting : MonoBehaviour
 
     public virtual void TileClickBehaviour(Tile tile) { }
 
-    public virtual void BuildingClickBehaviour(Building building) { }
+    public virtual void BuildingClickBehaviour(Building building) { } //more behaviours
 
     protected virtual void TileHoverBehaviour(Tile tile) { }
 
