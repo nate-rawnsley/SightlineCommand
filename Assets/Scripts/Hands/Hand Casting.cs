@@ -22,7 +22,7 @@ public class HandCasting : MonoBehaviour
         }
         Vector3 OriginFinger = Fingertip.transform.position;
         RaycastHit FingerHit;
-        Physics.Raycast(OriginFinger, Fingertip.transform.right, out FingerHit, 500f);
+        Physics.Raycast(OriginFinger, Fingertip.transform.right, out FingerHit, 500f); //raycasting from finger to world
         //if (Check == true || Input.GetKeyDown(KeyCode.Space))
         //{
 
@@ -30,8 +30,8 @@ public class HandCasting : MonoBehaviour
             switch (FingerHit.collider.tag)
             {
                 case "Unit":
-                    UnitClickBehaviour(FingerHit.collider.GetComponentInParent<Unit>());
-                    break; //click behaviour are given values based on what is being selected
+                    UnitClickBehaviour(FingerHit.collider.GetComponentInParent<Unit>());//click behaviour are given values based on what is being selected
+                break; 
                 case "Tile":
                     TileClickBehaviour(FingerHit.collider.GetComponentInParent<Tile>());
                     break;
@@ -58,7 +58,7 @@ public class HandCasting : MonoBehaviour
     {
         Check = true;
         Debug.Log("True");
-        yield return new WaitForSeconds(2.5f); //delays
+        yield return new WaitForSeconds(2.5f); //Delaying inputs
         Debug.Log("waited");
         
     }

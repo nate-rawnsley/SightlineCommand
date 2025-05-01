@@ -161,7 +161,7 @@ public class Tile : MonoBehaviour {
     public List<PathTile> WeightedSearch(PathTile tileToCheck, int currentCost, int maxMovement, List<PathTile> pathList, bool flying) {
 
         foreach (Tile adjacentTile in tileToCheck.tile.adjacentTiles){
-            if (!adjacentTile.terrainType.walkable && !flying) {
+            if (!adjacentTile.terrainType.walkable && !flying) { //checks if the unit is a flying one to allow it to ignore terrain affordability and inaccessable tiles. (Dylan)
                 continue;
             }
             int nextTravelSpeed = flying ? 1 : adjacentTile.terrainType.travelSpeed;

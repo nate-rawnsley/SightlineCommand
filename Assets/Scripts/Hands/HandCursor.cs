@@ -35,7 +35,7 @@ public class HandCursor : HandCasting {
                         if (unit.CurrentAttacks > 0)
                         {
                             Values.text = unit.CurrentAttacks.ToString();
-                            unit.CurrentMoveableCol = unit.moveableCol[0];
+                            unit.CurrentMoveableCol = unit.moveableCol[0]; //checks the tiles around the unit in attack range and readies the attack
                             unit.MarkAdjacentTiles(unit.currentTile, unit.AttackRange, true);
                         }
                         else
@@ -151,7 +151,7 @@ public class HandCursor : HandCasting {
     //<Legacy functions - currently unused>
     protected void doDamage(Tile tile) {
         if (tile.unitHere) {            
-            EnemyUnit = tile.unitHere;
+            EnemyUnit = tile.unitHere; //checks if the clicked tile has a unit on and does damage to said unit if so removing one of the current attacks if possible
             EnemyUnit.TakeDamage(activeUnit.Damage);
             activeUnit.CurrentAttacks--;
             Debug.Log("DONEDAMAGE2");
@@ -159,7 +159,7 @@ public class HandCursor : HandCasting {
     }
 
     protected void DamageBuilding(Building building) {
-        if (building) {
+        if (building) { //damages the building by one
             building.TakeDamage(activeUnit.Damage);
             activeUnit.CurrentAttacks--;
         }

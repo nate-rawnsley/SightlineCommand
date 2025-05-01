@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
+    //done by both Dylan and Nate
     [Tooltip("The name this unit displays in UI.")]
     public string displayName;
 
@@ -332,7 +333,7 @@ public class Unit : MonoBehaviour
     }
 
     public void AttackUnit(Tile enemyTile){
-        enemyUnit = enemyTile.unitHere;
+        enemyUnit = enemyTile.unitHere; //if the tile clicked has an enemy unit on it do animation and damage
         Attack(enemyTile.transform.position);
         if (animateTrigger != null) {
             animateTrigger.AnimEvent += DamageEnemy;
