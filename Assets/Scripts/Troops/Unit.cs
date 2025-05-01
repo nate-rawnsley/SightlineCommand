@@ -82,7 +82,9 @@ public class Unit : MonoBehaviour
     {
         tile.unitHere = this;
 
-        GameManager.Instance.players[team].units.Add(this);
+        if (GameManager.Instance != null && !GameManager.Instance.editorStart) {
+            GameManager.Instance.players[team].units.Add(this);
+        }
 
         scale = tile.transform.localScale.x * 0.5f;
         unitScale = new Vector3(scale, scale, scale);
@@ -394,7 +396,7 @@ public class Unit : MonoBehaviour
     }
 
     private void OnDestroy() {
-        if (GameManager.Instance != null) {
+        if (GameManager.Instance != null && !GameManager.Instance.editorStart) {
             GameManager.Instance.AddTokens(team, tokenCost);
             GameManager.Instance.players[team].units.Remove(this);
         }

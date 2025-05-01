@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: {fileID: 11400000, guid: 2f8f2a0de89ca0c42ae2ec327b28f3c8, type: 2}
-  capacity: 5
+  capacity: 4
   maxHealth: 5
   team: 1
   materialYield: 20

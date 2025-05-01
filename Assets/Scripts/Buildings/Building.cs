@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
+/// <summary>
+/// Nate
+/// Defines building behaviour, which can be created by a Unit (or a level save)
+/// </summary>
 public class Building : MonoBehaviour {
     [Header("Values")]
     public BuildingCostTree price;

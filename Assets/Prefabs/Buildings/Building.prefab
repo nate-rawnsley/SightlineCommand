@@ -395,8 +395,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db314fb93c1f39499fb22a0667bfbf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 10
-  capacity: 5
+  price: {fileID: 0}
+  capacity: 4
   maxHealth: 5
   team: 0
   materialYield: 0
