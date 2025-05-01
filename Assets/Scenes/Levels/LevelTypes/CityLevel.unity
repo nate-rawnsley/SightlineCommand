@@ -5017,6 +5017,22 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e7f1839446d4234a83e7d59833af72a, type: 3}
+--- !u!114 &810483587 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2039521425945046632, guid: 9e7f1839446d4234a83e7d59833af72a, type: 3}
+  m_PrefabInstance: {fileID: 810483586}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &810483588 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8511826098055394717, guid: 9e7f1839446d4234a83e7d59833af72a, type: 3}
+  m_PrefabInstance: {fileID: 810483586}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &915937268 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 504401962825490748, guid: 9d75eb165f344464985838ddd934ba16, type: 3}
@@ -5651,11 +5667,11 @@ PrefabInstance:
     - target: {fileID: 4198903835672825467, guid: 643577c1059446b44bdb91b856e5a2b8, type: 3}
       propertyPath: winPanel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 810483588}
     - target: {fileID: 4198903835672825467, guid: 643577c1059446b44bdb91b856e5a2b8, type: 3}
       propertyPath: winDisplay
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 810483587}
     - target: {fileID: 4268403158604805077, guid: 643577c1059446b44bdb91b856e5a2b8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
