@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 
@@ -28,50 +27,65 @@ public class Building : MonoBehaviour {
     [HideInInspector] public List<Unit> unitsHere;
     [HideInInspector] public Tile tile;
 
-    [HideInInspector] public GameObject unitInCreation;
-    [HideInInspector] public int turnsToCreate;
     [HideInInspector] public int health;
     private HealthBar healthBar;
     private SpriteRenderer unitIndicator;
-    private TextMeshProUGUI createIndicator;
 
-    private void Awake() {
+    protected virtual void Awake() {
         health = maxHealth;
         healthBar = GetComponentInChildren<HealthBar>();
         healthBar.DisplaySpecified(maxHealth, maxHealth, team, true);
         healthBar.gameObject.SetActive(false);
         unitIndicator = GetComponentInChildren<SpriteRenderer>();
-        createIndicator = transform.Find("Canvas/Creation Indicator").GetComponent<TextMeshProUGUI>();
-        createIndicator.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Ensures references to this object do not remain once it is destroyed.
+    /// </summary>
     private void OnDestroy() {
-        GameManager.Instance.players[team].buildings.Remove(this);
+        if (GameManager.Instance != null && !GameManager.Instance.editorStart) {
+            GameManager.Instance.players[team].buildings.Remove(this);
+        }
     }
 
-    //Returns whether to hide the main buiding menu after.
+    /// <summary>
+    /// The code that runs when the activate button on the Building Panel is pressed.
+    /// Empty by default, designed to be overwritten by child classes.
+    /// </summary>
+    /// <returns> Whether to clear the main buiding menu after activating. </returns>
     public virtual bool ActivateBehaviour() { return false; }
 
+    /// <summary>
+    /// Called whenever a building is spawned.
+    /// By default, increments a scriptable object to increase price of spawning this building.
+    /// </summary>
     public virtual void SpawnBehaviour() {
         if (price != null) {
             price.numberActive++;
         }
     }
 
+    /// <summary>
+    /// Called when health is (or below) 0.
+    /// Decrements price, ejects all units within and destroys self.
+    /// </summary>
     protected virtual void DeathBehaviour() {
         if (price != null) {
             price.numberActive--;
         }
-        List<Unit> unitsToRemove = new List<Unit>(unitsHere); //Made temporary list to avoid errors
+        List<Unit> unitsToRemove = new List<Unit>(unitsHere); //Made temporary list to avoid errors when removing.
         foreach (var unit in unitsToRemove) {
             if (unit != null) {
-                OnExitBehaviour(unit); //All units exit when this is destroyed.
+                OnExitBehaviour(unit);
             }
         }
         Destroy(gameObject);
     }
 
-    //When a unit enters the tile this building is on, add it to the list, hide it and display a chevron.
+    /// <summary>
+    /// When a unit enters the tile this building is on, add it to the list, hide it and display a chevron.
+    /// </summary>
+    /// <param name="unitEntered">The unit entering the building.</param>
     public virtual void OnEnterBehaviour(Unit unitEntered) {
         unitsHere.Add(unitEntered);
         tile.unitHere = null;
@@ -84,6 +98,12 @@ public class Building : MonoBehaviour {
         unitIndicator.sprite = indicatorSprite;
     }
 
+    /// <summary>
+    /// Called when a unit is selected from the building panel (or the building is destroyed).
+    /// Finds a tile with no units (if possible) and moves the player to that tile.
+    /// Removes it from the list and updates the chevron display.
+    /// </summary>
+    /// <param name="unitLeaving">The unit being removed from the building.</param>
     public virtual void OnExitBehaviour(Unit unitLeaving) {
         Tile exitTile = tile;
         if (tile.unitHere != null) {
@@ -105,47 +125,44 @@ public class Building : MonoBehaviour {
         }
     }
 
-    public bool BuyUnit(Unit newUnit) {
-        if (unitInCreation == null && GameManager.Instance.UseTokens(team, newUnit.tokenCost)) {
-            unitInCreation = newUnit.gameObject;
-            turnsToCreate = newUnit.turnsToCreate;
-            createIndicator.gameObject.SetActive(true);
-            createIndicator.text = $"Unit Creating: {turnsToCreate} turn(s)";
-            return true;
-        }
-        return false;
-    }
-
+    /// <summary>
+    /// Called whenever the turn changes, before the other team's turn begins.
+    /// Adds this building's material yield, so they have more material next turn.
+    /// (This is done at the end rather than beginning so both teams start with the same material).
+    /// </summary>
     public void EndTurn() { 
         GameManager.Instance.players[team].material += materialYield;
-        Debug.Log(GameManager.Instance.players[team].material);
-        //GameManager.Instance.players[team].troopTokens++;
     }
 
-    public void NewTurn() {
-        if (unitInCreation != null) {
-            turnsToCreate--;
-            if (turnsToCreate <= 0) {
-                GameObject unitSpawn = Instantiate(unitInCreation);
-                unitSpawn.GetComponent<Unit>().UnitSpawn(tile);
-                unitInCreation = null;
-                createIndicator.gameObject.SetActive(false);
-            } else {
-                createIndicator.text = $"Unit Creating: {turnsToCreate} turn(s)";
-            }
-        }
-    }
+    /// <summary>
+    /// Called whenever the turn changes, before this team's turn begins.
+    /// Overriden by UnitCamp.
+    /// </summary>
+    public virtual void NewTurn() { }
 
+    /// <summary>
+    /// Called when in the range of an enemy's attack.
+    /// Shows how much health the unit will have after being attacked.
+    /// </summary>
+    /// <param name="damage">Amount of health to lose in an attack.</param>
     public void IndicateHealth(int damage) {
         healthBar.gameObject.SetActive(true);
         healthBar.IndicateDamage(damage);
     }
 
+    /// <summary>
+    /// Reset health bar once enemy finishes aiming.
+    /// </summary>
     public void StopIndicateHealth() {
         healthBar.gameObject.SetActive(false);
         healthBar.StopIndicating();
     }
 
+    /// <summary>
+    /// Called when an enemy attacks this building.
+    /// Displays the damage, and calls death behaviour if health is <= 0.
+    /// </summary>
+    /// <param name="damage">Health to lose.</param>
     public void TakeDamage(int damage) {
         health -= damage;
         StartCoroutine(DelayHealthBarDisplay(damage, false));
@@ -154,12 +171,22 @@ public class Building : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Currently unused outside of debug functions.
+    /// Restores health to the building, and displays accordingly.
+    /// </summary>
+    /// <param name="heal">Health to gain (gain is capped at max health)</param>
     public void RepairDamage(int heal) {
         int trueHeal = Mathf.Min(heal, maxHealth - health);
         health += trueHeal;
         StartCoroutine(DelayHealthBarDisplay(trueHeal, true));
     }
 
+    /// <summary>
+    /// Show damage/healing in health bar, then hide after display is finished.
+    /// </summary>
+    /// <param name="value">Difference in health to display.</param>
+    /// <param name="heal">Heal the difference instead of taking damage.</param>
     private IEnumerator DelayHealthBarDisplay(int value, bool heal) {
         yield return new WaitForEndOfFrame(); //Delays display as it sometimes gets disabled multiple times
         healthBar.gameObject.SetActive(true);

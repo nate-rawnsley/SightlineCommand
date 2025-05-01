@@ -45,8 +45,9 @@ public class BuildingPanel : MonoBehaviour {
         building = selectedBuilding;
         nameText.text = building.buildingName;
         tipText.text = building.toolTip;
-        if (building.unitInCreation != null) {
-            tipText.text += $"\nHiring: {building.unitInCreation.GetComponent<Unit>().displayName}, complete in {building.turnsToCreate} turn(s)";
+        UnitCamp buildCamp = building as UnitCamp;
+        if (buildCamp != null && buildCamp.unitInCreation != null) {
+            tipText.text += $"\nHiring: {buildCamp.unitInCreation.GetComponent<Unit>().displayName}, complete in {buildCamp.turnsToCreate} turn(s)";
         }
         activeButton.gameObject.SetActive(building.canActivate);
         if (building.canActivate) {

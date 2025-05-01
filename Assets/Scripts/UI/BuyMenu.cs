@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Leap;
 
 public class BuyMenu : MonoBehaviour {
     [SerializeField]
@@ -57,6 +56,8 @@ public class BuyMenu : MonoBehaviour {
     public void UnitSelected(Unit newUnit) {
         if (building.BuyUnit(newUnit)) {
             GameManager.Instance.gameUI.HideUnitBuyMenu();
+        } else if (building.unitInCreation != null) {
+             StartCoroutine(ShowError("Already creating a unit!"));
         } else {
             StartCoroutine(ShowError("Insufficient Troop Tokens!"));
         }
