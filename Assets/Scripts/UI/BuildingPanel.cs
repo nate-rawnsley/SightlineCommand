@@ -20,13 +20,16 @@ public class BuildingPanel : MonoBehaviour {
 
     private TextMeshProUGUI nameText;
     private TextMeshProUGUI tipText;
+    private Transform activeButton;
     private TextMeshProUGUI commandText;
 
     private void Awake() {
         gameUI = GetComponentInParent<GameUI>();
         nameText = transform.Find("BuildingName").GetComponent<TextMeshProUGUI>();
         tipText = transform.Find("ToolTip").GetComponent<TextMeshProUGUI>();
-        commandText = transform.Find("ActiveButton/Action").GetComponent<TextMeshProUGUI>();
+        activeButton = transform.Find("ActiveButton");
+        commandText = activeButton.Find("Action").GetComponent<TextMeshProUGUI>();
+        HidePanel();
     }
 
     public void OnEnable() {
@@ -45,7 +48,7 @@ public class BuildingPanel : MonoBehaviour {
         if (building.unitInCreation != null) {
             tipText.text += $"\nHiring: {building.unitInCreation.GetComponent<Unit>().displayName}, complete in {building.turnsToCreate} turn(s)";
         }
-        commandText.gameObject.SetActive(building.canActivate);
+        activeButton.gameObject.SetActive(building.canActivate);
         if (building.canActivate) {
             commandText.text = building.command;
         }
@@ -60,6 +63,7 @@ public class BuildingPanel : MonoBehaviour {
             newEntry.GetComponent<BuildingUnitEntry>().Initialize(unit, building, this, entryPos);
             entries.Add(newEntry);
         }
+        healthBar.gameObject.SetActive(true);
         healthBar.DisplaySpecified(building.maxHealth, building.health, building.team, true);
     }
     
@@ -71,6 +75,8 @@ public class BuildingPanel : MonoBehaviour {
             Destroy(entry);
         }
         entries.Clear();
+        healthBar.gameObject.SetActive(false);
+        activeButton.gameObject.SetActive(false);
         //gameUI.HideBuildingPanel();
     }
 

@@ -6,9 +6,11 @@ using UnityEngine;
 
 /// <summary>
 /// Nate
-/// Defines building behaviour, which can be created by a Unit (or a level save)
+/// Defines building behaviour, which can be created by a Unit (or a level save).
+/// This script is inherited by UnitCamp and DefenceBuilding, to expand functionality.
 /// </summary>
 public class Building : MonoBehaviour {
+    //Prefab-assignable values, allowing for variants to be created easily.
     [Header("Values")]
     public BuildingCostTree price;
     public int capacity = 5;
