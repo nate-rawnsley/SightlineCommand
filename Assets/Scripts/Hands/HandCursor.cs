@@ -45,12 +45,10 @@ public class HandCursor : HandCasting {
                         break;
 
                     case UnitMode.Move:
-                        Debug.Log("click");
                         Values.text = unit.CurrentMove.ToString();
                         if (activeUnit.CurrentMove > 0)
                         {
                             unit.BeginMove();
-                            Debug.Log("DID MOVE");
                         }
                         else
                         {

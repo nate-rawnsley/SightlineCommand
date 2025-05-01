@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEditor;
 
+/// <summary>
+/// Nate
+/// Editor script used for testing and debugging behaviours
+/// </summary>
 [CustomEditor(typeof(GameManager))]
 public class GameManagerEditor : Editor {
     //https://stackoverflow.com/questions/63928964/how-to-align-guilayout-elements
