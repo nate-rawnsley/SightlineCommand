@@ -1,6 +1,6 @@
 using UnityEngine;
-using System.Collections.Generic;
 
+// Nate - unused script that was replaced by GameManager.
 public class GridParent : MonoBehaviour {
     public Tile[,] tiles;
 

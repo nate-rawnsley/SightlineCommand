@@ -2,6 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Nate
+/// Panel that displays a building's name, health and units currently active.
+/// Also contains a button to activate the building (used by UnitCamp to show the buy menu)
+/// </summary>
 public class BuildingPanel : MonoBehaviour {
 
     [SerializeField]
@@ -32,6 +37,7 @@ public class BuildingPanel : MonoBehaviour {
         HidePanel();
     }
 
+    //Hide the panel when the selection changes, to prevent confusion and errors.
     public void OnEnable() {
         GameManager.SelectionChanged += HidePanel;
     }
@@ -40,6 +46,11 @@ public class BuildingPanel : MonoBehaviour {
         GameManager.SelectionChanged -= HidePanel;
     }
 
+    /// <summary>
+    /// Set a building as the target of the panel.
+    /// Displays its stats, and creates a list of entries to display units within it.
+    /// </summary>
+    /// <param name="selectedBuilding">Building instance to target.</param>
     public void SetBuilding(Building selectedBuilding) {
         //gameUI.ShowBuildingPanel();
         building = selectedBuilding;

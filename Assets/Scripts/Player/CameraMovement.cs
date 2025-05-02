@@ -1,8 +1,12 @@
 using UnityEngine;
 
+/// <summary>
+/// Nate
+/// A simple script on the camera that allows it to be manually repositioned with WASD + Q/E.
+/// </summary>
 public class CameraMovement : MonoBehaviour {
 
-    public float speed = 2.5f;
+    public float speed = 25f;
     private float initialSpeed;
     private int direction = 1;
 
@@ -11,6 +15,10 @@ public class CameraMovement : MonoBehaviour {
         CameraChange.CameraChanged += SwapDirection;
     }
 
+    /// <summary>
+    /// Reverses the orientation of the camera, as the separate teams have opposite viewpoints.
+    /// Called by action on the CameraChange script.
+    /// </summary>
     private void SwapDirection() {
         direction *= -1;
     }
@@ -26,8 +34,8 @@ public class CameraMovement : MonoBehaviour {
         sprint();
 
         Vector3 newPos = transform.position;
-        //this is not a neat way of doing this so I might change it later but it works for now.
         float difference = Time.deltaTime * speed * direction;
+        //to be replaced with Unity Input System in future
         if (Input.GetKey(KeyCode.W)) {
             newPos.z += difference;
         }

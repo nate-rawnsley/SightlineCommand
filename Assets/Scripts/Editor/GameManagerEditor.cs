@@ -3,7 +3,7 @@ using UnityEditor;
 
 /// <summary>
 /// Nate
-/// Editor script used for testing and debugging behaviours
+/// Editor script used for testing and debugging behaviours.
 /// </summary>
 [CustomEditor(typeof(GameManager))]
 public class GameManagerEditor : Editor {

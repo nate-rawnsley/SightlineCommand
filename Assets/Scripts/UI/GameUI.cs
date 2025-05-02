@@ -1,8 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections.Generic;
 
+/// <summary>
+/// Nate
+/// The UI functions for the game.
+/// Displays the player's stats and the current team.
+/// Changes the colour and sprites of text and images in the UI to match the team.
+/// </summary>
 public class GameUI : MonoBehaviour {
     [SerializeField]
     private TextMeshProUGUI modeDisplay;

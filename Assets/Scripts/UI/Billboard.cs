@@ -1,7 +1,11 @@
 using UnityEngine;
 
-//from https://www.youtube.com/watch?v=eiGvVgwtJ8k
 
+/// <summary>
+/// Nate
+/// Simple canvas billboard script that sets rotation when the camera rotation is changed.
+/// Adapted from https://www.youtube.com/watch?v=eiGvVgwtJ8k
+/// </summary>
 public class Billboard : MonoBehaviour {
 
     private void OnEnable() {

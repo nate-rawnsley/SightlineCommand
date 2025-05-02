@@ -1,8 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+/// <summary>
+/// Nate
+/// Editor scripts that allow units, buildings and tiles to be selected without hand tracking.
+/// Used for debugging.
+/// </summary>
 [CustomEditor(typeof(Unit), true)]
 public class UnitEditor : Editor {
     public override void OnInspectorGUI() { 

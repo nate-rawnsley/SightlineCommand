@@ -1,6 +1,12 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Nate
+/// Partner script with an animator.
+/// Allows imported animations to call custom events, such as spawning particles or playing sounds.
+/// I set the event triggers on the animations and hooked them up in the prefabs.
+/// </summary>
 public class AnimatorEventTrigger : MonoBehaviour {
     [SerializeField]
     private Animator[] animators;

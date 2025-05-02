@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-
 
 /// <summary>
 /// Nate
@@ -22,6 +22,8 @@ public class Building : MonoBehaviour {
     public string toolTip;
     public string command;
 
+    protected TextMeshProUGUI createIndicator;
+
     [HideInInspector] public bool canActivate;
 
     [HideInInspector] public List<Unit> unitsHere;
@@ -30,6 +32,7 @@ public class Building : MonoBehaviour {
     [HideInInspector] public int health;
     private HealthBar healthBar;
     private SpriteRenderer unitIndicator;
+    
 
     protected virtual void Awake() {
         health = maxHealth;
@@ -37,6 +40,8 @@ public class Building : MonoBehaviour {
         healthBar.DisplaySpecified(maxHealth, maxHealth, team, true);
         healthBar.gameObject.SetActive(false);
         unitIndicator = GetComponentInChildren<SpriteRenderer>();
+        createIndicator = transform.Find("Canvas/Creation Indicator").GetComponent<TextMeshProUGUI>();
+        createIndicator.gameObject.SetActive(false);
     }
 
     /// <summary>

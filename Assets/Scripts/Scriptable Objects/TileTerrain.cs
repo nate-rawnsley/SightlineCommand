@@ -1,6 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// Nate
+/// The data for a tile's terrain type.
+/// Used by the grid generator and level editor.
+/// </summary>
 [CreateAssetMenu(menuName = "SightlineCommand/Tile Terrain")]
 public class TileTerrain : ScriptableObject {
     public string terrainName;

@@ -4,9 +4,13 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Dylan and Nate
+/// The behaviour of units in the game.
+/// Contains functionality for moving, attacking and building.
+/// </summary>
 public class Unit : MonoBehaviour
 {
-    //done by both Dylan and Nate
     [Tooltip("The name this unit displays in UI.")]
     public string displayName;
 
@@ -22,6 +26,7 @@ public class Unit : MonoBehaviour
 
     protected float scale;
 
+    //Parameters for each troop.
     [Header("Troop Settings")]
     public PlayerTeam team;
     public int MaxMovement;
@@ -78,9 +83,8 @@ public class Unit : MonoBehaviour
         //positionOffset = model.position;
         animator = model.GetComponent<Animator>();
     }
-    //Movement///////////////////////////////////////////// Base Movement done by Nate, Limiting Movement Distance and changing movement material Done By Dylan
-    public void UnitSpawn(Tile tile)
-    {
+
+    public void UnitSpawn(Tile tile) {
         tile.unitHere = this;
 
         if (GameManager.Instance != null && !GameManager.Instance.editorStart) {
@@ -93,6 +97,9 @@ public class Unit : MonoBehaviour
 
         MoveToTile(tile);
     }
+
+    //Movement///////////////////////////////////////////// Base Movement done by Nate, Limiting Movement Distance and changing movement material Done By Dylan
+
     public void MoveToTile(Tile tile, bool animate = false)
     {
         currentTile = tile;
@@ -224,6 +231,7 @@ public class Unit : MonoBehaviour
             animator.SetTrigger("Defeated");
             healthBar.gameObject.SetActive(false);
             if (animateTrigger != null) {
+                //If the animator trigger is setup, wait for the animation event before destroying self.
                 animateTrigger.AnimEvent += DestroySelf;
             } else {
                 DestroySelf();
@@ -242,6 +250,7 @@ public class Unit : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    ///Currently unused outside of debugging.
     public void Heal(int healingDealt) {
         int trueHeal = Mathf.Min(healingDealt, MaxHealth - Health);
         Health += trueHeal;
@@ -250,9 +259,13 @@ public class Unit : MonoBehaviour
 
     //Damage and Targeting/////////////////////////////////// Done By Dylan & Nate
 
+    /// <summary>
+    /// Used for targetting units in attack range.
+    /// Lists of enemies and buildings in sight are saved, showing them as attackable.
+    /// </summary>
     public void MarkAdjacentTiles(Tile tileToCheck, int maxLoops, bool dmgIndicate = false)
     {
-        EndTargeting(); //Hopefully doesn't cause issues, but if multiple things are targetted at once it will (Shouldn't happen but might).
+        EndTargeting();
         tilesTargetted = tileToCheck.GetAdjacentGroup(maxLoops);
         foreach (Tile tile in tilesTargetted) { 
             tile.DisplayColour(CurrentMoveableCol);
@@ -320,12 +333,20 @@ public class Unit : MonoBehaviour
 
     //End Of Damage and Targeting///////////////////////////// Done By Dylan
 
+    //Attack Visuals////////////////////////////////////////// Done By Nate
+
+    /// <summary>
+    /// Visually attack towards an enemy's position.
+    /// Called by AttackUnit and AttackBuilding, which use separate listener events.
+    /// </summary>
+    /// <param name="attackPos">Position to face. The position of the tile targetted is used.</param>
     public void Attack(Vector3 attackPos) {
         EndTargeting();
         attackPos.y += scale * 0.5f;
         StopCoroutine("RotateToTarget");
         StartCoroutine(RotateToTarget(attackPos, true));
 
+        //To prevent attacking twice (which can attack already-dead targets) a boolean is checked to prevent further action.
         inAction = true;
         CurrentAttacks--;
     }
@@ -334,8 +355,8 @@ public class Unit : MonoBehaviour
         enemyUnit = enemyTile.unitHere; //if the tile clicked has an enemy unit on it do animation and damage
         Attack(enemyTile.transform.position);
         if (animateTrigger != null) {
+            //Waits for animation event before actually damaging enemy. Creates a more immersive timing.
             animateTrigger.AnimEvent += DamageEnemy;
-            Debug.Log("a");
         } else {
             DamageEnemy();
         }
@@ -352,7 +373,6 @@ public class Unit : MonoBehaviour
     }
 
     public void DamageEnemy() {
-        Debug.Log("b");
         if (animateTrigger != null) {
             animateTrigger.AnimEvent -= DamageEnemy;
         }
@@ -368,11 +388,13 @@ public class Unit : MonoBehaviour
         inAction = false;
     }
 
+    //End of Attack Visuals/////////////////////////////////// Done By Nate
+
     //Creating buildings////////////////////////////////////// Done by Nate
 
     public void ShowBuildMenu() {
         if (canBuild && currentTile.buildingHere == null) {
-            GameManager.Instance.gameUI.ShowBuildingBuyMenu(this);  //COMMENTED OUT
+            GameManager.Instance.gameUI.ShowBuildingBuyMenu(this);
         }
     }
 

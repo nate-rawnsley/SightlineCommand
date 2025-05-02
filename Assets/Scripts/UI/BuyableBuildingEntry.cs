@@ -1,9 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
 
+/// <summary>
+/// Nate
+/// An entry used to display a building that can be created in the buy menu.
+/// Contains a button that allows the building to be selected and created.
+/// </summary>
 public class BuyableBuildingEntry : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI buildingName;
     [SerializeField] private TextMeshProUGUI buldingDescription;

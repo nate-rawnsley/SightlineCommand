@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Nate
+/// The menu that shows buildings and units that can be created, as well as their stats and costs.
+/// CAn be initialised by a unit (showing buildings it can make) or a bulding (showing units it can hire).
+/// </summary>
 public class BuyMenu : MonoBehaviour {
     [SerializeField]
     private GameObject buyableUnitEntry;

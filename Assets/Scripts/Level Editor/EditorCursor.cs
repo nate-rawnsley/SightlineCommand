@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +6,10 @@ public enum EditorMode {
     Paint
 }
 
+/// <summary>
+/// Nate
+/// Cursor controls for the level editor, allowing the user to paint tiles' terrain in addition to selecting them.
+/// </summary>
 public class EditorCursor : CursorControls {
     public TileTerrain terrainBrush;
     public EditorMode mode;
@@ -42,6 +45,11 @@ public class EditorCursor : CursorControls {
         }
     }
 
+    /// <summary>
+    /// Called when the player drags their cursor over a tile while 'painting' terrain.
+    /// The same tile is not painted twice, so a list is kept.
+    /// </summary>
+    /// <param name="tile">The tile to change terrain of.</param>
     private void TilePaint(Tile tile) {
         if (paintedTiles.Contains(tile)) { 
             return;
@@ -53,7 +61,6 @@ public class EditorCursor : CursorControls {
     }
 
     protected override void TileClickBehaviour(Tile tile) {
-
         EditorFunction.Instance.SelectTile(tile);
     }
 }

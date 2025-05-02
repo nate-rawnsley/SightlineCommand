@@ -2,8 +2,11 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
+/// <summary>
+/// Nate
+/// A data class used for storing the lowest-cost route to reach a tile.
+/// </summary>
 public class PathTile {
     public Tile tile;
     public int minCost = 99;
@@ -16,6 +19,12 @@ public class PathTile {
     }
 }
 
+/// <summary>
+/// Nate
+/// The behaviour and values of every tile in the grid.
+/// Contains functions for setting data, as well as querying about other tiles.
+/// In addition, contains the function for spawning buildings.
+/// </summary>
 public class Tile : MonoBehaviour {
     public TileTerrain terrainType;
     public List<Tile> adjacentTiles = new List<Tile>();
@@ -25,6 +34,7 @@ public class Tile : MonoBehaviour {
     public Building buildingHere;
     public GameObject decoration;
 
+    //Allows listeners (currently defence building) to observe when a unit enters, parsing the unit as a parameter.
     public Action<Unit> UnitMovedHere;
 
     private Renderer thisRenderer;
@@ -64,6 +74,10 @@ public class Tile : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Configures the tile's values and decoration based on its new terrain type.
+    /// Called after assigning a terrain type, by the grid generator and editor scripts.
+    /// </summary>
     public void SetTerrain() {
         if (decoration != null) {
             Destroy(decoration);
@@ -71,6 +85,7 @@ public class Tile : MonoBehaviour {
         }
         thisRenderer.material = terrainType.material;
         bool hasDecoration = false;
+        //The decoration's rotation and index are stored for saving in the level editor.
         if (terrainType.decorations.Count > 0 && buildingHere == null) {
             if (UnityEngine.Random.value <= terrainType.decorationFrequency) {
                 decoIndex = UnityEngine.Random.Range(0, terrainType.decorations.Count);
@@ -88,6 +103,11 @@ public class Tile : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Configures the tile's values and decoration based on data loaded from a save.
+    /// Replicates its state from the editor, including spawning decorations, buildings, and units.
+    /// </summary>
+    /// <param name="loadTile">The data from the corresponding tile in the level save.</param>
     public void LoadTile(TileData loadTile) {
         ClearTerrain();
         terrainType = loadTile.terrainType;
@@ -105,6 +125,11 @@ public class Tile : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Creates a building on top of this tile.
+    /// Ensures the building is spawned properly and added to the player's data.
+    /// </summary>
+    /// <param name="building">The script on the prefab building to create.</param>
     public void CreateBuilding(Building building) {
         if (buildingHere != null || !terrainType.walkable) {
             return;
@@ -121,6 +146,11 @@ public class Tile : MonoBehaviour {
         GameManager.Instance.players[building.team].buildings.Add(buildingHere);
     }
 
+    /// <summary>
+    /// Highlights the tile in a selected colour.
+    /// USed to indicate being in range of moving or attacking.
+    /// </summary>
+    /// <param name="color"></param>
     public void DisplayColour(Color color) {
         if (lerpingColour) {
             return;
@@ -137,8 +167,8 @@ public class Tile : MonoBehaviour {
     }
 
     private IEnumerator LerpColour(Color color) {
-        //will add a proper easing here later
         while (lerpingColour) {
+            //Linear easing for the lerping that reverses halfway through.
             float perc = lerpTime < 0.5f ? lerpTime * 1.75f : 1 - (lerpTime - 0.5f) * 1.75f;
             Color newColour = Color.Lerp(terrainType.material.color, color, perc);
 
@@ -152,6 +182,13 @@ public class Tile : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Finds a list of all adjacent tiles a unit can reach with their maximum movement.
+    /// Since tiles have separate travel speeds (eg. sand is twice as slow as others), a weighted search is performed.
+    /// </summary>
+    /// <param name="maxMovement">The unit's MaxMovement stat. Provides the limit for the loop.</param>
+    /// <param name="flying">The unit's isFlying stat. Allows them to ignore tile cost and walkability.</param>
+    /// <returns>A list of all tiles in range, as well as the most efficient route to reach them (unfinished).</returns>
     public List<PathTile> GetWalkableGroup(int maxMovement, bool flying = false) {
         List<PathTile> tilePaths = new List<PathTile>(); 
         tilePaths = WeightedSearch(new PathTile(this, 0, new List<Tile>()), 0, maxMovement, tilePaths, flying);
@@ -170,6 +207,8 @@ public class Tile : MonoBehaviour {
             PathTile adjacentPathTile = new PathTile(this, 0, new List<Tile>());
 
             bool inList = false;
+            ///Recording the most efficient path to a tile is not properly implemented yet.
+            ///For the sake of simpicity, the list simply contains the end destination.
             foreach (PathTile path in pathList) { 
                 if (adjacentTile == path.tile) {
                     adjacentPathTile = path;
@@ -196,6 +235,12 @@ public class Tile : MonoBehaviour {
         return pathList;
     }
 
+    /// <summary>
+    /// Performs a recursive search for adjacent tiles.
+    /// Used for attacking and for defence buildings.
+    /// </summary>
+    /// <param name="maxLoops">Layers to search (1 = neighbours, 2 = neighbours of neighbours etc.)</param>
+    /// <returns>A list of all relevant adjacent tiles.</returns>
     public List<Tile> GetAdjacentGroup(int maxLoops) {
         List<Tile> tileList = new List<Tile>();
         tileList = AdjacentSearch(this, 0, maxLoops, tileList);
@@ -215,6 +260,11 @@ public class Tile : MonoBehaviour {
         return tileList;
     }
 
+    /// <summary>
+    /// Attempts to find tiles that do not have a unit in immediate neighbours.
+    /// Used for units leaving buildings, to prevent stacking.
+    /// </summary>
+    /// <returns>An empty tile.</returns>
     public Tile FindEmptyTile() {
         if (!unitHere) {
             return this;

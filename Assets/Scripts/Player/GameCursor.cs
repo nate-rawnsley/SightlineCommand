@@ -1,6 +1,11 @@
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Nate & Dylan
+/// Currently unused script for interacting with units, tiles and buildings in-game.
+/// Code was duplicated and adapted for hand tracker in HandCursor.cs.
+/// </summary>
 public class GameCursor : CursorControls {
     public Unit activeUnit = null;
     private Unit EnemyUnit;
@@ -21,7 +26,6 @@ public class GameCursor : CursorControls {
     public override void UnitClickBehaviour(Unit unit) {
         if (activeUnit == null && currentMode != UnitMode.None && unit.Health != 0) {
             activeUnit = unit;
-            //HasSelection = false  -- N - This was replaced by checking activeUnit == null instead
             Values = unit.valuesText;
 
             if (activeUnit.team == CurrentTeam)
@@ -137,28 +141,33 @@ public class GameCursor : CursorControls {
 
     protected override void RightClickBehaviour()
     {
-        CLEARALL();  //
+        CLEARALL();
     }
 
-    //unused now
-    protected void doDamage(Tile tile) {
-        if (tile.unitHere) {            
-            EnemyUnit = tile.unitHere;
-            EnemyUnit.TakeDamage(activeUnit.Damage);
-            activeUnit.CurrentAttacks--;
-            Debug.Log("DONEDAMAGE2");
-        }
-    }
+    /// Unused now - replaced by Unit.AttackUnit
+    //protected void doDamage(Tile tile) {
+    //    if (tile.unitHere) {            
+    //        EnemyUnit = tile.unitHere;
+    //        EnemyUnit.TakeDamage(activeUnit.Damage);
+    //        activeUnit.CurrentAttacks--;
+    //        Debug.Log("DONEDAMAGE2");
+    //    }
+    //}
 
-    //also unused
-    protected void DamageBuilding(Building building) {
-        if (building) {
-            building.TakeDamage(activeUnit.Damage);
-            activeUnit.CurrentAttacks--;
-        }
-    }
+    /// Unused now - replaced by Unit.AttackBuilding
+    //protected void DamageBuilding(Building building) {
+    //    if (building) {
+    //        building.TakeDamage(activeUnit.Damage);
+    //        activeUnit.CurrentAttacks--;
+    //    }
+    //}
 
-    //Instead of separate functions for each button, it parses an index and uses the same one.
+    /// <summary>
+    /// Swaps the current mode of interaction, called from UI buttons.
+    /// Instead of separate functions for each mode, an index is parsed.
+    /// In future, this could be called by gesture recognition.
+    /// </summary>
+    /// <param name="modeIndex"></param>
     public void SetBehaviour(int modeIndex) {
         UnitMode unitMode = (UnitMode)modeIndex;
         if (currentMode == unitMode) {

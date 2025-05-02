@@ -1,8 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Nate
+/// Base class for using the mouse cursor to select objects in the scene.
+/// Currently unused in-game (replaced by hand tracking), but still used in the level editor.
+/// </summary>
 public abstract class CursorControls : MonoBehaviour { 
     //By default, the cursor can hit layers 'Default' (1), 'Building' (64), and 'Unit' (128).
     [SerializeField]
@@ -10,7 +13,7 @@ public abstract class CursorControls : MonoBehaviour {
 
     public bool active;
 
-    //More efficient ways of doing this can be made later
+    //More efficient ways of doing this with the Unity Input System will be added later
     protected virtual void Update() {
         if (!active) {
             return;
@@ -43,12 +46,14 @@ public abstract class CursorControls : MonoBehaviour {
         }
     }
 
+    //Empty virtual functions are usued to be overriden by child classes while still called here.
     public virtual void UnitClickBehaviour(Unit unit) { }
 
     protected virtual void TileClickBehaviour(Tile tile) { }
 
     protected virtual void BuildingClickBehaviour(Building building) { }
 
+    //Hovering behaviour is currently inimplemented. This would highlight the tile to indicate it.
     protected virtual void TileHoverBehaviour(Tile tile) { }
 
     protected virtual void RightClickBehaviour() { }

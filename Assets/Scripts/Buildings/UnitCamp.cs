@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -10,16 +9,9 @@ using UnityEngine;
 public class UnitCamp : Building {
     [Header("Units sold here")]
     public BuildingBuyMenu availableUnits;
-    private TextMeshProUGUI createIndicator;
-
+    
     [HideInInspector] public GameObject unitInCreation;
     [HideInInspector] public int turnsToCreate;
-
-    protected override void Awake() {
-        base.Awake();
-        createIndicator = transform.Find("Canvas/Creation Indicator").GetComponent<TextMeshProUGUI>();
-        createIndicator.gameObject.SetActive(false);
-    }
 
     private void Start() {
         canActivate = true;

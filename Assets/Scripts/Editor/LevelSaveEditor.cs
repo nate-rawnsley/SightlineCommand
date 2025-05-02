@@ -2,6 +2,10 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 
+/// <summary>
+/// Nate
+/// Editor script that saves data from the level editor into scriptable objects.
+/// </summary>
 [CustomEditor(typeof(EditorFunction))]
 public class LevelSaveEditor : Editor {
     public override void OnInspectorGUI() {

@@ -1,6 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Nate
+/// The stats for each individual player, created by and stored in GameManager.
+/// Also contains functions that affect all units or buildings under a player's control.
+/// </summary>
 public class PlayerStats {
     public PlayerTeam team;
     public List<Unit> units = new List<Unit>();

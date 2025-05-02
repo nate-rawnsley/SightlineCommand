@@ -1,9 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
 
+/// <summary>
+/// Nate
+/// An entry used to display a unit that can be hired in the buy menu.
+/// Contains a button that allows the unit to be selected and hired.
+/// </summary>
 public class BuyableUnitEntry : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI unitName;
     [SerializeField] private TextMeshProUGUI unitStats;

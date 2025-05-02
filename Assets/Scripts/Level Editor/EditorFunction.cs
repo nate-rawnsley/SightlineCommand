@@ -2,6 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Nate
+/// The manager for the game's Level Editor.
+/// Stores data relating to the level being created.
+/// This data is saved by the LevelSaveEditor script.
+/// </summary>
 public class EditorFunction : MonoBehaviour {
     public static EditorFunction Instance;
 
@@ -26,6 +32,7 @@ public class EditorFunction : MonoBehaviour {
     public TileData[,] tileData;
 
     private void Awake() {
+        //As this is a manager with multiple references to it, a singleton was used.
         if (Instance == null) { 
             Instance = this;
         } else {

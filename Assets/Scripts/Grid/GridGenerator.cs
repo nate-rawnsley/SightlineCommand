@@ -1,6 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// Nate
+/// Object that generates the game's grid on start.
+/// Can load a save, but if none is selected it will randomly generate a grid with the set parameters.
+/// </summary>
 public class GridGenerator : MonoBehaviour {
     [SerializeField, Tooltip("Define the different types of terrain in this map.")]
     public List<TileTerrain> terrainTypes = new List<TileTerrain>();
@@ -24,7 +29,7 @@ public class GridGenerator : MonoBehaviour {
     [SerializeField]
     private Building alienFOB;
 
-    //temporarily here for testing & creating unit functionality
+    //debug bool for testing & creating unit functionality
     [SerializeField]
     private bool testUnits;
 
@@ -44,6 +49,7 @@ public class GridGenerator : MonoBehaviour {
     public bool inEditor = false;
 
     private void Awake() {
+        //Load the parameters and tile data from selected file, if one is selected.
         if (levelSave != null) {
             scale = levelSave.scale;
             gapScale = levelSave.gapScale;
@@ -59,7 +65,11 @@ public class GridGenerator : MonoBehaviour {
         gridParent = new GameObject("Grid");
     }
     
-
+    /// <summary>
+    /// Creates a grid within the selected/loaded parameters and spawns it in-game.
+    /// If a save was loaded, any details from the save (eg. decorations, units) are re-created.
+    /// Called at the start of the game (or when level editor is opened).
+    /// </summary>
     public void GenerateGrid() {
         GameManager.Instance.SetGridSize(width, height);
 
@@ -82,7 +92,8 @@ public class GridGenerator : MonoBehaviour {
 
                 Tile tileScript = gridTile.AddComponent<Tile>();
                 GameManager.Instance.tiles[x,z] = tileScript;
-
+                
+                //Re-creates details from save, if applicable. If not, terrain and decoration are randomly picked.
                 if (loadedTiles != null) {
                     tileScript.LoadTile(loadedTiles[x, z]);
                 } else {
@@ -92,6 +103,8 @@ public class GridGenerator : MonoBehaviour {
                 tileScript.coords = new Vector2(x, z);
             }
         }
+
+        //Finds every tile's adjacent neighbours, once they all have been placed.
         foreach (Tile tile in GameManager.Instance.tiles) {
             int x = (int)tile.coords.x;
             int z = (int)tile.coords.y;
@@ -116,7 +129,6 @@ public class GridGenerator : MonoBehaviour {
         
 
         //here for testing unit movement
-
         if (testUnits)
         {
             for (int p = 0; p < testSoldierAmount; p++) //multiple test units done by Dylan
@@ -130,12 +142,15 @@ public class GridGenerator : MonoBehaviour {
                 Alienunit.name = ("Alien" + e).ToString();
                 EnemyObj.GetComponent<Unit>().UnitSpawn(GameManager.Instance.tiles[width - 1, e]);
             }
-        } else if (!inEditor && levelSave == null) {
+        } else if (!inEditor && levelSave == null) { //If no save is loaded, places FOBs for both players so the game is playable.
             GameManager.Instance.tiles[0, 0].CreateBuilding(humanFOB);
             GameManager.Instance.tiles[width-1, height-1].CreateBuilding(alienFOB);
         }
     }
 
+    /// <summary>
+    /// Adds two tiles into each others' lists of adjacent tiles.
+    /// </summary>
     private void AddAdjacentTiles(Tile tile1, Tile tile2) {
         tile1.adjacentTiles.Add(tile2);
         tile2.adjacentTiles.Add(tile1);

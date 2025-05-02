@@ -3,8 +3,12 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 
+/// <summary>
+/// Nate
+/// A health bar, that can display current health, as well as indicate damage loss and use easings.
+/// Adapted from https://www.youtube.com/watch?v=0tDPxNB2JNs
+/// </summary>
 public class HealthBar : MonoBehaviour {
-    //https://www.youtube.com/watch?v=0tDPxNB2JNs
     [SerializeField] 
     private Image healthFill;
 
@@ -21,6 +25,13 @@ public class HealthBar : MonoBehaviour {
     private float currentHealth;
     public bool active;
 
+    /// <summary>
+    /// Show the current health of a unit or building.
+    /// </summary>
+    /// <param name="max">Maximum health</param>
+    /// <param name="current">Current health</param>
+    /// <param name="team">Player team (used for picking colour)</param>
+    /// <param name="building">Whether it is a building or unit (used for picking colour)</param>
     public void DisplaySpecified(float max, float current, PlayerTeam team, bool building = false) { 
         maxHealth = max;
         currentHealth = current;
@@ -35,6 +46,9 @@ public class HealthBar : MonoBehaviour {
         UpdateDisplay();
     }
 
+    /// <summary>
+    /// Show an indication of how damage will affect health bar.
+    /// </summary>
     public void IndicateDamage(float dmg) {
         healthFill.fillAmount = (currentHealth - dmg) / maxHealth;
         healthLoss.fillAmount = dmg / maxHealth;
@@ -47,6 +61,9 @@ public class HealthBar : MonoBehaviour {
         UpdateDisplay();
     }
 
+    /// <summary>
+    /// Decrease health and show the loss with an easing.
+    /// </summary>
     public void Damage(float dmg) {
         StopAllCoroutines();
         StartCoroutine(AnimateChange(currentHealth, currentHealth - dmg));
