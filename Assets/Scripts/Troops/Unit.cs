@@ -217,7 +217,7 @@ public class Unit : MonoBehaviour
     }
     //End Of Movement////////////////////////////////////////
 
-    //Health///////////////////////////////////////////////// Done By Dylan
+    //Health///////////////////////////////////////////////// Done By Dylan. Events added by Nate
 
     public void TakeDamage(int damageDealt)
     {
@@ -241,7 +241,7 @@ public class Unit : MonoBehaviour
         }
 
     }
-    //End of Health//////////////////////////////////////////
+    
 
     private void DestroySelf() {
         if (animateTrigger != null) {
@@ -249,6 +249,8 @@ public class Unit : MonoBehaviour
         }
         Destroy(this.gameObject);
     }
+
+    //End of Health//////////////////////////////////////////
 
     ///Currently unused outside of debugging.
     public void Heal(int healingDealt) {
